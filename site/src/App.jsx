@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import overtureLogo from '/omf_logo_transparent.png'
 import viteLogo from '/vite.svg'
 import './App.css'
 
@@ -8,25 +8,14 @@ function App() {
 
   return (
     <>
+      <h1>OvertureMaps.io</h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+        <a href="https://overturemaps.org" target="_blank">
+          <img src={overtureLogo} className="logo overture" alt="Overture Maps logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Head on over to <a href="https://docs.overturemaps.org/how-to" target="_blank"> the documentation</a> to learn more
       </p>
     </>
   )
