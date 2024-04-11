@@ -62,7 +62,7 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::851725248912:role/aria-cicd-role
         role-duration-seconds: 900 # the ttl of the session, in seconds.
-        aws-region: us-east-2
+        aws-region: us-west-2
 
     - name: Setup vars 📋
       id: vars
