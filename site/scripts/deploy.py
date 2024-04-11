@@ -20,7 +20,6 @@ See .github/workflows/deploy.yml 'Setup Vars' step for how those env vars are cr
 """
 
 def deploy():
-    os.chdir('site')
     print("Calculating build hash and distdir...")
     output = subprocess.run(
         ["git", "rev-parse", "--short", "HEAD"], capture_output=True
