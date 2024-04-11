@@ -52,8 +52,8 @@ def deploy():
             # Massage the paths appropriately
             for s in input:
                 s = (
-                    s.replace("/assets/", f"/aria/{distdir}/assets/"),
-                    s.replace("/favicon.png", f"/aria/{distdir}/favicon.png")
+                    s.replace("/assets/", f"/aria/{distdir}/assets/")
+                    .replace("/favicon.png", f"/aria/{distdir}/favicon.png")
                 )
                 output.write(s)
 
