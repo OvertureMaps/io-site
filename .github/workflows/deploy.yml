@@ -34,7 +34,7 @@ jobs:
       run: cd site; npm install
 
     - name: Build 🏃
-      run: cd site; npm run build --env CI
+      run: cd site; npm run build
     - name: Upload artifacts 📤
       uses: actions/upload-artifact@v2
       with:
