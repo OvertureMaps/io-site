@@ -71,7 +71,7 @@ jobs:
         echo ::set-output name=distdir::$(git rev-parse --short ${{ github.sha }})-20.x-dist
 
     - name: Prep files 🔨
-      run: npm run aws_deploy
+      run: cd site ; npm run aws_deploy
       env:
         IDENTIFIER: ${{ steps.vars.outputs.identifier }}
         DISTDIR: ${{ steps.vars.outputs.distdir }}
