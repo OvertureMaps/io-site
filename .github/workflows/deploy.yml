@@ -31,10 +31,10 @@ jobs:
         echo ::set-output name=distdir::$(git rev-parse --short ${{ github.sha }})-20.x-dist
 
     - name: Install 🎯
-      run: yarn install
+      run: npm install
 
     - name: Build 🏃
-      run: npm run build --env CI
+      run: cd site; npm run build --env CI
     - name: Upload artifacts 📤
       uses: actions/upload-artifact@v2
       with:
