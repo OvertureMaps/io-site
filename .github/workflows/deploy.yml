@@ -23,7 +23,7 @@ jobs:
     - name: Use Node.js 20.12.0 ⚙️
       uses: actions/setup-node@v1
       with:
-        node-version: 20.12.0
+        node-version: 20
 
     - name: Setup vars 📋
       id: vars
