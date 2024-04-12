@@ -36,7 +36,7 @@ jobs:
     - name: Build 🏃
       run: cd site; npm run build
     - name: Upload artifacts 📤
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
         path: site/dist
@@ -49,16 +49,16 @@ jobs:
 
     steps:
     - name: Checkout 📥
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Download artifacts 📥
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: build-artifacts
         path: site/dist
 
     - name: Configure AWS credentials 🔐
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::851725248912:role/aria-cicd-role
         role-duration-seconds: 900 # the ttl of the session, in seconds.
