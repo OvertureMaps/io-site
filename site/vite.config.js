@@ -18,5 +18,6 @@ export default defineConfig({
   build: {
     target: 'esnext',
     minify: false,
-  }
+  },
+  base: process.env.BASE_ARIA_URL
 })
