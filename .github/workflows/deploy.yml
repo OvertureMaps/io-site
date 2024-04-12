@@ -29,12 +29,14 @@ jobs:
       id: vars
       run: |
         echo ::set-output name=distdir::$(git rev-parse --short ${{ github.sha }})-20.x-dist
+        echo ::set-output name=ariabaseurl::/aria-site/aria/$(git rev-parse --short ${{ github.sha }})-20.x-dist
 
     - name: Install 🎯
       run: cd site; npm install
-
     - name: Build 🏃
       run: cd site; npm run build
+      env: 
+        BASE_ARIA_URL: ${{ steps.vars.outputs.ariabaseurl }}
     - name: Upload artifacts 📤
       uses: actions/upload-artifact@v4
       with:
