@@ -44,18 +44,18 @@ def deploy():
         raise
     print("\nCopying dist folder")
     subprocess.check_call(args=f"cp -a ./dist/* {distdir}", shell=True)
-    print("\nPrepping index.html with correct asset, css, and javascript paths")
-    index = "dist/index.html"
-    newindex = os.path.join(distdir, "index.html")
-    with open(index, "r") as input:
-        with open(newindex, "w+") as output:
-            # Massage the paths appropriately
-            for s in input:
-                s = (
-                    s.replace("/assets/", f"/aria/{distdir}/assets/")
-                    .replace("/favicon.png", f"/aria/{distdir}/favicon.png")
-                )
-                output.write(s)
+    # print("\nPrepping index.html with correct asset, css, and javascript paths")
+    # index = "dist/index.html"
+    # newindex = os.path.join(distdir, "index.html")
+    # with open(index, "r") as input:
+    #     with open(newindex, "w+") as output:
+    #         # Massage the paths appropriately
+    #         for s in input:
+    #             s = (
+    #                 s.replace("/assets/", f"/aria/{distdir}/assets/")
+    #                 .replace("/favicon.png", f"/aria/{distdir}/favicon.png")
+    #             )
+    #             output.write(s)
 
 if __name__ == "__main__":
     deploy()

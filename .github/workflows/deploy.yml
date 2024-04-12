@@ -29,7 +29,7 @@ jobs:
       id: vars
       run: |
         echo ::set-output name=distdir::$(git rev-parse --short ${{ github.sha }})-20.x-dist
-        echo ::set-output name=ariabaseurl::/aria-site/
+        echo ::set-output name=ariabaseurl::/aria/$(git rev-parse --short ${{ github.sha }})-20.x-dist
 
     - name: Install 🎯
       run: cd site; npm install
