@@ -11,12 +11,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@geoarrow/geoarrow-wasm": "~0.2.0-beta.3",
     "maplibre-gl": "^4.1.0",
     "pmtiles": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-map-gl": "^7.1.7",
-    "@geoarrow/geoarrow-wasm" : "~0.2.0-beta.3"
+    "react-map-gl": "^7.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
@@ -26,7 +26,7 @@
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.1.6"
+    "vite": "^5.2.8"
   },
   "volta": {
     "node": "20.11.1"
