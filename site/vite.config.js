@@ -9,7 +9,15 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'node_modules/@geoarrow/geoarrow-wasm/esm/index_bg.wasm',
+          src: '../../geoarrow-rs/js/pkg/esm/index_bg.wasm',
+          dest: 'assets'
+        },
+        {
+          src: '../../geoarrow-rs/js/pkg/esm/index_bg.wasm.d.ts',
+          dest: 'assets'
+        },
+        {
+          src: 'public/nybb.parquet',
           dest: 'assets'
         }
       ]
@@ -18,6 +26,12 @@ export default defineConfig({
   build: {
     target: 'esnext',
     minify: false,
+  },
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: ['../../'],
+    },
   },
   base: process.env.BASE_ARIA_URL
 })
