@@ -3,7 +3,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect } from 'react';
-import { Layer } from 'react-map-gl';
+import { Layer } from 'react-map-gl/maplibre';
 import DownloadButton from './DownloadButton';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
