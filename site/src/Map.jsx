@@ -69,6 +69,7 @@ export default function Map() {
     <>
       <div className="map">
         <MapLibreMap
+          id="myMap"
           initialViewState={INITIAL_VIEW_STATE}
           mapStyle={pmTilesReady ? MAP_STYLE : undefined}
         >
