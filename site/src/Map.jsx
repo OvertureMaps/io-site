@@ -3,7 +3,8 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect } from 'react';
-import { Layer } from 'react-map-gl';
+import { Layer } from 'react-map-gl/maplibre';
+import DownloadButton from './DownloadButton';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
@@ -63,17 +64,22 @@ export default function Map() {
     setPmTilesReady(true)
   }, []);
 
+
   return (
-    <div className="map">
-    <MapLibreMap
-      initialViewState={INITIAL_VIEW_STATE}
-      mapStyle={pmTilesReady ? MAP_STYLE: undefined }
-      >
-        <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
-          <Layer {...PLACES_MAP_STYLE} />
-        </Source>
-        <NavigationControl position='top-right'></NavigationControl>
+    <>
+      <div className="map">
+        <MapLibreMap
+          id="myMap"
+          initialViewState={INITIAL_VIEW_STATE}
+          mapStyle={pmTilesReady ? MAP_STYLE : undefined}
+        >
+          <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
+            <Layer {...PLACES_MAP_STYLE} />
+          </Source>
+          <NavigationControl position='top-right'></NavigationControl>
         </MapLibreMap>
-    </div>
+      </div>
+      <DownloadButton />
+    </>
   );
 }
