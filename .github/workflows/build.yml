@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
+    - run: cd site; npm install
 
     - name: Setup vars 📋
       id: vars
@@ -28,6 +28,6 @@ jobs:
         echo identifier=$(git rev-parse --short ${{ github.sha }})-20.x >> $GITHUB_OUTPUT
         echo distdir=aria-site/aria$(git rev-parse --short ${{ github.sha }})-20.x-dist >> $GITHUB_OUTPUT
 
-    - run: npm run build
+    - run: cd site; npm run build
       env: 
         BASE_ARIA_URL: ${{ steps.vars.outputs.identifier }}
