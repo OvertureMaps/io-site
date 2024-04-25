@@ -287,10 +287,13 @@ const readOptions = {
 // const url =
 // "https://overturemaps-us-west-2.s3.amazonaws.com/release/2024-03-12-alpha.0/theme=transportation/type=segment/part-00000-26412a13-1721-4841-b165-ec480de266f5-c000.zstd.parquet";
 
-const url="http://localhost:5173/nybb.parquet";
+const url =
+"https://overturemaps-us-west-2.s3.amazonaws.com/release/2024-03-12-alpha.0/theme=transportation/type=segment/part-00000-26412a13-1721-4841-b165-ec480de266f5-c000.zstd.parquet";
+
 let exampleFile = await new ParquetFile(url);
- const wasmTable = await exampleFile.read({
+ const wasmTable = await exampleFile.readRowGroups([0], {
   batch_size: 1024,
+  limit: 100,
   offset: 0, 
 });
 
@@ -301,4 +304,4 @@ let blerb = new Blob([binaryDataForDownload], {
   type: "application/octet-stream"
 });
 
-window.open(URL.createObjectURL(blerb));
+//window.open(URL.createObjectURL(blerb));
