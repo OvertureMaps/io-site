@@ -3,7 +3,7 @@ import overtureLogo from '/omf_logo_transparent.png';
 export default function Header() {
   return (
     <>
-      <div>
+      <div className="header">
         <a href="https://overturemaps.org" target="_blank">
           <img
             src={overtureLogo}
@@ -11,7 +11,7 @@ export default function Header() {
             alt="Overture Maps logo"
           />
         </a>
-        <div>OvertureMaps.io</div>
+        <div>Overture Maps Explorer</div>
       </div>
     </>
   );

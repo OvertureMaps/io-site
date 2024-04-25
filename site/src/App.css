@@ -1,6 +1,7 @@
 #root {
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  padding: 1 rem;
+  font-family: Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
 }
 
 .map {
@@ -8,12 +9,25 @@
   height:80vh;
 }
 
+.header {
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content:center
+}
+
+.downloadBar { 
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 2em;
+  padding: .5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -31,9 +45,9 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .logo.overture {
+  /* .logo.overture {
     animation: logo-spin infinite 20s linear;
-  }
+  } */
 }
 
 .card {

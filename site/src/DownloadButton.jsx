@@ -1,10 +1,12 @@
 import { useMap } from "react-map-gl/maplibre";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DownloadCatalog } from "./DownloadCatalog.js"
 import { ParquetDataset, set_panic_hook, writeGeoParquet } from "@geoarrow/geoarrow-wasm/esm/index.js"
 
 function DownloadButton() {
   const { myMap } = useMap();
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (myMap) {
@@ -14,7 +16,7 @@ function DownloadButton() {
 
 
   const handleDownloadClick = async () => {
-
+    setLoading(true);
     //Get current map dimensions and convert to bbox
     const bounds = myMap.getBounds();
     let bbox = [
@@ -56,11 +58,12 @@ function DownloadButton() {
 
     //Download the blob
     window.open(URL.createObjectURL(blerb));
+    setLoading(false);
   };
 
   return (
     <>
-      <button id="downloadButton" onClick={handleDownloadClick}>
+      <button id="downloadButton" disabled={loading} className={loading ? "cursor-downloading" : ''} onClick={handleDownloadClick}>
         Download Visible
       </button>
     </>
