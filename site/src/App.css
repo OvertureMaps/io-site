@@ -1,19 +1,24 @@
 #root {
-  margin: 0;
-  padding: 1 rem;
-  font-family: Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  width:100%;
 }
 
 .map {
-  width:80vw;
+  width:100vw;
   height:80vh;
+}
+
+.wordmark {
+  display:flex;
+  flex-direction:row;
+  align-items: center;
 }
 
 .header {
   display: flex;
   flex-direction:row;
   align-items: center;
-  justify-content:center
+  justify-content:space-between;
+  width:100%;
 }
 
 .downloadBar { 
@@ -21,6 +26,7 @@
   flex-direction: row;
   justify-content: end;
 }
+
 .logo {
   height: 2em;
   padding: .5em;

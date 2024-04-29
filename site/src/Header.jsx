@@ -1,17 +1,12 @@
-import overtureLogo from '/omf_logo_transparent.png';
+import DownloadButton from './DownloadButton';
+import OvertureWordmark from './OvertureWordmark';
 
 export default function Header() {
   return (
     <>
       <div className="header">
-        <a href="https://overturemaps.org" target="_blank">
-          <img
-            src={overtureLogo}
-            className="logo overture"
-            alt="Overture Maps logo"
-          />
-        </a>
-        <div>Overture Maps Explorer</div>
+       <OvertureWordmark></OvertureWordmark>
+        <DownloadButton></DownloadButton>
       </div>
     </>
   );

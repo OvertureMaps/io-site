@@ -63,8 +63,8 @@ function DownloadButton() {
 
   return (
     <>
-      <button id="downloadButton" disabled={loading} className={loading ? "cursor-downloading" : ''} onClick={handleDownloadClick}>
-        Download Visible
+      <button id="downloadButton" disabled={loading} className={loading ? "disabled" : ''} onClick={handleDownloadClick}>
+        {loading ? 'Downloading...' : 'Download Visible'}
       </button>
     </>
   );
