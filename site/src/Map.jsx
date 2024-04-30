@@ -4,6 +4,7 @@ import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect } from 'react';
 import { Layer } from 'react-map-gl/maplibre';
+import PropTypes from 'prop-types';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
@@ -53,7 +54,7 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
   pitch: 0
 };
-export default function Map() {
+export default function Map({mode}) {
 
   const [pmTilesReady, setPmTilesReady] = useState(false)
 
@@ -66,7 +67,7 @@ export default function Map() {
 
   return (
     <>
-      <div className="map">
+      <div className={`map ${mode}`}>
         <MapLibreMap
           id="myMap"
           hash={true}
@@ -81,4 +82,8 @@ export default function Map() {
       </div>
     </>
   );
+}
+
+Map.propTypes = {
+  mode: PropTypes.string.isRequired
 }

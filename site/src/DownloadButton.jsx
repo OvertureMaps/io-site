@@ -64,13 +64,12 @@ function DownloadButton() {
   return (
     <>
       <button id="downloadButton" disabled={loading} className={loading ? "disabled" : ''} onClick={handleDownloadClick}>
+
+      <img src="/download.svg"/>
         {loading ? 'Downloading...' : 'Download Visible'}
       </button>
     </>
   );
 }
 
-// DownloadButton.propTypes = {
-//   onClick: PropTypes.func.isRequired
-// }
 export default DownloadButton;
