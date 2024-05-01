@@ -3,7 +3,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect } from 'react';
-import { Layer } from 'react-map-gl/maplibre';
+import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
 import PropTypes from 'prop-types';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
@@ -89,6 +89,7 @@ export default function Map({mode}) {
             <Layer {...PLACES_MAP_STYLE} />
           </Source>
           <NavigationControl position='top-right'></NavigationControl>
+          <GeolocateControl />
         </MapLibreMap>
       </div>
     </>
