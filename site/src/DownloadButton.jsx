@@ -77,7 +77,7 @@ function DownloadButton() {
     <>
       <button id="download" disabled={loading} className={loading ? "disabled" : ''} onClick={handleDownloadClick}>
 
-      <img src="/download.svg"/>
+      <img className={'dl-img'} src="/download.svg"/>
         {loading ? 'Downloading...' : 'Download Visible'}
       </button>
     </>

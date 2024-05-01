@@ -54,7 +54,12 @@ button#download {
   font-size: 1em;
   font-weight: 400;
   border: 2px solid gray;
-};
+}
+
+img.dl-img {
+  margin-right: 5px;
+  width: 1.5rem;
+}
 
 button {
   font-family: inherit;
