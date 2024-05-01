@@ -46,6 +46,10 @@ button#download {
   background-color: rgb(0,255,255);
   border-radius: 16px;
   color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding: 0.6em 1.2em;
   margin: 2px;
   font-size: 1em;
   font-weight: 400;
@@ -53,10 +57,6 @@ button#download {
 };
 
 button {
-  display: flex;
-  justify-content:space-between;
-  align-items: ceneter;
-  padding: 0.6em 1.2em;
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
