@@ -7,6 +7,7 @@ import { Layer } from 'react-map-gl/maplibre';
 import PropTypes from 'prop-types';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+const DARK_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
 
 const PLACES_PMTILES_URL = 'pmtiles://https://r2-public.protomaps.com/overture-tiles/2023-10-19-alpha.0/places.pmtiles';
 const PLACES_MAP_STYLE = {
@@ -64,6 +65,16 @@ export default function Map({mode}) {
     setPmTilesReady(true)
   }, []);
 
+  function getMapStyle() {
+    let mapStyle;
+
+    if (pmTilesReady){
+     mapStyle =  mode === 'theme-light' ? MAP_STYLE : DARK_MAP_STYLE;
+    } else {
+      mapStyle = undefined;
+    }
+    return mapStyle;
+  }
 
   return (
     <>
@@ -72,7 +83,7 @@ export default function Map({mode}) {
           id="myMap"
           hash={true}
           initialViewState={INITIAL_VIEW_STATE}
-          mapStyle={pmTilesReady ? MAP_STYLE : undefined}
+          mapStyle={getMapStyle()}
         >
           <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
             <Layer {...PLACES_MAP_STYLE} />
