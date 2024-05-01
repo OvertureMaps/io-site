@@ -57,7 +57,19 @@ function DownloadButton() {
     });
 
     //Download the blob
-    window.open(URL.createObjectURL(blerb));
+    // window.open(URL.createObjectURL(blerb));
+
+    var downloadLink = document.createElement("a");
+    downloadLink.href = blerb;
+
+    const center = myMap.getCenter();
+    const zoom = myMap.getZoom();
+    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.parquet`;
+    
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
     setLoading(false);
   };
 
