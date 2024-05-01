@@ -59,8 +59,9 @@ function DownloadButton() {
     //Download the blob
     // window.open(URL.createObjectURL(blerb));
 
+    const url = URL.createObjectURL(blerb);
     var downloadLink = document.createElement("a");
-    downloadLink.href = blerb;
+    downloadLink.href = url;
 
     const center = myMap.getCenter();
     const zoom = myMap.getZoom();
