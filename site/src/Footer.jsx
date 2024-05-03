@@ -1,7 +1,8 @@
-export default function Footer() {
+import PropTypes from 'prop-types';
+export default function Footer({mode}) {
   return (
     <>
-    <div className="footer">
+    <div className={`footer ${mode}`}>
       <p className="read-the-docs">
         Head on over to{' '}
         <a href="https://docs.overturemaps.org/how-to" target="_blank">
@@ -13,4 +14,8 @@ export default function Footer() {
       </div>
     </>
   );
+}
+
+Footer.propTypes = {
+  mode: PropTypes.string.isRequired
 }

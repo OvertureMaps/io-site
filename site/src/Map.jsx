@@ -3,10 +3,11 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect } from 'react';
-import { Layer } from 'react-map-gl/maplibre';
-import DownloadBar from './DownloadBar';
+import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
+import PropTypes from 'prop-types';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+const DARK_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
 
 const PLACES_PMTILES_URL = 'pmtiles://https://r2-public.protomaps.com/overture-tiles/2023-10-19-alpha.0/places.pmtiles';
 const PLACES_MAP_STYLE = {
@@ -54,7 +55,7 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
   pitch: 0
 };
-export default function Map() {
+export default function Map({mode}) {
 
   const [pmTilesReady, setPmTilesReady] = useState(false)
 
@@ -64,23 +65,37 @@ export default function Map() {
     setPmTilesReady(true)
   }, []);
 
+  function getMapStyle() {
+    let mapStyle;
+
+    if (pmTilesReady){
+     mapStyle =  mode === 'theme-light' ? MAP_STYLE : DARK_MAP_STYLE;
+    } else {
+      mapStyle = undefined;
+    }
+    return mapStyle;
+  }
 
   return (
     <>
-      <div className="map">
+      <div className={`map ${mode}`}>
         <MapLibreMap
           id="myMap"
           hash={true}
           initialViewState={INITIAL_VIEW_STATE}
-          mapStyle={pmTilesReady ? MAP_STYLE : undefined}
+          mapStyle={getMapStyle()}
         >
           <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
             <Layer {...PLACES_MAP_STYLE} />
           </Source>
           <NavigationControl position='top-right'></NavigationControl>
+          <GeolocateControl />
         </MapLibreMap>
       </div>
-      <DownloadBar />
     </>
   );
+}
+
+Map.propTypes = {
+  mode: PropTypes.string.isRequired
 }

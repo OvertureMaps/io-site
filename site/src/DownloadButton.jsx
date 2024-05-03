@@ -57,20 +57,32 @@ function DownloadButton() {
     });
 
     //Download the blob
-    window.open(URL.createObjectURL(blerb));
+    // window.open(URL.createObjectURL(blerb));
+
+    const url = URL.createObjectURL(blerb);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = url;
+
+    const center = myMap.getCenter();
+    const zoom = myMap.getZoom();
+    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.parquet`;
+    
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
     setLoading(false);
   };
 
   return (
     <>
-      <button id="downloadButton" disabled={loading} className={loading ? "cursor-downloading" : ''} onClick={handleDownloadClick}>
-        Download Visible
+      <button id="download" disabled={loading} className={loading ? "disabled" : ''} onClick={handleDownloadClick}>
+
+      <img className={'dl-img'} src="/download.svg"/>
+        {loading ? 'Downloading...' : 'Download Visible'}
       </button>
     </>
   );
 }
 
-// DownloadButton.propTypes = {
-//   onClick: PropTypes.func.isRequired
-// }
 export default DownloadButton;
