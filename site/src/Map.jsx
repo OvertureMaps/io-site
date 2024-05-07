@@ -4,7 +4,9 @@ import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect } from 'react';
 import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
+ import ControlPanel from './control-panel';
 import PropTypes from 'prop-types';
+import './control-panel.css';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const DARK_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
@@ -84,6 +86,7 @@ export default function Map({mode}) {
           hash={true}
           initialViewState={INITIAL_VIEW_STATE}
           mapStyle={getMapStyle()}
+          style={{position: 'fixed', width: '100%', height: '100%'}}
         >
           <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
             <Layer {...PLACES_MAP_STYLE} />
@@ -91,6 +94,7 @@ export default function Map({mode}) {
           <NavigationControl position='top-right'></NavigationControl>
           <GeolocateControl />
         </MapLibreMap>
+        <ControlPanel />
       </div>
     </>
   );
