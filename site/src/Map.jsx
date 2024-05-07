@@ -4,9 +4,9 @@ import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect } from 'react';
 import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
- import ControlPanel from './control-panel';
+ import ControlPanel from './InspectorPanel';
 import PropTypes from 'prop-types';
-import './control-panel.css';
+import './InspectorPanel.css';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const DARK_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
