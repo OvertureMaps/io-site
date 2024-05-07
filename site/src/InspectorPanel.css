@@ -15,3 +15,7 @@
     border-radius:15px;
     border-color: rgba(15,15,15,0.8);
   }
+
+  .theme-light .inspector-panel {
+    background-color: rgba(255,255,255,0.6);
+  }
