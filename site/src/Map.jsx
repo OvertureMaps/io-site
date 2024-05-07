@@ -2,7 +2,7 @@ import { Map as MapLibreMap, NavigationControl, Source } from 'react-map-gl/mapl
 import 'maplibre-gl/dist/maplibre-gl.css';
 import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
  import ControlPanel from './InspectorPanel';
 import PropTypes from 'prop-types';
@@ -60,11 +60,28 @@ const INITIAL_VIEW_STATE = {
 export default function Map({mode}) {
 
   const [pmTilesReady, setPmTilesReady] = useState(false)
+  const [cursor, setCursor] = useState('auto');
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol()
     maplibregl.addProtocol('pmtiles', protocol.tile)
     setPmTilesReady(true)
+  }, []);
+
+  const [interactiveLayerIds, setInteractiveLayerIds] = useState(['overture-pois']);
+  // const onInteractiveLayersChange = useCallback(layerFilter => {
+  //   setInteractiveLayerIds(MAP_STYLE.layers.map(layer => layer.id).filter(layerFilter));
+  // }, []);
+
+  const onMouseEnter = useCallback(() => setCursor('pointer'), []);
+  const onMouseLeave = useCallback(() => setCursor('auto'), []);
+
+  const onClick = useCallback(event => {
+    const feature = event.features && event.features[0];
+
+    if (feature) {
+      window.alert(`Clicked layer ${feature.layer.id}`); // eslint-disable-line no-alert
+    }
   }, []);
 
   function getMapStyle() {
@@ -83,7 +100,12 @@ export default function Map({mode}) {
       <div className={`map ${mode}`}>
         <MapLibreMap
           id="myMap"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+          cursor={cursor}
           hash={true}
+          interactiveLayerIds={interactiveLayerIds}
           initialViewState={INITIAL_VIEW_STATE}
           mapStyle={getMapStyle()}
           style={{position: 'fixed', width: '100%', height: '100%'}}
