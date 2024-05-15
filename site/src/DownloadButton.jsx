@@ -1,7 +1,7 @@
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
 import { DownloadCatalog } from "./DownloadCatalog.js"
-import { ParquetDataset, set_panic_hook, writeGeoParquet } from "@geoarrow/geoarrow-wasm/esm/index.js"
+import { ParquetDataset, set_panic_hook, writeGeoJSON } from "@geoarrow/geoarrow-wasm/esm/index.js"
 
 function DownloadButton() {
   const { myMap } = useMap();
@@ -49,7 +49,8 @@ function DownloadButton() {
 
     set_panic_hook();
     //Create a blob
-    const binaryDataForDownload = writeGeoParquet(wasmTable);
+    // const binaryDataForDownload = writeGeoParquet(wasmTable);
+    const binaryDataForDownload = writeGeoJSON(wasmTable);
 
 
     let blerb = new Blob([binaryDataForDownload], {
@@ -65,7 +66,7 @@ function DownloadButton() {
 
     const center = myMap.getCenter();
     const zoom = myMap.getZoom();
-    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.parquet`;
+    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
     
     document.body.appendChild(downloadLink);
     downloadLink.click();
