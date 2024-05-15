@@ -4,7 +4,7 @@ import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect, useCallback } from 'react';
 import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
- import ControlPanel from './InspectorPanel';
+ import InspectorPanel from './InspectorPanel';
 import PropTypes from 'prop-types';
 import './InspectorPanel.css';
 
@@ -61,6 +61,7 @@ export default function Map({mode}) {
 
   const [pmTilesReady, setPmTilesReady] = useState(false)
   const [cursor, setCursor] = useState('auto');
+  const [mapEntity, setMapEntity] = useState({});
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol()
@@ -79,8 +80,9 @@ export default function Map({mode}) {
   const onClick = useCallback(event => {
     const feature = event.features && event.features[0];
 
+
     if (feature) {
-      window.alert(`Clicked layer ${feature.layer.id}`); // eslint-disable-line no-alert
+      setMapEntity(event.features[0].properties);
     }
   }, []);
 
@@ -116,7 +118,7 @@ export default function Map({mode}) {
           <NavigationControl position='top-right'></NavigationControl>
           <GeolocateControl />
         </MapLibreMap>
-        <ControlPanel />
+        <InspectorPanel entity={mapEntity}/>
       </div>
     </>
   );
