@@ -10,8 +10,8 @@
     "aws_deploy": "python3 scripts/deploy.py",
     "preview": "vite preview"
   },
-  "dependencies": {    
-    "@geoarrow/geoarrow-wasm": "file:../../geoarrow-rs/js/pkg",
+  "dependencies": {
+    "@geoarrow/geoarrow-wasm": "^0.2.0-beta.4",
     "apache-arrow": "^15.0.2",
     "maplibre-gl": "^4.1.3",
     "pmtiles": "^3.0.5",
