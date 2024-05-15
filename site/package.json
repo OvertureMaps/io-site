@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {    
-    "@geoarrow/geoarrow-wasm": "~0.2.0-beta.3",
+    "@geoarrow/geoarrow-wasm": "file:../../geoarrow-rs/js/pkg",
     "apache-arrow": "^15.0.2",
     "maplibre-gl": "^4.1.3",
     "pmtiles": "^3.0.5",

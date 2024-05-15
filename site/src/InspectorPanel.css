@@ -1,0 +1,21 @@
+.inspector-panel {
+    position: fixed;
+    z-index: 10;
+    top: 10;
+    left: 0;
+    max-width: 320px;
+    background-color: rgba(0,0,0,0.4);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    padding: 12px 24px;
+    margin: 4px;
+    font-size: 13px;
+    line-height: 2;
+    outline: none;
+    border: 3px;
+    border-radius:15px;
+    border-color: rgba(15,15,15,0.8);
+  }
+
+  .theme-light .inspector-panel {
+  background-color: rgba(255,255,255,0.6D);
+  }
