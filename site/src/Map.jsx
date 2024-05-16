@@ -11,24 +11,24 @@ import './InspectorPanel.css';
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const DARK_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
 
-const PLACES_PMTILES_URL = 'pmtiles://https://r2-public.protomaps.com/overture-tiles/2023-10-19-alpha.0/places.pmtiles';
+const PLACES_PMTILES_URL = 'pmtiles://https://data.source.coop/protomaps/overture/2024-04-16-beta.0/places.pmtiles';
 const PLACES_MAP_STYLE = {
-  'id': 'overture-pois',
+  'id': 'places',
   'type': 'circle',
-  'source': 'overture-pois',
-  'source-layer': 'pois',
+  'source': 'places',
+  'source-layer': 'places',
   'filter': [">=", ["get", "confidence"], 0.0],
   'paint': {
     'circle-color':
       ['case',
-        ['==', ['get', 'category_main'], 'beauty_salon'], '#fb9a99',
-        ['==', ['get', 'category_main'], 'hotel'], '#33a02c',
-        ['==', ['get', 'category_main'], 'landmark_and_historical_building'], '#a6cee3',
-        ['==', ['get', 'category_main'], 'professional_services'], '#fdbf6f',
-        ['==', ['get', 'category_main'], 'shopping'], '#e31a1c',
-        ['==', ['get', 'category_main'], 'restaurant'], '#1f78b4',
-        ['==', ['get', 'category_main'], 'school'], '#ff7f00',
-        ['==', ['get', 'category_main'], 'accommodation'], '#b2df8a',
+        ['==', ['get', '@category'], 'beauty_salon'], '#fb9a99',
+        ['==', ['get', '@category'], 'hotel'], '#33a02c',
+        ['==', ['get', '@category'], 'landmark_and_historical_building'], '#a6cee3',
+        ['==', ['get', '@category'], 'professional_services'], '#fdbf6f',
+        ['==', ['get', '@category'], 'shopping'], '#e31a1c',
+        ['==', ['get', '@category'], 'restaurant'], '#1f78b4',
+        ['==', ['get', '@category'], 'school'], '#ff7f00',
+        ['==', ['get', '@category'], 'accommodation'], '#b2df8a',
         '#cab2d6'
       ],
     'circle-radius': [
@@ -69,7 +69,7 @@ export default function Map({mode}) {
     setPmTilesReady(true)
   }, []);
 
-  const [interactiveLayerIds, setInteractiveLayerIds] = useState(['overture-pois']);
+  const [interactiveLayerIds, setInteractiveLayerIds] = useState(['places']);
   // const onInteractiveLayersChange = useCallback(layerFilter => {
   //   setInteractiveLayerIds(MAP_STYLE.layers.map(layer => layer.id).filter(layerFilter));
   // }, []);
