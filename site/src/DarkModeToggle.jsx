@@ -1,5 +1,7 @@
 import { setTheme } from './themeUtils';
 import PropTypes from 'prop-types';
+import darkModeIcon from '/darkmode.svg';
+import lightModeIcon from '/lightmode.svg';
 
 export default function DarkModeToggle({ mode, setMode }) {
 
@@ -15,7 +17,7 @@ export default function DarkModeToggle({ mode, setMode }) {
     return (
         <div>
             <button id="toggle" className="toggle--checkbox" onClick={toggleDarkMode} readOnly>
-                <img src={mode === 'theme-light' ? '/lightmode.svg' : '/darkmode.svg'} />
+                <img src={mode === 'theme-light' ? lightModeIcon : darkModeIcon} />
             </button>
         </div>
     );

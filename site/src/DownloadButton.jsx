@@ -2,6 +2,7 @@ import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
 import { DownloadCatalog } from "./DownloadCatalog.js"
 import { ParquetDataset, set_panic_hook, writeGeoJSON } from "@geoarrow/geoarrow-wasm/esm/index.js"
+import downloadIcon from "/download.svg"
 
 function DownloadButton() {
   const { myMap } = useMap();
@@ -79,7 +80,7 @@ function DownloadButton() {
     <>
       <button id="download" disabled={loading} className={loading ? "disabled" : ''} onClick={handleDownloadClick}>
 
-      <img className={'dl-img'} src="/download.svg"/>
+      <img className={'dl-img'} src={downloadIcon}/>
         {loading ? 'Downloading...' : 'Download Visible'}
       </button>
     </>
