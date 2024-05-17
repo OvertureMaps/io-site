@@ -1,0 +1,28 @@
+.button--download {
+  button {
+    color: white;
+  }
+
+  button:hover {
+    color: white;
+  }
+
+  .wrapper {
+    display: flex;
+
+    .icon {
+      height: 20px;
+
+      img {
+        height: 23px;
+        margin-right: 2px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .button--download {
+    display: none;
+  }
+}

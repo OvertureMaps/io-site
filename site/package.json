@@ -27,7 +27,8 @@
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.2.8"
+    "vite": "^5.2.8",
+    "infima": "0.2.0-alpha.43"
   },
   "volta": {
     "node": "20.11.1"

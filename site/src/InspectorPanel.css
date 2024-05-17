@@ -1,13 +1,12 @@
 .inspector-panel {
   position: fixed;
   z-index: 10;
-  top: 10;
   left: 0;
-  max-width: 320px;
-  background-color: rgba(255, 255, 255, 0.95);
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.9);
   color: black;
   box-shadow: 0 2px 4px white;
-  padding: 10px;
+  padding: 13px 10px;
   margin: 4px;
   font-size: 13px;
   line-height: 2;
@@ -15,10 +14,18 @@
   border: 3px;
   border-radius: 10px;
   border-color: rgba(15, 15, 15, 0.8);
+  max-height: 80%;
+  overflow-y: scroll;
 
-  h3,
-  p {
-    margin: 0;
+  @media (max-width: 768px) {
+    max-height: 50%;
+  }
+
+  table {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  table th, table td {
     padding: 0;
   }
 
@@ -39,16 +46,15 @@
   table td:last-child {
     width: 70%;
   }
-  table tr:not(:last-child) td {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  }
-  table {
-    border-spacing: 0;
-  }
 }
 
 .theme-dark .inspector-panel {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.7);
+
+  table {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+
   box-shadow: 0 2px 4px black;
   color: white;
 }
