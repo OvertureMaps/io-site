@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import 'infima/dist/css/default/default.css';
 import initWasm from "@geoarrow/geoarrow-wasm/esm/index.js";
 import wasmUrl from "@geoarrow/geoarrow-wasm/esm/index_bg.wasm?url"
 
