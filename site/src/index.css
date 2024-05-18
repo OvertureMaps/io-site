@@ -2,7 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  width:100%;
+  width: 100%;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -13,7 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0 rem;
-  font-family: Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  font-family: Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
+    sans-serif;
 }
 
 a {
@@ -29,7 +30,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  flex-direction:column;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -43,22 +44,17 @@ button.disabled {
 }
 
 button#download {
-  background-color: rgb(0,255,255);
+  background-color: rgb(0, 255, 255);
   border-radius: 16px;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   padding: 0.6em 1.2em;
   margin: 2px;
   font-size: 1em;
   font-weight: 400;
   border: 2px solid gray;
-}
-
-img.dl-img {
-  margin-right: 5px;
-  width: 1.5rem;
 }
 
 button {
