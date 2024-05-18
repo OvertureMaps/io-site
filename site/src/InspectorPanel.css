@@ -1,21 +1,54 @@
 .inspector-panel {
-    position: fixed;
-    z-index: 10;
-    top: 10;
-    left: 0;
-    max-width: 320px;
-    background-color: rgba(0,0,0,0.4);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    padding: 12px 24px;
-    margin: 4px;
-    font-size: 13px;
-    line-height: 2;
-    outline: none;
-    border: 3px;
-    border-radius:15px;
-    border-color: rgba(15,15,15,0.8);
+  position: fixed;
+  z-index: 10;
+  top: 10;
+  left: 0;
+  max-width: 320px;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: black;
+  box-shadow: 0 2px 4px white;
+  padding: 10px;
+  margin: 4px;
+  font-size: 13px;
+  line-height: 2;
+  outline: none;
+  border: 3px;
+  border-radius: 10px;
+  border-color: rgba(15, 15, 15, 0.8);
+
+  h3,
+  p {
+    margin: 0;
+    padding: 0;
   }
 
-  .theme-light .inspector-panel {
-  background-color: rgba(255,255,255,0.6D);
+  table td {
+    padding-right: 0.5em;
+    vertical-align: top;
+    border-left: 0;
+    border-right: 0;
+    word-break: break-all;
   }
+  table td:first-child {
+    text-align: left;
+    width: 30%;
+  }
+  table td:first-child {
+    word-break: normal;
+  }
+  table td:last-child {
+    width: 70%;
+  }
+  table tr:not(:last-child) td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  table {
+    border-spacing: 0;
+  }
+}
+
+.theme-dark .inspector-panel {
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 2px 4px black;
+  color: white;
+}

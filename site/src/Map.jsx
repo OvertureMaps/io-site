@@ -80,9 +80,10 @@ export default function Map({mode}) {
   const onClick = useCallback(event => {
     const feature = event.features && event.features[0];
 
-
     if (feature) {
       setMapEntity(event.features[0].properties);
+    } else {
+      setMapEntity({});
     }
   }, []);
 
@@ -118,7 +119,7 @@ export default function Map({mode}) {
           <NavigationControl position='top-right'></NavigationControl>
           <GeolocateControl />
         </MapLibreMap>
-        <InspectorPanel entity={mapEntity}/>
+        {Object.keys(mapEntity).length > 0 && <InspectorPanel entity={mapEntity} />}
       </div>
     </>
   );

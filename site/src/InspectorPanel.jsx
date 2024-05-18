@@ -9,13 +9,18 @@ function InspectorPanel({entity}) {
   return (
     <div className="inspector-panel">
       <h3>Inspector Panel</h3>
-      {Object.keys(entity)
-        .filter((key) => !key.startsWith('@'))
-        .map((key) => (
-          <div key={key}>
-            <strong>{key}:</strong> {entity[key].toString()}
-          </div>
-        ))}
+      <table>
+        {Object.keys(entity)
+          .filter((key) => !key.startsWith("@"))
+          .map((key) => (
+            <tr key={key}>
+              <td>
+                <strong>{key}</strong>
+              </td>
+              <td>{entity[key].toString()}</td>
+            </tr>
+          ))}
+      </table>
       <p>
          <a href="https://docs.overturemaps.org/schema/">Overture Schema Reference</a>
       </p>
