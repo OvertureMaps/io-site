@@ -1,8 +1,13 @@
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
-import { DownloadCatalog } from "./DownloadCatalog.js"
-import { ParquetDataset, set_panic_hook, writeGeoJSON } from "@geoarrow/geoarrow-wasm/esm/index.js"
-import downloadIcon from "/download.svg"
+import { DownloadCatalog } from "../DownloadCatalog.js";
+import {
+  ParquetDataset,
+  set_panic_hook,
+  writeGeoJSON,
+} from "@geoarrow/geoarrow-wasm/esm/index.js";
+import downloadIcon from "/download.svg";
+import "./DownloadButton.css";
 
 function DownloadButton() {
   const { myMap } = useMap();
@@ -13,18 +18,17 @@ function DownloadButton() {
     if (myMap) {
       myMap.getBounds();
     }
-  }, [myMap])
-
+  }, [myMap]);
 
   const handleDownloadClick = async () => {
     setLoading(true);
     //Get current map dimensions and convert to bbox
     const bounds = myMap.getBounds();
     let bbox = [
-      bounds.getWest(),  //minx
+      bounds.getWest(), //minx
       bounds.getSouth(), //miny
-      bounds.getEast(),  //maxx
-      bounds.getNorth()  //maxy
+      bounds.getEast(), //maxx
+      bounds.getNorth(), //maxy
     ];
 
     console.log(bounds);
@@ -53,9 +57,8 @@ function DownloadButton() {
     // const binaryDataForDownload = writeGeoParquet(wasmTable);
     const binaryDataForDownload = writeGeoJSON(wasmTable);
 
-
     let blerb = new Blob([binaryDataForDownload], {
-      type: "application/octet-stream"
+      type: "application/octet-stream",
     });
 
     //Download the blob
@@ -68,7 +71,7 @@ function DownloadButton() {
     const center = myMap.getCenter();
     const zoom = myMap.getZoom();
     downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
-    
+
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
@@ -77,13 +80,19 @@ function DownloadButton() {
   };
 
   return (
-    <>
-      <button id="download" disabled={loading} className={loading ? "disabled" : ''} onClick={handleDownloadClick}>
-
-      <img className={'dl-img'} src={downloadIcon}/>
-        {loading ? 'Downloading...' : 'Download Visible'}
+    <div className="button--download">
+      <button
+        className={`button button--primary ${loading ? "disabled" : ""}`}
+        onClick={handleDownloadClick}
+      >
+        <div className="wrapper">
+          <div className="icon">
+            <img className={"dl-img"} src={downloadIcon} />
+          </div>
+          <div>{loading ? "Downloading..." : "Download Visible"}</div>
+        </div>
       </button>
-    </>
+    </div>
   );
 }
 
