@@ -7,6 +7,7 @@ import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
  import InspectorPanel from './InspectorPanel';
 import PropTypes from 'prop-types';
 import './InspectorPanel.css';
+import ThemeSelector from './ThemeSelector';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const DARK_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
@@ -120,6 +121,7 @@ export default function Map({mode}) {
           <GeolocateControl />
         </MapLibreMap>
         {Object.keys(mapEntity).length > 0 && <InspectorPanel entity={mapEntity} />}
+        <ThemeSelector></ThemeSelector>
       </div>
     </>
   );

@@ -1,0 +1,36 @@
+.theme-selector {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  font-size:0;
+  outline: none;
+  display:flex;
+}
+
+.theme-dark .inspector-panel {
+  background-color: rgba(0, 0, 0, 0.7);
+
+  table {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+
+  box-shadow: 0 2px 4px black;
+  color: white;
+}
+
+div.layer-control {
+  width:32px;
+  height:32px;
+  justify-content: center;
+  display: flex;
+  border-radius: 5px;
+  border: 2px solid #aaaaaaaa;
+}
+img.layer-control {
+  background: white; 
+  width:24px;
+  justify-content: center;
+}
