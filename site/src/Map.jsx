@@ -7,6 +7,8 @@ import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
  import InspectorPanel from './InspectorPanel';
 import PropTypes from 'prop-types';
 import './InspectorPanel.css';
+import './CustomControls.css';
+import ThemeSelector from './ThemeSelector';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const DARK_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
@@ -114,12 +116,15 @@ export default function Map({mode}) {
           style={{position: 'fixed', width: '100%', height: '100%'}}
         >
           <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
-            <Layer {...PLACES_MAP_STYLE} />
+            <Layer {...PLACES_MAP_STYLE} layout={{visibility: interactiveLayerIds.includes('places') ? 'visible' : 'none'}} />
           </Source>
           <NavigationControl position='top-right'></NavigationControl>
           <GeolocateControl />
         </MapLibreMap>
-        {Object.keys(mapEntity).length > 0 && <InspectorPanel entity={mapEntity} />}
+        <div className="custom-controls">
+          {Object.keys(mapEntity).length > 0 && <InspectorPanel entity={mapEntity} />}
+          <ThemeSelector interactiveLayers={setInteractiveLayerIds}></ThemeSelector>
+        </div>
       </div>
     </>
   );
