@@ -1,13 +1,24 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LayerIcon from "./icons/icon-layers.svg?react";
 import "./ThemeSelector.css"; 
 
-function ThemeSelector({ themes }) {
+function ThemeSelector({ interactiveLayers }) {
 
   const [places, setPlaces] = useState(true);
   const [buildings, setBuildings] = useState(true);
   const [transportation, setTransportation] = useState(true);
+
+  
+  useEffect(() => {
+
+    let layers = [];
+
+    if (places) layers.push('places');
+    if (buildings) layers.push('buildings');
+    if (transportation) layers.push('transportation');
+    interactiveLayers(layers);
+  }, [buildings, places, transportation, interactiveLayers]);
 
   return (
     <div className="dropdown dropdown--hoverable theme-selector">
@@ -30,6 +41,6 @@ function ThemeSelector({ themes }) {
 }
 
 ThemeSelector.propTypes = {
-  themes: PropTypes.object,
+  interactiveLayers: PropTypes.function,
 };
 export default ThemeSelector;

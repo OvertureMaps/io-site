@@ -116,14 +116,14 @@ export default function Map({mode}) {
           style={{position: 'fixed', width: '100%', height: '100%'}}
         >
           <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
-            <Layer {...PLACES_MAP_STYLE} />
+            <Layer {...PLACES_MAP_STYLE} layout={{visibility: interactiveLayerIds.includes('places') ? 'visible' : 'none'}} />
           </Source>
           <NavigationControl position='top-right'></NavigationControl>
           <GeolocateControl />
         </MapLibreMap>
         <div className="custom-controls">
           {Object.keys(mapEntity).length > 0 && <InspectorPanel entity={mapEntity} />}
-          <ThemeSelector></ThemeSelector>
+          <ThemeSelector interactiveLayers={setInteractiveLayerIds}></ThemeSelector>
         </div>
       </div>
     </>
