@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import layersIcon from "/icon-layers.svg";
+import LayerIcon from "./icons/icon-layers.svg?react";
 import "./ThemeSelector.css"; 
 
 function ThemeSelector({ themes }) {
@@ -12,7 +12,7 @@ function ThemeSelector({ themes }) {
   return (
     <div className="dropdown dropdown--hoverable theme-selector">
       <div className="layer-control">
-        <img className="layer-control" src={layersIcon} />
+        <LayerIcon></LayerIcon>
       </div>
       <ul className="dropdown__menu">
         {places ? <li>
