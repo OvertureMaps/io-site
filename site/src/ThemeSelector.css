@@ -1,7 +1,4 @@
 .theme-selector {
-  position: fixed;
-  z-index: 10;
-  left: 0;
   max-width: 400px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius:5px;
@@ -9,6 +6,8 @@
   font-size:0;
   outline: none;
   display:flex;
+  max-height: 32px;
+  margin-top:3px;
 }
 
 .theme-dark .inspector-panel {

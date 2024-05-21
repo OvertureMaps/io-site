@@ -1,8 +1,7 @@
 .inspector-panel {
-  position: fixed;
-  z-index: 10;
-  left: 0;
   max-width: 400px;
+  display:flex;
+  flex-direction:column;
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
   box-shadow: 0 2px 4px white;
@@ -16,6 +15,7 @@
   border-color: rgba(15, 15, 15, 0.8);
   max-height: 80%;
   overflow-y: scroll;
+  position:relative;
 
   @media (max-width: 768px) {
     max-height: 50%;

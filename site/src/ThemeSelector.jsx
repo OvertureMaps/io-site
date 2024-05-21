@@ -12,17 +12,17 @@ function ThemeSelector({ themes }) {
   return (
     <div className="dropdown dropdown--hoverable theme-selector">
       <div className="layer-control">
-        <LayerIcon></LayerIcon>
+        <LayerIcon/>
       </div>
       <ul className="dropdown__menu">
         <li> 
-          <div className="dropdown__link" ><input type="checkbox" checked={places} onClick={() => setPlaces(!places)}/> Places </div>
+          <div className="dropdown__link" ><input type="checkbox" checked={places} onClick={() => setPlaces(!places)}/>Places</div>
         </li>
         <li>
-          <div className="dropdown__link" ><input type="checkbox" checked={buildings} onClick={() => setBuildings(!buildings)}/> Buildings </div>
+          <div className="dropdown__link" ><input type="checkbox" checked={buildings} onClick={() => setBuildings(!buildings)}/>Buildings</div>
         </li>
         <li>
-          <div className="dropdown__link" ><input type="checkbox" checked={transportation} onClick={() => setTransportation(!transportation)}/> Transportation </div>
+          <div className="dropdown__link" ><input type="checkbox" checked={transportation} onClick={() => setTransportation(!transportation)}/>Transportation</div>
         </li>
       </ul>
     </div>
