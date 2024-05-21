@@ -7,7 +7,7 @@ function ThemeSelector({ themes }) {
 
   const [places, setPlaces] = useState(true);
   const [buildings, setBuildings] = useState(true);
-  const [transporation, setTransporation] = useState(true);
+  const [transportation, setTransportation] = useState(true);
 
   return (
     <div className="dropdown dropdown--hoverable theme-selector">
@@ -15,15 +15,15 @@ function ThemeSelector({ themes }) {
         <LayerIcon></LayerIcon>
       </div>
       <ul className="dropdown__menu">
-        {places ? <li>
-          <a className="dropdown__link" href="#url">Places</a>
-        </li> : null}
-        {buildings ? <li>
-          <a className="dropdown__link" href="#url">Buildings</a>
-        </li> : null}
-        {transporation ? <li>
-          <a className="dropdown__link" href="#url">Transportation</a>
-        </li> : null}
+        <li> 
+          <div className="dropdown__link" ><input type="checkbox" checked={places} onClick={() => setPlaces(!places)}/> Places </div>
+        </li>
+        <li>
+          <div className="dropdown__link" ><input type="checkbox" checked={buildings} onClick={() => setBuildings(!buildings)}/> Buildings </div>
+        </li>
+        <li>
+          <div className="dropdown__link" ><input type="checkbox" checked={transportation} onClick={() => setTransportation(!transportation)}/> Transportation </div>
+        </li>
       </ul>
     </div>
   );
