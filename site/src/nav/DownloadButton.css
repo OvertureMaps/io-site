@@ -26,3 +26,20 @@
     display: none;
   }
 }
+
+
+div.download {
+  width:20px;
+  height:20px;
+  justify-content: center;
+  display: flex;
+  padding-right: 1px;
+}
+
+svg.icon-refresh > circle.primary {
+  fill: white;
+}
+
+svg.icon-refresh > path.secondary {
+  fill: cornflowerblue;
+}
