@@ -10,7 +10,7 @@ The data accessible through io-site is drawn from the [Overture Maps Foundation]
 * See [open issues in the issue tracker](https://github.com/OvertureMaps/io-site/issues?q=is%3Aissue+is%3Aopen+) if you're looking to help on issues.
 
 * Test a prerelease version of io-site:
-  * The current build of the `main` branch is not published yet. When it is you can find it here!
+  * The current build of the `main` branch is publicly available [here](https://explore.overturemaps.org/#16.34/51.049194/3.728993)!
 
 ## For developers
 
