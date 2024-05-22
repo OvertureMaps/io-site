@@ -88,11 +88,13 @@ function DownloadButton() {
         onClick={handleDownloadClick}
       >
         <div className="wrapper">
-          <div className="download">
+          <div className="download-icon">
              {!loading ? <img className={"dl-img"} src={downloadIcon}/>
               : <RefreshIcon/>}
           </div>
-          <div>{loading ? "Downloading..." : "Download Visible"}</div>
+          <div className="download-text">
+            {loading ? "Downloading..." : "Download Visible"}
+            </div>
         </div>
       </button>
     </div>
