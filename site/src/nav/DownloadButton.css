@@ -27,13 +27,23 @@
   }
 }
 
-
-div.download {
+div.download-icon {
   width:20px;
   height:20px;
   justify-content: center;
   display: flex;
-  padding-right: 1px;
+}
+
+svg.icon-refresh {
+  width:20px;
+  height:20px;
+  justify-content: center;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin-animation 1s infinite ease;
 }
 
 svg.icon-refresh > circle.primary {
@@ -42,4 +52,15 @@ svg.icon-refresh > circle.primary {
 
 svg.icon-refresh > path.secondary {
   fill: cornflowerblue;
+  
+}
+
+@keyframes spin-animation {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+div.download-text {
+  padding-left: 1px;
 }
