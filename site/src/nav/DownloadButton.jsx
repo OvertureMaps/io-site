@@ -8,7 +8,7 @@ import {
   writeGeoJSON,
 } from "@geoarrow/geoarrow-wasm/esm/index.js";
 import downloadIcon from "/download.svg";
-import RefreshIcon from "../icons/icon-refresh.svg?react"
+import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
 
 function DownloadButton() {
@@ -89,12 +89,15 @@ function DownloadButton() {
       >
         <div className="wrapper">
           <div className="download-icon">
-             {!loading ? <img className={"dl-img"} src={downloadIcon}/>
-              : <RefreshIcon/>}
+            {!loading ? (
+              <img className={"dl-img"} src={downloadIcon} />
+            ) : (
+              <RefreshIcon />
+            )}
           </div>
           <div className="download-text">
             {loading ? "Downloading..." : "Download Visible"}
-            </div>
+          </div>
         </div>
       </button>
     </div>
