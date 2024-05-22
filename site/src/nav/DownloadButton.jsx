@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
 import { DownloadCatalog } from "../DownloadCatalog.js";
@@ -7,6 +8,7 @@ import {
   writeGeoJSON,
 } from "@geoarrow/geoarrow-wasm/esm/index.js";
 import downloadIcon from "/download.svg";
+import RefreshIcon from "../icons/icon-refresh.svg?react"
 import "./DownloadButton.css";
 
 function DownloadButton() {
@@ -86,8 +88,9 @@ function DownloadButton() {
         onClick={handleDownloadClick}
       >
         <div className="wrapper">
-          <div className="icon">
-            <img className={"dl-img"} src={downloadIcon} />
+          <div className="download">
+             {!loading ? <img className={"dl-img"} src={downloadIcon}/>
+              : <RefreshIcon/>}
           </div>
           <div>{loading ? "Downloading..." : "Download Visible"}</div>
         </div>
