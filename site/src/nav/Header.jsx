@@ -1,6 +1,7 @@
 import DownloadButton from "./DownloadButton";
 import OvertureWordmark from "./OvertureWordmark";
 import DarkModeToggle from "./DarkModeToggle";
+import DownloadOptions from "./DownloadOptions"
 import PropTypes from "prop-types";
 
 export default function Header({ mode, setMode }) {
@@ -12,6 +13,7 @@ export default function Header({ mode, setMode }) {
         </div>
         <div className="navbar__items navbar__items--right">
           <DarkModeToggle mode={mode} setMode={setMode} />
+          <DownloadOptions />
           <DownloadButton />
         </div>
       </div>
