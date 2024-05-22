@@ -28,8 +28,8 @@
 }
 
 div.download-icon {
-  width:20px;
-  height:20px;
+  width: 20px;
+  height: 20px;
   justify-content: center;
   display: flex;
 }
@@ -48,7 +48,6 @@ svg.icon-refresh > circle.primary {
 
 svg.icon-refresh > path.secondary {
   fill: cornflowerblue;
-  
 }
 
 @keyframes spin-animation {
