@@ -50,7 +50,7 @@ VSCode provides a debugging mode using Chrome. To use it, follow these steps:
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://127.0.0.1:5173",
-            "webRoot": "${workspaceFolder}/sitel/"
+            "webRoot": "${workspaceFolder}/site/"
         }
     ]
 }
