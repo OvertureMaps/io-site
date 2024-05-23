@@ -6,12 +6,19 @@ div.layerselect {
   padding: 3px;
 }
 
-div.options-wrapper {
-  background-color: whitesmoke;
-}
-
 div.file-select-multi {
   max-height: 224;
   width: 250;
   font-weight: "normal";
+}
+
+div.options-wrapper {
+  position: absolute;
+  right: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: whitesmoke;
+  border: 1px solid darkgrey;
 }
