@@ -6,18 +6,28 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
+
+const fileTypes = ["geoJson", "Parquet"];
 
 function DownloadOptions() {
   const [open, setOpen] = useState(false);
+  const [fileType, setFileType] = useState([]);
 
-  const handleClick = () => {
+  const handleClickC = () => {
     setOpen(!open);
+  };
+
+  const handleChangeFT = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setFileType(typeof value === "string" ? value.split(",") : value);
   };
 
   return (
     <div className="download-options">
-      <button classname="download-options-button" onClick={handleClick}>
+      <button classname="download-options-button" onClick={handleClickC}>
         <div className="wrapper">
           <div classname="icon">
             {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
@@ -28,14 +38,24 @@ function DownloadOptions() {
         {open ? (
           <div className="options">
             <span className="fileselect">
-              <FormControl>
+              <FormControl sx={{ m: 1, width: 300 }}>
                 <InputLabel id="file-select-multi-label">
-                  Download File Format
+                  File Format
                 </InputLabel>
                 <Select
                   labelId="file-select-multi-label"
                   id="file-select-multi"
-                ></Select>
+                  multiple
+                  value={fileType}
+                  onChange={handleChangeFT}
+                  input={<OutlinedInput label="File Type" />}
+                >
+                  {fileTypes.map((type) => (
+                    <MenuItem key={type} value={type}>
+                      {type}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
             </span>
             <span className="layerselect">Layer Selector</span>

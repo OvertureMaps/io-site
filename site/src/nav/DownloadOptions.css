@@ -7,5 +7,11 @@ span.layerselect {
 }
 
 div.options-wrapper {
-  background-color: lightgray;
+  background-color: whitesmoke;
+}
+
+div.file-select-multi {
+  max-height: 224;
+  width: 250;
+  font-weight: "normal";
 }
