@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { TextField, Typography } from "@mui/material";
 
 const fileTypes = ["geoJson", "Parquet"];
 
@@ -34,16 +35,23 @@ function DownloadOptions() {
 
   return (
     <div className="download-options">
-      <button classname="download-options-button" onClick={handleClickC}>
-        <div className="wrapper">
-          <div classname="icon">
-            {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
+      <div className="button-wrapper">
+        <button className="download-options-button" onClick={handleClickC}>
+          <div className="chevron-icon-wrapper">
+            <div classname="chevron-icon">
+              {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </div>
       <div className="options-wrapper">
         {open ? (
           <div className="options">
+            <div className="title-wrapper">
+              <Typography align="center" variant="h6">
+                Download Options
+              </Typography>
+            </div>
             <div className="layerselect">
               <FormControlLabel
                 control={

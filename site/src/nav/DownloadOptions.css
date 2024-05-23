@@ -1,11 +1,3 @@
-div.fileselect {
-  padding: 3px;
-}
-
-div.layerselect {
-  padding: 3px;
-}
-
 div.file-select-multi {
   max-height: 224;
   width: 250;
@@ -21,4 +13,34 @@ div.options-wrapper {
   border-bottom-right-radius: 5px;
   background-color: whitesmoke;
   border: 1px solid darkgrey;
+}
+
+svg.chevron-down > path.primary {
+  fill: darkslategray;
+}
+
+svg.chevron-up > path.primary {
+  fill: darkslategray;
+}
+
+button.download-options-button {
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+}
+
+button.download-options-button:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+div.download-options {
+  margin-right: 11px;
+}
+
+div.options-title {
+  font-size: large;
+}
+
+div.title-wrapper {
+  border-bottom: 1px solid darkgray;
 }
