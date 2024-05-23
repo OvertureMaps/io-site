@@ -72,7 +72,10 @@ function DownloadButton() {
 
     const center = myMap.getCenter();
     const zoom = myMap.getZoom();
-    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
+    const filenameZoom = Number.parseFloat(zoom.toFixed(2));
+    const filenameLat = Number.parseFloat(center.lat.toFixed(3));
+    const filenameLng = Number.parseFloat(center.lng.toFixed(3));
+    downloadLink.download = `overture-${filenameZoom}-${filenameLat}-${filenameLng}.geojson`;
 
     document.body.appendChild(downloadLink);
     downloadLink.click();
