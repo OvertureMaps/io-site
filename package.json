@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@mui/material": "^5.15.18",
+    "@mui/styles": "^5.15.18"
+  }
+}
