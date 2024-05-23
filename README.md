@@ -6,25 +6,27 @@ The data accessible through io-site is drawn from the [Overture Maps Foundation]
 
 ## Participate!
 
-* Read the project [Contributioning Guide](CONTRIBUTIONing.md) to learn about how to contribute.
-* See [open issues in the issue tracker](https://github.com/OvertureMaps/io-site/issues?q=is%3Aissue+is%3Aopen+) if you're looking to help on issues.
+- Read the project [Contributioning Guide](CONTRIBUTING.md) to learn about how to contribute.
+- See [open issues in the issue tracker](https://github.com/OvertureMaps/io-site/issues?q=is%3Aissue+is%3Aopen+) if you're looking to help on issues.
 
-* Test a prerelease version of io-site:
-  * The current build of the `main` branch is publicly available [here](https://explore.overturemaps.org/#16.34/51.049194/3.728993)!
+- Test a prerelease version of io-site:
+  - The current build of the `main` branch is publicly available [here](https://explore.overturemaps.org/#16.34/51.049194/3.728993)!
 
 ## For developers
 
 Running the io-site requires installation of:
-* [Node.js](https://nodejs.org/en/download/package-manager)
-* [vite](https://vitejs.dev/guide/)
-* [eslint](https://eslint.org/docs/latest/use/getting-started)
+
+- [Node.js](https://nodejs.org/en/download/package-manager)
+- [vite](https://vitejs.dev/guide/)
+- [eslint](https://eslint.org/docs/latest/use/getting-started)
 
 Once there prerequisites are installed, execute the `npm run` command to understand the run configurations:
-* dev
-* build
-* lint
-* aws_deploy
-* preview
+
+- dev
+- build
+- lint
+- aws_deploy
+- preview
 
 Try it out! For example, executing `npm run dev` will allow you to view the io-site in your preferred browser.
 
