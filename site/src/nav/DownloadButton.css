@@ -59,3 +59,19 @@ svg.icon-refresh > path.secondary {
 div.download-text {
   padding-left: 1px;
 }
+
+div.filename-field-wrapper {
+  background: white;
+  position: absolute;
+  padding: 5px;
+  margin-top: 5px;
+  border: solid 1px black;
+  border-radius: 5px;
+  margin-left: -10px;
+}
+
+div.confirm-wrapper {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}

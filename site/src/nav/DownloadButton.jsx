@@ -10,11 +10,14 @@ import {
 import downloadIcon from "/download.svg";
 import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
+import Textfield from "@mui/material/TextField";
 
 function DownloadButton() {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [fileName, setFileName] = useState("");
 
   useEffect(() => {
     if (myMap) {
@@ -22,8 +25,13 @@ function DownloadButton() {
     }
   }, [myMap]);
 
-  const handleDownloadClick = async () => {
+  const handleDownloadClick = () => {
+    setOpen(!open);
+  };
+
+  const handleDownloadClickConfirm = async () => {
     setLoading(true);
+    setOpen(false);
     //Get current map dimensions and convert to bbox
     const bounds = myMap.getBounds();
     let bbox = [
@@ -72,13 +80,24 @@ function DownloadButton() {
 
     const center = myMap.getCenter();
     const zoom = myMap.getZoom();
-    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
+
+    if (fileName === "") {
+      downloadLink.download = "overture.geojson";
+    } else {
+      downloadLink.download = `${fileName}.geojson`;
+    }
+
+    // downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
 
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
 
     setLoading(false);
+  };
+
+  const onChangeFN = async (event) => {
+    setFileName(event.target.value);
   };
 
   return (
@@ -100,6 +119,31 @@ function DownloadButton() {
           </div>
         </div>
       </button>
+      {open & !loading ? (
+        <div className="filename-field-wrapper">
+          <Textfield
+            className="filename-textfield"
+            label="Enter File Name"
+            variant="outlined"
+            size="small"
+            onChange={onChangeFN}
+          />
+          <div className="confirm-wrapper">
+            <button
+              className={`button button--primary button-confirm ${loading ? "disabled" : ""}`}
+              onClick={handleDownloadClickConfirm}
+            >
+              <div className="warpper">
+                <div className="download-text">
+                  {loading ? "Downloading..." : "Confirm Download"}
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
