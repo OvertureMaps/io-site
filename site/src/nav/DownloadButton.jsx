@@ -123,7 +123,7 @@ function DownloadButton() {
         <div className="filename-field-wrapper">
           <Textfield
             className="filename-textfield"
-            label="Enter File Name"
+            label="Enter File Name (Optional)"
             variant="outlined"
             size="small"
             onChange={onChangeFN}
