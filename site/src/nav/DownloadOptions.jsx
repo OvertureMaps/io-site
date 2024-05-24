@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChevronUpIcon from "./../icons/chevron-up.svg?react";
 import ChevronDownIcon from "./../icons/chevron-down.svg?react";
 import "./DownloadOptions.css";
@@ -13,10 +13,13 @@ import { TextField, Typography } from "@mui/material";
 
 const fileTypes = ["geoJson", "Parquet"];
 
-function DownloadOptions() {
+function DownloadOptions({
+  fileType,
+  setFileType,
+  selectedLayers,
+  setSelectedLayers,
+}) {
   const [open, setOpen] = useState(false);
-  const [fileType, setFileType] = useState([]);
-  const [selectedLayers, setSelectedLaters] = useState(true);
 
   const handleClickC = () => {
     setOpen(!open);
@@ -30,7 +33,7 @@ function DownloadOptions() {
   };
 
   const handleChangeSL = () => {
-    setSelectedLaters(!selectedLayers);
+    setSelectedLayers(!selectedLayers);
   };
 
   return (

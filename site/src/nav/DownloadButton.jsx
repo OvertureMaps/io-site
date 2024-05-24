@@ -9,7 +9,7 @@ import {
 import downloadIcon from "/download.svg";
 import "./DownloadButton.css";
 
-function DownloadButton() {
+function DownloadButton({ fileType, selectedLayers }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -22,6 +22,10 @@ function DownloadButton() {
 
   const handleDownloadClick = async () => {
     setLoading(true);
+
+    console.log(`File Type(s): ${fileType}`);
+    console.log(`Selected Layers: ${selectedLayers}`);
+
     //Get current map dimensions and convert to bbox
     const bounds = myMap.getBounds();
     let bbox = [
@@ -31,7 +35,8 @@ function DownloadButton() {
       bounds.getNorth(), //maxy
     ];
 
-    console.log(bounds);
+    // Do we need to log this?
+    // console.log(bounds);
 
     //Send those to the download engine
     const minxPath = ["bbox", "minx"];
