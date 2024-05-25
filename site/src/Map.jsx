@@ -113,7 +113,7 @@ export default function Map({mode}) {
           interactiveLayerIds={interactiveLayerIds}
           initialViewState={INITIAL_VIEW_STATE}
           mapStyle={getMapStyle()}
-          style={{position: 'fixed', width: '100%', height: '100%'}}
+          style={{position: 'fixed', width: '100%', height: 'calc(100vh - 60px)'}}
         >
           <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
             <Layer {...PLACES_MAP_STYLE} layout={{visibility: interactiveLayerIds.includes('places') ? 'visible' : 'none'}} />
