@@ -12,20 +12,20 @@ import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
 
 function DownloadButton() {
-  const { myMap } = useMap();
+  const { map } = useMap();
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (myMap) {
-      myMap.getBounds();
+    if (map) {
+      map.getBounds();
     }
-  }, [myMap]);
+  }, [map]);
 
   const handleDownloadClick = async () => {
     setLoading(true);
     //Get current map dimensions and convert to bbox
-    const bounds = myMap.getBounds();
+    const bounds = map.getBounds();
     let bbox = [
       bounds.getWest(), //minx
       bounds.getSouth(), //miny
@@ -70,8 +70,8 @@ function DownloadButton() {
     var downloadLink = document.createElement("a");
     downloadLink.href = url;
 
-    const center = myMap.getCenter();
-    const zoom = myMap.getZoom();
+    const center = map.getCenter();
+    const zoom = map.getZoom();
     downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
 
     document.body.appendChild(downloadLink);

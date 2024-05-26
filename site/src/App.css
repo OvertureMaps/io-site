@@ -2,12 +2,6 @@
   width:100%;
 }
 
-.map {
-  width:100vw;
-  height:80vh;
-  position:relative;
-}
-
 .wordmark {
   display:flex;
   flex-direction:row;

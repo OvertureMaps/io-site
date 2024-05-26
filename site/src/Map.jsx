@@ -1,9 +1,14 @@
-import { Map as MapLibreMap, NavigationControl, Source } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import * as pmtiles from 'pmtiles';
 import maplibregl from 'maplibre-gl';
 import { useState, useEffect, useCallback } from 'react';
-import { Layer, GeolocateControl } from 'react-map-gl/maplibre';
+import {
+  Map as MapLibreMap,
+  NavigationControl,
+  Source,
+  Layer,
+  GeolocateControl,
+} from 'react-map-gl/maplibre';
  import InspectorPanel from './InspectorPanel';
 import PropTypes from 'prop-types';
 import './InspectorPanel.css';
@@ -104,7 +109,7 @@ export default function Map({mode}) {
     <>
       <div className={`map ${mode}`}>
         <MapLibreMap
-          id="myMap"
+          id="map"
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onClick={onClick}
@@ -113,7 +118,8 @@ export default function Map({mode}) {
           interactiveLayerIds={interactiveLayerIds}
           initialViewState={INITIAL_VIEW_STATE}
           mapStyle={getMapStyle()}
-          style={{position: 'fixed', width: '100%', height: '100%'}}
+          style={{position: 'fixed', width: '100%', height: 'calc(100vh - 60px)'}}
+          attributionControl={true}
         >
           <Source id="overture-places" type="vector" url={PLACES_PMTILES_URL}>
             <Layer {...PLACES_MAP_STYLE} layout={{visibility: interactiveLayerIds.includes('places') ? 'visible' : 'none'}} />
