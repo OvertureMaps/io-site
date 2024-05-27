@@ -27,13 +27,13 @@ function ThemeSelector({ interactiveLayers }) {
       </div>
       <ul className="dropdown__menu">
         <li> 
-          <div className="dropdown__link" ><input type="checkbox" checked={places} onClick={() => setPlaces(!places)}/>Places</div>
+          <label htmlFor="places" className="dropdown__link" ><input id="places" type="checkbox" checked={places} onClick={() => setPlaces(!places)}/>Places</label>
         </li>
         <li>
-          <div className="dropdown__link" ><input type="checkbox" checked={buildings} onClick={() => setBuildings(!buildings)}/>Buildings</div>
+          <label htmlFor="buildings" className="dropdown__link" ><input id="buildings" type="checkbox" checked={buildings} onClick={() => setBuildings(!buildings)}/>Buildings</label>
         </li>
         <li>
-          <div className="dropdown__link" ><input type="checkbox" checked={transportation} onClick={() => setTransportation(!transportation)}/>Transportation</div>
+          <label htmlFor="transportation" className="dropdown__link" ><input id="transportation" type="checkbox" checked={transportation} onClick={() => setTransportation(!transportation)}/>Transportation</label>
         </li>
       </ul>
     </div>
