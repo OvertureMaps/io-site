@@ -18,7 +18,7 @@ function StartupBox({ open, setOpen, startTour, updateTour }) {
           <div className="perma-skip">
             <FormControlLabel
               control={<Checkbox onChange={updateTour} />}
-              label="Don't Ask Again"
+              label="Don't Ask Me This Again"
             />
           </div>
         </Box>
