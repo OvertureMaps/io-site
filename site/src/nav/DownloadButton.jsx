@@ -87,7 +87,7 @@ function DownloadButton() {
         className={`button button--primary ${loading ? "disabled" : ""}`}
         onClick={handleDownloadClick}
       >
-        <div className="wrapper">
+        <div className="wrapper tour-download">
           <div className="download-icon">
             {!loading ? (
               <img className={"dl-img"} src={downloadIcon} />

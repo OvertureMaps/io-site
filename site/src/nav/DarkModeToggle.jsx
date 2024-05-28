@@ -14,7 +14,7 @@ export default function DarkModeToggle({ mode, setMode }) {
   };
 
   return (
-    <div className="dark-mode-toggle">
+    <div className="dark-mode-toggle tour-darkmode">
       <button className="clean-btn" onClick={toggleDarkMode}>
         {mode === "theme-light" ? (
           <img src={lightModeIcon} />
