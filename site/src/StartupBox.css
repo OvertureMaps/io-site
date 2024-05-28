@@ -1,0 +1,40 @@
+div.startup-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 200px;
+  background: white;
+  border: 2px solid darkslategray;
+  border-radius: 15px;
+  box-shadow: 24;
+}
+
+button.start {
+  background: var(--ifm-color-success-dark);
+  margin-left: 20px;
+  margin-right: 10px;
+  width: 170px;
+  border: darkslategray 1px solid;
+}
+
+button.skip {
+  background: var(--ifm-color-danger-dark);
+  margin-left: 10px;
+  margin-right: 20px;
+  width: 170px;
+  border: 1px darkslategray solid;
+}
+
+p.tour-intro {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+div.perma-skip {
+  margin-top: 20px;
+  margin-left: 20px;
+}
