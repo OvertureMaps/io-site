@@ -1,4 +1,4 @@
-div.startup-box {
+div.startup-box-light {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -6,9 +6,19 @@ div.startup-box {
   width: 450px;
   height: 200px;
   background: white;
-  border: 2px solid darkslategray;
   border-radius: 15px;
-  box-shadow: 24;
+}
+
+div.startup-box-dark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 200px;
+  background: black;
+  border-radius: 15px;
+  color: whitesmoke;
 }
 
 button.start {

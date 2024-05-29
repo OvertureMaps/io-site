@@ -5,7 +5,7 @@ import Map from "./Map";
 import { MapProvider } from "react-map-gl/maplibre";
 import { keepTheme } from "./themeUtils";
 import { useState, useEffect } from "react";
-import Joyride, { ACTIONS, EVENTS } from "react-joyride";
+import Joyride, { ACTIONS, EVENTS, LIFECYCLE } from "react-joyride";
 import Steps from "./Tour";
 import StartupBox from "./StartupBox";
 
@@ -76,6 +76,10 @@ function App() {
     setRun(true);
   };
 
+  const stepBGColor =
+    modeName === "theme-dark" ? "var(--ifm-background-color)" : "whitesmoke";
+  const stepTextColor = modeName === "theme-dark" ? "whitesmoke" : "black";
+
   const updateTour = (event) => {
     localStorage.setItem("tour", event.target.checked);
     setTour(!tour);
@@ -88,14 +92,17 @@ function App() {
         event.index + (event.action === ACTIONS.PREV ? -1 : 1);
       if (
         (event.index === 4) &
-        (event.lifecycle === "complete") &
-        (event.action === "next")
+        (event.lifecycle === LIFECYCLE.COMPLETE) &
+        (event.action === ACTIONS.NEXT)
       ) {
         setMapEntity(sampleFeature.properties);
         setTimeout(() => {
           setStepIndex(nextStepIndex);
         }, 100);
-      } else if ((event.index === 5) & (event.lifecycle === "complete")) {
+      } else if (
+        (event.index === 5) &
+        (event.lifecycle === LIFECYCLE.COMPLETE)
+      ) {
         setMapEntity({});
         setStepIndex(nextStepIndex);
       } else {
@@ -115,6 +122,7 @@ function App() {
         updateTour={updateTour}
         open={open}
         setOpen={setOpen}
+        mode={modeName}
       />
       <Joyride
         callback={handleJoyrideCallback}
@@ -125,6 +133,13 @@ function App() {
         showSkipButton={true}
         disableBeacon={true}
         stepIndex={stepIndex}
+        styles={{
+          options: {
+            backgroundColor: stepBGColor,
+            arrowColor: stepBGColor,
+            textColor: stepTextColor,
+          },
+        }}
       />
       <MapProvider>
         <Header mode={modeName} setMode={setModeName} />

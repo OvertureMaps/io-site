@@ -5,6 +5,7 @@ const Steps = [
     disableBeacon: true,
     title: "Homepage Link",
     placement: "auto",
+    offset: 0,
   },
   {
     target: ".tour-darkmode",
@@ -12,6 +13,7 @@ const Steps = [
     disableBeacon: true,
     title: "Darkmode Toggle",
     placement: "auto",
+    offset: 0,
   },
   {
     target: ".tour-download",
@@ -19,6 +21,7 @@ const Steps = [
     disableBeacon: true,
     title: "Download Button",
     placement: "bottom-end",
+    offset: 0,
   },
   {
     target: ".tour-layers",
@@ -26,6 +29,7 @@ const Steps = [
     disableBeacon: true,
     title: "Themne Selector",
     placement: "auto",
+    offset: 0,
   },
   {
     target: ".maplibregl-ctrl-top-right",
@@ -33,6 +37,7 @@ const Steps = [
     disableBeacon: true,
     title: "Map Navigation Tools",
     placement: "auto",
+    offset: 0,
   },
   {
     target: ".inspector-panel",
@@ -40,6 +45,7 @@ const Steps = [
     disableBeacon: true,
     title: "Inspector Panel",
     placement: "right",
+    offset: 0,
   },
 ];
 
