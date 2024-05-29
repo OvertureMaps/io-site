@@ -12,8 +12,10 @@ import StartupBox from "./StartupBox";
 function App() {
   const [modeName, setModeName] = useState("theme-dark");
   const [run, setRun] = useState(false);
-  const [tour, setTour] = useState(!Boolean(localStorage.getItem("tour")));
+  const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
   const [open, setOpen] = useState(tour);
+
+  console.log(tour);
 
   const startTour = () => {
     setOpen(false);
@@ -21,7 +23,7 @@ function App() {
   };
 
   const updateTour = (event) => {
-    localStorage.setItem("tour", event.target.value);
+    localStorage.setItem("tour", event.target.checked);
     setTour(!tour);
   };
 

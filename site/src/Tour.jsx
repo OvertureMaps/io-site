@@ -18,7 +18,7 @@ const Steps = [
     content: "This button will download all data within view.",
     disableBeacon: true,
     title: "Download Button",
-    placement: "auto",
+    placement: "bottom-end",
   },
   {
     target: ".tour-layers",
