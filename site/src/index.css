@@ -13,7 +13,13 @@
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0 rem;
-  font-family: Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
+  font-family:
+    Montserrat,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
     sans-serif;
 }
 

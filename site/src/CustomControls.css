@@ -1,7 +1,7 @@
 .custom-controls {
   position: fixed;
   z-index: 10;
-  display:flex;
+  display: flex;
   flex-direction: row;
   color: black;
   margin: 4px;

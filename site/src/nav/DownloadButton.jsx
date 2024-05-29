@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
 import { DownloadCatalog } from "../DownloadCatalog.js";

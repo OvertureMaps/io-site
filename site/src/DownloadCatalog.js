@@ -231,8 +231,8 @@ export const DownloadCatalog = [
   "https://overturemaps-us-west-2.s3.amazonaws.com/release/2024-03-12-alpha.0/theme=buildings/type=building/part-00229-4dfc75cd-2680-4d52-b5e0-f4cc9f36b267-c000.zstd.parquet",
   "https://overturemaps-us-west-2.s3.amazonaws.com/release/2024-03-12-alpha.0/theme=buildings/type=building/part-00230-4dfc75cd-2680-4d52-b5e0-f4cc9f36b267-c000.zstd.parquet",
   "https://overturemaps-us-west-2.s3.amazonaws.com/release/2024-03-12-alpha.0/theme=buildings/type=building/part-00231-4dfc75cd-2680-4d52-b5e0-f4cc9f36b267-c000.zstd.parquet",
-          ];
-  
- export default {
-    DownloadCatalog
- }
+];
+
+export default {
+  DownloadCatalog,
+};
