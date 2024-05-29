@@ -3,7 +3,7 @@ export function setTheme(themeName, setClassName) {
   setClassName(themeName);
   document.documentElement.setAttribute(
     "data-theme",
-    themeName === "theme-light" ? "light" : "dark"
+    themeName === "theme-light" ? "light" : "dark",
   );
 }
 
