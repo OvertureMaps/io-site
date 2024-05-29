@@ -34,6 +34,13 @@ const Steps = [
     title: "Map Navigation Tools",
     placement: "auto",
   },
+  {
+    target: ".inspector-panel",
+    content: "This is the inspector panel.",
+    disableBeacon: true,
+    title: "Inspector Panel",
+    placement: "right",
+  },
 ];
 
 export default Steps;

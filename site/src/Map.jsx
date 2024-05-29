@@ -69,10 +69,9 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
   pitch: 0,
 };
-export default function Map({ mode }) {
+export default function Map({ mode, mapEntity, setMapEntity }) {
   const [pmTilesReady, setPmTilesReady] = useState(false);
   const [cursor, setCursor] = useState("auto");
-  const [mapEntity, setMapEntity] = useState({});
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol();
