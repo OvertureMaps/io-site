@@ -76,8 +76,7 @@ function App() {
     setRun(true);
   };
 
-  const stepBGColor =
-    modeName === "theme-dark" ? "var(--ifm-background-color)" : "whitesmoke";
+  const stepBGColor = modeName === "theme-dark" ? "dimgray" : "whitesmoke";
   const stepTextColor = modeName === "theme-dark" ? "whitesmoke" : "black";
 
   const updateTour = (event) => {
@@ -140,6 +139,7 @@ function App() {
             textColor: stepTextColor,
           },
         }}
+        spotlightPadding={0}
       />
       <MapProvider>
         <Header mode={modeName} setMode={setModeName} />

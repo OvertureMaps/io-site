@@ -47,6 +47,14 @@ const Steps = [
     placement: "right",
     offset: 0,
   },
+  {
+    target: ".maplibregl-ctrl-bottom-right",
+    content: "This is the map footer.",
+    disableBeacon: true,
+    title: "Map Footer",
+    placement: "top-end",
+    offset: -10,
+  },
 ];
 
 export default Steps;
