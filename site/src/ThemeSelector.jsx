@@ -9,6 +9,7 @@ function ThemeSelector({ visibleThemes }) {
   const [buildings, setBuildings] = useState(true);
   const [divisions, setDivisions] = useState(true);
   const [places, setPlaces] = useState(true);
+  const [transportation, setTransportation] = useState(true);
   
   useEffect(() => {
 
@@ -18,8 +19,9 @@ function ThemeSelector({ visibleThemes }) {
     if (buildings) layers.push('buildings');
     if (divisions) layers.push('divisions');
     if (places) layers.push('places');
+    if (transportation) layers.push('transportation');
     visibleThemes(layers);
-  }, [base, buildings, divisions, places, visibleThemes]);
+  }, [base, buildings, divisions, places, transportation, visibleThemes]);
 
   return (
     <div className="dropdown dropdown--hoverable theme-selector">
@@ -38,6 +40,9 @@ function ThemeSelector({ visibleThemes }) {
         </li>
         <li>
           <label htmlFor="places" className="dropdown__link" ><input id="places" type="checkbox" checked={places} onChange={() => setPlaces(!places)}/>Places</label>
+        </li>
+        <li>
+          <label htmlFor="transportation" className="dropdown__link" ><input id="transportation" type="checkbox" checked={transportation} onChange={() => setTransportation(!transportation)}/>Transportation</label>
         </li>
       </ul>
     </div>

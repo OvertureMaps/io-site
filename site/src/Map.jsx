@@ -51,13 +51,13 @@ const ThemeTypeLayer = ({
   line,
   polygon,
   extrusion,
+  visible,
 }) => {
   return (
     <>
       {point ? (
         <Layer
           filter={["==", ["geometry-type"], "Point"]}
-          beforeId="divisions_division"
           id={`${theme}_${type}_point`}
           type="circle"
           source={theme}
@@ -74,28 +74,29 @@ const ThemeTypeLayer = ({
               8,
             ],
           }}
+          layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
       {line ? (
         <Layer
           filter={["==", ["geometry-type"], "LineString"]}
-          beforeId="divisions_division"
           id={`${theme}_${type}_line`}
           type="line"
           source={theme}
           source-layer={type}
           paint={{ "line-color": color }}
+          layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
       {polygon ? (
         <Layer
           filter={["==", ["geometry-type"], "Polygon"]}
-          beforeId="divisions_division"
           id={`${theme}_${type}_fill`}
           type="fill"
           source={theme}
           source-layer={type}
           paint={{ "fill-color": color, "fill-opacity": 0.2 }}
+          layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
       {extrusion ? (
@@ -105,7 +106,6 @@ const ThemeTypeLayer = ({
             ["==", ["geometry-type"], "Polygon"],
             ["!=", ["get", "has_parts"], true],
           ]} // prevent z-fighting
-          beforeId="divisions_division"
           id={`${theme}_${type}_fill-extrusion`}
           type="fill-extrusion"
           source={theme}
@@ -116,6 +116,7 @@ const ThemeTypeLayer = ({
             "fill-extrusion-base": ["get", "min_height"],
             "fill-extrusion-height": ["get", "height"],
           }}
+          layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
     </>
@@ -197,7 +198,100 @@ export default function Map({ mode }) {
           <ThemeSource name="buildings" url={PMTILES_URL} />
           <ThemeSource name="places" url={PMTILES_URL} />
           <ThemeSource name="divisions" url={PMTILES_URL} />
+          <ThemeSource name="transportation" url={PMTILES_URL} />
 
+          <ThemeTypeLayer
+            theme="base"
+            type="land"
+            point
+            line
+            polygon
+            color="#ccebc5"
+            visible={visibleThemes.includes("base")}
+          />
+          <ThemeTypeLayer
+            theme="base"
+            type="land_cover"
+            polygon
+            color="#b3de69"
+            visible={visibleThemes.includes("base")}
+          />
+          <ThemeTypeLayer
+            theme="base"
+            type="land_use"
+            point
+            line
+            polygon
+            color="#b3de69"
+            visible={visibleThemes.includes("base")}
+          />
+          <ThemeTypeLayer
+            theme="base"
+            type="water"
+            point
+            line
+            polygon
+            color="#80b1d3"
+            visible={visibleThemes.includes("base")}
+          />
+          <ThemeTypeLayer
+            theme="base"
+            type="infrastructure"
+            point
+            line
+            polygon
+            color="#b3de69"
+            visible={visibleThemes.includes("base")}
+          />
+          <ThemeTypeLayer
+            theme="divisions"
+            type="division_area"
+            polygon
+            color="#bc80bd"
+            visible={visibleThemes.includes("divisions")}
+          />
+          <ThemeTypeLayer
+            theme="divisions"
+            type="boundary"
+            line
+            color="#bc80bd"
+            visible={visibleThemes.includes("divisions")}
+          />
+          <ThemeTypeLayer
+            theme="transportation"
+            type="segment"
+            line
+            color="#fb8072"
+            visible={visibleThemes.includes("transportation")}
+          />
+          <ThemeTypeLayer
+            theme="transportation"
+            type="connector"
+            point
+            color="#fb8072"
+            visible={visibleThemes.includes("transportation")}
+          />
+          <ThemeTypeLayer
+            theme="buildings"
+            type="building"
+            extrusion
+            color="#d9d9d9"
+            visible={visibleThemes.includes("buildings")}
+          />
+          <ThemeTypeLayer
+            theme="buildings"
+            type="building_part"
+            extrusion
+            color="#d9d9d9"
+            visible={visibleThemes.includes("buildings")}
+          />
+          <ThemeTypeLayer
+            theme="places"
+            type="place"
+            point
+            color="#fdb462"
+            visible={visibleThemes.includes("places")}
+          />
           <Layer
             id="divisions_division"
             type="symbol"
@@ -214,84 +308,6 @@ export default function Map({ mode }) {
               "text-size": 11,
             }}
           />
-
-          {visibleThemes.includes("base") ? (
-            <>
-              <ThemeTypeLayer
-                theme="base"
-                type="land"
-                point
-                line
-                polygon
-                color="#ccebc5"
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="land_cover"
-                polygon
-                color="#b3de69"
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="land_use"
-                point
-                line
-                polygon
-                color="#b3de69"
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="water"
-                point
-                line
-                polygon
-                color="#80b1d3"
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="infrastructure"
-                point
-                line
-                polygon
-                color="#b3de69"
-              />
-            </>
-          ) : null}
-          {visibleThemes.includes("divisions") ? (
-            <>
-              <ThemeTypeLayer
-                theme="divisions"
-                type="division_area"
-                polygon
-                color="#bc80bd"
-              />
-              <ThemeTypeLayer
-                theme="divisions"
-                type="boundary"
-                line
-                color="#bc80bd"
-              />
-            </>
-          ) : null}
-          {visibleThemes.includes("buildings") ? (
-            <>
-              <ThemeTypeLayer
-                theme="buildings"
-                type="building"
-                extrusion
-                color="#d9d9d9"
-              />
-              <ThemeTypeLayer
-                theme="buildings"
-                type="building_part"
-                extrusion
-                color="#d9d9d9"
-              />
-            </>
-          ) : null}
-          {visibleThemes.includes("places") ? (
-            <ThemeTypeLayer theme="places" type="place" point color="#fdb462" />
-          ) : null}
 
           <NavigationControl position="top-right"></NavigationControl>
           <GeolocateControl />
