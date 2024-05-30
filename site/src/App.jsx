@@ -76,8 +76,10 @@ function App() {
     setRun(true);
   };
 
-  const stepBGColor = modeName === "theme-dark" ? "dimgray" : "whitesmoke";
-  const stepTextColor = modeName === "theme-dark" ? "whitesmoke" : "black";
+  const stepBGColor =
+    modeName === "theme-dark" ? "dimgray" : "var(--ifm-color-secondary-light)";
+  const stepTextColor =
+    modeName === "theme-dark" ? "var(--ifm-color-secondary-light)" : "black";
 
   const updateTour = (event) => {
     localStorage.setItem("tour", event.target.checked);

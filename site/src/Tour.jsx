@@ -12,7 +12,7 @@ const Steps = [
     content: "This button enables dark/light mode for the site.",
     disableBeacon: true,
     title: "Darkmode Toggle",
-    placement: "auto",
+    placement: "bottom-end",
     offset: 0,
   },
   {
@@ -27,7 +27,7 @@ const Steps = [
     target: ".tour-layers",
     content: "These options changes the visible layers of data on the map.",
     disableBeacon: true,
-    title: "Themne Selector",
+    title: "Theme Selector",
     placement: "auto",
     offset: 0,
   },

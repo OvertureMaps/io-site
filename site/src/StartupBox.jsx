@@ -15,10 +15,10 @@ function StartupBox({ open, setOpen, startTour, updateTour, mode }) {
               First time here? Take the tour to get familiar with our features!
             </p>
             <button className="button start" onClick={startTour}>
-              Start Tour
+              Begin
             </button>
             <button className="button skip" onClick={() => setOpen(false)}>
-              Skip Tour
+              Skip
             </button>
             <div className="perma-skip">
               <FormControlLabel

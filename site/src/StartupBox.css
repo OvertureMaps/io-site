@@ -22,19 +22,31 @@ div.startup-box-dark {
 }
 
 button.start {
-  background: var(--ifm-color-success-dark);
+  background: var(--ifm-color-primary-darker);
   margin-left: 20px;
   margin-right: 10px;
   width: 170px;
-  border: darkslategray 1px solid;
+  border: none;
+  box-shadow: var(--ifm-global-shadow-md);
+  font-weight: var(--ifm-font-weight-bold);
+}
+
+button.start:hover {
+  background: var(--ifm-color-primary-darkest);
 }
 
 button.skip {
-  background: var(--ifm-color-danger-dark);
+  background: var(--ifm-color-info-darker);
   margin-left: 10px;
   margin-right: 20px;
   width: 170px;
-  border: 1px darkslategray solid;
+  border: none;
+  box-shadow: var(--ifm-global-shadow-md);
+  font-weight: var(--ifm-font-weight-bold);
+}
+
+button.skip:hover {
+  background: var(--ifm-color-info-darkest);
 }
 
 p.tour-intro {
