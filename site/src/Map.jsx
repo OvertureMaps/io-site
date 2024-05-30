@@ -43,11 +43,20 @@ ThemeSource.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-const ThemeTypeLayer = ({ theme, type, color, point, line, polygon }) => {
+const ThemeTypeLayer = ({
+  theme,
+  type,
+  color,
+  point,
+  line,
+  polygon,
+  extrusion,
+}) => {
   return (
     <>
       {point ? (
         <Layer
+          filter={["==", ["geometry-type"], "Point"]}
           beforeId="divisions_division"
           id={`${theme}_${type}_point`}
           type="circle"
@@ -69,6 +78,7 @@ const ThemeTypeLayer = ({ theme, type, color, point, line, polygon }) => {
       ) : null}
       {line ? (
         <Layer
+          filter={["==", ["geometry-type"], "LineString"]}
           beforeId="divisions_division"
           id={`${theme}_${type}_line`}
           type="line"
@@ -79,12 +89,33 @@ const ThemeTypeLayer = ({ theme, type, color, point, line, polygon }) => {
       ) : null}
       {polygon ? (
         <Layer
+          filter={["==", ["geometry-type"], "Polygon"]}
           beforeId="divisions_division"
           id={`${theme}_${type}_fill`}
           type="fill"
           source={theme}
           source-layer={type}
-          paint={{ "fill-color": color, "fill-opacity": 0.25 }}
+          paint={{ "fill-color": color, "fill-opacity": 0.2 }}
+        />
+      ) : null}
+      {extrusion ? (
+        <Layer
+          filter={[
+            "all",
+            ["==", ["geometry-type"], "Polygon"],
+            ["!=", ["get", "has_parts"], true],
+          ]} // prevent z-fighting
+          beforeId="divisions_division"
+          id={`${theme}_${type}_fill-extrusion`}
+          type="fill-extrusion"
+          source={theme}
+          source-layer={type}
+          paint={{
+            "fill-extrusion-color": color,
+            "fill-extrusion-opacity": 0.35,
+            "fill-extrusion-base": ["get", "min_height"],
+            "fill-extrusion-height": ["get", "height"],
+          }}
         />
       ) : null}
     </>
@@ -98,6 +129,7 @@ ThemeTypeLayer.propTypes = {
   point: PropTypes.bool,
   line: PropTypes.bool,
   polygon: PropTypes.bool,
+  extrusion: PropTypes.bool,
 };
 
 export default function Map({ mode }) {
@@ -161,6 +193,7 @@ export default function Map({ mode }) {
           }}
           attributionControl={false}
         >
+          <ThemeSource name="base" url={PMTILES_URL} />
           <ThemeSource name="buildings" url={PMTILES_URL} />
           <ThemeSource name="places" url={PMTILES_URL} />
           <ThemeSource name="divisions" url={PMTILES_URL} />
@@ -182,6 +215,48 @@ export default function Map({ mode }) {
             }}
           />
 
+          {visibleThemes.includes("base") ? (
+            <>
+              <ThemeTypeLayer
+                theme="base"
+                type="land"
+                point
+                line
+                polygon
+                color="#ccebc5"
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="land_cover"
+                polygon
+                color="#b3de69"
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="land_use"
+                point
+                line
+                polygon
+                color="#b3de69"
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="water"
+                point
+                line
+                polygon
+                color="#80b1d3"
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="infrastructure"
+                point
+                line
+                polygon
+                color="#b3de69"
+              />
+            </>
+          ) : null}
           {visibleThemes.includes("divisions") ? (
             <>
               <ThemeTypeLayer
@@ -203,13 +278,13 @@ export default function Map({ mode }) {
               <ThemeTypeLayer
                 theme="buildings"
                 type="building"
-                polygon
+                extrusion
                 color="#d9d9d9"
               />
               <ThemeTypeLayer
                 theme="buildings"
                 type="building_part"
-                polygon
+                extrusion
                 color="#d9d9d9"
               />
             </>
