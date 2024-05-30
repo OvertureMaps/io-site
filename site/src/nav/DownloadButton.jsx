@@ -127,6 +127,9 @@ function DownloadButton() {
             variant="outlined"
             size="small"
             onChange={onChangeFN}
+            sx={{ width: 165 }}
+            inputProps={{ style: { fontSize: "smaller" } }}
+            InputLabelProps={{ style: { fontSize: "smaller" } }}
           />
           <div className="confirm-wrapper">
             <button
