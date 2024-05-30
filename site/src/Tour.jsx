@@ -9,7 +9,7 @@ const Steps = [
   },
   {
     target: ".tour-darkmode",
-    content: "This button enables dark/light mode for the site.",
+    content: "This button enables dark mode for the site.",
     disableBeacon: true,
     title: "Darkmode Toggle",
     placement: "bottom-end",
@@ -17,7 +17,8 @@ const Steps = [
   },
   {
     target: ".tour-download",
-    content: "This button will download all data within view.",
+    content:
+      "This button will download all data within view. Downloads are disabled at low zoom levels to stop downloads of large sizes.",
     disableBeacon: true,
     title: "Download Button",
     placement: "bottom-end",
@@ -41,7 +42,8 @@ const Steps = [
   },
   {
     target: ".inspector-panel",
-    content: "This is the inspector panel.",
+    content:
+      "This is the inspector panel. Clicking on features in the world will display them here. These features are only clickable after a zoom threshold has been reached.",
     disableBeacon: true,
     title: "Inspector Panel",
     placement: "right",
@@ -49,7 +51,8 @@ const Steps = [
   },
   {
     target: ".maplibregl-ctrl-bottom-right",
-    content: "This is the map footer.",
+    content:
+      "This is the map footer. Credits and copyrights can be found here.",
     disableBeacon: true,
     title: "Map Footer",
     placement: "top-end",
