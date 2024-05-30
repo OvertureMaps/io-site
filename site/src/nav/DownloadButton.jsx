@@ -120,28 +120,33 @@ function DownloadButton() {
         </div>
       </button>
       {open & !loading ? (
-        <div className="filename-field-wrapper">
-          <Textfield
-            className="filename-textfield"
-            label="Enter File Name (Optional)"
-            variant="outlined"
-            size="small"
-            onChange={onChangeFN}
-            sx={{ width: 165 }}
-            inputProps={{ style: { fontSize: "smaller" } }}
-            InputLabelProps={{ style: { fontSize: "smaller" } }}
-          />
-          <div className="confirm-wrapper">
-            <button
-              className={`button button--primary button-confirm ${loading ? "disabled" : ""}`}
-              onClick={handleDownloadClickConfirm}
-            >
-              <div className="warpper">
-                <div className="download-text">
-                  {loading ? "Downloading..." : "Confirm Download"}
+        <div>
+          <div className="arrow-up"></div>
+          <div className="filename-field-wrapper">
+            <div className="input-wrapper">
+              <Textfield
+                className="filename-textfield"
+                label="Enter File Name (Optional)"
+                variant="outlined"
+                size="small"
+                onChange={onChangeFN}
+                sx={{ width: "218px" }}
+                inputProps={{ style: { fontSize: "smaller" } }}
+                InputLabelProps={{ style: { fontSize: "smaller" } }}
+              />
+            </div>
+            <div className="confirm-wrapper">
+              <button
+                className={`button button--primary button-confirm ${loading ? "disabled" : ""}`}
+                onClick={handleDownloadClickConfirm}
+              >
+                <div className="wrapper">
+                  <div className="download-text">
+                    {loading ? "Downloading..." : "Confirm Download"}
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
         </div>
       ) : (
