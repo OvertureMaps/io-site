@@ -81,6 +81,12 @@ div.input-wrapper {
   display: flex;
 }
 
+div.input-label {
+  padding: 10px;
+  font-size: smaller;
+  font-style: italic;
+}
+
 div.arrow-up {
   position: absolute;
   width: 0;
