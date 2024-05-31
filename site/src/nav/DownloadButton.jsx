@@ -96,6 +96,7 @@ function DownloadButton({ mode }) {
     document.body.removeChild(downloadLink);
 
     setLoading(false);
+    setFileName("");
   };
 
   const onChangeFN = async (event) => {
