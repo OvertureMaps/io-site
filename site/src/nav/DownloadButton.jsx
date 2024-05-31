@@ -14,7 +14,7 @@ import Textfield from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import HelpIcon from "@mui/icons-material/Help";
 
-function DownloadButton() {
+function DownloadButton({ mode }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -123,16 +123,22 @@ function DownloadButton() {
       </button>
       {open & !loading ? (
         <div>
-          <div className="arrow-up"></div>
-          <div className="filename-field-wrapper">
+          <div
+            className={`arrow-up ${mode === "theme-dark" ? "au-dark" : ""}`}
+          ></div>
+          <div
+            className={`filename-field-wrapper ${mode === "theme-dark" ? "ffw-dark" : ""}`}
+          >
             <div className="input-wrapper">
-              <div className="CF-help-icon">
+              <div
+                className={`CF-help-icon ${mode === "theme-dark" ? "cfhi-dark" : ""}`}
+              >
                 <Tooltip
                   title="**Enter file name only, do not include file types."
                   arrow={true}
                   placement="left"
                 >
-                  <HelpIcon color="black" />
+                  <HelpIcon />
                 </Tooltip>
               </div>
               <Textfield
@@ -142,8 +148,18 @@ function DownloadButton() {
                 size="small"
                 onChange={onChangeFN}
                 sx={{ width: "218px" }}
-                inputProps={{ style: { fontSize: "smaller" } }}
-                InputLabelProps={{ style: { fontSize: "smaller" } }}
+                inputProps={{
+                  style: {
+                    fontSize: "smaller",
+                    color: `${mode === "theme-dark" ? "whitesmoke" : "black"}`,
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontSize: "smaller",
+                    color: `${mode === "theme-dark" ? "whitesmoke" : "black"}`,
+                  },
+                }}
               />
             </div>
             <div className="confirm-wrapper">

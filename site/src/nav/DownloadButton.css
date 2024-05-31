@@ -73,6 +73,11 @@ div.filename-field-wrapper {
   margin-top: 12px;
 }
 
+div.ffw-dark {
+  background: dimgray;
+  border: solid 1px whitesmoke;
+}
+
 div.confirm-wrapper {
   padding-top: 10px;
   display: flex;
@@ -99,6 +104,9 @@ div.arrow-up {
   border-bottom: 10px solid black;
   margin-left: 83.3px;
 }
+div.au-dark {
+  border-bottom: 10px solid whitesmoke;
+}
 div.CF-help-icon {
   padding-top: 6px;
   padding-right: 5px;
@@ -109,4 +117,12 @@ div.CF-help-icon {
 
 div.CF-help-icon:hover {
   color: black;
+}
+
+div.cfhi-dark {
+  color: lightgray;
+}
+
+div.cfhi-dark:hover {
+  color: whitesmoke;
 }
