@@ -11,9 +11,8 @@ import downloadIcon from "/download.svg";
 import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
 import Textfield from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import HelpIcon from '@mui/icons-material/Help';
+import HelpIcon from "@mui/icons-material/Help";
 
 function DownloadButton() {
   const { myMap } = useMap();
@@ -127,6 +126,15 @@ function DownloadButton() {
           <div className="arrow-up"></div>
           <div className="filename-field-wrapper">
             <div className="input-wrapper">
+              <div className="CF-help-icon">
+                <Tooltip
+                  title="**Enter file name only, do not include file types."
+                  arrow={true}
+                  placement="left"
+                >
+                  <HelpIcon color="black" />
+                </Tooltip>
+              </div>
               <Textfield
                 className="filename-textfield"
                 label="Enter File Name (Optional)"
@@ -137,11 +145,6 @@ function DownloadButton() {
                 inputProps={{ style: { fontSize: "smaller" } }}
                 InputLabelProps={{ style: { fontSize: "smaller" } }}
               />
-              <Tooltip title="**Enter file name only, do not include file types." arrow={true} placement="left">
-                <IconButton>
-                  <HelpIcon />
-                </IconButton>
-              </Tooltip>
             </div>
             <div className="confirm-wrapper">
               <button
