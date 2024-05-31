@@ -100,9 +100,10 @@ div.arrow-up {
   margin-left: 83.3px;
 }
 div.CF-help-icon {
-  padding-top: 8px;
+  padding-top: 6px;
   padding-right: 5px;
   padding-left: 10px;
+  padding-bottom: 2px;
   color: dimgray;
 }
 
