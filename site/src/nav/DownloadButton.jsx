@@ -80,16 +80,11 @@ function DownloadButton({ mode }) {
     var downloadLink = document.createElement("a");
     downloadLink.href = url;
 
-    const center = myMap.getCenter();
-    const zoom = myMap.getZoom();
-
     if (fileName === "") {
       downloadLink.download = "overture.geojson";
     } else {
       downloadLink.download = `${fileName}.geojson`;
     }
-
-    // downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
 
     document.body.appendChild(downloadLink);
     downloadLink.click();
