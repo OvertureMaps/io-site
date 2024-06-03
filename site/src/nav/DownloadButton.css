@@ -59,70 +59,80 @@ svg.icon-refresh > path.secondary {
 div.download-text {
   padding-left: 1px;
 }
-
 div.filename-field-wrapper {
-  background: white;
-  position: absolute;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border: solid 1px black;
-  border-radius: 5px;
-  width: 280px;
-  margin-left: -83.33px;
-  margin-top: 12px;
+  background: var(--ifm-color-secondary);
+  border: 1px solid var(--ifm-color-primary-lightest);
+  border-radius: 10px;
+  box-shadow:
+    hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  padding: 5px;
+}
+
+fieldset {
+  all: unset;
+}
+
+fieldset.filename-fieldset {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+label.filename-fieldset-label {
+  font-size: small;
+  font-weight: 600;
+}
+
+input.filename-fieldset-input {
+  margin-bottom: 10px;
+}
+
+svg.arrow-up {
+  fill: var(--ifm-color-secondary);
+  width: 20px;
+  height: 10px;
 }
 
 div.ffw-dark {
-  background: dimgray;
-  border: solid 1px whitesmoke;
+  background: var(--ifm-navbar-background-color);
+  border: 1px solid var(-ifm-color-primary-darkest);
 }
 
-div.confirm-wrapper {
-  padding-top: 10px;
+input.ffi-dark {
+  color: white;
+  background-color: var(--ifm-navbar-background-color);
+}
+
+label.ffl-dark {
+  color: white;
+}
+
+fieldset.input-fieldset {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
 }
 
-div.input-wrapper {
-  display: flex;
+svg.theme-dark {
+  color: white;
 }
 
-div.input-label {
-  padding: 10px;
-  font-size: smaller;
-  font-style: italic;
-}
-
-div.arrow-up {
-  position: absolute;
-  width: 0;
-  height: 0;
-  margin-top: 2px;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid black;
-  margin-left: 83.3px;
-}
-div.au-dark {
-  border-bottom: 10px solid whitesmoke;
-}
-div.CF-help-icon {
-  padding-top: 6px;
-  padding-right: 5px;
-  padding-left: 10px;
-  padding-bottom: 2px;
-  color: dimgray;
-}
-
-div.CF-help-icon:hover {
+svg.theme-light {
   color: black;
 }
 
-div.cfhi-dark {
-  color: lightgray;
+div.help-icon-content {
+  background: white;
+  border: 1px solid black;
+  font-size: x-small;
+  font-weight: 700;
+  padding: 2px;
+  border-radius: 5px;
 }
 
-div.cfhi-dark:hover {
-  color: whitesmoke;
+div.hic-dark {
+  background: var(--ifm-navbar-background-color);
+  border: 1px solid white;
+  color: white;
 }

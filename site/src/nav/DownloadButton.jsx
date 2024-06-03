@@ -10,9 +10,9 @@ import {
 import downloadIcon from "/download.svg";
 import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
-import Textfield from "@mui/material/TextField";
-import Tooltip from "@mui/material/Tooltip";
-import HelpIcon from "@mui/icons-material/Help";
+import * as Popover from "@radix-ui/react-popover";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
 function DownloadButton({ mode }) {
   const { myMap } = useMap();
@@ -104,68 +104,70 @@ function DownloadButton({ mode }) {
   };
 
   return (
-    <div className="button--download">
-      <button
-        className={`button button--primary ${loading ? "disabled" : ""}`}
-        onClick={handleDownloadClick}
-      >
-        <div className="wrapper">
-          <div className="download-icon">
-            {!loading ? (
-              <img className={"dl-img"} src={downloadIcon} />
-            ) : (
-              <RefreshIcon />
-            )}
-          </div>
-          <div className="download-text">
-            {loading ? "Downloading..." : "Download Visible"}
-          </div>
-        </div>
-      </button>
-      {open & !loading ? (
-        <div>
-          <div
-            className={`arrow-up ${mode === "theme-dark" ? "au-dark" : ""}`}
-          ></div>
-          <div
-            className={`filename-field-wrapper ${mode === "theme-dark" ? "ffw-dark" : ""}`}
+    <Popover.Root>
+      <Popover.Trigger asChild>
+        <div className="button--download">
+          <button
+            className={`button button--primary ${loading ? "disabled" : ""}`}
+            onClick={handleDownloadClick}
           >
-            <div className="input-wrapper">
+            <div className="wrapper">
+              <div className="download-icon">
+                {!loading ? (
+                  <img className={"dl-img"} src={downloadIcon} />
+                ) : (
+                  <RefreshIcon />
+                )}
+              </div>
+              <div className="download-text">
+                {loading ? "Downloading..." : "Download Visible"}
+              </div>
+            </div>
+          </button>
+        </div>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          className={`filename-field-wrapper ${mode === "theme-dark" ? "ffw-dark" : ""}`}
+          sideOffset={12}
+        >
+          <fieldset className="filename-fieldset">
+            <label
+              className={`filename-fieldset-label ${mode === "theme-dark" ? "ffl-dark" : ""}`}
+            >
+              Enter a Filename
+            </label>
+            <fieldset className="input-fieldset">
               <div
                 className={`CF-help-icon ${mode === "theme-dark" ? "cfhi-dark" : ""}`}
               >
-                <Tooltip
-                  title="**Enter file name only, do not include file types."
-                  arrow={true}
-                  placement="left"
-                >
-                  <HelpIcon />
-                </Tooltip>
+                <Tooltip.Provider>
+                  <Tooltip.Root defaultOpen={false}>
+                    <Tooltip.Trigger asChild>
+                      <QuestionMarkCircledIcon className={mode} />
+                    </Tooltip.Trigger>
+                    <Tooltip.Portal>
+                      <Tooltip.Content
+                        className={`help-icon-content ${mode === "theme-dark" ? "hic-dark" : ""}`}
+                        sideOffset={5}
+                        side={"left"}
+                      >
+                        **Enter file name only, do not include file types.
+                        <Tooltip.Arrow className="TooltipArrow" />
+                      </Tooltip.Content>
+                    </Tooltip.Portal>
+                  </Tooltip.Root>
+                </Tooltip.Provider>
               </div>
-              <Textfield
-                className="filename-textfield"
-                label="Enter File Name (Optional)"
-                variant="outlined"
-                size="small"
+              <input
+                className={`filename-fieldset-input ${mode === "theme-dark" ? "ffi-dark" : ""}`}
+                id="filename"
                 onChange={onChangeFN}
-                sx={{ width: "218px" }}
-                inputProps={{
-                  style: {
-                    fontSize: "smaller",
-                    color: `${mode === "theme-dark" ? "whitesmoke" : "black"}`,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontSize: "smaller",
-                    color: `${mode === "theme-dark" ? "whitesmoke" : "black"}`,
-                  },
-                }}
               />
-            </div>
-            <div className="confirm-wrapper">
+            </fieldset>
+            <div className="button--download">
               <button
-                className={`button button--primary button-confirm ${loading ? "disabled" : ""}`}
+                className={`button button--primary ${loading ? "disabled" : ""}`}
                 onClick={handleDownloadClickConfirm}
               >
                 <div className="wrapper">
@@ -175,13 +177,10 @@ function DownloadButton({ mode }) {
                 </div>
               </button>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div></div>
-      )}
-    </div>
+          </fieldset>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 }
-
 export default DownloadButton;
