@@ -10,11 +10,15 @@ import {
 import downloadIcon from "/download.svg";
 import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
+import Floater from "react-floater";
+
+const ZOOM_BOUND = 16;
 
 function DownloadButton({ zoom }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
+  const [showFloater, setShowFloater] = useState(false);
 
   useEffect(() => {
     if (myMap) {
@@ -81,27 +85,50 @@ function DownloadButton({ zoom }) {
     setLoading(false);
   };
 
+  const handleEnterButton = () => {
+    if (zoom < ZOOM_BOUND) {
+      setShowFloater(true);
+    }
+  };
+
+  const handleLeaveButton = () => {
+    if (zoom < ZOOM_BOUND) {
+      setShowFloater(false);
+    }
+  };
+
   return (
-    <div className="button--download">
-      <button
-        className={`button button--primary ${
-          loading || zoom < 16 ? "disabled" : ""
-        }`}
-        onClick={handleDownloadClick}
+    <div>
+      <Floater
+        content={<div>THIS IS MY CONTENT</div>}
+        open={showFloater}
+        target={".button--download"}
+      />
+      <div
+        className="button--download"
+        onMouseOver={handleEnterButton}
+        onMouseOut={handleLeaveButton}
       >
-        <div className="wrapper">
-          <div className="download-icon">
-            {!loading ? (
-              <img className={"dl-img"} src={downloadIcon} />
-            ) : (
-              <RefreshIcon />
-            )}
+        <button
+          className={`button button--primary ${
+            loading || zoom < ZOOM_BOUND ? "disabled" : ""
+          }`}
+          onClick={handleDownloadClick}
+        >
+          <div className="wrapper">
+            <div className="download-icon">
+              {!loading ? (
+                <img className={"dl-img"} src={downloadIcon} />
+              ) : (
+                <RefreshIcon />
+              )}
+            </div>
+            <div className="download-text">
+              {loading ? "Downloading..." : "Download Visible"}
+            </div>
           </div>
-          <div className="download-text">
-            {loading ? "Downloading..." : "Download Visible"}
-          </div>
-        </div>
-      </button>
+        </button>
+      </div>
     </div>
   );
 }
