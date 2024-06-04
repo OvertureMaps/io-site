@@ -11,7 +11,7 @@ import downloadIcon from "/download.svg";
 import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
 
-function DownloadButton() {
+function DownloadButton({ zoom }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -84,7 +84,9 @@ function DownloadButton() {
   return (
     <div className="button--download">
       <button
-        className={`button button--primary ${loading ? "disabled" : ""}`}
+        className={`button button--primary ${
+          loading || zoom < 16 ? "disabled" : ""
+        }`}
         onClick={handleDownloadClick}
       >
         <div className="wrapper">
