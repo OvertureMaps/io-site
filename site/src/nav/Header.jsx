@@ -12,7 +12,7 @@ export default function Header({ zoom, mode, setMode }) {
         </div>
         <div className="navbar__items navbar__items--right">
           <DarkModeToggle mode={mode} setMode={setMode} />
-          <DownloadButton zoom={zoom} />
+          <DownloadButton zoom={zoom} mode={mode} />
         </div>
       </div>
     </nav>

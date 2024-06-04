@@ -59,3 +59,7 @@ svg.icon-refresh > path.secondary {
 div.download-text {
   padding-left: 1px;
 }
+
+div.download-zoom-tip {
+  border-radius: 10px;
+}

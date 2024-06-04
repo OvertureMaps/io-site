@@ -14,7 +14,7 @@ import Floater from "react-floater";
 
 const ZOOM_BOUND = 16;
 
-function DownloadButton({ zoom }) {
+function DownloadButton({ mode, zoom }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -100,7 +100,31 @@ function DownloadButton({ zoom }) {
   return (
     <div>
       <Floater
-        content={<div>THIS IS MY CONTENT</div>}
+        styles={{
+          container: {
+            borderRadius: "10px",
+            padding: "10px",
+            color: mode === "theme-dark" ? "white" : "black",
+            fontSize: ".7rem",
+            background:
+              mode === "theme-dark"
+                ? "var(--ifm-navbar-background-color)"
+                : "var(--ifm-color-secondary-light)",
+          },
+          arrow: {
+            color:
+              mode === "theme-dark"
+                ? "var(--ifm-navbar-background-color)"
+                : "var(--ifm-color-secondary-light)",
+          },
+        }}
+        content={
+          <div>
+            The download button is disabled at zoom levels below {ZOOM_BOUND}.
+            This is done to prevent downloading large amounts of data. To
+            reenable the button, zoom further in.
+          </div>
+        }
         open={showFloater}
         target={".button--download"}
       />
