@@ -14,7 +14,7 @@ import Floater from "react-floater";
 
 const ZOOM_BOUND = 16;
 
-function DownloadButton({ mode, zoom }) {
+function DownloadButton({ mode, zoom, setZoom }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -23,6 +23,7 @@ function DownloadButton({ mode, zoom }) {
   useEffect(() => {
     if (myMap) {
       myMap.getBounds();
+      setZoom(myMap.getZoom());
     }
   }, [myMap]);
 
