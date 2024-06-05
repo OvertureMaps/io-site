@@ -177,6 +177,7 @@ export default function Map({ mode }) {
     <>
       <div className={`map ${mode}`}>
         <MapLibreMap
+          id="myMap"
           ref={mapRef}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
