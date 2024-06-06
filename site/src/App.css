@@ -6,6 +6,11 @@
   width:100vw;
   height:80vh;
   position:relative;
+
+  .maplibregl-ctrl-bottom-right {
+    bottom: 10px;
+    right: 10px;
+  }
 }
 
 .wordmark {
@@ -14,16 +19,12 @@
   align-items: center;
 }
 
-.header,.footer {
+.header {
   display: flex;
   flex-direction:row;
   align-items: center;
   justify-content:space-between;
   width:100%;
-}
-
-.footer {
-  height: 20vh;
 }
 
 .downloadBar { 
