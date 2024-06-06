@@ -86,15 +86,9 @@ function DownloadButton({ mode, zoom, setZoom }) {
     setLoading(false);
   };
 
-  const handleEnterButton = () => {
+  const handleToggleTooltip = () => {
     if (zoom < ZOOM_BOUND) {
-      setShowFloater(true);
-    }
-  };
-
-  const handleLeaveButton = () => {
-    if (zoom < ZOOM_BOUND) {
-      setShowFloater(false);
+      setShowFloater(!showFloater);
     }
   };
 
@@ -139,11 +133,7 @@ function DownloadButton({ mode, zoom, setZoom }) {
         open={showFloater}
         target={".button--download"}
       />
-      <div
-        className="button--download"
-        onMouseOver={handleEnterButton}
-        onMouseOut={handleLeaveButton}
-      >
+      <div className="button--download" onMouseDown={handleToggleTooltip}>
         <button
           className={`button button--primary ${
             loading || zoom < ZOOM_BOUND ? "disabled" : ""
