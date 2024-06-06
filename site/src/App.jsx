@@ -1,6 +1,5 @@
 import "./App.css";
 import Header from "./nav/Header";
-import Footer from "./Footer";
 import Map from "./Map";
 import { MapProvider } from "react-map-gl/maplibre";
 import { keepTheme } from "./themeUtils";
