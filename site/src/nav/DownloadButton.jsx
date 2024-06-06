@@ -123,7 +123,17 @@ function DownloadButton({ mode, zoom, setZoom }) {
           <div>
             The download button is disabled at zoom levels below {ZOOM_BOUND}.
             This is done to prevent downloading large amounts of data. To
-            reenable the button, zoom further in.
+            reenable the button, zoom further in. If you wish to download a
+            larger area of data points, consider using our python installer,
+            found at{" "}
+            <a
+              href={"https://github.com/OvertureMaps/overturemaps-py"}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              our git repository
+            </a>
+            .
           </div>
         }
         open={showFloater}
