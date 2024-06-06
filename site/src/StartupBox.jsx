@@ -11,7 +11,11 @@ function StartupBox({ open, setOpen, startTour, updateTour, mode }) {
           }`}
         >
           <Box>
-            <p className="tour-intro">
+            <p
+              className={`tour-intro ${
+                mode === "theme-dark" ? "dark-startup" : "light-startup"
+              }`}
+            >
               First time here? Take the tour to get familiar with our features!
             </p>
             <button className="button start" onClick={startTour}>
@@ -29,6 +33,11 @@ function StartupBox({ open, setOpen, startTour, updateTour, mode }) {
                   />
                 }
                 label="Don't Ask Me This Again"
+                sx={
+                  mode === "theme-dark"
+                    ? { color: "whitesmoke" }
+                    : { color: "#213547" }
+                }
               />
             </div>
           </Box>

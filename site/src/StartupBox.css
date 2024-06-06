@@ -60,3 +60,11 @@ div.perma-skip {
   margin-top: 20px;
   margin-left: 20px;
 }
+
+p.dark-startup {
+  color: whitesmoke;
+}
+
+p.light-startup {
+  color: #213547;
+}
