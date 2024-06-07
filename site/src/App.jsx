@@ -1,6 +1,5 @@
 import "./App.css";
 import Header from "./nav/Header";
-import Footer from "./Footer";
 import Map from "./Map";
 import { MapProvider } from "react-map-gl/maplibre";
 import { keepTheme } from "./themeUtils";
@@ -14,6 +13,7 @@ function App() {
   const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
   const [open, setOpen] = useState(tour);
   const [mapEntity, setMapEntity] = useState({});
+  const [zoom, setZoom] = useState(0);
 
   const startTour = () => {
     setOpen(false);
@@ -40,13 +40,18 @@ function App() {
       />
       <Tour run={run} modeName={modeName} setMapEntity={setMapEntity} />
       <MapProvider>
-        <Header mode={modeName} setMode={setModeName} />
+        <Header
+          mode={modeName}
+          setMode={setModeName}
+          zoom={zoom}
+          setZoom={setZoom}
+        />
         <Map
           mode={modeName}
           mapEntity={mapEntity}
           setMapEntity={setMapEntity}
+          setZoom={setZoom}
         />
-        <Footer mode={modeName} />
       </MapProvider>
     </div>
   );

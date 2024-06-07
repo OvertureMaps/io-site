@@ -7,6 +7,7 @@ import {
 import "maplibre-gl/dist/maplibre-gl.css";
 import * as pmtiles from "pmtiles";
 import maplibregl from "maplibre-gl";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
 import InspectorPanel from "./InspectorPanel";
@@ -133,20 +134,23 @@ ThemeTypeLayer.propTypes = {
   extrusion: PropTypes.bool,
 };
 
-export default function Map({ mode, mapEntity, setMapEntity }) {
+export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
+
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
   const [visibleThemes, setVisibleThemes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
-  pitch: 0,
-    useEffect(() => {
-      const protocol = new pmtiles.Protocol();
-      maplibregl.addProtocol("pmtiles", protocol.tile);
-      return () => {
-        maplibregl.removeProtocol("pmtiles");
-      };
-    }, []);
+
+
+  useEffect(() => {
+    const protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol("pmtiles", protocol.tile);
+
+    return () => {
+      maplibregl.removeProtocol("pmtiles");
+    };
+  }, []);
 
   const syncInteractiveLayerIds = useCallback(() => {
     const layers = mapRef.current.getStyle().layers;
@@ -172,10 +176,15 @@ export default function Map({ mode, mapEntity, setMapEntity }) {
     }
   }, []);
 
+  const handleZoom = (event) => {
+    setZoom(event.target.getZoom());
+  };
+
   return (
     <>
       <div className={`map ${mode}`}>
         <MapLibreMap
+          id="myMap"
           ref={mapRef}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
@@ -183,6 +192,7 @@ export default function Map({ mode, mapEntity, setMapEntity }) {
           onClick={onClick}
           cursor={cursor}
           hash={true}
+          onZoom={handleZoom}
           mapStyle={MAP_STYLE}
           interactiveLayerIds={interactiveLayerIds}
           initialViewState={INITIAL_VIEW_STATE}
@@ -316,6 +326,7 @@ export default function Map({ mode, mapEntity, setMapEntity }) {
           {Object.keys(mapEntity).length > 0 && (
             <InspectorPanel entity={mapEntity} />
           )}
+
           <ThemeSelector visibleThemes={setVisibleThemes}></ThemeSelector>
         </div>
       </div>
