@@ -7,6 +7,7 @@ import {
 import "maplibre-gl/dist/maplibre-gl.css";
 import * as pmtiles from "pmtiles";
 import maplibregl from "maplibre-gl";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
 import InspectorPanel from "./InspectorPanel";
@@ -133,7 +134,7 @@ ThemeTypeLayer.propTypes = {
   extrusion: PropTypes.bool,
 };
 
-export default function Map({ mode }) {
+export default function Map({ mode, setZoom }) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
   const [mapEntity, setMapEntity] = useState({});
@@ -144,6 +145,7 @@ export default function Map({ mode }) {
   useEffect(() => {
     const protocol = new pmtiles.Protocol();
     maplibregl.addProtocol("pmtiles", protocol.tile);
+
     return () => {
       maplibregl.removeProtocol("pmtiles");
     };
@@ -173,6 +175,10 @@ export default function Map({ mode }) {
     }
   }, []);
 
+  const handleZoom = (event) => {
+    setZoom(event.target.getZoom());
+  };
+
   return (
     <>
       <div className={`map ${mode}`}>
@@ -185,6 +191,7 @@ export default function Map({ mode }) {
           onClick={onClick}
           cursor={cursor}
           hash={true}
+          onZoom={handleZoom}
           mapStyle={MAP_STYLE}
           interactiveLayerIds={interactiveLayerIds}
           initialViewState={INITIAL_VIEW_STATE}
@@ -318,6 +325,7 @@ export default function Map({ mode }) {
           {Object.keys(mapEntity).length > 0 && (
             <InspectorPanel entity={mapEntity} />
           )}
+
           <ThemeSelector visibleThemes={setVisibleThemes}></ThemeSelector>
         </div>
       </div>

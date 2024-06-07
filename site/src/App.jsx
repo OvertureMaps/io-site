@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [modeName, setModeName] = useState("theme-dark");
+  const [zoom, setZoom] = useState(0);
 
   useEffect(() => {
     keepTheme(setModeName);
@@ -14,8 +15,14 @@ function App() {
 
   return (
     <MapProvider>
-      <Header mode={modeName} setMode={setModeName} />
-      <Map mode={modeName} />
+      <Header
+        mode={modeName}
+        setMode={setModeName}
+        zoom={zoom}
+        setZoom={setZoom}
+      />
+      <Map mode={modeName} setZoom={setZoom} />
+      <Footer mode={modeName} />
     </MapProvider>
   );
 }
