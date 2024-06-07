@@ -1,13 +1,16 @@
 import { useState } from "react";
 import "./DownloadOptions.css";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { TextField, Typography } from "@mui/material";
+import {
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
+  Select,
+  FormControlLabel,
+  Checkbox,
+  TextField,
+  Typography,
+  FormControl,
+} from "@mui/material";
 import SettingsIcon from "./../icons/icon-settings.svg?react";
 import Floater from "react-floater";
 
@@ -50,7 +53,8 @@ function DownloadOptions({
               mode === "theme-dark"
                 ? "var(--ifm-navbar-background-color)"
                 : "var(--ifm-color-secondary-light)",
-            width: 350,
+            width: 380,
+            marginLeft: "-50px",
           },
         }}
         content={
@@ -70,26 +74,53 @@ function DownloadOptions({
                 disabled={true}
               ></FormControlLabel>
             </div>
+            <div className="filename">
+              <FormControlLabel
+                control={
+                  <TextField
+                    label="overture.geojson"
+                    variant="outlined"
+                    size="small"
+                  />
+                }
+                label={
+                  <Typography sx={{ fontSize: ".9rem" }}>
+                    Download File Name
+                  </Typography>
+                }
+                labelPlacement="start"
+                sx={{ gap: "10px" }}
+              />
+            </div>
             <div className="fileselect">
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="file-select-multi-label">
-                  File Format
-                </InputLabel>
-                <Select
-                  labelId="file-select-multi-label"
-                  id="file-select-multi"
-                  multiple
-                  value={fileType}
-                  onChange={handleChangeFT}
-                  input={<OutlinedInput label="File Type" />}
-                >
-                  {fileTypes.map((type) => (
-                    <MenuItem key={type} value={type}>
-                      {type}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <FormControlLabel
+                control={
+                  <FormControl size="small" sx={{ width: 180 }}>
+                    <InputLabel>File Format(s)</InputLabel>
+                    <Select
+                      labelId="file-select-multi-label"
+                      id="file-select-multi"
+                      multiple
+                      value={fileType}
+                      onChange={handleChangeFT}
+                      input={<OutlinedInput label="File Type" />}
+                    >
+                      {fileTypes.map((type) => (
+                        <MenuItem key={type} value={type}>
+                          {type}
+                        </MenuItem>
+                      ))}
+                    </Select>{" "}
+                  </FormControl>
+                }
+                label={
+                  <Typography sx={{ fontSize: ".9rem" }}>
+                    Download File Format
+                  </Typography>
+                }
+                labelPlacement="start"
+                sx={{ gap: "10px", marginTop: "10px" }}
+              />
             </div>
           </div>
         }
