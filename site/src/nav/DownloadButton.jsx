@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
 import { DownloadCatalog } from "../DownloadCatalog.js";
@@ -7,16 +8,22 @@ import {
   writeGeoJSON,
 } from "@geoarrow/geoarrow-wasm/esm/index.js";
 import downloadIcon from "/download.svg";
+import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
+import Floater from "react-floater";
 
-function DownloadButton({ fileType, selectedLayers }) {
+const ZOOM_BOUND = 16;
+
+function DownloadButton({ fileType, selectedLayers, mode, zoom, setZoom }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
+  const [showFloater, setShowFloater] = useState(false);
 
   useEffect(() => {
     if (myMap) {
       myMap.getBounds();
+      setZoom(myMap.getZoom());
     }
   }, [myMap]);
 
@@ -84,19 +91,74 @@ function DownloadButton({ fileType, selectedLayers }) {
     setLoading(false);
   };
 
+  const handleToggleTooltip = () => {
+    if (zoom < ZOOM_BOUND) {
+      setShowFloater(!showFloater);
+    }
+  };
+
   return (
-    <div className="button--download">
-      <button
-        className={`button button--primary ${loading ? "disabled" : ""}`}
-        onClick={handleDownloadClick}
-      >
-        <div className="wrapper">
-          <div className="icon">
-            <img className={"dl-img"} src={downloadIcon} />
+    <div>
+      <Floater
+        styles={{
+          container: {
+            borderRadius: "10px",
+            padding: "10px",
+            color: mode === "theme-dark" ? "white" : "black",
+            fontSize: ".7rem",
+            background:
+              mode === "theme-dark"
+                ? "var(--ifm-navbar-background-color)"
+                : "var(--ifm-color-secondary-light)",
+          },
+          arrow: {
+            color:
+              mode === "theme-dark"
+                ? "var(--ifm-navbar-background-color)"
+                : "var(--ifm-color-secondary-light)",
+          },
+        }}
+        content={
+          <div>
+            The download button is disabled at zoom levels below {ZOOM_BOUND}.
+            This is done to prevent downloading large amounts of data. To
+            reenable the button, zoom further in. If you wish to download a
+            larger area of data points, consider using our python installer,
+            found at{" "}
+            <a
+              href={"https://github.com/OvertureMaps/overturemaps-py"}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              our git repository
+            </a>
+            .
           </div>
-          <div>{loading ? "Downloading..." : "Download Visible"}</div>
-        </div>
-      </button>
+        }
+        open={showFloater}
+        target={".button--download"}
+      />
+      <div className="button--download" onMouseDown={handleToggleTooltip}>
+        <button
+          className={`button button--primary ${
+            loading || zoom < ZOOM_BOUND ? "disabled" : ""
+          }`}
+          onClick={handleDownloadClick}
+        >
+          <div className="wrapper">
+            <div className="download-icon">
+              {!loading ? (
+                <img className={"dl-img"} src={downloadIcon} />
+              ) : (
+                <RefreshIcon />
+              )}
+            </div>
+            <div className="download-text">
+              {loading ? "Downloading..." : "Download Visible"}
+            </div>
+          </div>
+        </button>
+      </div>
     </div>
   );
 }

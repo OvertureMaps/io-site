@@ -5,7 +5,7 @@ import DownloadOptions from "./DownloadOptions";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function Header({ mode, setMode }) {
+export default function Header({ zoom, mode, setMode, setZoom }) {
   const [fileType, setFileType] = useState([]);
   const [selectedLayers, setSelectedLayers] = useState(true);
 
@@ -23,7 +23,13 @@ export default function Header({ mode, setMode }) {
             selectedLayers={selectedLayers}
             setSelectedLayers={setSelectedLayers}
           />
-          <DownloadButton fileType={fileType} selectedLayers={selectedLayers} />
+          <DownloadButton
+            fileType={fileType}
+            selectedLayers={selectedLayers}
+            zoom={zoom}
+            mode={mode}
+            setZoom={setZoom}
+          />
         </div>
       </div>
     </nav>

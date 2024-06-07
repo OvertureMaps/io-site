@@ -13,9 +13,13 @@
   border: 3px;
   border-radius: 10px;
   border-color: rgba(15, 15, 15, 0.8);
-  max-height: 80%;
+  max-height: 80vh;
   overflow-y: scroll;
   position:relative;
+
+  p {
+    margin: 0;
+  }
 
   @media (max-width: 768px) {
     max-height: 50%;
