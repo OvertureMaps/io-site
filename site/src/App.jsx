@@ -22,7 +22,6 @@ function App() {
         setZoom={setZoom}
       />
       <Map mode={modeName} setZoom={setZoom} />
-      <Footer mode={modeName} />
     </MapProvider>
   );
 }
