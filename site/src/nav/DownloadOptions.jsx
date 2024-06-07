@@ -9,6 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { TextField, Typography } from "@mui/material";
 import SettingsIcon from "./../icons/icon-settings.svg?react";
+import Floater from "react-floater";
 
 const fileTypes = ["geoJson", "Parquet"];
 
@@ -17,11 +18,12 @@ function DownloadOptions({
   setFileType,
   selectedLayers,
   setSelectedLayers,
+  mode,
 }) {
-  const [open, setOpen] = useState(false);
+  const [showFloater, setShowFloater] = useState(false);
 
-  const handleClickC = () => {
-    setOpen(!open);
+  const handleToggleFloater = () => {
+    setShowFloater(!showFloater);
   };
 
   const handleChangeFT = (event) => {
@@ -36,12 +38,22 @@ function DownloadOptions({
   };
 
   return (
-    <div className="download-options">
-      <button className="download-options-button" onClick={handleClickC}>
-        <SettingsIcon />
-      </button>
-      <div className="options-wrapper">
-        {open ? (
+    <div>
+      <Floater
+        styles={{
+          container: {
+            borderRadius: "10px",
+            padding: "10px",
+            color: mode === "theme-dark" ? "white" : "black",
+            fontSize: ".7rem",
+            background:
+              mode === "theme-dark"
+                ? "var(--ifm-navbar-background-color)"
+                : "var(--ifm-color-secondary-light)",
+            width: 350,
+          },
+        }}
+        content={
           <div className="options">
             <div className="title-wrapper">
               <Typography align="center" variant="h6">
@@ -80,9 +92,17 @@ function DownloadOptions({
               </FormControl>
             </div>
           </div>
-        ) : (
-          <div></div>
-        )}
+        }
+        open={showFloater}
+        target={".download-options"}
+      />
+      <div className="download-options">
+        <button
+          className="download-options-button"
+          onClick={handleToggleFloater}
+        >
+          <SettingsIcon />
+        </button>
       </div>
     </div>
   );

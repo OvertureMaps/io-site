@@ -22,6 +22,7 @@ export default function Header({ zoom, mode, setMode, setZoom }) {
             setFileType={setFileType}
             selectedLayers={selectedLayers}
             setSelectedLayers={setSelectedLayers}
+            mode={mode}
           />
           <DownloadButton
             fileType={fileType}
