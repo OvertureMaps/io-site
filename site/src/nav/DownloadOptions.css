@@ -15,18 +15,13 @@ div.options-wrapper {
   border: 1px solid darkgrey;
 }
 
-svg.chevron-down > path.primary {
-  fill: darkslategray;
-}
-
-svg.chevron-up > path.primary {
-  fill: darkslategray;
-}
-
 button.download-options-button {
   border: none;
   background-color: white;
   border-radius: 50%;
+  padding: 0;
+  height: 2rem;
+  width: 2rem;
 }
 
 button.download-options-button:hover {

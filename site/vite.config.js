@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     svgr({
-      include:  ["**/icon-layers.svg?react", "**/chevron-up.svg?react", "**/chevron-down.svg?react"],
+      include:  ["**/icon-layers.svg?react", "**/icon-settings.svg?react"],
     })
   ],
   build: {

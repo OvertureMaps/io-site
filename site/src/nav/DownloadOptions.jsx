@@ -1,6 +1,4 @@
 import { useState } from "react";
-import ChevronUpIcon from "./../icons/chevron-up.svg?react";
-import ChevronDownIcon from "./../icons/chevron-down.svg?react";
 import "./DownloadOptions.css";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -10,6 +8,7 @@ import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { TextField, Typography } from "@mui/material";
+import SettingsIcon from "./../icons/icon-settings.svg?react";
 
 const fileTypes = ["geoJson", "Parquet"];
 
@@ -38,15 +37,9 @@ function DownloadOptions({
 
   return (
     <div className="download-options">
-      <div className="button-wrapper">
-        <button className="download-options-button" onClick={handleClickC}>
-          <div className="chevron-icon-wrapper">
-            <div classname="chevron-icon">
-              {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
-            </div>
-          </div>
-        </button>
-      </div>
+      <button className="download-options-button" onClick={handleClickC}>
+        <SettingsIcon />
+      </button>
       <div className="options-wrapper">
         {open ? (
           <div className="options">
@@ -62,6 +55,7 @@ function DownloadOptions({
                 }
                 label="Download Only Selected Layers"
                 style={{ marginLeft: 0 }}
+                disabled={true}
               ></FormControlLabel>
             </div>
             <div className="fileselect">
