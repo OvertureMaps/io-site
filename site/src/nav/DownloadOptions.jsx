@@ -72,10 +72,23 @@ function DownloadOptions({ optionStates, optionSetters, mode }) {
                   <Checkbox
                     checked={optionStates.selectedLayers}
                     onClick={handleChangeSL}
+                    sx={{
+                      color: "white",
+                    }}
                   />
                 }
-                label="Download Only Selected Layers"
-                style={{ marginLeft: 0 }}
+                labelPlacement="start"
+                label={
+                  <Typography
+                    sx={{
+                      color: mode === "theme-dark" ? "whitesmoke" : "black",
+                      fontSize: ".9rem",
+                    }}
+                  >
+                    Download Only Selected Layers
+                  </Typography>
+                }
+                sx={{ gap: "10px", marginBottom: "5px" }}
                 disabled={true}
               ></FormControlLabel>
             </div>
@@ -83,12 +96,20 @@ function DownloadOptions({ optionStates, optionSetters, mode }) {
               <FormControlLabel
                 control={
                   <TextField
-                    label={optionStates.fileName}
+                    label={"overture.geojson"}
                     value={optionStates.fileName}
                     variant="outlined"
                     size="small"
                     onChange={(event) => {
                       optionSetters.setFileName(event.target.value);
+                    }}
+                    sx={{
+                      input: {
+                        color: mode === "theme-dark" ? "white" : "black",
+                      },
+                      label: {
+                        color: mode === "theme-dark" ? "white" : "black",
+                      },
                     }}
                   />
                 }
@@ -106,7 +127,13 @@ function DownloadOptions({ optionStates, optionSetters, mode }) {
                 disabled={true}
                 control={
                   <FormControl size="small" sx={{ width: 180 }}>
-                    <InputLabel>File Format(s)</InputLabel>
+                    <InputLabel
+                      sx={{
+                        color: mode === "theme-dark" ? "white" : "black",
+                      }}
+                    >
+                      File Format(s)
+                    </InputLabel>
                     <Select
                       labelId="file-select-multi-label"
                       id="file-select-multi"
@@ -114,6 +141,9 @@ function DownloadOptions({ optionStates, optionSetters, mode }) {
                       value={optionStates.fileTypes}
                       onChange={handleChangeFT}
                       input={<OutlinedInput label="File Type" />}
+                      sx={{
+                        color: mode === "theme-dark" ? "white" : "black",
+                      }}
                     >
                       {FILE_FORMATS.map((type) => (
                         <MenuItem key={type} value={type}>
@@ -139,10 +169,12 @@ function DownloadOptions({ optionStates, optionSetters, mode }) {
       />
       <div className="download-options">
         <button
-          className="download-options-button"
+          className={`download-options-button ${mode === "theme-dark" ? "options-dark" : ""}`}
           onClick={handleToggleFloater}
         >
-          <SettingsIcon />
+          <SettingsIcon
+            className={mode === "theme-dark" ? "dark-options-icon" : ""}
+          />
         </button>
       </div>
     </div>
