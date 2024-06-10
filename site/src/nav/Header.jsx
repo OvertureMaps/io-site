@@ -6,8 +6,19 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 
 export default function Header({ zoom, mode, setMode, setZoom }) {
-  const [fileType, setFileType] = useState([]);
+  const [fileTypes, setFileTypes] = useState([]);
   const [selectedLayers, setSelectedLayers] = useState(true);
+  const [fileName, setFileName] = useState("overture.geojson");
+  const optionStates = {
+    fileName: fileName,
+    fileTypes: fileTypes,
+    selectedLayers: selectedLayers,
+  };
+  const optionSetters = {
+    setFileName: setFileName,
+    setFileTypes: setFileTypes,
+    setSelectedLayers: setSelectedLayers,
+  };
 
   return (
     <nav aria-label="Main" className="navbar navbar--fixed-top">
@@ -18,15 +29,13 @@ export default function Header({ zoom, mode, setMode, setZoom }) {
         <div className="navbar__items navbar__items--right">
           <DarkModeToggle mode={mode} setMode={setMode} />
           <DownloadOptions
-            fileType={fileType}
-            setFileType={setFileType}
-            selectedLayers={selectedLayers}
-            setSelectedLayers={setSelectedLayers}
+            optionStates={optionStates}
+            optionSetters={optionSetters}
             mode={mode}
           />
           <DownloadButton
-            fileType={fileType}
-            selectedLayers={selectedLayers}
+            optionStates={optionStates}
+            optionSetters={optionSetters}
             zoom={zoom}
             mode={mode}
             setZoom={setZoom}

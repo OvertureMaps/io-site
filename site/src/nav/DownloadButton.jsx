@@ -14,7 +14,7 @@ import Floater from "react-floater";
 
 const ZOOM_BOUND = 16;
 
-function DownloadButton({ fileType, selectedLayers, mode, zoom, setZoom }) {
+function DownloadButton({ optionStates, optionSetters, mode, zoom, setZoom }) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -30,8 +30,7 @@ function DownloadButton({ fileType, selectedLayers, mode, zoom, setZoom }) {
   const handleDownloadClick = async () => {
     setLoading(true);
 
-    console.log(`File Type(s): ${fileType}`);
-    console.log(`Selected Layers: ${selectedLayers}`);
+    console.log(optionStates);
 
     //Get current map dimensions and convert to bbox
     const bounds = myMap.getBounds();
@@ -80,9 +79,14 @@ function DownloadButton({ fileType, selectedLayers, mode, zoom, setZoom }) {
     var downloadLink = document.createElement("a");
     downloadLink.href = url;
 
+    /*
     const center = myMap.getCenter();
     const zoom = myMap.getZoom();
     downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
+    */
+
+    downloadLink.download = optionStates.fileName;
+    optionSetters.setFileName("overture.geojson");
 
     document.body.appendChild(downloadLink);
     downloadLink.click();

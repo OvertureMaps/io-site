@@ -14,15 +14,9 @@ import {
 import SettingsIcon from "./../icons/icon-settings.svg?react";
 import Floater from "react-floater";
 
-const fileTypes = ["geoJson", "Parquet"];
+const FILE_FORMATS = ["geoJson", "Parquet"];
 
-function DownloadOptions({
-  fileType,
-  setFileType,
-  selectedLayers,
-  setSelectedLayers,
-  mode,
-}) {
+function DownloadOptions({ optionStates, optionSetters, mode }) {
   const [showFloater, setShowFloater] = useState(false);
 
   const handleToggleFloater = () => {
@@ -33,17 +27,25 @@ function DownloadOptions({
     const {
       target: { value },
     } = event;
-    setFileType(typeof value === "string" ? value.split(",") : value);
+    optionSetters.setFileTypes(
+      typeof value === "string" ? value.split(",") : value
+    );
   };
 
   const handleChangeSL = () => {
-    setSelectedLayers(!selectedLayers);
+    optionSetters.setSelectedLayers(!optionStates.selectedLayers);
   };
 
   return (
     <div>
       <Floater
         styles={{
+          arrow: {
+            color:
+              mode === "theme-dark"
+                ? "var(--ifm-navbar-background-color)"
+                : "var(--ifm-color-secondary-light)",
+          },
           container: {
             borderRadius: "10px",
             padding: "10px",
@@ -67,7 +69,10 @@ function DownloadOptions({
             <div className="layerselect">
               <FormControlLabel
                 control={
-                  <Checkbox checked={selectedLayers} onClick={handleChangeSL} />
+                  <Checkbox
+                    checked={optionStates.selectedLayers}
+                    onClick={handleChangeSL}
+                  />
                 }
                 label="Download Only Selected Layers"
                 style={{ marginLeft: 0 }}
@@ -78,9 +83,13 @@ function DownloadOptions({
               <FormControlLabel
                 control={
                   <TextField
-                    label="overture.geojson"
+                    label={optionStates.fileName}
+                    value={optionStates.fileName}
                     variant="outlined"
                     size="small"
+                    onChange={(event) => {
+                      optionSetters.setFileName(event.target.value);
+                    }}
                   />
                 }
                 label={
@@ -94,6 +103,7 @@ function DownloadOptions({
             </div>
             <div className="fileselect">
               <FormControlLabel
+                disabled={true}
                 control={
                   <FormControl size="small" sx={{ width: 180 }}>
                     <InputLabel>File Format(s)</InputLabel>
@@ -101,11 +111,11 @@ function DownloadOptions({
                       labelId="file-select-multi-label"
                       id="file-select-multi"
                       multiple
-                      value={fileType}
+                      value={optionStates.fileTypes}
                       onChange={handleChangeFT}
                       input={<OutlinedInput label="File Type" />}
                     >
-                      {fileTypes.map((type) => (
+                      {FILE_FORMATS.map((type) => (
                         <MenuItem key={type} value={type}>
                           {type}
                         </MenuItem>

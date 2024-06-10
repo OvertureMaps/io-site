@@ -22,6 +22,8 @@ button.download-options-button {
   padding: 0;
   height: 2rem;
   width: 2rem;
+  display: grid;
+  place-content: center;
 }
 
 button.download-options-button:hover {
