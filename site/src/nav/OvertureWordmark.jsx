@@ -9,12 +9,9 @@ export default function OvertureWordmark() {
       className="navbar__brand"
     >
       <div className="navbar__logo">
-        <img
-          src={overtureLogo}
-          alt="Overture Maps Foundation Logo"
-        />
+        <img src={overtureLogo} alt="Overture Maps Foundation Logo" />
       </div>
-      <b className="navbar__title">Overture Maps</b>
+      <b className="navbar__title tour-homepage">Overture Maps</b>
     </a>
   );
 }

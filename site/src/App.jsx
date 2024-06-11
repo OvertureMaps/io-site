@@ -4,25 +4,56 @@ import Map from "./Map";
 import { MapProvider } from "react-map-gl/maplibre";
 import { keepTheme } from "./themeUtils";
 import { useState, useEffect } from "react";
+import Tour from "./Tour";
+import StartupBox from "./StartupBox";
 
 function App() {
   const [modeName, setModeName] = useState("theme-dark");
+  const [run, setRun] = useState(false);
+  const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
+  const [open, setOpen] = useState(tour);
+  const [mapEntity, setMapEntity] = useState({});
   const [zoom, setZoom] = useState(0);
+
+  const startTour = () => {
+    setOpen(false);
+    setRun(true);
+  };
+
+  const updateTour = (event) => {
+    localStorage.setItem("tour", event.target.checked);
+    setTour(!tour);
+  };
 
   useEffect(() => {
     keepTheme(setModeName);
   }, [setModeName]);
 
   return (
-    <MapProvider>
-      <Header
+    <div>
+      <StartupBox
+        startTour={startTour}
+        updateTour={updateTour}
+        open={open}
+        setOpen={setOpen}
         mode={modeName}
-        setMode={setModeName}
-        zoom={zoom}
-        setZoom={setZoom}
       />
-      <Map mode={modeName} setZoom={setZoom} />
-    </MapProvider>
+      <Tour run={run} modeName={modeName} setMapEntity={setMapEntity} />
+      <MapProvider>
+        <Header
+          mode={modeName}
+          setMode={setModeName}
+          zoom={zoom}
+          setZoom={setZoom}
+        />
+        <Map
+          mode={modeName}
+          mapEntity={mapEntity}
+          setMapEntity={setMapEntity}
+          setZoom={setZoom}
+        />
+      </MapProvider>
+    </div>
   );
 }
 
