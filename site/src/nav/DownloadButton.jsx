@@ -140,7 +140,7 @@ function DownloadButton({ mode, zoom, setZoom }) {
           }`}
           onClick={handleDownloadClick}
         >
-          <div className="wrapper">
+          <div className="wrapper tour-download">
             <div className="download-icon">
               {!loading ? (
                 <img className={"dl-img"} src={downloadIcon} />
