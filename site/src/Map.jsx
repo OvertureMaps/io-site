@@ -135,13 +135,11 @@ ThemeTypeLayer.propTypes = {
 };
 
 export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
-
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
   const [visibleThemes, setVisibleThemes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
-
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol();
@@ -327,7 +325,10 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             <InspectorPanel entity={mapEntity} />
           )}
 
-          <ThemeSelector visibleThemes={setVisibleThemes}></ThemeSelector>
+          <ThemeSelector
+            mode={mode}
+            visibleThemes={setVisibleThemes}
+          ></ThemeSelector>
         </div>
       </div>
     </>
