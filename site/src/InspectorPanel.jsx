@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function InspectorPanel({ entity, mode }) {
+function InspectorPanel({ entity }) {
   if (!entity) {
     return;
   }
