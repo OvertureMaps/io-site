@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import TableRow from "./TableRow";
+import "./InspectorPanel.css";
 
 function InspectorPanel({ entity }) {
   if (!entity) {
@@ -13,17 +15,16 @@ function InspectorPanel({ entity }) {
           {Object.keys(entity)
             .filter((key) => !key.startsWith("@"))
             .map((key) => (
-              <tr key={key}>
-                <td>
-                  <strong>{key}</strong>
-                </td>
-                <td>{entity[key].toString()}</td>
-              </tr>
+              <TableRow table_key={key} entity={entity} />
             ))}
         </tbody>
       </table>
       <p>
-        <a href="https://docs.overturemaps.org/schema/" target="_blank" rel="noreferrer noopener">
+        <a
+          href="https://docs.overturemaps.org/schema/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           Overture Schema Reference
         </a>
       </p>

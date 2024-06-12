@@ -10,9 +10,8 @@ import maplibregl from "maplibre-gl";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
-import InspectorPanel from "./InspectorPanel";
+import InspectorPanel from "./inspector_panel/InspectorPanel";
 import PropTypes from "prop-types";
-import "./InspectorPanel.css";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 
@@ -135,13 +134,11 @@ ThemeTypeLayer.propTypes = {
 };
 
 export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
-
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
   const [visibleThemes, setVisibleThemes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
-
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol();

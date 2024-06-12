@@ -1,0 +1,60 @@
+.inspector-panel {
+  td {
+    padding: 0;
+  }
+
+  td {
+    padding-right: 0.5em;
+    vertical-align: top;
+    border-left: 0;
+    border-right: 0;
+    word-break: break-all;
+  }
+  td:first-child {
+    text-align: left;
+    width: 40%;
+    word-break: normal;
+  }
+  td:last-child {
+    overflow: hidden;
+    display: flex;
+    width: fit-content;
+    border: none;
+  }
+  tr {
+    border-bottom: var(--ifm-table-border-width) solid
+      var(--ifm-table-border-color);
+  }
+
+  td.expanded {
+    max-height: unset;
+  }
+
+  td.collapsed {
+    max-height: 100px;
+  }
+}
+
+button.expand {
+  justify-self: right;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  height: 26px;
+  width: 26px;
+  justify-content: center;
+}
+
+button.expand:focus {
+  outline: none;
+}
+button.expand:hover {
+  background-color: var(--ifm-color-secondary-dark);
+}
+
+div.first-child {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: auto auto;
+  padding-right: 10px;
+}

@@ -26,38 +26,12 @@
 
   table {
     background-color: rgba(255, 255, 255, 0.95);
+    overflow-y: scroll;
+    overflow-x: auto;
   }
 
-  table th,
-  table td {
+  table th {
     padding: 0;
-  }
-
-  table td {
-    padding-right: 0.5em;
-    vertical-align: top;
-    border-left: 0;
-    border-right: 0;
-    word-break: break-all;
-  }
-  table td:first-child {
-    text-align: left;
-    width: 30%;
-  }
-  table td:first-child {
-    word-break: normal;
-  }
-  table td:last-child {
-    width: 70%;
-    overflow: auto;
-    max-height: 200px;
-    display: block;
-    width: fit-content;
-    border: none;
-  }
-  table tr {
-    border-bottom: var(--ifm-table-border-width) solid
-      var(--ifm-table-border-color);
   }
 }
 
