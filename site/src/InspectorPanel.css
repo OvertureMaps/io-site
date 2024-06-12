@@ -1,7 +1,7 @@
 .inspector-panel {
   max-width: 400px;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
   box-shadow: 0 2px 4px white;
@@ -14,8 +14,7 @@
   border-radius: 10px;
   border-color: rgba(15, 15, 15, 0.8);
   max-height: 80vh;
-  overflow-y: scroll;
-  position:relative;
+  position: relative;
 
   p {
     margin: 0;
@@ -29,7 +28,8 @@
     background-color: rgba(255, 255, 255, 0.95);
   }
 
-  table th, table td {
+  table th,
+  table td {
     padding: 0;
   }
 
@@ -49,6 +49,15 @@
   }
   table td:last-child {
     width: 70%;
+    overflow: auto;
+    max-height: 200px;
+    display: block;
+    width: fit-content;
+    border: none;
+  }
+  table tr {
+    border-bottom: var(--ifm-table-border-width) solid
+      var(--ifm-table-border-color);
   }
 }
 
