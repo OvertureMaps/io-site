@@ -7,9 +7,6 @@ import RemoveIcon from "@mui/icons-material/Remove";
 function TableRow({ table_key, entity }) {
   const [overflow, setOverflow] = useState("collapsed");
 
-  console.log(table_key);
-  console.log(entity);
-
   const handleExpand = () => {
     if (overflow === "collapsed") {
       setOverflow("expanded");
@@ -20,14 +17,14 @@ function TableRow({ table_key, entity }) {
 
   return (
     <tr key={table_key}>
-      <td classname={overflow}>
+      <td className={overflow}>
         <div className="first-child">
           <strong>{table_key}</strong>
           <button className="expand" onClick={handleExpand}>
             {overflow === "expanded" ? (
-              <RemoveIcon fontSize="small" />
+              <RemoveIcon className="ec-icon" fontSize="small" />
             ) : (
-              <AddIcon fontSize="small" />
+              <AddIcon className="ec-icon" fontSize="small" />
             )}
           </button>
         </div>

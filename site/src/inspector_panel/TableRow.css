@@ -31,7 +31,7 @@
   }
 
   td.collapsed {
-    max-height: 100px;
+    max-height: 26px;
   }
 }
 
@@ -43,13 +43,11 @@ button.expand {
   height: 26px;
   width: 26px;
   justify-content: center;
+  background-color: unset;
 }
 
 button.expand:focus {
   outline: none;
-}
-button.expand:hover {
-  background-color: var(--ifm-color-secondary-dark);
 }
 
 div.first-child {
@@ -57,4 +55,9 @@ div.first-child {
   justify-content: space-between;
   grid-template-columns: auto auto;
   padding-right: 10px;
+}
+
+svg.ec-icon {
+  padding-top: 1px;
+  fill: var(--ifm-color-secondary-darkest);
 }
