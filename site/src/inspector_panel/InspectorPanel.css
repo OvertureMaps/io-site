@@ -34,6 +34,13 @@
   table th {
     padding: 0;
   }
+
+  .panel-header {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: auto auto;
+    place-items: start;
+  }
 }
 
 .theme-dark .inspector-panel {
@@ -45,4 +52,19 @@
 
   box-shadow: 0 2px 4px black;
   color: white;
+}
+
+button.close-panel-button {
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+button.close-panel-button:active {
+  outline: none;
+}
+
+button.close-panel-button:hover {
+  background: var(--ifm-color-secondary-dark);
 }

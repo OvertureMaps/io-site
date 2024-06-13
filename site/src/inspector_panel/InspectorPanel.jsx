@@ -6,8 +6,9 @@ import BuildingsPanel from "./BuildingsPanel";
 import DivisionsPanel from "./DivisionsPanel";
 import PlacesPanel from "./PlacesPanel";
 import TransportationPanel from "./TransportationPanel";
+import CloseIcon from "@mui/icons-material/Close";
 
-function InspectorPanel({ entity }) {
+function InspectorPanel({ entity, setEntity }) {
   if (!entity) {
     return;
   }
@@ -43,7 +44,12 @@ function InspectorPanel({ entity }) {
 
   return (
     <div className="inspector-panel">
-      <h4>Inspector Panel</h4>
+      <div className="panel-header">
+        <h4>Inspector Panel</h4>
+        <button className="close-panel-button" onClick={() => setEntity({})}>
+          <CloseIcon className="close-panel-icon" />
+        </button>
+      </div>
       {inspectorPanel}
       <p>
         <a
