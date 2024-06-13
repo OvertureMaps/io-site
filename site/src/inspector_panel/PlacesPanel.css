@@ -1,0 +1,11 @@
+div.places-panel {
+  width: 300px;
+}
+
+caption.common-props {
+  width: max-content;
+}
+
+caption.other-props {
+  width: max-content;
+}
