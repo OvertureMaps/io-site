@@ -25,12 +25,15 @@ function PlacesPanel({ entity }) {
       <div className="id"> ID: {entity["id"]}</div>
       <div className="sources">
         Sources:{" "}
-        {JSON.parse(entity["sources"]).map((source) => `${source["dataset"]},`)}
+        {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
       </div>
       <div className="common-properties">
-        <table>
+        <table className="places-table">
           <caption className="common-props">
-            <button onClick={() => setCommonExpanded(!commonExpanded)}>
+            <button
+              className="places-table"
+              onClick={() => setCommonExpanded(!commonExpanded)}
+            >
               Common Properties{" "}
               {commonExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>
@@ -47,9 +50,12 @@ function PlacesPanel({ entity }) {
         </table>
       </div>
       <div className="other-properties">
-        <table>
+        <table className="places-table">
           <caption className="other-props">
-            <button onClick={() => setOtherExpanded(!otherExpanded)}>
+            <button
+              className="places-table"
+              onClick={() => setOtherExpanded(!otherExpanded)}
+            >
               Other Properties{" "}
               {otherExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>

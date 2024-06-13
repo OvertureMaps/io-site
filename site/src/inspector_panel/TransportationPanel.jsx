@@ -17,9 +17,9 @@ function TransportationPanel({ entity }) {
       <div className="theme">Theme: {entity["theme"]}</div>
       <div className="type">Type: {entity["type"]}</div>
       <div className="other-properties">
-        <table>
+        <table className="trans-table">
           <caption className="other-props">
-            <button onClick={toggleExpanded}>
+            <button className="trans-table" onClick={toggleExpanded}>
               Other Properties{" "}
               {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>

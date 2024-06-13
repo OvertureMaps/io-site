@@ -28,9 +28,12 @@ function DivisionsPanel({ entity }) {
         {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
       </div>
       <div className="common-properties">
-        <table>
+        <table className="divisions-table">
           <caption className="common-props">
-            <button onClick={() => setCommonExpanded(!commonExpanded)}>
+            <button
+              className="divisions-table"
+              onClick={() => setCommonExpanded(!commonExpanded)}
+            >
               Common Properties{" "}
               {commonExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>
@@ -47,9 +50,12 @@ function DivisionsPanel({ entity }) {
         </table>
       </div>
       <div className="other-properties">
-        <table>
+        <table className="divisions-table">
           <caption className="other-props">
-            <button onClick={() => setOtherExpanded(!otherExpanded)}>
+            <button
+              className="divisions-table"
+              onClick={() => setOtherExpanded(!otherExpanded)}
+            >
               Other Properties{" "}
               {otherExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>

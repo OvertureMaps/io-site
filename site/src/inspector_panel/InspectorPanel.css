@@ -28,6 +28,7 @@
     background-color: rgba(255, 255, 255, 0.95);
     overflow-y: scroll;
     overflow-x: auto;
+    max-height: 250px;
   }
 
   table th {

@@ -28,9 +28,12 @@ function BasePanel({ entity }) {
         {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
       </div>
       <div className="common-properties">
-        <table>
+        <table className="base-table">
           <caption className="common-props">
-            <button onClick={() => setCommonExpanded(!commonExpanded)}>
+            <button
+              className="base-table"
+              onClick={() => setCommonExpanded(!commonExpanded)}
+            >
               Common Properties{" "}
               {commonExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>
@@ -47,9 +50,12 @@ function BasePanel({ entity }) {
         </table>
       </div>
       <div className="other-properties">
-        <table>
+        <table className="base-table">
           <caption className="other-props">
-            <button onClick={() => setOtherExpanded(!otherExpanded)}>
+            <button
+              className="base-table"
+              onClick={() => setOtherExpanded(!otherExpanded)}
+            >
               Other Properties{" "}
               {otherExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>
