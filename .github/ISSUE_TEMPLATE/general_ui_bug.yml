@@ -1,5 +1,5 @@
-name: 🐛 Bug Report
-description: Report a reproducible bug with the General UI of the IO-site
+name: General UI Bug Report
+description: Report a reproducible bug with the General UI of the IO-Site
 body:
   - type: markdown
     attributes:
@@ -45,4 +45,4 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for the issue, our team will look into it as soon as possible! If you would like to work on this issue, please wait for us to decide if it's ready. The issue will be ready to work on once we remove the "needs triage" label.
+        Thanks for the issue, our team will look into it as soon as possible!

@@ -1,0 +1,48 @@
+name: Map Display Bug Report
+description: Report a reproducivle bug found in the data displayed via the IO-Site
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please Provide all the information requested. Issues that do not follow this format are likley to stall.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Please provide a clear and concise description of what the bug is. Please include screenshots!
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: What browser are you seeing the problem on? What version are you running?
+      placeholder: ex. Chrome v112, Safari v16.3, Edge v112, Firefox v112, etc.
+  - type: input
+    id: os
+    attributes:
+      label: The OS you're using
+      placeholder: MacOS 13.2, Linux (distro), Win10/11, etc.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Describe how to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: URL
+    attributes:
+      label: The browser URL at the time you encountered the bug
+      description: Please copy and paste the contents of the URL bar.
+      placeholder: ex. https://explore.overturemaps.org/#16.34/51.049194/3.728993
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the issue, our team will look into it as soon as possible!
