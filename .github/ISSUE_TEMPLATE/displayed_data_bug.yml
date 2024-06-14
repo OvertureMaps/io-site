@@ -1,5 +1,6 @@
 name: Map Display Bug Report
 description: Report a reproducivle bug found in the data displayed via the IO-Site
+labels: ["Needs: Triage"]
 body:
   - type: markdown
     attributes:
@@ -34,6 +35,12 @@ body:
         4. See error
     validations:
       required: true
+  - type: textarea
+    id: ID
+    attributes:
+      label: GERS ID of the entity in question (if applicable)
+      description: Please provide the ID of the entity, or the entire entity of no ID is provided.
+      placeholder: ex. 08f194dbad9210d503ccbefa0de75b4d
   - type: textarea
     id: URL
     attributes:
