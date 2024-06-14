@@ -1,9 +1,22 @@
 .custom-controls {
   position: fixed;
   z-index: 10;
-  display:flex;
+  display: flex;
   flex-direction: row;
   color: black;
   margin: 4px;
   outline: none;
+}
+
+.bug-nub {
+  margin-top: 3px;
+  margin-left: 3px;
+  background: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+}
+
+svg.bug-nub-icon > path.primary {
+  fill: blue;
 }

@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 import "./InspectorPanel.css";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
+import BugIcon from "./icons/icon-bug.svg?react";
 
 const PMTILES_URL =
   "pmtiles://https://data.source.coop/protomaps/overture/2024-05-16-beta.0/";
@@ -135,13 +136,11 @@ ThemeTypeLayer.propTypes = {
 };
 
 export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
-
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
   const [visibleThemes, setVisibleThemes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
-
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol();
@@ -328,6 +327,15 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           )}
 
           <ThemeSelector visibleThemes={setVisibleThemes}></ThemeSelector>
+          <div className="bug-nub">
+            <a
+              className="bug-nub-link"
+              href="https://github.com/OvertureMaps/io-site"
+              target="_blank"
+            >
+              <BugIcon className="bug-nub-icon" />
+            </a>
+          </div>
         </div>
       </div>
     </>

@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     svgr({
-      include: ["**/icon-layers.svg?react", "**/icon-refresh.svg?react"],
+      include: ["**/icon-layers.svg?react", "**/icon-refresh.svg?react", "**/icon-bug.svg?react"],
     })
   ],
   build: {
