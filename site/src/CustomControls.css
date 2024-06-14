@@ -8,15 +8,27 @@
   outline: none;
 }
 
-.bug-nub {
-  margin-top: 3px;
-  margin-left: 3px;
+div.bug-nub {
+  float: right;
+  margin-top: 146px;
+  margin-right: 10px;
   background: white;
-  width: 32px;
-  height: 32px;
-  border-radius: 5px;
+  width: 29px;
+  height: 29px;
+  position: relative;
+  display: grid;
+  place-items: center;
 }
 
 svg.bug-nub-icon > path.primary {
-  fill: blue;
+  fill: var(--ifm-color-primary);
+}
+
+.bug-nub:hover {
+  border-radius: 5px;
+}
+
+a.bug-nub-link {
+  height: 25px;
+  width: 25px;
 }

@@ -327,15 +327,15 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           )}
 
           <ThemeSelector visibleThemes={setVisibleThemes}></ThemeSelector>
-          <div className="bug-nub">
-            <a
-              className="bug-nub-link"
-              href="https://github.com/OvertureMaps/io-site/issues/new/choose"
-              target="_blank"
-            >
-              <BugIcon className="bug-nub-icon" />
-            </a>
-          </div>
+        </div>
+        <div className="bug-nub">
+          <a
+            className="bug-nub-link"
+            href="https://github.com/OvertureMaps/io-site/issues/new/choose"
+            target="_blank"
+          >
+            <BugIcon className="bug-nub-icon" />
+          </a>
         </div>
       </div>
     </>
