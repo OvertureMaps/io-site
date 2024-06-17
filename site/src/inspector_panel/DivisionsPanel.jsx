@@ -3,6 +3,7 @@ import "./DivisionsPanel.css";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import IndentIcon from "../icons/icon-indent.svg?react";
 
 const sharedProperties = [
   "theme",
@@ -10,23 +11,46 @@ const sharedProperties = [
   "update_time",
   "id",
   "sources",
-  "usubtype",
+  "subtype",
   "version",
 ];
 function DivisionsPanel({ entity }) {
   const [commonExpanded, setCommonExpanded] = useState(false);
   const [otherExpanded, setOtherExpanded] = useState(false);
 
+  const hasSources = entity["sources"] != null;
+
   return (
     <div className="div-panel">
-      <div className="theme">Theme: {entity["theme"]}</div>
-      <div className="type">Type: {entity["type"]}</div>
-      <div className="subtype">Subtype: {entity["subtype"]}</div>
-      <div className="id"> ID: {entity["id"]}</div>
-      <div className="sources">
-        Sources:{" "}
-        {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
+      <div className="theme">
+        <strong>Theme: </strong>
+        {entity["theme"]}
       </div>
+      <div className="type">
+        <strong>Type: </strong>
+        {entity["type"]}
+      </div>
+      <div className="subtype">
+        <IndentIcon /> <strong>Subtype: </strong>
+        {entity["subtype"]}
+      </div>{" "}
+      <div className="id">
+        <strong>ID: </strong>
+        {entity["id"] != null ? entity["id"] : "None Found"}
+      </div>
+      {hasSources ? (
+        <div className="sources">
+          <strong>Source(s): </strong>{" "}
+          {JSON.parse(entity["sources"]).map(
+            (source) => `${source["dataset"]}, `
+          )}
+        </div>
+      ) : (
+        <div className="sources">
+          {" "}
+          <strong>Source(s): </strong>None Found
+        </div>
+      )}
       <div className="common-properties">
         <table className="divisions-table">
           <caption className="common-props">

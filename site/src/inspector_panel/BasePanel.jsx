@@ -3,6 +3,7 @@ import "./BasePanel.css";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import IndentIcon from "../icons/icon-indent.svg?react";
 
 const sharedProperties = [
   "theme",
@@ -19,12 +20,24 @@ function BasePanel({ entity }) {
   const [otherExpanded, setOtherExpanded] = useState(false);
   return (
     <div className="base-panel">
-      <div className="theme">Theme: {entity["theme"]}</div>
-      <div className="type">Type: {entity["type"]}</div>
-      <div className="subtype">Subtype: {entity["subtype"]}</div>
-      <div className="id"> ID: {entity["id"]}</div>
+      <div className="theme">
+        <strong>Theme: </strong>
+        {entity["theme"]}
+      </div>
+      <div className="type">
+        <strong>Type: </strong>
+        {entity["type"]}
+      </div>
+      <div className="subtype">
+        <IndentIcon /> <strong>Type: </strong>
+        {entity["subtype"]}
+      </div>
+      <div className="id">
+        <strong>ID: </strong>
+        {entity["id"]}
+      </div>
       <div className="sources">
-        Sources:{" "}
+        <strong>Source(s)</strong>{" "}
         {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
       </div>
       <div className="common-properties">

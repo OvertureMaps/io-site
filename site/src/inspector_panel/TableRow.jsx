@@ -29,7 +29,11 @@ function TableRow({ table_key, entity }) {
           </button>
         </div>
       </td>
-      <td className={overflow}>{entity[table_key].toString()}</td>
+      {entity[table_key] != null ? (
+        <td className={overflow}>{entity[table_key].toString()}</td>
+      ) : (
+        <td className={overflow}>None Found</td>
+      )}
     </tr>
   );
 }

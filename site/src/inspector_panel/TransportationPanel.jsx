@@ -14,8 +14,14 @@ function TransportationPanel({ entity }) {
   };
   return (
     <div className="trans-panel">
-      <div className="theme">Theme: {entity["theme"]}</div>
-      <div className="type">Type: {entity["type"]}</div>
+      <div className="theme">
+        <strong>Theme: </strong>
+        {entity["theme"]}
+      </div>
+      <div className="type">
+        <strong>Type: </strong>
+        {entity["type"]}
+      </div>
       <div className="other-properties">
         <table className="trans-table">
           <caption className="other-props">
