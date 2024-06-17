@@ -36,3 +36,9 @@ table.building-table {
   margin-top: 5px;
   display: grid;
 }
+
+.theme-dark .inspector-panel {
+  button.buildings-table {
+    background: var(--ifm-color-primary-light);
+  }
+}

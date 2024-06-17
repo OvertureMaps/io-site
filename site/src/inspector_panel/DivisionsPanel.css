@@ -36,3 +36,9 @@ table.divisions-table {
   margin-top: 5px;
   display: grid;
 }
+
+.theme-dark .inspector-panel {
+  button.divisions-table {
+    background: var(--ifm-color-primary-light);
+  }
+}

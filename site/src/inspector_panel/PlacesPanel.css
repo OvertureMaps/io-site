@@ -36,3 +36,9 @@ table.places-table {
   margin-top: 5px;
   display: grid;
 }
+
+.theme-dark .inspector-panel {
+  button.places-table {
+    background: var(--ifm-color-primary-light);
+  }
+}

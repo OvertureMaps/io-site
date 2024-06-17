@@ -36,3 +36,9 @@ table.trans-table {
   margin-top: 5px;
   display: grid;
 }
+
+.theme-dark .inspector-panel {
+  button.trans-table {
+    background: var(--ifm-color-primary-light);
+  }
+}
