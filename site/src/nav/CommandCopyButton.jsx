@@ -5,6 +5,14 @@ import Floater from "react-floater";
 
 const ZOOM_BOUND = 16;
 
+const themeTypeMap = {
+  "buildings": ["building", "building_part"],
+  "divisions": ["division", "division_area"],
+  "places": ["place"],
+  "transportation": ["segment", "connector"],
+  "base": ["infrastructure", "land", "land_cover", "land_use", "water"],
+}
+
 function CommandCopyButton({ mode, zoom, setZoom, visibleThemes }) {
   const { myMap } = useMap();
 
@@ -26,9 +34,15 @@ function CommandCopyButton({ mode, zoom, setZoom, visibleThemes }) {
       bounds.getNorth(), //maxy
     ];
 
-    console.log(
-      "overturemaps download --bbox: " + bbox + " -f: geojson --type: "
-    );
+    let visibleTypes = []
+    for (let i = 0; i < visibleThemes.length; i++ ) {
+      visibleTypes = visibleTypes.concat(themeTypeMap[visibleThemes[i]])
+    }
+    
+    setCommands([])
+    for (let i = 0; i < visibleTypes.length; i++ ){
+      setCommands(commands.push("overturemaps download --bbox " + bbox + " -f geojson --type " + visibleTypes[i]));
+    }
 
     setShowFloater(!showFloater);
   };
