@@ -139,12 +139,12 @@ export default function Map({
   mapEntity,
   setMapEntity,
   setZoom,
+  visibleThemes,
   setVisibleThemes,
 }) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
-  const [visibleThemes, setVisibleThemes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
 
   useEffect(() => {

@@ -2,18 +2,17 @@ import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
 import CopyIcon from "../icons/icon-copy.svg?react";
 import Floater from "react-floater";
-
-const ZOOM_BOUND = 16;
+import "./CommandCopyButton.css";
 
 const themeTypeMap = {
-  "buildings": ["building", "building_part"],
-  "divisions": ["division", "division_area"],
-  "places": ["place"],
-  "transportation": ["segment", "connector"],
-  "base": ["infrastructure", "land", "land_cover", "land_use", "water"],
-}
+  buildings: ["building", "building_part"],
+  divisions: ["division", "division_area"],
+  places: ["place"],
+  transportation: ["segment", "connector"],
+  base: ["infrastructure", "land", "land_cover", "land_use", "water"],
+};
 
-function CommandCopyButton({ mode, zoom, setZoom, visibleThemes }) {
+function CommandCopyButton({ mode, visibleThemes }) {
   const { myMap } = useMap();
 
   const [showFloater, setShowFloater] = useState(false);
@@ -22,7 +21,6 @@ function CommandCopyButton({ mode, zoom, setZoom, visibleThemes }) {
   useEffect(() => {
     if (myMap) {
       myMap.getBounds();
-      setZoom(myMap.getZoom());
     }
   });
   const handleClick = () => {
@@ -34,21 +32,28 @@ function CommandCopyButton({ mode, zoom, setZoom, visibleThemes }) {
       bounds.getNorth(), //maxy
     ];
 
-    let visibleTypes = []
-    for (let i = 0; i < visibleThemes.length; i++ ) {
-      visibleTypes = visibleTypes.concat(themeTypeMap[visibleThemes[i]])
-    }
-    
-    setCommands([])
-    for (let i = 0; i < visibleTypes.length; i++ ){
-      setCommands(commands.push("overturemaps download --bbox " + bbox + " -f geojson --type " + visibleTypes[i]));
+    let visibleTypes = [];
+    for (let i = 0; i < visibleThemes.length; i++) {
+      visibleTypes = visibleTypes.concat(themeTypeMap[visibleThemes[i]]);
     }
 
+    let commandList = [];
+    for (let i = 0; i < visibleTypes.length; i++) {
+      commandList.push(
+        "overturemaps download --bbox " +
+          bbox +
+          " -f geojson --type " +
+          visibleTypes[i] +
+          " "
+      );
+    }
+
+    setCommands(commandList);
     setShowFloater(!showFloater);
   };
 
   return (
-    <div>
+    <div className="copy-command-wrapper">
       <Floater
         styles={{}}
         content={
@@ -60,8 +65,9 @@ function CommandCopyButton({ mode, zoom, setZoom, visibleThemes }) {
               rel="noreferrer noopener"
             >
               python downloader
-            </a>
+            </a>{" "}
             to download the current layers:
+            <div className="commands">{commands}</div>
           </div>
         }
         open={showFloater}

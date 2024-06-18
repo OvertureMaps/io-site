@@ -53,6 +53,7 @@ function App() {
           mapEntity={mapEntity}
           setMapEntity={setMapEntity}
           setZoom={setZoom}
+          visibleThemes={visibleThemes}
           setVisibleThemes={setVisibleThemes}
         />
       </MapProvider>

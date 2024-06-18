@@ -1,0 +1,22 @@
+div.commands {
+  font-size: x-small;
+}
+
+div.copy-command-wrapper {
+  margin-right: 11px;
+  width: 32px;
+  height: 32px;
+}
+
+button.copy-command-button {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  outline: none;
+  border: none;
+}
+
+button.copy-command-button:hover {
+  background: var(--ifm-color-emphasis-200);
+}
