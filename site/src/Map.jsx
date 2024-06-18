@@ -17,7 +17,7 @@ import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 
 const PMTILES_URL =
-  "pmtiles://https://data.source.coop/protomaps/overture/2024-05-16-beta.0/";
+  "pmtiles://https://data.source.coop/protomaps/overture/2024-06-13-beta.0/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 51.05,
