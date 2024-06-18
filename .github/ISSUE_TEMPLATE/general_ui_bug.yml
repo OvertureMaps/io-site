@@ -1,5 +1,5 @@
 name: General UI Bug Report
-description: Report a reproducible bug with the General UI of the IO-Site
+description: Report a bug with the General UI of the site.
 labels: ["Needs: Triage"]
 body:
   - type: markdown

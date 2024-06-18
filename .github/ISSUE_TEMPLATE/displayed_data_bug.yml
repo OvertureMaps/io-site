@@ -1,5 +1,5 @@
 name: Map Display Bug Report
-description: Report a reproducivle bug found in the data displayed via the IO-Site
+description: Report a bug found in the data displayed on the site.
 labels: ["Needs: Triage"]
 body:
   - type: markdown

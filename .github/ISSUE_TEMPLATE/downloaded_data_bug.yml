@@ -1,5 +1,5 @@
 name: Download Bug Report
-description: Report a reproducible bug found in downloaded data from the IO-Site
+description: Report a bug found in downloaded data from the site.
 labels: ["Needs: Triage"]
 body:
   - type: markdown
