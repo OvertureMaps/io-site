@@ -134,14 +134,18 @@ ThemeTypeLayer.propTypes = {
   extrusion: PropTypes.bool,
 };
 
-export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
-
+export default function Map({
+  mode,
+  mapEntity,
+  setMapEntity,
+  setZoom,
+  setVisibleThemes,
+}) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
   const [visibleThemes, setVisibleThemes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
-
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol();

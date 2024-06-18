@@ -14,6 +14,7 @@ function App() {
   const [open, setOpen] = useState(tour);
   const [mapEntity, setMapEntity] = useState({});
   const [zoom, setZoom] = useState(0);
+  const [visibleThemes, setVisibleThemes] = useState([]);
 
   const startTour = () => {
     setOpen(false);
@@ -45,12 +46,14 @@ function App() {
           setMode={setModeName}
           zoom={zoom}
           setZoom={setZoom}
+          visibleThemes={visibleThemes}
         />
         <Map
           mode={modeName}
           mapEntity={mapEntity}
           setMapEntity={setMapEntity}
           setZoom={setZoom}
+          setVisibleThemes={setVisibleThemes}
         />
       </MapProvider>
     </div>

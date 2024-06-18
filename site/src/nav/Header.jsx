@@ -1,9 +1,16 @@
 import DownloadButton from "./DownloadButton";
 import OvertureWordmark from "./OvertureWordmark";
 import DarkModeToggle from "./DarkModeToggle";
+import CommandCopyButton from "./CommandCopyButton";
 import PropTypes from "prop-types";
 
-export default function Header({ zoom, mode, setMode, setZoom }) {
+export default function Header({
+  zoom,
+  mode,
+  setMode,
+  setZoom,
+  visibleThemes,
+}) {
   return (
     <nav aria-label="Main" className="navbar navbar--fixed-top">
       <div className="navbar__inner">
@@ -12,6 +19,12 @@ export default function Header({ zoom, mode, setMode, setZoom }) {
         </div>
         <div className="navbar__items navbar__items--right">
           <DarkModeToggle mode={mode} setMode={setMode} />
+          <CommandCopyButton
+            mode={mode}
+            zoom={zoom}
+            setZoom={setZoom}
+            visibleThemes={visibleThemes}
+          />
           <DownloadButton zoom={zoom} mode={mode} setZoom={setZoom} />
         </div>
       </div>
