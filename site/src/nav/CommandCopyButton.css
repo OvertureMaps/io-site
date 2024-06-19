@@ -20,3 +20,12 @@ button.copy-command-button {
 button.copy-command-button:hover {
   background: var(--ifm-color-emphasis-200);
 }
+
+p {
+  font-size: 0.8rem;
+}
+
+div.commands {
+  overflow-y: scroll;
+  max-height: 400px;
+}
