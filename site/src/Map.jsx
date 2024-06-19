@@ -44,6 +44,15 @@ ThemeSource.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
+const colorExpression = (color) => {
+  return [
+    "case",
+    ["boolean", ["feature-state", "selected"], false],
+    "white",
+    color,
+  ];
+};
+
 const ThemeTypeLayer = ({
   theme,
   type,
@@ -64,7 +73,7 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "circle-color": color,
+            "circle-color": colorExpression(color),
             "circle-radius": [
               "interpolate",
               ["exponential", 2],
@@ -85,7 +94,7 @@ const ThemeTypeLayer = ({
           type="line"
           source={theme}
           source-layer={type}
-          paint={{ "line-color": color }}
+          paint={{ "line-color": colorExpression(color) }}
           layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
@@ -96,7 +105,7 @@ const ThemeTypeLayer = ({
           type="fill"
           source={theme}
           source-layer={type}
-          paint={{ "fill-color": color, "fill-opacity": 0.2 }}
+          paint={{ "fill-color": colorExpression(color), "fill-opacity": 0.2 }}
           layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
@@ -112,7 +121,7 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "fill-extrusion-color": color,
+            "fill-extrusion-color": colorExpression(color),
             "fill-extrusion-opacity": 0.35,
             "fill-extrusion-base": ["get", "min_height"],
             "fill-extrusion-height": ["get", "height"],
@@ -135,13 +144,14 @@ ThemeTypeLayer.propTypes = {
 };
 
 export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
-
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
   const [visibleThemes, setVisibleThemes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
 
+  const selectedSource = useRef();
+  const selectedSourceLayer = useRef();
 
   useEffect(() => {
     const protocol = new pmtiles.Protocol();
@@ -160,21 +170,50 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
     setInteractiveLayerIds(layersToShow);
   }, [visibleThemes]);
 
-  const onMouseEnter = useCallback(() => setCursor("pointer"), []);
+  const onMouseEnter = useCallback(
+    (e) => {
+      if (e.features.some((f) => visibleThemes.indexOf(f.source) >= 0)) {
+        setCursor("pointer");
+      }
+    },
+    [visibleThemes],
+  );
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
 
-  const onClick = useCallback((event) => {
-    const feature = event.features && event.features[0];
-    if (feature) {
-      setMapEntity({
-        theme: feature.source,
-        type: feature.sourceLayer,
-        ...feature.properties,
-      });
-    } else {
-      setMapEntity({});
-    }
-  }, []);
+  const onClick = useCallback(
+    (event) => {
+      let features = event.features;
+      features = features.filter((f) => visibleThemes.indexOf(f.source) >= 0);
+      const feature = features[0];
+      if (feature) {
+        if (selectedSource.current) {
+          mapRef.current.removeFeatureState({
+            source: selectedSource.current,
+            sourceLayer: selectedSourceLayer.current,
+          });
+        }
+
+        selectedSource.current = feature.source;
+        selectedSourceLayer.current = feature.sourceLayer;
+        mapRef.current.setFeatureState(
+          {
+            source: feature.source,
+            sourceLayer: feature.sourceLayer,
+            id: feature.id,
+          },
+          { selected: true },
+        );
+        setMapEntity({
+          theme: feature.source,
+          type: feature.sourceLayer,
+          ...feature.properties,
+        });
+      } else {
+        setMapEntity({});
+      }
+    },
+    [visibleThemes],
+  );
 
   const handleZoom = (event) => {
     setZoom(event.target.getZoom());
