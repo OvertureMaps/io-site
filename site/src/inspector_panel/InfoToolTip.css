@@ -3,6 +3,7 @@ button.tool-tip {
   padding: 0;
   width: 12px;
   height: 12px;
+  background: none;
 }
 
 button.tool-tip:focus {
@@ -16,4 +17,8 @@ svg.info-icon {
   > path.primary {
     fill: gray;
   }
+}
+
+.theme-dark svg.info-icon > path.primary {
+  fill: whitesmoke;
 }

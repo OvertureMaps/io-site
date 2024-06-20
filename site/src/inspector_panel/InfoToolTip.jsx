@@ -33,6 +33,7 @@ function InfoToolTip({ mode, target, content }) {
           className={target + " tool-tip"}
           onMouseOver={() => setOpen(true)}
           onMouseOut={() => setOpen(false)}
+          disabled={true}
         >
           <InfoIcon />
         </button>

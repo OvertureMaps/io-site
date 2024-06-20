@@ -3,8 +3,9 @@ import { useState } from "react";
 import "./TableRow.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import InfoToolTip from "./InfoToolTip";
 
-function TableRow({ table_key, entity }) {
+function TableRow({ mode, table_key, entity }) {
   const [overflow, setOverflow] = useState("collapsed");
 
   const handleExpand = () => {
@@ -30,7 +31,14 @@ function TableRow({ table_key, entity }) {
         </div>
       </td>
       {entity[table_key] != null ? (
-        <td className={overflow}>{entity[table_key].toString()}</td>
+        <td className={overflow}>
+          {entity[table_key].toString()}{" "}
+          <InfoToolTip
+            mode={mode}
+            content={"placeholder"}
+            target={`${entity["theme"]}-${table_key}-tip`}
+          />
+        </td>
       ) : (
         <td className={overflow}>None Found</td>
       )}

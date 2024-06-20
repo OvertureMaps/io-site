@@ -12,18 +12,19 @@
   }
   td:first-child {
     text-align: left;
-    width: 40%;
+    width: 30%;
     word-break: normal;
   }
   td:last-child {
     overflow: hidden;
     display: flex;
-    width: fit-content;
+    justify-content: space-between;
     border: none;
   }
   tr {
     border-bottom: var(--ifm-table-border-width) solid
       var(--ifm-table-border-color);
+    width: 400px;
   }
 
   td.expanded {

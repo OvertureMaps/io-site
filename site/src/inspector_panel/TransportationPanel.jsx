@@ -51,7 +51,7 @@ function TransportationPanel({ mode, entity }) {
                 .filter((key) => !key.startsWith("@"))
                 .filter((key) => !sharedProperties.includes(key))
                 .map((key) => (
-                  <TableRow table_key={key} entity={entity} />
+                  <TableRow mode={mode} table_key={key} entity={entity} />
                 ))}
             </tbody>
           ) : (

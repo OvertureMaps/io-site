@@ -35,7 +35,7 @@ function InspectorPanel({ mode, entity, setEntity }) {
           {Object.keys(entity)
             .filter((key) => !key.startsWith("@"))
             .map((key) => (
-              <TableRow table_key={key} entity={entity} />
+              <TableRow mode={mode} table_key={key} entity={entity} />
             ))}
         </tbody>
       </table>
