@@ -176,7 +176,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         setCursor("pointer");
       }
     },
-    [visibleThemes],
+    [visibleThemes]
   );
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
 
@@ -201,7 +201,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             sourceLayer: feature.sourceLayer,
             id: feature.id,
           },
-          { selected: true },
+          { selected: true }
         );
         setMapEntity({
           theme: feature.source,
@@ -212,7 +212,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         setMapEntity({});
       }
     },
-    [visibleThemes],
+    [visibleThemes]
   );
 
   const handleZoom = (event) => {
@@ -366,7 +366,10 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             <InspectorPanel entity={mapEntity} />
           )}
 
-          <ThemeSelector visibleThemes={setVisibleThemes}></ThemeSelector>
+          <ThemeSelector
+            mode={mode}
+            visibleThemes={setVisibleThemes}
+          ></ThemeSelector>
         </div>
       </div>
     </>

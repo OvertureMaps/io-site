@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import LayerIcon from "./icons/icon-layers.svg?react";
 import "./ThemeSelector.css";
 
-function ThemeSelector({ visibleThemes }) {
+function ThemeSelector({ visibleThemes, mode }) {
   const [base, setBase] = useState(true);
   const [buildings, setBuildings] = useState(true);
   const [divisions, setDivisions] = useState(true);
@@ -24,7 +24,11 @@ function ThemeSelector({ visibleThemes }) {
   return (
     <div className="dropdown dropdown--hoverable theme-selector tour-layers">
       <div className="layer-control">
-        <LayerIcon />
+        <LayerIcon
+          className={`icon-layers ${
+            mode === "theme-dark" ? "icon-layers-dark" : ""
+          }`}
+        />
       </div>
       <ul className="dropdown__menu">
         <li>
