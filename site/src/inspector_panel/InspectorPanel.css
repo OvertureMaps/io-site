@@ -1,5 +1,5 @@
 .inspector-panel {
-  max-width: 420px;
+  max-width: 370px;
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.9);
@@ -29,6 +29,8 @@
     overflow-y: scroll;
     overflow-x: auto;
     max-height: 250px;
+    width: 370;
+    table-layout: fixed;
   }
 
   table th {

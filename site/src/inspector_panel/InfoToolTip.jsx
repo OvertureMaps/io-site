@@ -28,6 +28,7 @@ function InfoToolTip({ mode, target, content }) {
         content={<div>{content}</div>}
         target={"." + target}
         open={open}
+        placement={"right"}
       >
         <button
           className={target + " tool-tip"}

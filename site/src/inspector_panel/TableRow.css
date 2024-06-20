@@ -12,19 +12,22 @@
   }
   td:first-child {
     text-align: left;
-    width: 30%;
+    width: 35%;
     word-break: normal;
+    border: none;
   }
   td:last-child {
     overflow: hidden;
+    width: 65%;
     display: flex;
     justify-content: space-between;
     border: none;
   }
   tr {
+    border-top: none;
     border-bottom: var(--ifm-table-border-width) solid
       var(--ifm-table-border-color);
-    width: 400px;
+    display: flex;
   }
 
   td.expanded {
@@ -52,7 +55,7 @@ button.expand:focus {
 }
 
 div.first-child {
-  display: grid;
+  display: flex;
   justify-content: space-between;
   grid-template-columns: auto auto;
   padding-right: 10px;
