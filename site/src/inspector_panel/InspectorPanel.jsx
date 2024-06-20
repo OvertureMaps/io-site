@@ -8,7 +8,7 @@ import PlacesPanel from "./PlacesPanel";
 import TransportationPanel from "./TransportationPanel";
 import CloseIcon from "@mui/icons-material/Close";
 
-function InspectorPanel({ entity, setEntity }) {
+function InspectorPanel({ mode, entity, setEntity }) {
   if (!entity) {
     return;
   }
@@ -18,15 +18,15 @@ function InspectorPanel({ entity, setEntity }) {
   let inspectorPanel = <div></div>;
 
   if (theme === "base") {
-    inspectorPanel = <BasePanel entity={entity} />;
+    inspectorPanel = <BasePanel mode={mode} entity={entity} />;
   } else if (theme === "buildings") {
-    inspectorPanel = <BuildingsPanel entity={entity} />;
+    inspectorPanel = <BuildingsPanel mode={mode} entity={entity} />;
   } else if (theme === "divisions") {
-    inspectorPanel = <DivisionsPanel entity={entity} />;
+    inspectorPanel = <DivisionsPanel mode={mode} entity={entity} />;
   } else if (theme === "places") {
-    inspectorPanel = <PlacesPanel entity={entity} />;
+    inspectorPanel = <PlacesPanel mode={mode} entity={entity} />;
   } else if (theme === "transportation") {
-    inspectorPanel = <TransportationPanel entity={entity} />;
+    inspectorPanel = <TransportationPanel mode={mode} entity={entity} />;
   } else {
     console.log("unhandled theme type");
     inspectorPanel = (

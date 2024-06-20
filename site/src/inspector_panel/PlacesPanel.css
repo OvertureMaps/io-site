@@ -15,7 +15,6 @@ button.places-table {
   justify-content: space-between;
   grid-template-columns: auto auto;
   place-items: center;
-  border-radius: var(--ifm-button-border-radius);
   width: 180px;
   background-color: var(--ifm-color-primary);
   color: white;

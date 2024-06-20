@@ -321,7 +321,11 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         </MapLibreMap>
         <div className="custom-controls">
           {Object.keys(mapEntity).length > 0 && (
-            <InspectorPanel entity={mapEntity} setEntity={setMapEntity} />
+            <InspectorPanel
+              mode={mode}
+              entity={mapEntity}
+              setEntity={setMapEntity}
+            />
           )}
 
           <ThemeSelector visibleThemes={setVisibleThemes}></ThemeSelector>

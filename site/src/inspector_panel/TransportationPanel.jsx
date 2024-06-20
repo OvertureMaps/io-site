@@ -3,10 +3,11 @@ import "./TransportationPanel.css";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import InfoToolTip from "./InfoToolTip";
 
 const sharedProperties = ["theme", "type"];
 
-function TransportationPanel({ entity }) {
+function TransportationPanel({ mode, entity }) {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => {
@@ -14,13 +15,27 @@ function TransportationPanel({ entity }) {
   };
   return (
     <div className="trans-panel">
-      <div className="theme">
-        <strong>Theme: </strong>
-        {entity["theme"]}
+      <div className="panel-row theme">
+        <div>
+          <strong>Theme: </strong>
+          {entity["theme"]}
+        </div>
+        <InfoToolTip
+          mode={mode}
+          content={"placeholder"}
+          target={"trans-theme-tip"}
+        />
       </div>
-      <div className="type">
-        <strong>Type: </strong>
-        {entity["type"]}
+      <div className="panel-row type">
+        <div>
+          <strong>Type: </strong>
+          {entity["type"]}
+        </div>
+        <InfoToolTip
+          mode={mode}
+          content={"placeholder"}
+          target={"trans-type-tip"}
+        />
       </div>
       <div className="other-properties">
         <table className="trans-table">

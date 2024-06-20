@@ -4,6 +4,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import IndentIcon from "../icons/icon-indent.svg?react";
+import InfoToolTip from "./InfoToolTip";
 
 const sharedProperties = [
   "theme",
@@ -15,30 +16,65 @@ const sharedProperties = [
   "version",
 ];
 
-function BasePanel({ entity }) {
+function BasePanel({ mode, entity }) {
   const [commonExpanded, setCommonExpanded] = useState(false);
   const [otherExpanded, setOtherExpanded] = useState(false);
   return (
     <div className="base-panel">
-      <div className="theme">
-        <strong>Theme: </strong>
-        {entity["theme"]}
+      <div className="panel-row theme">
+        <div>
+          <strong>Theme: </strong>
+          {entity["theme"]}
+        </div>
+        <InfoToolTip
+          mode={mode}
+          content={"placeholder"}
+          target={"base-theme-tip"}
+        />
       </div>
-      <div className="type">
-        <strong>Type: </strong>
-        {entity["type"]}
+      <div className="panel-row type">
+        <div>
+          <strong>Type: </strong>
+          {entity["type"]}
+        </div>
+        <InfoToolTip
+          mode={mode}
+          content={"placeholder"}
+          target={"base-type-tip"}
+        />
       </div>
-      <div className="subtype">
-        <IndentIcon /> <strong>Type: </strong>
-        {entity["subtype"]}
+      <div className="panel-row subtype">
+        <div>
+          <IndentIcon /> <strong>Subtype: </strong>
+          {entity["subtype"]}
+        </div>
+        <InfoToolTip
+          mode={mode}
+          content={"placeholder"}
+          target={"base-subtype-tip"}
+        />
       </div>
-      <div className="id">
-        <strong>ID: </strong>
-        {entity["id"]}
+      <div className="panel-row id">
+        <div>
+          <strong>ID: </strong>
+          {entity["id"]}
+        </div>
+        <InfoToolTip
+          mode={mode}
+          content={"placeholder"}
+          target={"base-id-tip"}
+        />
       </div>
-      <div className="sources">
-        <strong>Source(s)</strong>{" "}
-        {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
+      <div className="panel-row sources">
+        <div>
+          <strong>Source(s):</strong>{" "}
+          {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
+        </div>
+        <InfoToolTip
+          mode={mode}
+          content={"placeholder"}
+          target={"base-sources-tip"}
+        />
       </div>
       <div className="common-properties">
         <table className="base-table">

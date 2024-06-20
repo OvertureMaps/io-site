@@ -82,3 +82,9 @@ button.close-panel-button:active {
 button.close-panel-button:hover {
   background: var(--ifm-color-secondary-dark);
 }
+
+div.panel-row {
+  border-bottom: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
+}
