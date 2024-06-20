@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 import "./InspectorPanel.css";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
+import BugIcon from "./icons/icon-bug.svg?react";
 
 const PMTILES_URL =
   "pmtiles://https://data.source.coop/protomaps/overture/2024-06-13-beta.0/";
@@ -370,6 +371,15 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             mode={mode}
             visibleThemes={setVisibleThemes}
           ></ThemeSelector>
+        </div>
+        <div className="bug-nub">
+          <a
+            className="bug-nub-link"
+            href="https://github.com/OvertureMaps/io-site/issues/new/choose"
+            target="_blank"
+          >
+            <BugIcon className="bug-nub-icon" />
+          </a>
         </div>
       </div>
     </>
