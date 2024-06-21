@@ -44,6 +44,15 @@ const Steps = [
     offset: 0,
   },
   {
+    target: ".bug-nub-link",
+    content:
+      "This is where you can file bug reports! Follow this link, and fill out the appropriate github workflow.",
+    disableBeacon: true,
+    title: "Github Issue Link",
+    placement: "left",
+    offset: 0,
+  },
+  {
     target: ".inspector-panel",
     content:
       "This is the inspector panel. Clicking on features in the world will display them here. These features are only clickable after a zoom threshold has been reached.",
@@ -59,7 +68,7 @@ const Steps = [
     disableBeacon: true,
     title: "Map Footer",
     placement: "top-end",
-    offset: -10,
+    offset: 0,
   },
 ];
 const sampleFeature = {
@@ -130,7 +139,7 @@ function Tour({ run, modeName, setMapEntity }) {
       const nextStepIndex =
         event.index + (event.action === ACTIONS.PREV ? -1 : 1);
       if (
-        (event.index === 4) &
+        (event.index === 5) &
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.NEXT)
       ) {
@@ -139,7 +148,7 @@ function Tour({ run, modeName, setMapEntity }) {
           setStepIndex(nextStepIndex);
         }, 100);
       } else if (
-        (event.index === 5) &
+        (event.index === 6) &
         (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
         setMapEntity({});

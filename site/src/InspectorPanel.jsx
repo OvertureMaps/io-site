@@ -23,7 +23,11 @@ function InspectorPanel({ entity }) {
         </tbody>
       </table>
       <p>
-        <a href="https://docs.overturemaps.org/schema/" target="_blank" rel="noreferrer noopener">
+        <a
+          href="https://docs.overturemaps.org/schema/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           Overture Schema Reference
         </a>
       </p>
