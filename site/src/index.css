@@ -94,3 +94,9 @@ div.theme-light {
   color: #213547;
   background-color: #ffffff;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #ffffff;
+  }
+}

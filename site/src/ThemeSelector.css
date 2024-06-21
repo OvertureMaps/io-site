@@ -10,6 +10,11 @@
   margin-top: 3px;
 }
 
+.theme-dark .inspector-panel {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
 div.layer-control {
   width: 32px;
   height: 32px;
