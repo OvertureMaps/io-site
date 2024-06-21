@@ -21,7 +21,7 @@ button.copy-command-button:hover {
   background: var(--ifm-color-emphasis-200);
 }
 
-p {
+p.command {
   font-size: 0.8rem;
 }
 

@@ -87,7 +87,7 @@ function CommandCopyButton({ mode, visibleThemes }) {
             to download the current layers:
             <div className="commands">
               {commands.map((command) => (
-                <p>{command}</p>
+                <p className="command">{command}</p>
               ))}
             </div>
           </div>
