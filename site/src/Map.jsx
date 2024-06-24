@@ -87,6 +87,32 @@ const ThemeTypeLayer = ({
           layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
+
+      {point ? (
+        <Layer
+          filter={["==", ["geometry-type"], "Point"]}
+          id={`${theme}_${type}_point_label`}
+          minzoom={17}
+          type="symbol"
+          source={theme}
+          source-layer={type}
+          paint={{
+            "text-color": "black",
+            "text-halo-color": colorExpression(color),
+            "text-halo-width": 1,
+          }}
+          layout={{
+            "text-font": ["Noto Sans Bold"],
+            "text-field": ["get", "@name"],
+            "text-size": 11,
+            visibility: visible ? "visible" : "none",
+            "text-variable-anchor": ["top", "bottom", "left", "right"],
+            "text-radial-offset": 0.8,
+            "text-justify": "auto",
+          }}
+        />
+      ) : null}
+
       {line ? (
         <Layer
           filter={["==", ["geometry-type"], "LineString"]}
@@ -96,6 +122,27 @@ const ThemeTypeLayer = ({
           source-layer={type}
           paint={{ "line-color": colorExpression(color) }}
           layout={{ visibility: visible ? "visible" : "none" }}
+        />
+      ) : null}
+      {line ? (
+        <Layer
+          filter={["==", ["geometry-type"], "LineString"]}
+          id={`${theme}_${type}_line_label`}
+          type="symbol"
+          source={theme}
+          source-layer={type}
+          paint={{
+            "text-color": "black",
+            "text-halo-color": colorExpression(color),
+            "text-halo-width": 1,
+          }}
+          layout={{
+            "text-font": ["Noto Sans Bold"],
+            "text-field": ["get", "@name"],
+            "text-size": 11,
+            "symbol-placement": "line-center",
+            visibility: visible ? "visible" : "none",
+          }}
         />
       ) : null}
       {polygon ? (
@@ -127,6 +174,27 @@ const ThemeTypeLayer = ({
             "fill-extrusion-height": ["get", "height"],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
+        />
+      ) : null}
+      {polygon || extrusion ? (
+        <Layer
+          filter={["all", ["==", ["geometry-type"], "Polygon"]]}
+          id={`${theme}_${type}_fill_labels`}
+          type="symbol"
+          source={theme}
+          source-layer={type}
+          paint={{
+            "text-color": "black",
+            "text-halo-color": colorExpression(color),
+            "text-halo-width": 1,
+          }}
+          layout={{
+            "text-font": ["Noto Sans Bold"],
+            "text-field": ["get", "@name"],
+            "text-size": 11,
+            visibility: visible ? "visible" : "none",
+            "symbol-placement": "point",
+          }}
         />
       ) : null}
     </>
@@ -176,7 +244,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         setCursor("pointer");
       }
     },
-    [visibleThemes]
+    [visibleThemes],
   );
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
 
@@ -201,7 +269,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             sourceLayer: feature.sourceLayer,
             id: feature.id,
           },
-          { selected: true }
+          { selected: true },
         );
         setMapEntity({
           theme: feature.source,
@@ -212,7 +280,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         setMapEntity({});
       }
     },
-    [visibleThemes]
+    [visibleThemes],
   );
 
   const handleZoom = (event) => {
@@ -351,7 +419,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
               "text-halo-width": 1,
             }}
             layout={{
-              "text-font": ["Noto Sans Regular"],
+              "text-font": ["Noto Sans Bold"],
               "text-field": ["get", "@name"],
               "text-size": 11,
             }}
