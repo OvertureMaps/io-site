@@ -90,7 +90,12 @@ function BasePanel({ mode, entity }) {
           {commonExpanded ? (
             <tbody>
               {["update_time", "version"].map((key) => (
-                <TableRow mode={mode} table_key={key} entity={entity} />
+                <TableRow
+                  key={key}
+                  mode={mode}
+                  table_key={key}
+                  entity={entity}
+                />
               ))}
             </tbody>
           ) : (
@@ -115,7 +120,12 @@ function BasePanel({ mode, entity }) {
                 .filter((key) => !key.startsWith("@"))
                 .filter((key) => !sharedProperties.includes(key))
                 .map((key) => (
-                  <TableRow mode={mode} table_key={key} entity={entity} />
+                  <TableRow
+                    key={key}
+                    mode={mode}
+                    table_key={key}
+                    entity={entity}
+                  />
                 ))}
             </tbody>
           ) : (

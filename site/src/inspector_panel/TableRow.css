@@ -12,13 +12,15 @@
   }
   td:first-child {
     text-align: left;
-    width: 35%;
+    min-width: 40%;
+    justify-content: space-between;
     word-break: normal;
     border: none;
+    width: -webkit-fill-available;
   }
   td:last-child {
     overflow: hidden;
-    width: 65%;
+    width: -webkit-fill-available;
     display: flex;
     justify-content: space-between;
     border: none;
@@ -40,7 +42,6 @@
 }
 
 button.expand {
-  justify-self: right;
   border: none;
   border-radius: 50%;
   padding: 0;
@@ -57,7 +58,6 @@ button.expand:focus {
 div.first-child {
   display: flex;
   justify-content: space-between;
-  grid-template-columns: auto auto;
   padding-right: 10px;
 }
 

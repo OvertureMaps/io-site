@@ -6,32 +6,34 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import InfoToolTip from "./InfoToolTip";
 
 function TableRow({ mode, table_key, entity }) {
-  const [overflow, setOverflow] = useState("collapsed");
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpand = () => {
-    if (overflow === "collapsed") {
-      setOverflow("expanded");
-    } else {
-      setOverflow("collapsed");
-    }
+    setExpanded(!expanded);
   };
 
   return (
     <tr key={table_key}>
-      <td className={overflow}>
+      <td className={expanded ? "expanded" : "collapsed"}>
         <div className="first-child">
           <strong>{table_key}</strong>
           <button className="expand" onClick={handleExpand}>
-            {overflow === "expanded" ? (
-              <RemoveIcon className="ec-icon" fontSize="small" />
+            {entity[table_key] != "null" ? (
+              <div>
+                {expanded ? (
+                  <RemoveIcon className="ec-icon" fontSize="small" />
+                ) : (
+                  <AddIcon className="ec-icon" fontSize="small" />
+                )}{" "}
+              </div>
             ) : (
-              <AddIcon className="ec-icon" fontSize="small" />
+              ""
             )}
           </button>
         </div>
       </td>
       {entity[table_key] != null ? (
-        <td className={overflow}>
+        <td className={expanded ? "expanded" : "collapsed"}>
           {entity[table_key].toString()}{" "}
           <InfoToolTip
             mode={mode}
@@ -40,7 +42,7 @@ function TableRow({ mode, table_key, entity }) {
           />
         </td>
       ) : (
-        <td className={overflow}>None Found</td>
+        <td className={expanded ? "expanded" : "collapsed"}>None Found</td>
       )}
     </tr>
   );
