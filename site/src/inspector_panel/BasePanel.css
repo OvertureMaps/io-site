@@ -34,6 +34,7 @@ button.base-table:focus {
 table.base-table {
   margin-top: 5px;
   display: grid;
+  border-bottom: 1px solid gray;
 }
 
 .theme-dark .inspector-panel {

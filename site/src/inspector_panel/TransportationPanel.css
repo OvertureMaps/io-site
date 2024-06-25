@@ -34,6 +34,7 @@ button.trans-table:focus {
 table.trans-table {
   margin-top: 5px;
   display: grid;
+  border-bottom: 1px solid gray;
 }
 
 .theme-dark .inspector-panel {
