@@ -175,6 +175,12 @@ function Tour({ run, modeName, setMapEntity }) {
           arrowColor: stepBGColor,
           textColor: stepTextColor,
         },
+        buttonNext: {
+          backgroundColor: "var(--ifm-color-primary)",
+        },
+        buttonBack: {
+          color: "var(--ifm-color-primary)",
+        },
       }}
       spotlightPadding={0}
     />
