@@ -178,9 +178,15 @@ function Tour({ run, modeName, setMapEntity }) {
         buttonNext: {
           backgroundColor: "var(--ifm-color-primary)",
         },
-        buttonBack: {
-          color: "var(--ifm-color-primary)",
-        },
+        buttonBack:
+          modeName === "theme-dark"
+            ? {
+                color: "var(--ifm-color-primary)",
+                backgroundColor: "var(--ifm-color-secondary-light)",
+                opacity: "90%",
+                borderRadius: "4px",
+              }
+            : { color: "var(--ifm-color-primary)" },
       }}
       spotlightPadding={0}
     />
