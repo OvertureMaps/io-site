@@ -10,9 +10,8 @@ import maplibregl from "maplibre-gl";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
-import InspectorPanel from "./InspectorPanel";
+import InspectorPanel from "./inspector_panel/InspectorPanel";
 import PropTypes from "prop-types";
-import "./InspectorPanel.css";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
@@ -432,7 +431,11 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         </MapLibreMap>
         <div className="custom-controls">
           {Object.keys(mapEntity).length > 0 && (
-            <InspectorPanel entity={mapEntity} />
+            <InspectorPanel
+              mode={mode}
+              entity={mapEntity}
+              setEntity={setMapEntity}
+            />
           )}
 
           <ThemeSelector
