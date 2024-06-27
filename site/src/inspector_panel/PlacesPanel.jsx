@@ -27,7 +27,9 @@ function PlacesPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Contains datasets with point representations of real-world facilities, services, businesses or amenities."
+          }
           target={"place-theme-tip"}
         />
       </div>
@@ -38,7 +40,9 @@ function PlacesPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Describes the entity. The places theme only has one type: place."
+          }
           target={"place-type-tip"}
         />
       </div>
@@ -65,7 +69,9 @@ function PlacesPanel({ mode, entity }) {
           </div>
           <InfoToolTip
             mode={mode}
-            content={"placeholder"}
+            content={
+              "A feature ID. This may be an ID associated with the Global Entity Reference System (GERS) if—and-only-if the feature represents an entity that is part of GERS."
+            }
             target={"place-id-tip"}
           />
         </div>
@@ -80,7 +86,9 @@ function PlacesPanel({ mode, entity }) {
           </div>
           <InfoToolTip
             mode={mode}
-            content={"placeholder"}
+            content={
+              "The array of source information for the properties of a given feature, with each entry being a source object which lists the property in JSON Pointer notation and the dataset that specific value came from. All features must have a root level source which is the default source if a specific property's source is not specified."
+            }
             target={"place-sources-tip"}
           />
         </div>

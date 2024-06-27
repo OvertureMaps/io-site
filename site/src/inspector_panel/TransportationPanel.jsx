@@ -30,7 +30,9 @@ function TransportationPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "The collection of features and attributes that describe the infrastructure and conventions of how people and objects travel around the world. "
+          }
           target={"trans-theme-tip"}
         />
       </div>
@@ -41,7 +43,9 @@ function TransportationPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Further describes the entity. The transportation theme contains the segment feature type and the connector feature type."
+          }
           target={"trans-type-tip"}
         />
       </div>
@@ -54,7 +58,7 @@ function TransportationPanel({ mode, entity }) {
           </div>
           <InfoToolTip
             mode={mode}
-            content={"placeholder"}
+            content={"Further describes the feature type."}
             target={"trans-subtype-tip"}
           />
         </div>
@@ -69,7 +73,9 @@ function TransportationPanel({ mode, entity }) {
           </div>
           <InfoToolTip
             mode={mode}
-            content={"placeholder"}
+            content={
+              "A feature ID. This may be an ID associated with the Global Entity Reference System (GERS) if—and-only-if the feature represents an entity that is part of GERS."
+            }
             target={"trans-id-tip"}
           />{" "}
         </div>
@@ -84,7 +90,9 @@ function TransportationPanel({ mode, entity }) {
           </div>
           <InfoToolTip
             mode={mode}
-            content={"placeholder"}
+            content={
+              "The array of source information for the properties of a given feature, with each entry being a source object which lists the property in JSON Pointer notation and the dataset that specific value came from. All features must have a root level source which is the default source if a specific property's source is not specified."
+            }
             target={"trans-sources-tip"}
           />{" "}
         </div>

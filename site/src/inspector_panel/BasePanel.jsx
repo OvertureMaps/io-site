@@ -28,7 +28,9 @@ function BasePanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Provides the land and water features that are necessary to render a complete basemap."
+          }
           target={"base-theme-tip"}
         />
       </div>
@@ -39,7 +41,9 @@ function BasePanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Describes the feature type of the entity. The base theme is split into five feature types: infrastructure, land, land_cover, land_use, and water."
+          }
           target={"base-type-tip"}
         />
       </div>
@@ -50,7 +54,7 @@ function BasePanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={"Further description of the feature type."}
           target={"base-subtype-tip"}
         />
       </div>
@@ -61,7 +65,9 @@ function BasePanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "A feature ID. This may be an ID associated with the Global Entity Reference System (GERS) if—and-only-if the feature represents an entity that is part of GERS."
+          }
           target={"base-id-tip"}
         />
       </div>
@@ -72,7 +78,9 @@ function BasePanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "The array of source information for the properties of a given feature, with each entry being a source object which lists the property in JSON Pointer notation and the dataset that specific value came from. All features must have a root level source which is the default source if a specific property's source is not specified."
+          }
           target={"base-sources-tip"}
         />
       </div>

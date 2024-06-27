@@ -28,7 +28,9 @@ function BuildingsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Describes human-made structures with roofs or interior spaces that are permanently or semi-permanently in one place."
+          }
           target={"building-theme-tip"}
         />
       </div>
@@ -39,7 +41,9 @@ function BuildingsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Describes the feature type of the entity. The building theme is split into two feature types: building, and building_part."
+          }
           target={"building-type-tip"}
         />{" "}
       </div>
@@ -50,7 +54,7 @@ function BuildingsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={"A broad category of the building type and purpose."}
           target={"building-subtype-tip"}
         />
       </div>
@@ -61,7 +65,9 @@ function BuildingsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "A feature ID that may be associated with the Global Entity Reference System (GERS) if—and-only-if the feature represents an entity that is part of GERS."
+          }
           target={"building-id-tip"}
         />
       </div>
@@ -72,7 +78,9 @@ function BuildingsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "The array of source information for the properties of a given feature. Each source object lists the property in JSON Pointer notation and the dataset from which that specific value originated."
+          }
           target={"building-sources-tip"}
         />
       </div>

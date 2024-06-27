@@ -30,7 +30,9 @@ function DivisionsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Includes features that represent human settlements in the real world, such as countries, regions, states, cities and towns."
+          }
           target={"div-theme-tip"}
         />
       </div>
@@ -41,7 +43,9 @@ function DivisionsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "Describes the feature type of the entity. The divisions theme is split into 3 types: division, division_area, and boundary."
+          }
           target={"div-type-tip"}
         />
       </div>
@@ -52,7 +56,7 @@ function DivisionsPanel({ mode, entity }) {
         </div>{" "}
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={"Further description of the feature type."}
           target={"div-subtype-tip"}
         />
       </div>{" "}
@@ -63,7 +67,9 @@ function DivisionsPanel({ mode, entity }) {
         </div>
         <InfoToolTip
           mode={mode}
-          content={"placeholder"}
+          content={
+            "A feature ID. This may be an ID associated with the Global Entity Reference System (GERS) if—and-only-if the feature represents an entity that is part of GERS."
+          }
           target={"div-id-tip"}
         />
       </div>
@@ -77,7 +83,9 @@ function DivisionsPanel({ mode, entity }) {
           </div>
           <InfoToolTip
             mode={mode}
-            content={"placeholder"}
+            content={
+              "The array of source information for the properties of a given feature, with each entry being a source object which lists the property in JSON Pointer notation and the dataset that specific value came from. All features must have a root level source which is the default source if a specific property's source is not specified."
+            }
             target={"div-sources-tip"}
           />
         </div>
@@ -89,7 +97,9 @@ function DivisionsPanel({ mode, entity }) {
           </div>
           <InfoToolTip
             mode={mode}
-            content={"placeholder"}
+            content={
+              "The array of source information for the properties of a given feature, with each entry being a source object which lists the property in JSON Pointer notation and the dataset that specific value came from. All features must have a root level source which is the default source if a specific property's source is not specified."
+            }
             target={"div-source-tip"}
           />
         </div>
