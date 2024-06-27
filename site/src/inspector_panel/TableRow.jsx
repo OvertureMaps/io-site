@@ -35,11 +35,6 @@ function TableRow({ mode, table_key, entity }) {
       {entity[table_key] != null ? (
         <td className={expanded ? "expanded" : "collapsed"}>
           {entity[table_key].toString()}{" "}
-          <InfoToolTip
-            mode={mode}
-            content={"placeholder"}
-            target={`${entity["theme"]}-${table_key}-tip`}
-          />
         </td>
       ) : (
         <td className={expanded ? "expanded" : "collapsed"}>None Found</td>

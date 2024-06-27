@@ -69,6 +69,13 @@
   }
 }
 
+.theme-light .inspector-panel {
+  table {
+    scrollbar-color: var(--ifm-color-secondary-darker)
+      var(--ifm-color-secondary-light);
+  }
+}
+
 button.close-panel-button {
   border: none;
   padding: 0;
