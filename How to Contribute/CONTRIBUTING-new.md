@@ -3,13 +3,13 @@
 ## Table of contents
 
 - [Meetings](#Meetings)
-- [Technical Decision Making](<#Technical Decision Making>)
-- [Using Supermajority vote to achieve agreement](<#Using Supermajority vote to achieve agreement>)
-- [Approval Process](<#Approval Process>)
+- [Technical Decision Making](#Technical-Decision-Making)
+- [Using Supermajority vote to achieve agreement](#Using-Supermajority-vote-to-achieve-agreement)
+- [Approval Process](#Approval-Process)
 - [Documentation](#Documentation)
 - [Publication](#Publication)
-- [Intellectual Property Rights](<#Intellectual Property Rights>)
-- [Certificate of Origin](<#Certificate of Origin>)
+- [Intellectual Property Rights](#Intellectual-Property-Rights)
+- [Certificate of Origin](#Certificate-of-Origin)
 
 ## Meetings
 
