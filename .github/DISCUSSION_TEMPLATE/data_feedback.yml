@@ -1,0 +1,76 @@
+title: "[Data-Feedback] "
+labels: ["data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is text that will show up in the template!
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feedback Theme?
+      options:
+        - Address
+        - Admin Boundaries
+        - Base
+        - Buildings
+        - Places
+        - Transportation
+    validations:
+      required: true
+  - type: dropdown
+    id: download
+    attributes:
+      label: Feedback category
+      options:
+        - Documentation
+        - Suggested improvements
+        - Bug fix time
+        - Release cadence
+    validations:
+      required: true
+  - type: textarea
+    id: improvements
+    attributes:
+      label: feedback-details
+      description: "outline in detail what your observations"
+      value: |
+        ## Feedback Details: 
+        ```
+        Add details here
+        ```
+        ## Associated Links:
+        ```
+        Add details here
+        ```
+        ## Other:
+        ```
+        Add details here
+        ```
+        ...
+      render: bash
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## Further Details
+        And some more markdown
+  - type: input
+    id: has-id
+    attributes:
+      label: Suggestions
+      description: A description of suggestions to help us
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Check box if needed!
+      options:
+        - label: Feedback required
+          required: true
+        - label: Feedback not required
+  - type: markdown
+    attributes:
+      value: |
+        ### Thanks for your submission 
