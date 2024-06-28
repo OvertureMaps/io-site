@@ -1,0 +1,236 @@
+# syntax - https://github.com/redhat-plumbers-in-action/advanced-issue-labeler#policy
+---
+
+policy:
+  - template: [bug.yml, feature.yml]
+    section:
+      - id: [component]
+        block-list: [other]
+        label:
+          - name: analyze
+            keys: ['systemd-analyze']
+
+          - name: ask-password
+            keys: ['systemd-ask-password']
+
+          - name: binfmt
+            keys: ['systemd-binfmt']
+
+          - name: cgtop
+            keys: ['systemd-cgtop']
+
+          - name: cryptsetup
+            keys: ['systemd-cryptsetup']
+
+          - name: delta
+            keys: ['systemd-delta']
+
+          - name: env
+            keys: ['systemd-env-generator']
+
+          - name: fsck
+            keys: ['systemd-fsck']
+
+          - name: gpt-auto
+            keys: ['systemd-gpt-auto-generator']
+
+          - name: growfs
+            keys: ['systemd-growfs']
+
+          - name: homed
+            keys: ['systemd-homed', 'homectl', 'pam_systemd_home']
+
+          - name: hostname
+            keys: ['systemd-hostnamed', 'hostnamectl']
+
+          - name: hwdb
+            keys: ['systemd-hwdb', 'hardware database files']
+
+          - name: import
+            keys: ['systemd-import']
+
+          - name: journal
+            keys: ['systemd-journald', 'journalctl']
+
+          - name: journal-remote
+            keys: ['systemd-journal-remote', 'systemd-journal-upload', 'systemd-journal-gatewayd']
+
+          - name: kernel-install
+            keys: ['kernel-install']
+
+          - name: logind
+            keys: ['systemd-logind', 'loginctl', 'pam_systemd']
+
+          - name: machined
+            keys: ['systemd-machined', 'machinectl']
+
+          - name: modules-load
+            keys: ['systemd-modules-load']
+
+          - name: network
+            keys: ['systemd-networkd', 'networkctl', 'systemd-networkd-wait-online', 'systemd-network-generator']
+
+          - name: nspawn
+            keys: ['systemd-nspawn']
+
+          - name: oomd
+            keys: ['systemd-oomd', 'oomctl']
+
+          - name: pid1
+            keys: ['systemd']
+
+          - name: portabled
+            keys: ['systemd-portabled', 'portablectl']
+
+          - name: pstore
+            keys: ['systemd-pstore']
+
+          - name: repart
+            keys: ['systemd-repart']
+
+          - name: resolve
+            keys: ['systemd-resolved', 'resolvectl', 'nss-resolve']
+
+          - name: rfkill
+            keys: ['systemd-rfkill']
+
+          - name: rpm
+            keys: ['rpm scriptlets']
+
+          - name: run
+            keys: ['systemd-run']
+
+          - name: sd-boot/sd-stub/bootctl
+            keys: ['bootctl', 'systemd-boot', 'systemd-stub']
+
+          - name: sysctl
+            keys: ['systemd-sysctl']
+
+          - name: sysext
+            keys: ['systemd-sysext']
+
+          - name: systemctl
+            keys: ['systemctl']
+
+          - name: sysusers
+            keys: ['systemd-sysusers']
+
+          - name: sysv
+            keys: ['systemd-sysv-generator']
+
+          - name: tests
+            keys: ['tests']
+
+          - name: timedate
+            keys: ['systemd-timedate', 'timedatectl']
+
+          - name: timesync
+            keys: ['systemd-timesync']
+
+          - name: tmpfiles
+            keys: ['systemd-tmpfiles']
+
+          - name: udev
+            keys: ['systemd-udevd', 'udevadm', 'udev rule files']
+
+          - name: userdb
+            keys: ['systemd-userdb', 'userdbctl']
+
+          - name: veritysetup
+            keys: ['systemd-veritysetup']
+
+          - name: xdg-autostart
+            keys: ['systemd-xdg-autostart-generator']
+
+  - template: ['animals.yml']
+    section:
+      - id: [animals]
+        block-list: ['I do not like animals', 'Other']
+        label:
+          - name: 'kind: amphibians'
+            keys: ['🐸 Frog']
+
+          - name: 'kind: birds'
+            keys: ['🐓 Rooster', '🐦 Bird', '🐧 Penguin']
+
+          - name: 'kind: fish'
+            keys: ['🐡 Blowfish', '🐟 Fish', '🦈 Shark']
+
+          - name: 'kind: mammals'
+            keys: ['🦍 Gorilla', '🐶 Dog', '🐬 Dolphin', '🐺 Wolf', '🦊 Fox', '🐴 Horse']
+
+          - name: 'kind: reptiles'
+            keys: ['🐊 Crocodile']
+
+          - name: 'invertebrates'
+            keys: ['🐛 Bug', '🕷️ Spider']
+
+      - id: ['food']
+        block-list: ["I don't like food", 'Other']
+        label:
+          - name: 'food: fruits'
+            keys: ['🍎 apple', '🥒 cucumber', '🍊 orange', '🍅 tomato']
+
+          - name: 'food: vegetables'
+            keys: ['🥔 potato']
+
+      - id: ['severity', 'priority']
+        block-list: []
+        label:
+          - name: 'low'
+            keys: ['low', 'I do not know']
+
+          - name: 'medium'
+            keys: ['medium']
+
+          - name: 'high'
+            keys: ['high']
+
+          - name: 'urgent'
+            keys: ['urgent']
+
+  - section:
+      - id: [type]
+        block-list: ['Other']
+        label:
+          - name: 'bug 🐛'
+            keys: ['Bug Report']
+
+          - name: 'RFE 🎁'
+            keys: ['Feature Request']
+
+  - template: ['phase_of_development.yml']
+    section:
+      - id: [phases]
+        block-list: ['other']
+        label:
+          - name: 'phase 1'
+            keys: ['phase-1']
+
+          - name: 'phase 2'
+            keys: ['phase-2']
+            
+          - name: 'phase 3'
+            keys: ['phase-3']
+   
+      - id: ['milestone']
+        block-list: ['other']
+        label:
+          - name: 'milestone 1'
+            keys: ['milestone-1']
+
+          - name: 'milestone 2'
+            keys: ['milestone-2']     
+
+          - name: 'milestone 3'
+            keys: ['milestone-3']            
+
+          - name: 'medium'
+            keys: ['medium']
+
+          - name: 'high'
+            keys: ['high']
+
+          - name: 'urgent'
+            keys: ['urgent']
+            

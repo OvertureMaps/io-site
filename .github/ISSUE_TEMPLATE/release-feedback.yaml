@@ -1,0 +1,39 @@
+name:  Feedback
+description: Feedback Report
+title: "[Feedback]"
+labels: ["Feedback"]
+projects: ["ADD-PROJECT"]
+assignees: add Github name
+body:
+  - type: input
+    id: contact
+    attributes:
+      label: contact
+      description: How can we contact you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false  
+  - type: textarea
+    id: Feedback
+    attributes:
+      label: Feedback
+      description: Release feedback
+      placeholder: Tell us your feedback!
+      value: "## Summary Feedback \n\n [add details]"
+    validations:
+      required: true
+  - type: dropdown
+    id: Feedback-Theme
+    attributes:
+      label: Feedback Theme
+      description: 
+      options:
+        - No Dependency
+        - Admin
+        - Address
+        - Base
+        - Data Platform
+        - Dev Advocacy
+        - GERs
+        - Schema
+        - Transportation 

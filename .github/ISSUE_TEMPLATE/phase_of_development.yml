@@ -1,0 +1,34 @@
+name: Phase-of-development
+description: Phase development submission
+title: "[Phase-Dev]"
+labels: ["Phase-Dev"]
+projects: ["Add project name"]
+assignees: 
+  - <add GitHub username>
+
+body:
+  - type: textarea
+    id: other
+    attributes:
+      label: Other info
+      description: Write your ideas ...
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: phases
+    attributes:
+      label: phases
+      multiple: false
+      options:
+        - 'phase-1'
+        - 'phase-2'
+        - 'phase-3'
+        
+  - type: checkboxes
+    id: Platform-work-question
+    attributes:
+      label: Platform work
+      description: "Is this platform work that could be shared across multiple themes?"
+      options:
+        - label: Check box if YES
