@@ -32,8 +32,29 @@ const INITIAL_VIEW_STATE = {
 const MAP_STYLE = {
   version: 8,
   glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
-  sources: {},
-  layers: [],
+  sources: {
+    'raster-tiles': {
+        'type': 'raster',
+        'tiles': [
+            'https://tiles.openaerialmap.org/66230310bb689b000146b574/0/66230310bb689b000146b575/{z}/{x}/{y}'
+        ],
+        'tileSize': 256,
+        'attribution':
+            'Open Aerial Map'
+    }
+  },
+  layers: [
+    {
+        'id': 'simple-tiles',
+        'type': 'raster',
+        'source': 'raster-tiles',
+        'minzoom': 0,
+        'maxzoom': 22,
+        'paint': {
+          'raster-opacity': 0.5
+        }
+    }
+  ],
 };
 
 const ThemeSource = ({ name, url }) => {
