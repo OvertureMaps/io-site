@@ -125,7 +125,7 @@ const sampleFeature = {
   state: {},
 };
 
-function Tour({ run, modeName, setMapEntity }) {
+function Tour({ run, modeName, setMapEntity, setSidecar }) {
   const [stepIndex, setStepIndex] = useState(0);
 
   const stepBGColor =
@@ -153,6 +153,12 @@ function Tour({ run, modeName, setMapEntity }) {
       ) {
         setMapEntity({});
         setStepIndex(nextStepIndex);
+      } else if (
+        (event.index === 7) &
+        (event.lifecycle === LIFECYCLE.COMPLETE)
+      ) {
+        setStepIndex(nextStepIndex);
+        setSidecar(true);
       } else {
         setStepIndex(nextStepIndex);
       }

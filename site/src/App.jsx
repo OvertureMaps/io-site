@@ -6,12 +6,14 @@ import { keepTheme } from "./themeUtils";
 import { useState, useEffect } from "react";
 import Tour from "./Tour";
 import StartupBox from "./StartupBox";
+import Sidecar from "./Sidecar";
 
 function App() {
   const [modeName, setModeName] = useState("theme-dark");
   const [run, setRun] = useState(false);
   const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
   const [open, setOpen] = useState(tour);
+  const [sidecarOpen, setSidecarOpen] = useState(false);
   const [mapEntity, setMapEntity] = useState({});
   const [zoom, setZoom] = useState(0);
 
@@ -38,7 +40,13 @@ function App() {
         setOpen={setOpen}
         mode={modeName}
       />
-      <Tour run={run} modeName={modeName} setMapEntity={setMapEntity} />
+      <Tour
+        run={run}
+        modeName={modeName}
+        setMapEntity={setMapEntity}
+        setSidecar={setSidecarOpen}
+      />
+      <Sidecar open={sidecarOpen} setOpen={setSidecarOpen} />
       <MapProvider>
         <Header
           mode={modeName}

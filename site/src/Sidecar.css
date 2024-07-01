@@ -1,0 +1,26 @@
+div.sidecar-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-150%, -50%);
+  width: 200px;
+  height: 400px;
+  background: white;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+button.close-panel-button {
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+button.close-panel-button:active {
+  outline: none;
+}
+
+button.close-panel-button:hover {
+  background: var(--ifm-color-secondary-dark);
+}
