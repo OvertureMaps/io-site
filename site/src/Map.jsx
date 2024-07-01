@@ -18,7 +18,7 @@ import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
 
 const PMTILES_URL =
-  "pmtiles://https://hellocdkstack-overturetilesbucket6f38c611-6zusoghoh4au.s3.us-west-2.amazonaws.com/2024-06-13-beta/";
+  "pmtiles://https://d32gfzcnkb85e2.cloudfront.net/2024-06-13-beta/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 51.05,
