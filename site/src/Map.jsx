@@ -16,6 +16,7 @@ import "./InspectorPanel.css";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
+import Sidecar from "./Sidecar";
 
 const PMTILES_URL =
   "pmtiles://https://hellocdkstack-overturetilesbucket6f38c611-6zusoghoh4au.s3.us-west-2.amazonaws.com/2024-06-13-beta/";
@@ -212,7 +213,15 @@ ThemeTypeLayer.propTypes = {
   extrusion: PropTypes.bool,
 };
 
-export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
+export default function Map({
+  mode,
+  mapEntity,
+  setMapEntity,
+  zoom,
+  setZoom,
+  sidecarOpen,
+  setSidecarOpen,
+}) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
@@ -288,149 +297,160 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
     setZoom(event.target.getZoom());
   };
 
+  const map = (
+    <MapLibreMap
+      id="myMap"
+      ref={mapRef}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onLoad={syncInteractiveLayerIds}
+      onClick={onClick}
+      cursor={cursor}
+      hash={true}
+      onZoom={handleZoom}
+      mapStyle={MAP_STYLE}
+      interactiveLayerIds={interactiveLayerIds}
+      initialViewState={INITIAL_VIEW_STATE}
+      style={{
+        position: "fixed",
+        width: "100%",
+        height: "calc(100vh - 60px)",
+      }}
+      attributionControl={false}
+    >
+      <ThemeSource name="base" url={PMTILES_URL} />
+      <ThemeSource name="buildings" url={PMTILES_URL} />
+      <ThemeSource name="places" url={PMTILES_URL} />
+      <ThemeSource name="divisions" url={PMTILES_URL} />
+      <ThemeSource name="transportation" url={PMTILES_URL} />
+
+      <ThemeTypeLayer
+        theme="base"
+        type="land"
+        point
+        line
+        polygon
+        color="#ccebc5"
+        visible={visibleThemes.includes("base")}
+      />
+      <ThemeTypeLayer
+        theme="base"
+        type="land_cover"
+        polygon
+        color="#b3de69"
+        visible={visibleThemes.includes("base")}
+      />
+      <ThemeTypeLayer
+        theme="base"
+        type="land_use"
+        point
+        line
+        polygon
+        color="#b3de69"
+        visible={visibleThemes.includes("base")}
+      />
+      <ThemeTypeLayer
+        theme="base"
+        type="water"
+        point
+        line
+        polygon
+        color="#80b1d3"
+        visible={visibleThemes.includes("base")}
+      />
+      <ThemeTypeLayer
+        theme="base"
+        type="infrastructure"
+        point
+        line
+        polygon
+        color="#b3de69"
+        visible={visibleThemes.includes("base")}
+      />
+      <ThemeTypeLayer
+        theme="divisions"
+        type="division_area"
+        polygon
+        color="#bc80bd"
+        visible={visibleThemes.includes("divisions")}
+      />
+      <ThemeTypeLayer
+        theme="divisions"
+        type="boundary"
+        line
+        color="#bc80bd"
+        visible={visibleThemes.includes("divisions")}
+      />
+      <ThemeTypeLayer
+        theme="transportation"
+        type="segment"
+        line
+        color="#fb8072"
+        visible={visibleThemes.includes("transportation")}
+      />
+      <ThemeTypeLayer
+        theme="transportation"
+        type="connector"
+        point
+        color="#fb8072"
+        visible={visibleThemes.includes("transportation")}
+      />
+      <ThemeTypeLayer
+        theme="buildings"
+        type="building"
+        extrusion
+        color="#d9d9d9"
+        visible={visibleThemes.includes("buildings")}
+      />
+      <ThemeTypeLayer
+        theme="buildings"
+        type="building_part"
+        extrusion
+        color="#d9d9d9"
+        visible={visibleThemes.includes("buildings")}
+      />
+      <ThemeTypeLayer
+        theme="places"
+        type="place"
+        point
+        color="#fdb462"
+        visible={visibleThemes.includes("places")}
+      />
+      <Layer
+        id="divisions_division"
+        type="symbol"
+        source="divisions"
+        source-layer="division"
+        paint={{
+          "text-color": mode === "theme-light" ? "black" : "white",
+          "text-halo-color": mode === "theme-light" ? "white" : "black",
+          "text-halo-width": 1,
+        }}
+        layout={{
+          "text-font": ["Noto Sans Bold"],
+          "text-field": ["get", "@name"],
+          "text-size": 11,
+        }}
+      />
+
+      <NavigationControl position="top-right"></NavigationControl>
+      <GeolocateControl />
+      <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
+    </MapLibreMap>
+  );
+
   return (
     <>
       <div className={`map ${mode} tour-map`}>
-        <MapLibreMap
-          id="myMap"
-          ref={mapRef}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          onLoad={syncInteractiveLayerIds}
-          onClick={onClick}
-          cursor={cursor}
-          hash={true}
-          onZoom={handleZoom}
-          mapStyle={MAP_STYLE}
-          interactiveLayerIds={interactiveLayerIds}
-          initialViewState={INITIAL_VIEW_STATE}
-          style={{
-            position: "fixed",
-            width: "100%",
-            height: "calc(100vh - 60px)",
-          }}
-          attributionControl={false}
-        >
-          <ThemeSource name="base" url={PMTILES_URL} />
-          <ThemeSource name="buildings" url={PMTILES_URL} />
-          <ThemeSource name="places" url={PMTILES_URL} />
-          <ThemeSource name="divisions" url={PMTILES_URL} />
-          <ThemeSource name="transportation" url={PMTILES_URL} />
-
-          <ThemeTypeLayer
-            theme="base"
-            type="land"
-            point
-            line
-            polygon
-            color="#ccebc5"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="land_cover"
-            polygon
-            color="#b3de69"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="land_use"
-            point
-            line
-            polygon
-            color="#b3de69"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="water"
-            point
-            line
-            polygon
-            color="#80b1d3"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="infrastructure"
-            point
-            line
-            polygon
-            color="#b3de69"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="divisions"
-            type="division_area"
-            polygon
-            color="#bc80bd"
-            visible={visibleThemes.includes("divisions")}
-          />
-          <ThemeTypeLayer
-            theme="divisions"
-            type="boundary"
-            line
-            color="#bc80bd"
-            visible={visibleThemes.includes("divisions")}
-          />
-          <ThemeTypeLayer
-            theme="transportation"
-            type="segment"
-            line
-            color="#fb8072"
-            visible={visibleThemes.includes("transportation")}
-          />
-          <ThemeTypeLayer
-            theme="transportation"
-            type="connector"
-            point
-            color="#fb8072"
-            visible={visibleThemes.includes("transportation")}
-          />
-          <ThemeTypeLayer
-            theme="buildings"
-            type="building"
-            extrusion
-            color="#d9d9d9"
-            visible={visibleThemes.includes("buildings")}
-          />
-          <ThemeTypeLayer
-            theme="buildings"
-            type="building_part"
-            extrusion
-            color="#d9d9d9"
-            visible={visibleThemes.includes("buildings")}
-          />
-          <ThemeTypeLayer
-            theme="places"
-            type="place"
-            point
-            color="#fdb462"
-            visible={visibleThemes.includes("places")}
-          />
-          <Layer
-            id="divisions_division"
-            type="symbol"
-            source="divisions"
-            source-layer="division"
-            paint={{
-              "text-color": mode === "theme-light" ? "black" : "white",
-              "text-halo-color": mode === "theme-light" ? "white" : "black",
-              "text-halo-width": 1,
-            }}
-            layout={{
-              "text-font": ["Noto Sans Bold"],
-              "text-field": ["get", "@name"],
-              "text-size": 11,
-            }}
-          />
-
-          <NavigationControl position="top-right"></NavigationControl>
-          <GeolocateControl />
-          <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
-        </MapLibreMap>
+        {map}
         <div className="custom-controls">
+          <Sidecar
+            open={sidecarOpen}
+            setOpen={setSidecarOpen}
+            map={map}
+            setVisibleThemes={setVisibleThemes}
+          />
+
           {Object.keys(mapEntity).length > 0 && (
             <InspectorPanel entity={mapEntity} />
           )}

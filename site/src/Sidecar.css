@@ -1,13 +1,21 @@
 div.sidecar-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-150%, -50%);
   width: 200px;
-  height: 400px;
-  background: white;
+  height: 470px;
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   padding: 10px;
+  margin: 3px;
+  overflow-y: auto;
+}
+
+div.sidecar-header {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+
+div.sidecar-box::-webkit-scrollbar {
+  display: none;
 }
 
 button.close-panel-button {
@@ -23,4 +31,52 @@ button.close-panel-button:active {
 
 button.close-panel-button:hover {
   background: var(--ifm-color-secondary-dark);
+}
+
+div.sidecar-option {
+  width: 100%;
+  height: 120px;
+  margin-top: 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px gray;
+}
+
+button.sidecar-option {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5;
+  border-radius: 5px;
+}
+
+button.sidecar-option:focus {
+  outline: none;
+}
+
+svg.arrow-forward {
+  width: 10px;
+  height: 10px;
+}
+
+div {
+  .paris {
+    background-image: url("./images/paris.png");
+  }
+
+  .nyc {
+    background-image: url("./images/nyc.png");
+  }
+
+  .venice {
+    background-image: url("./images/venice.png");
+  }
+
+  .london {
+    background-image: url("./images/london.png");
+  }
 }

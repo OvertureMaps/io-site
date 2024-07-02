@@ -15,7 +15,7 @@ function App() {
   const [open, setOpen] = useState(tour);
   const [sidecarOpen, setSidecarOpen] = useState(false);
   const [mapEntity, setMapEntity] = useState({});
-  const [zoom, setZoom] = useState(0);
+  const [zoom, setZoom] = useState(16);
 
   const startTour = () => {
     setOpen(false);
@@ -46,7 +46,6 @@ function App() {
         setMapEntity={setMapEntity}
         setSidecar={setSidecarOpen}
       />
-      <Sidecar open={sidecarOpen} setOpen={setSidecarOpen} />
       <MapProvider>
         <Header
           mode={modeName}
@@ -58,7 +57,10 @@ function App() {
           mode={modeName}
           mapEntity={mapEntity}
           setMapEntity={setMapEntity}
+          zoom={zoom}
           setZoom={setZoom}
+          sidecarOpen={sidecarOpen}
+          setSidecarOpen={setSidecarOpen}
         />
       </MapProvider>
     </div>
