@@ -4,6 +4,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import InfoToolTip from "./InfoToolTip";
+import IndentIcon from "../icons/icon-indent.svg?react";
 
 const sharedProperties = [
   "theme",
@@ -94,6 +95,22 @@ function TransportationPanel({ mode, entity }) {
               "The array of source information for the properties of a given feature, with each entry being a source object which lists the property in JSON Pointer notation and the dataset that specific value came from. All features must have a root level source which is the default source if a specific property's source is not specified."
             }
             target={"trans-sources-tip"}
+          />{" "}
+        </div>
+      ) : (
+        ""
+      )}
+      {entity["class"] ? (
+        <div className="panel-row class">
+          <div>
+            <strong>Class:</strong> {entity["class"]}
+          </div>
+          <InfoToolTip
+            mode={mode}
+            content={
+              "Further describes the transportation entity by its 'class'"
+            }
+            target={"trans-class-tip"}
           />{" "}
         </div>
       ) : (
