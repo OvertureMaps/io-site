@@ -1,20 +1,44 @@
 div.sidecar-box {
-  width: 200px;
-  height: 470px;
+  width: 230px;
+  height: 568px;
   background: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
   padding: 10px;
+  border-radius: 15px;
   margin: 3px;
-  overflow-y: auto;
 }
 
-div.sidecar-header {
+div.sidecar-container {
+  overflow-y: auto;
+  width: 210px;
+  height: 416px;
+  border-radius: 10px;
+}
+
+div.sidecar-blurb {
+  font-size: 12px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+div.sidecar-landing {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: space-between;
+  font-size: 13px;
+  height: 34px;
+  position: relative;
 }
 
-div.sidecar-box::-webkit-scrollbar {
+p.sidecar-welcome {
+  padding-top: 8px;
+}
+
+div.sidecar-header {
+  font-weight: 600;
+  height: 34px;
+}
+
+div.sidecar-container::-webkit-scrollbar {
   display: none;
 }
 
@@ -66,6 +90,7 @@ svg.arrow-forward {
 div {
   .paris {
     background-image: url("./images/paris.png");
+    margin-top: 0;
   }
 
   .nyc {
@@ -78,5 +103,31 @@ div {
 
   .london {
     background-image: url("./images/london.png");
+  }
+}
+
+.theme-dark {
+  .sidecar-box {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .sidecar-landing {
+    color: var(--ifm-color-secondary-darkest);
+  }
+  .sidecar-header {
+    color: white;
+  }
+  .close-panel-button {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+  }
+  .close-panel-button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  button.sidecar-option {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    color: white;
+  }
+  .sidecar-blurb {
+    color: var(--ifm-color-secondary-darker);
   }
 }

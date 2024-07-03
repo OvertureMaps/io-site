@@ -45,8 +45,8 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
       {open ? (
         <div className="sidecar-modal">
           <div className="sidecar-box">
-            <div className="sidecar-header">
-              Explore Overture{" "}
+            <div className="sidecar-landing">
+              <p className="sidecar-welcome">WELCOME</p>
               <button
                 className="close-panel-button"
                 onClick={() => setOpen(false)}
@@ -54,30 +54,37 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
                 <CloseIcon className="close-panel-icon" />
               </button>
             </div>
-            <div className="sidecar-option paris">
-              {" "}
-              <button className="sidecar-option" onClick={handleParis}>
-                <ArrowForwardIosIcon className="arrow-forward" />
-                Paris Roads
-              </button>
+            <div className="sidecar-header">Explore Overture</div>
+            <div className="sidecar-blurb">
+              Initially, we are focusing on layers for transportation, places,
+              3D buildings, and administrative.
             </div>
-            <div className="sidecar-option nyc">
-              <button className="sidecar-option" onClick={handleNYC}>
-                <ArrowForwardIosIcon className="arrow-forward" />
-                NYC Buildings
-              </button>
-            </div>
-            <div className="sidecar-option venice">
-              <button className="sidecar-option" onClick={handleVenice}>
-                <ArrowForwardIosIcon className="arrow-forward" />
-                Venice Landcover
-              </button>
-            </div>
-            <div className="sidecar-option london">
-              <button className="sidecar-option" onClick={handleLondon}>
-                <ArrowForwardIosIcon className="arrow-forward" />
-                London Places
-              </button>
+            <div className="sidecar-container">
+              <div className="sidecar-option paris">
+                {" "}
+                <button className="sidecar-option" onClick={handleParis}>
+                  <ArrowForwardIosIcon className="arrow-forward" />
+                  Paris Roads
+                </button>
+              </div>
+              <div className="sidecar-option nyc">
+                <button className="sidecar-option" onClick={handleNYC}>
+                  <ArrowForwardIosIcon className="arrow-forward" />
+                  NYC Buildings
+                </button>
+              </div>
+              <div className="sidecar-option venice">
+                <button className="sidecar-option" onClick={handleVenice}>
+                  <ArrowForwardIosIcon className="arrow-forward" />
+                  Venice Landcover
+                </button>
+              </div>
+              <div className="sidecar-option london">
+                <button className="sidecar-option" onClick={handleLondon}>
+                  <ArrowForwardIosIcon className="arrow-forward" />
+                  London Places
+                </button>
+              </div>
             </div>
           </div>
         </div>
