@@ -48,13 +48,14 @@ button.close-panel-button {
   width: 24px;
   height: 24px;
   border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0);
 }
 button.close-panel-button:active {
   outline: none;
 }
 
 button.close-panel-button:hover {
-  background: var(--ifm-color-secondary-dark);
+  background-color: var(--ifm-color-secondary-dark);
 }
 
 div.sidecar-option {
@@ -70,7 +71,7 @@ button.sidecar-option {
   position: absolute;
   bottom: 5px;
   left: 5px;
-  background: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.7);
   border: none;
   font-size: 15px;
   font-weight: 600;
