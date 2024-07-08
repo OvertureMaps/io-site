@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
 import TableRow from "./TableRow";
 import "./InspectorPanel.css";
-import BasePanel from "./BasePanel";
-import BuildingsPanel from "./BuildingsPanel";
-import DivisionsPanel from "./DivisionsPanel";
-import PlacesPanel from "./PlacesPanel";
-import TransportationPanel from "./TransportationPanel";
 import CloseIcon from "@mui/icons-material/Close";
+import ThemePanel from "./ThemePanel";
+import {
+  BASE_TIPS,
+  BUILDING_TIPS,
+  DIVISION_TIPS,
+  PLACES_TIPS,
+  TRANSPORTATION_TIPS,
+} from "./TipLibrary";
 
 function InspectorPanel({ mode, entity, setEntity }) {
   if (!entity) {
@@ -18,15 +21,25 @@ function InspectorPanel({ mode, entity, setEntity }) {
   let inspectorPanel = <div></div>;
 
   if (theme === "base") {
-    inspectorPanel = <BasePanel mode={mode} entity={entity} />;
+    inspectorPanel = (
+      <ThemePanel mode={mode} entity={entity} tips={BASE_TIPS} />
+    );
   } else if (theme === "buildings") {
-    inspectorPanel = <BuildingsPanel mode={mode} entity={entity} />;
+    inspectorPanel = (
+      <ThemePanel mode={mode} entity={entity} tips={BUILDING_TIPS} />
+    );
   } else if (theme === "divisions") {
-    inspectorPanel = <DivisionsPanel mode={mode} entity={entity} />;
+    inspectorPanel = (
+      <ThemePanel mode={mode} entity={entity} tips={DIVISION_TIPS} />
+    );
   } else if (theme === "places") {
-    inspectorPanel = <PlacesPanel mode={mode} entity={entity} />;
+    inspectorPanel = (
+      <ThemePanel mode={mode} entity={entity} tips={PLACES_TIPS} />
+    );
   } else if (theme === "transportation") {
-    inspectorPanel = <TransportationPanel mode={mode} entity={entity} />;
+    inspectorPanel = (
+      <ThemePanel mode={mode} entity={entity} tips={TRANSPORTATION_TIPS} />
+    );
   } else {
     console.log("unhandled theme type");
     inspectorPanel = (

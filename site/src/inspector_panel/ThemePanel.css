@@ -1,4 +1,4 @@
-div.base-panel {
+div.theme-panel {
   width: 350px;
 }
 
@@ -10,7 +10,7 @@ caption.other-props {
   width: max-content;
 }
 
-button.base-table {
+button.theme-table {
   display: grid;
   justify-content: space-between;
   grid-template-columns: auto auto;
@@ -23,22 +23,22 @@ button.base-table {
   padding: 5px 10px 5px 10px;
 }
 
-button.base-table:hover {
+button.theme-table:hover {
   background-color: var(--ifm-color-primary-light);
 }
 
-button.base-table:focus {
+button.theme-table:focus {
   outline: none;
 }
 
-table.base-table {
+table.theme-table {
   margin-top: 5px;
   display: grid;
   border-bottom: 1px solid gray;
 }
 
 .theme-dark .inspector-panel {
-  button.base-table {
+  button.theme-table {
     background: var(--ifm-color-primary-light);
   }
 }
