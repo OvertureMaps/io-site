@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import LayerIcon from "./icons/icon-layers.svg?react";
 import "./ThemeSelector.css";
+import Checkbox from "@mui/material/Checkbox";
 
 function ThemeSelector({ visibleThemes, mode }) {
   const [base, setBase] = useState(true);
@@ -33,55 +34,80 @@ function ThemeSelector({ visibleThemes, mode }) {
       <ul className="dropdown__menu">
         <li>
           <label htmlFor="base" className="dropdown__link">
-            <input
+            <Checkbox
               id="base"
-              type="checkbox"
               checked={base}
               onChange={() => setBase(!base)}
+              size="small"
+              sx={{
+                padding: 0,
+                svg: { fontSize: 17 },
+                marginTop: -0.5,
+              }}
             />
             Base
           </label>
         </li>
         <li>
           <label htmlFor="buildings" className="dropdown__link">
-            <input
+            <Checkbox
               id="buildings"
-              type="checkbox"
               checked={buildings}
               onChange={() => setBuildings(!buildings)}
+              size="small"
+              sx={{
+                padding: 0,
+                svg: { fontSize: 17 },
+                marginTop: -0.5,
+              }}
             />
             Buildings
           </label>
         </li>
         <li>
           <label htmlFor="divisions" className="dropdown__link">
-            <input
+            <Checkbox
               id="divisions"
-              type="checkbox"
               checked={divisions}
               onChange={() => setDivisions(!divisions)}
+              size="small"
+              sx={{
+                padding: 0,
+                svg: { fontSize: 17 },
+                marginTop: -0.5,
+              }}
             />
             Divisions
           </label>
         </li>
         <li>
           <label htmlFor="places" className="dropdown__link">
-            <input
+            <Checkbox
               id="places"
-              type="checkbox"
               checked={places}
               onChange={() => setPlaces(!places)}
+              size="small"
+              sx={{
+                padding: 0,
+                svg: { fontSize: 17 },
+                marginTop: -0.5,
+              }}
             />
             Places
           </label>
         </li>
         <li>
           <label htmlFor="transportation" className="dropdown__link">
-            <input
+            <Checkbox
               id="transportation"
-              type="checkbox"
               checked={transportation}
               onChange={() => setTransportation(!transportation)}
+              size="small"
+              sx={{
+                padding: 0,
+                svg: { fontSize: 17 },
+                marginTop: -0.5,
+              }}
             />
             Transportation
           </label>
