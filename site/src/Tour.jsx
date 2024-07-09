@@ -175,6 +175,27 @@ function Tour({ run, modeName, setMapEntity }) {
           arrowColor: stepBGColor,
           textColor: stepTextColor,
         },
+        buttonNext:
+          modeName === "theme-dark"
+            ? {
+                backgroundColor: "var(--ifm-color-primary-lightest)",
+                color: stepBGColor,
+                fontWeight: "600",
+              }
+            : {
+                backgroundColor: "var(--ifm-color-primary)",
+                fontWeight: "600",
+              },
+        buttonBack:
+          modeName === "theme-dark"
+            ? {
+                color: "var(--ifm-color-primary-lightest)",
+                fontWeight: "600",
+                opacity: "90%",
+                borderRadius: "4px",
+              }
+            : { color: "var(--ifm-color-primary)", fontWeight: "600" },
+        buttonSkip: { fontWeight: "600" },
       }}
       spotlightPadding={0}
     />
