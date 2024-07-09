@@ -12,7 +12,7 @@ import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
 import Floater from "react-floater";
 
-const ZOOM_BOUND = 16;
+const ZOOM_BOUND = 15;
 
 function DownloadButton({ mode, zoom, setZoom }) {
   const { myMap } = useMap();
