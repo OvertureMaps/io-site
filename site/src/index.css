@@ -85,9 +85,6 @@ button:focus-visible {
   }
 }
 
-div.theme-light button {
-  background-color: #ffffff;
-}
 div.theme-light {
   color: #213547;
   background-color: #ffffff;
