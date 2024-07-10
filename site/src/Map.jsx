@@ -10,16 +10,15 @@ import maplibregl from "maplibre-gl";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
-import InspectorPanel from "./InspectorPanel";
+import InspectorPanel from "./inspector_panel/InspectorPanel";
 import PropTypes from "prop-types";
-import "./InspectorPanel.css";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
 import Sidecar from "./Sidecar";
 
 const PMTILES_URL =
-  "pmtiles://https://hellocdkstack-overturetilesbucket6f38c611-6zusoghoh4au.s3.us-west-2.amazonaws.com/2024-06-13-beta/";
+  "pmtiles://https://d32gfzcnkb85e2.cloudfront.net/2024-06-13-beta/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 51.05,
@@ -452,7 +451,11 @@ export default function Map({
           />
 
           {Object.keys(mapEntity).length > 0 && (
-            <InspectorPanel entity={mapEntity} />
+            <InspectorPanel
+              mode={mode}
+              entity={mapEntity}
+              setEntity={setMapEntity}
+            />
           )}
 
           <ThemeSelector
