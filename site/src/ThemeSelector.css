@@ -34,3 +34,8 @@ svg.icon-layers > path.primary {
 svg.icon-layers > path.secondary {
   fill: cornflowerblue;
 }
+
+svg.icon-layers-dark {
+  background: var(--ifm-navbar-background-color);
+  border-radius: 5px;
+}
