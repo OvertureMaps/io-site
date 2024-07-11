@@ -1,10 +1,13 @@
 div.sidecar-box {
   width: 230px;
-  height: 568px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-radius: 15px;
+  max-height: 80vh;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 13px 10px;
+  border-radius: 10px;
   margin: 3px;
+  box-shadow: 0 2px 4px white;
+  border-color: rgba(15, 15, 15, 0.8);
+  border: 3px;
 }
 
 div.sidecar-container {
@@ -48,7 +51,6 @@ button.close-panel-button {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0);
 }
 button.close-panel-button:active {
   outline: none;
@@ -109,7 +111,8 @@ div {
 
 .theme-dark {
   .sidecar-box {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 2px 4px black;
   }
   .sidecar-landing {
     color: var(--ifm-color-secondary-darkest);
