@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import LayerIcon from "./icons/icon-layers.svg?react";
 import "./ThemeSelector.css";
 
-function ThemeSelector({ visibleThemes, mode }) {
+function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
   const [base, setBase] = useState(true);
   const [buildings, setBuildings] = useState(true);
   const [divisions, setDivisions] = useState(true);
@@ -18,8 +18,18 @@ function ThemeSelector({ visibleThemes, mode }) {
     if (divisions) layers.push("divisions");
     if (places) layers.push("places");
     if (transportation) layers.push("transportation");
-    visibleThemes(layers);
-  }, [base, buildings, divisions, places, transportation, visibleThemes]);
+    setVisibleThemes(layers);
+  }, [base, buildings, divisions, places, transportation, setVisibleThemes]);
+
+  useEffect(() => {
+    setBase(visibleThemes.includes("base"));
+    setBuildings(visibleThemes.includes("buildings"));
+    setDivisions(visibleThemes.includes("divisions"));
+    setPlaces(visibleThemes.includes("places"));
+    setTransportation(visibleThemes.includes("transportation"));
+
+    console.log(visibleThemes);
+  }, [visibleThemes]);
 
   return (
     <div className="dropdown dropdown--hoverable theme-selector tour-layers">
@@ -92,6 +102,6 @@ function ThemeSelector({ visibleThemes, mode }) {
 }
 
 ThemeSelector.propTypes = {
-  visibleThemes: PropTypes.func,
+  setVisibleThemes: PropTypes.func,
 };
 export default ThemeSelector;

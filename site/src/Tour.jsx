@@ -71,6 +71,7 @@ const Steps = [
     offset: 0,
   },
 ];
+
 const sampleFeature = {
   geometry: {
     type: "Point",
@@ -94,6 +95,8 @@ const sampleFeature = {
     update_time: "2024-04-11T00:00:00.000Z",
     sources:
       '[{"property":"","dataset":"meta","record_id":"612060042296776","confidence":null}]',
+    theme: "places",
+    type: "place",
   },
   id: 38848842,
   layer: {
@@ -134,7 +137,6 @@ function Tour({ run, modeName, setMapEntity, setSidecar }) {
     modeName === "theme-dark" ? "var(--ifm-color-secondary-light)" : "black";
 
   const handleJoyrideCallback = (event) => {
-    console.log(event);
     if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(event.type)) {
       const nextStepIndex =
         event.index + (event.action === ACTIONS.PREV ? -1 : 1);
@@ -157,8 +159,15 @@ function Tour({ run, modeName, setMapEntity, setSidecar }) {
         (event.index === 7) &
         (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
-        setStepIndex(nextStepIndex);
-        setSidecar(true);
+        if (event.action === ACTIONS.NEXT) {
+          setSidecar(true);
+          setStepIndex(nextStepIndex);
+        } else if (event.action === ACTIONS.PREV) {
+          setMapEntity(sampleFeature.properties);
+          setTimeout(() => {
+            setStepIndex(nextStepIndex);
+          }, 100);
+        }
       } else {
         setStepIndex(nextStepIndex);
       }

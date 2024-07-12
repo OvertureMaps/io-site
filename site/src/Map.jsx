@@ -460,7 +460,8 @@ export default function Map({
 
           <ThemeSelector
             mode={mode}
-            visibleThemes={setVisibleThemes}
+            visibleThemes={visibleThemes}
+            setVisibleThemes={setVisibleThemes}
           ></ThemeSelector>
         </div>
         <div className="bug-nub">

@@ -42,6 +42,7 @@ function InspectorPanel({ mode, entity, setEntity }) {
     );
   } else {
     console.log("unhandled theme type");
+    console.log(entity);
     inspectorPanel = (
       <table>
         <tbody>
