@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 function Sidecar({ open, setOpen, map, setVisibleThemes }) {
   const handleParis = () => {
     setVisibleThemes(["base", "transportation"]);
-    map.ref.current.easeTo({
+    map.ref.current.jumpTo({
       center: [2.3417, 48.8552],
       zoom: 11.73,
       pitch: 12,
@@ -15,7 +15,7 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
 
   const handleNYC = () => {
     setVisibleThemes(["base", "buildings"]);
-    map.ref.current.easeTo({
+    map.ref.current.jumpTo({
       center: [-73.99768, 40.75332],
       zoom: 14.22,
       pitch: 60,
@@ -24,7 +24,7 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
   };
   const handleVenice = () => {
     setVisibleThemes(["base"]);
-    map.ref.current.easeTo({
+    map.ref.current.jumpTo({
       center: [12.32545, 45.4299],
       zoom: 13.36,
       pitch: 52,
@@ -33,7 +33,7 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
   };
   const handleLondon = () => {
     setVisibleThemes(["base", "places"]);
-    map.ref.current.easeTo({
+    map.ref.current.jumpTo({
       center: [-0.091217, 51.514511],
       zoom: 16.02,
       bearing: -24,
