@@ -85,3 +85,5 @@ export const PLACES_TIPS = {
   id: PLACES_ID,
   source: PLACES_SOURCE,
 };
+
+export const ADDRESSES_TIPS = {};

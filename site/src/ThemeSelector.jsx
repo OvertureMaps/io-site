@@ -9,6 +9,7 @@ function ThemeSelector({ visibleThemes, mode }) {
   const [divisions, setDivisions] = useState(true);
   const [places, setPlaces] = useState(true);
   const [transportation, setTransportation] = useState(true);
+  const [addresses, setAddresses] = useState(true);
 
   useEffect(() => {
     let layers = [];
@@ -18,8 +19,17 @@ function ThemeSelector({ visibleThemes, mode }) {
     if (divisions) layers.push("divisions");
     if (places) layers.push("places");
     if (transportation) layers.push("transportation");
+    if (addresses) layers.push("addresses");
     visibleThemes(layers);
-  }, [base, buildings, divisions, places, transportation, visibleThemes]);
+  }, [
+    base,
+    buildings,
+    divisions,
+    places,
+    transportation,
+    addresses,
+    visibleThemes,
+  ]);
 
   return (
     <div className="dropdown dropdown--hoverable theme-selector tour-layers">
@@ -84,6 +94,17 @@ function ThemeSelector({ visibleThemes, mode }) {
               onChange={() => setTransportation(!transportation)}
             />
             Transportation
+          </label>
+        </li>
+        <li>
+          <label htmlFor="addresses" className="dropdown__link">
+            <input
+              id="addresses"
+              type="checkbox"
+              checked={addresses}
+              onChange={() => setAddresses(!addresses)}
+            />
+            Addresses
           </label>
         </li>
       </ul>
