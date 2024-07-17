@@ -9,6 +9,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
   const [divisions, setDivisions] = useState(true);
   const [places, setPlaces] = useState(true);
   const [transportation, setTransportation] = useState(true);
+  const [addresses, setAddresses] = useState(true);
 
   useEffect(() => {
     let layers = [];
@@ -18,8 +19,17 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
     if (divisions) layers.push("divisions");
     if (places) layers.push("places");
     if (transportation) layers.push("transportation");
+    if (addresses) layers.push("addresses");
     setVisibleThemes(layers);
-  }, [base, buildings, divisions, places, transportation, setVisibleThemes]);
+  }, [
+    base,
+    buildings,
+    divisions,
+    places,
+    transportation,
+    addresses,
+    setVisibleThemes,
+  ]);
 
   useEffect(() => {
     setBase(visibleThemes.includes("base"));
@@ -27,8 +37,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
     setDivisions(visibleThemes.includes("divisions"));
     setPlaces(visibleThemes.includes("places"));
     setTransportation(visibleThemes.includes("transportation"));
-
-    console.log(visibleThemes);
+    setAddresses(visibleThemes.includes("addresses"));
   }, [visibleThemes]);
 
   return (
@@ -94,6 +103,17 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
               onChange={() => setTransportation(!transportation)}
             />
             Transportation
+          </label>
+        </li>
+        <li>
+          <label htmlFor="addresses" className="dropdown__link">
+            <input
+              id="addresses"
+              type="checkbox"
+              checked={addresses}
+              onChange={() => setAddresses(!addresses)}
+            />
+            Addresses
           </label>
         </li>
       </ul>

@@ -20,6 +20,8 @@ import Sidecar from "./Sidecar";
 const PMTILES_URL =
   "pmtiles://https://d32gfzcnkb85e2.cloudfront.net/2024-06-13-beta/";
 
+const ADDRESS_URL = "pmtiles://https://protomaps.dev/~bdon/";
+
 const INITIAL_VIEW_STATE = {
   latitude: 51.05,
   longitude: 3.7303,
@@ -59,6 +61,7 @@ const ThemeTypeLayer = ({
   type,
   color,
   point,
+  pointSize,
   line,
   polygon,
   extrusion,
@@ -82,7 +85,7 @@ const ThemeTypeLayer = ({
               0,
               1,
               17,
-              8,
+              pointSize,
             ],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
@@ -322,11 +325,13 @@ export default function Map({
       <ThemeSource name="places" url={PMTILES_URL} />
       <ThemeSource name="divisions" url={PMTILES_URL} />
       <ThemeSource name="transportation" url={PMTILES_URL} />
+      <ThemeSource name="addresses" url={ADDRESS_URL} />
 
       <ThemeTypeLayer
         theme="base"
         type="land"
         point
+        pointSize={8}
         line
         polygon
         color="#ccebc5"
@@ -343,6 +348,7 @@ export default function Map({
         theme="base"
         type="land_use"
         point
+        pointSize={8}
         line
         polygon
         color="#b3de69"
@@ -352,6 +358,7 @@ export default function Map({
         theme="base"
         type="water"
         point
+        pointSize={8}
         line
         polygon
         color="#80b1d3"
@@ -361,6 +368,7 @@ export default function Map({
         theme="base"
         type="infrastructure"
         point
+        pointSize={8}
         line
         polygon
         color="#b3de69"
@@ -391,6 +399,7 @@ export default function Map({
         theme="transportation"
         type="connector"
         point
+        pointSize={8}
         color="#fb8072"
         visible={visibleThemes.includes("transportation")}
       />
@@ -412,8 +421,17 @@ export default function Map({
         theme="places"
         type="place"
         point
+        pointSize={8}
         color="#fdb462"
         visible={visibleThemes.includes("places")}
+      />
+      <ThemeTypeLayer
+        theme="addresses"
+        type="address"
+        point
+        pointSize={5}
+        color="#00FFFF"
+        visible={visibleThemes.includes("addresses")}
       />
       <Layer
         id="divisions_division"
@@ -442,6 +460,7 @@ export default function Map({
     <>
       <div className={`map ${mode} tour-map`}>
         {map}
+
         <div className="custom-controls">
           <Sidecar
             open={sidecarOpen}
