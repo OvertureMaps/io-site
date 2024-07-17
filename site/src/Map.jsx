@@ -60,6 +60,7 @@ const ThemeTypeLayer = ({
   type,
   color,
   point,
+  pointSize,
   line,
   polygon,
   extrusion,
@@ -83,7 +84,7 @@ const ThemeTypeLayer = ({
               0,
               1,
               17,
-              8,
+              pointSize,
             ],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
@@ -323,6 +324,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             theme="base"
             type="land"
             point
+            pointSize={8}
             line
             polygon
             color="#ccebc5"
@@ -339,6 +341,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             theme="base"
             type="land_use"
             point
+            pointSize={8}
             line
             polygon
             color="#b3de69"
@@ -348,6 +351,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             theme="base"
             type="water"
             point
+            pointSize={8}
             line
             polygon
             color="#80b1d3"
@@ -357,6 +361,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             theme="base"
             type="infrastructure"
             point
+            pointSize={8}
             line
             polygon
             color="#b3de69"
@@ -387,6 +392,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             theme="transportation"
             type="connector"
             point
+            pointSize={8}
             color="#fb8072"
             visible={visibleThemes.includes("transportation")}
           />
@@ -408,6 +414,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             theme="places"
             type="place"
             point
+            pointSize={8}
             color="#fdb462"
             visible={visibleThemes.includes("places")}
           />
@@ -415,6 +422,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             theme="addresses"
             type="address"
             point
+            pointSize={5}
             color="#00FFFF"
             visible={visibleThemes.includes("addresses")}
           />
