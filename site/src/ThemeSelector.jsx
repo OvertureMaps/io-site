@@ -21,24 +21,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
     if (transportation) layers.push("transportation");
     if (addresses) layers.push("addresses");
     setVisibleThemes(layers);
-  }, [
-    base,
-    buildings,
-    divisions,
-    places,
-    transportation,
-    addresses,
-    setVisibleThemes,
-  ]);
-
-  useEffect(() => {
-    setBase(visibleThemes.includes("base"));
-    setBuildings(visibleThemes.includes("buildings"));
-    setDivisions(visibleThemes.includes("divisions"));
-    setPlaces(visibleThemes.includes("places"));
-    setTransportation(visibleThemes.includes("transportation"));
-    setAddresses(visibleThemes.includes("addresses"));
-  }, [visibleThemes]);
+  }, [base, buildings, divisions, places, transportation, addresses]);
 
   return (
     <div className="dropdown dropdown--hoverable theme-selector tour-layers">
@@ -55,7 +38,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
             <input
               id="base"
               type="checkbox"
-              checked={base}
+              checked={visibleThemes.includes("base")}
               onChange={() => setBase(!base)}
             />
             Base
@@ -66,7 +49,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
             <input
               id="buildings"
               type="checkbox"
-              checked={buildings}
+              checked={visibleThemes.includes("buildings")}
               onChange={() => setBuildings(!buildings)}
             />
             Buildings
@@ -77,7 +60,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
             <input
               id="divisions"
               type="checkbox"
-              checked={divisions}
+              checked={visibleThemes.includes("divisions")}
               onChange={() => setDivisions(!divisions)}
             />
             Divisions
@@ -88,7 +71,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
             <input
               id="places"
               type="checkbox"
-              checked={places}
+              checked={visibleThemes.includes("places")}
               onChange={() => setPlaces(!places)}
             />
             Places
@@ -99,7 +82,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
             <input
               id="transportation"
               type="checkbox"
-              checked={transportation}
+              checked={visibleThemes.includes("transportation")}
               onChange={() => setTransportation(!transportation)}
             />
             Transportation
@@ -110,7 +93,7 @@ function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
             <input
               id="addresses"
               type="checkbox"
-              checked={addresses}
+              checked={visibleThemes.includes("addresses")}
               onChange={() => setAddresses(!addresses)}
             />
             Addresses
