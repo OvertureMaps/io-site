@@ -62,6 +62,7 @@ const ThemeTypeLayer = ({
   polygon,
   extrusion,
   visible,
+  label,
 }) => {
   return (
     <>
@@ -88,7 +89,7 @@ const ThemeTypeLayer = ({
         />
       ) : null}
 
-      {point ? (
+      {label && point ? (
         <Layer
           filter={["==", ["geometry-type"], "Point"]}
           id={`${theme}_${type}_point_label`}
@@ -124,7 +125,7 @@ const ThemeTypeLayer = ({
           layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
-      {line ? (
+      {label && line ? (
         <Layer
           filter={["==", ["geometry-type"], "LineString"]}
           id={`${theme}_${type}_line_label`}
@@ -176,7 +177,7 @@ const ThemeTypeLayer = ({
           layout={{ visibility: visible ? "visible" : "none" }}
         />
       ) : null}
-      {polygon || extrusion ? (
+      {label && (polygon || extrusion) ? (
         <Layer
           filter={["all", ["==", ["geometry-type"], "Polygon"]]}
           id={`${theme}_${type}_fill_labels`}
@@ -316,98 +317,114 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           <ThemeSource name="divisions" url={PMTILES_URL} />
           <ThemeSource name="transportation" url={PMTILES_URL} />
 
-          <ThemeTypeLayer
-            theme="base"
-            type="land"
-            point
-            line
-            polygon
-            color="#ccebc5"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="land_cover"
-            polygon
-            color="#b3de69"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="land_use"
-            point
-            line
-            polygon
-            color="#b3de69"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="water"
-            point
-            line
-            polygon
-            color="#80b1d3"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="base"
-            type="infrastructure"
-            point
-            line
-            polygon
-            color="#b3de69"
-            visible={visibleThemes.includes("base")}
-          />
-          <ThemeTypeLayer
-            theme="divisions"
-            type="division_area"
-            polygon
-            color="#bc80bd"
-            visible={visibleThemes.includes("divisions")}
-          />
-          <ThemeTypeLayer
-            theme="divisions"
-            type="boundary"
-            line
-            color="#bc80bd"
-            visible={visibleThemes.includes("divisions")}
-          />
-          <ThemeTypeLayer
-            theme="transportation"
-            type="segment"
-            line
-            color="#fb8072"
-            visible={visibleThemes.includes("transportation")}
-          />
-          <ThemeTypeLayer
-            theme="transportation"
-            type="connector"
-            point
-            color="#fb8072"
-            visible={visibleThemes.includes("transportation")}
-          />
-          <ThemeTypeLayer
-            theme="buildings"
-            type="building"
-            extrusion
-            color="#d9d9d9"
-            visible={visibleThemes.includes("buildings")}
-          />
-          <ThemeTypeLayer
-            theme="buildings"
-            type="building_part"
-            extrusion
-            color="#d9d9d9"
-            visible={visibleThemes.includes("buildings")}
-          />
-          <ThemeTypeLayer
-            theme="places"
-            type="place"
-            point
-            color="#fdb462"
-            visible={visibleThemes.includes("places")}
-          />
+          {[false,true].map((label) => {
+            return <>
+              <ThemeTypeLayer
+                theme="base"
+                type="land"
+                point
+                line
+                polygon
+                color="#ccebc5"
+                visible={visibleThemes.includes("base")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="land_cover"
+                polygon
+                color="#b3de69"
+                visible={visibleThemes.includes("base")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="land_use"
+                point
+                line
+                polygon
+                color="#b3de69"
+                visible={visibleThemes.includes("base")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="water"
+                point
+                line
+                polygon
+                color="#80b1d3"
+                visible={visibleThemes.includes("base")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="base"
+                type="infrastructure"
+                point
+                line
+                polygon
+                color="#b3de69"
+                visible={visibleThemes.includes("base")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="divisions"
+                type="division_area"
+                polygon
+                color="#bc80bd"
+                visible={visibleThemes.includes("divisions")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="divisions"
+                type="boundary"
+                line
+                color="#bc80bd"
+                visible={visibleThemes.includes("divisions")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="transportation"
+                type="segment"
+                line
+                color="#fb8072"
+                visible={visibleThemes.includes("transportation")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="transportation"
+                type="connector"
+                point
+                color="#fb8072"
+                visible={visibleThemes.includes("transportation")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="buildings"
+                type="building"
+                extrusion
+                color="#d9d9d9"
+                visible={visibleThemes.includes("buildings")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="buildings"
+                type="building_part"
+                extrusion
+                color="#d9d9d9"
+                visible={visibleThemes.includes("buildings")}
+                label={label}
+              />
+              <ThemeTypeLayer
+                theme="places"
+                type="place"
+                point
+                color="#fdb462"
+                visible={visibleThemes.includes("places")}
+                label={label}
+              />
+            </>;
+          })}
           <Layer
             id="divisions_division"
             type="symbol"
