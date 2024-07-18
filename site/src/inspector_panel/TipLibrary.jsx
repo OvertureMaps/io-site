@@ -86,7 +86,8 @@ export const PLACES_TIPS = {
   source: PLACES_SOURCE,
 };
 
-const ADDRESSES_THEME = "";
+const ADDRESSES_THEME =
+  "The Overture Address type is a compilation of open address datasets usually published by local authorized sources";
 const ADDRESSES_TYPE =
   "Describes the entity. The addresses theme only has one type: address.";
 const ADDRESSES_SUBTYPE = "";
