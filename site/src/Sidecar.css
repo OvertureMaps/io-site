@@ -107,6 +107,10 @@ div {
   .london {
     background-image: url("./images/london.png");
   }
+
+  .boston {
+    background-image: url("./images/boston.png");
+  }
 }
 
 .theme-dark {

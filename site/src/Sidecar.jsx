@@ -40,6 +40,15 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
       pitch: 50,
     });
   };
+  const handleBoston = () => {
+    setVisibleThemes(["base", "transportation", "addresses"]);
+    map.ref.current.jumpTo({
+      center: [-71.065192, 42.353714],
+      zoom: 15.94,
+      bearing: 0,
+      pitch: 52,
+    });
+  };
   return (
     <>
       {open ? (
@@ -83,6 +92,12 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
                 <button className="sidecar-option" onClick={handleLondon}>
                   <ArrowForwardIosIcon className="arrow-forward" />
                   London Places
+                </button>
+              </div>
+              <div className="sidecar-option boston">
+                <button className="sidecar-option" onClick={handleBoston}>
+                  <ArrowForwardIosIcon className="arrow-forward" />
+                  Boston Addresses
                 </button>
               </div>
             </div>
