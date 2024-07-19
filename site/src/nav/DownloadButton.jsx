@@ -42,10 +42,10 @@ function DownloadButton({ mode, zoom, setZoom }) {
     console.log(bounds);
 
     //Send those to the download engine
-    const minxPath = ["bbox", "minx"];
-    const minyPath = ["bbox", "miny"];
-    const maxxPath = ["bbox", "maxx"];
-    const maxyPath = ["bbox", "maxy"];
+    const minxPath = ["bbox", "xmin"];
+    const minyPath = ["bbox", "ymin"];
+    const maxxPath = ["bbox", "xmax"];
+    const maxyPath = ["bbox", "ymax"];
 
     const readOptions = {
       bbox: bbox,
@@ -58,9 +58,9 @@ function DownloadButton({ mode, zoom, setZoom }) {
     };
     let downloadCatalog = getDownloadCatalog(bbox);
     let parquetDataset = await new ParquetDataset(downloadCatalog);
+    set_panic_hook();
     const wasmTable = await parquetDataset.read(readOptions);
 
-    set_panic_hook();
     //Create a blob
     // const binaryDataForDownload = writeGeoParquet(wasmTable);
     const binaryDataForDownload = writeGeoJSON(wasmTable);
