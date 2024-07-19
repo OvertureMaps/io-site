@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
-import { DownloadCatalog } from "../DownloadCatalog.js";
+import { getDownloadCatalog } from "../DownloadCatalog.js";
 import {
   ParquetDataset,
   set_panic_hook,
@@ -56,8 +56,8 @@ function DownloadButton({ mode, zoom, setZoom }) {
         maxyPath,
       },
     };
-
-    let parquetDataset = await new ParquetDataset(DownloadCatalog);
+    let downloadCatalog = getDownloadCatalog(bbox);
+    let parquetDataset = await new ParquetDataset(downloadCatalog);
     const wasmTable = await parquetDataset.read(readOptions);
 
     set_panic_hook();
