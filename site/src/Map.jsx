@@ -15,14 +15,17 @@ import PropTypes from "prop-types";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
+import { layers } from "./Layers";
+import ThemeTypeLayer from "./ThemeTypeLayer";
+import InspectThemeSelect from "./InspectThemeSelect";
 
 const PMTILES_URL =
   "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-07-22/";
 
 const INITIAL_VIEW_STATE = {
-  latitude: 51.05,
-  longitude: 3.7303,
-  zoom: 16,
+  latitude: 38.90678,
+  longitude: -77.036495,
+  zoom: 15,
   bearing: 0,
   pitch: 0,
 };
@@ -44,181 +47,43 @@ ThemeSource.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-const colorExpression = (color) => {
-  return [
-    "case",
-    ["boolean", ["feature-state", "selected"], false],
-    "white",
-    color,
-  ];
-};
-
-const ThemeTypeLayer = ({
-  theme,
-  type,
-  color,
-  point,
-  pointSize,
-  line,
-  polygon,
-  extrusion,
-  visible,
-  label,
-}) => {
-  return (
-    <>
-      {point ? (
-        <Layer
-          filter={["==", ["geometry-type"], "Point"]}
-          id={`${theme}_${type}_point`}
-          type="circle"
-          source={theme}
-          source-layer={type}
-          paint={{
-            "circle-color": colorExpression(color),
-            "circle-radius": [
-              "interpolate",
-              ["exponential", 2],
-              ["zoom"],
-              0,
-              1,
-              17,
-              pointSize,
-            ],
-          }}
-          layout={{ visibility: visible ? "visible" : "none" }}
-        />
-      ) : null}
-
-      {label && point ? (
-        <Layer
-          filter={["==", ["geometry-type"], "Point"]}
-          id={`${theme}_${type}_point_label`}
-          minzoom={17}
-          type="symbol"
-          source={theme}
-          source-layer={type}
-          paint={{
-            "text-color": "black",
-            "text-halo-color": colorExpression(color),
-            "text-halo-width": 1,
-          }}
-          layout={{
-            "text-font": ["Noto Sans Bold"],
-            "text-field": ["get", "@name"],
-            "text-size": 11,
-            visibility: visible ? "visible" : "none",
-            "text-variable-anchor": ["top", "bottom", "left", "right"],
-            "text-radial-offset": 0.8,
-            "text-justify": "auto",
-          }}
-        />
-      ) : null}
-
-      {line ? (
-        <Layer
-          filter={["==", ["geometry-type"], "LineString"]}
-          id={`${theme}_${type}_line`}
-          type="line"
-          source={theme}
-          source-layer={type}
-          paint={{ "line-color": colorExpression(color) }}
-          layout={{ visibility: visible ? "visible" : "none" }}
-        />
-      ) : null}
-      {label && line ? (
-        <Layer
-          filter={["==", ["geometry-type"], "LineString"]}
-          id={`${theme}_${type}_line_label`}
-          type="symbol"
-          source={theme}
-          source-layer={type}
-          paint={{
-            "text-color": "black",
-            "text-halo-color": colorExpression(color),
-            "text-halo-width": 1,
-          }}
-          layout={{
-            "text-font": ["Noto Sans Bold"],
-            "text-field": ["get", "@name"],
-            "text-size": 11,
-            "symbol-placement": "line-center",
-            visibility: visible ? "visible" : "none",
-          }}
-        />
-      ) : null}
-      {polygon ? (
-        <Layer
-          filter={["==", ["geometry-type"], "Polygon"]}
-          id={`${theme}_${type}_fill`}
-          type="fill"
-          source={theme}
-          source-layer={type}
-          paint={{ "fill-color": colorExpression(color), "fill-opacity": 0.2 }}
-          layout={{ visibility: visible ? "visible" : "none" }}
-        />
-      ) : null}
-      {extrusion ? (
-        <Layer
-          filter={[
-            "all",
-            ["==", ["geometry-type"], "Polygon"],
-            ["!=", ["get", "has_parts"], true],
-          ]} // prevent z-fighting
-          id={`${theme}_${type}_fill-extrusion`}
-          type="fill-extrusion"
-          source={theme}
-          source-layer={type}
-          paint={{
-            "fill-extrusion-color": colorExpression(color),
-            "fill-extrusion-opacity": 0.35,
-            "fill-extrusion-base": ["get", "min_height"],
-            "fill-extrusion-height": ["get", "height"],
-          }}
-          layout={{ visibility: visible ? "visible" : "none" }}
-        />
-      ) : null}
-      {label && (polygon || extrusion) ? (
-        <Layer
-          filter={["all", ["==", ["geometry-type"], "Polygon"]]}
-          id={`${theme}_${type}_fill_labels`}
-          type="symbol"
-          source={theme}
-          source-layer={type}
-          paint={{
-            "text-color": "black",
-            "text-halo-color": colorExpression(color),
-            "text-halo-width": 1,
-          }}
-          layout={{
-            "text-font": ["Noto Sans Bold"],
-            "text-field": ["get", "@name"],
-            "text-size": 11,
-            visibility: visible ? "visible" : "none",
-            "symbol-placement": "point",
-          }}
-        />
-      ) : null}
-    </>
-  );
-};
-
-ThemeTypeLayer.propTypes = {
-  theme: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  point: PropTypes.bool,
-  line: PropTypes.bool,
-  polygon: PropTypes.bool,
-  extrusion: PropTypes.bool,
-};
-
 export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
-  const [visibleThemes, setVisibleThemes] = useState([]);
+  const [activeTheme, setActiveTheme] = useState("places");
+  const [visibleTypes, setVisibleTypes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
+
+  // For access of latest value within map events
+  const activeThemeRef = useRef(activeTheme);
+  useEffect(() => {
+    activeThemeRef.current = activeTheme;
+  }, [activeTheme]);
+
+  const syncInteractiveLayerIds = useCallback(() => {
+    const layers = mapRef.current.getStyle().layers;
+    const layersToShow = layers
+      .filter((layer) => {
+        return visibleTypes.indexOf(layer["source-layer"]) >= 0;
+      })
+      .map((layer) => layer.id);
+    setInteractiveLayerIds(layersToShow);
+  }, [visibleTypes]);
+
+  const onMouseEnter = useCallback(
+    (e) => {
+      if (
+        e.features.some(
+          (f) => visibleTypes.indexOf(f.layer["source-layer"]) >= 0
+        )
+      ) {
+        setCursor("pointer");
+      }
+    },
+    [visibleTypes]
+  );
+  const onMouseLeave = useCallback(() => setCursor("auto"), []);
 
   const selectedSource = useRef();
   const selectedSourceLayer = useRef();
@@ -232,28 +97,16 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
     };
   }, []);
 
-  const syncInteractiveLayerIds = useCallback(() => {
-    const layers = mapRef.current.getStyle().layers;
-    const layersToShow = layers
-      .filter((layer) => visibleThemes.indexOf(layer.source) >= 0)
-      .map((layer) => layer.id);
-    setInteractiveLayerIds(layersToShow);
-  }, [visibleThemes]);
-
-  const onMouseEnter = useCallback(
-    (e) => {
-      if (e.features.some((f) => visibleThemes.indexOf(f.source) >= 0)) {
-        setCursor("pointer");
-      }
-    },
-    [visibleThemes]
-  );
-  const onMouseLeave = useCallback(() => setCursor("auto"), []);
+  useEffect(() => {
+    window.map = mapRef.current;
+  });
 
   const onClick = useCallback(
     (event) => {
       let features = event.features;
-      features = features.filter((f) => visibleThemes.indexOf(f.source) >= 0);
+      features = features
+        .filter((f) => visibleTypes.indexOf(f.layer["source-layer"]) >= 0)
+        .filter((f) => activeThemeRef.current.indexOf(f.layer["source"]) >= 0);
       const feature = features[0];
       if (feature) {
         if (selectedSource.current) {
@@ -282,7 +135,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         setMapEntity({});
       }
     },
-    [visibleThemes]
+    [visibleTypes]
   );
 
   const handleZoom = (event) => {
@@ -320,139 +173,36 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           <ThemeSource name="addresses" url={PMTILES_URL} />
 
           {[false, true].map((label) => {
-            return (
-              <Fragment key={label}>
-                <ThemeTypeLayer
-                  theme="base"
-                  type="land"
-                  point
-                  pointSize={8}
-                  line
-                  polygon
-                  color="#ccebc5"
-                  visible={visibleThemes.includes("base")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="base"
-                  type="land_cover"
-                  polygon
-                  color="#b3de69"
-                  visible={visibleThemes.includes("base")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="base"
-                  type="land_use"
-                  point
-                  pointSize={8}
-                  line
-                  polygon
-                  color="#b3de69"
-                  visible={visibleThemes.includes("base")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="base"
-                  type="water"
-                  point
-                  pointSize={8}
-                  line
-                  polygon
-                  color="#80b1d3"
-                  visible={visibleThemes.includes("base")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="base"
-                  type="infrastructure"
-                  point
-                  pointSize={8}
-                  line
-                  polygon
-                  color="#b3de69"
-                  visible={visibleThemes.includes("base")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="divisions"
-                  type="division_area"
-                  polygon
-                  color="#bc80bd"
-                  visible={visibleThemes.includes("divisions")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="divisions"
-                  type="division_boundary"
-                  line
-                  color="#bc80bd"
-                  visible={visibleThemes.includes("divisions")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="transportation"
-                  type="segment"
-                  line
-                  color="#fb8072"
-                  visible={visibleThemes.includes("transportation")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="transportation"
-                  type="connector"
-                  point
-                  pointSize={8}
-                  color="#fb8072"
-                  visible={visibleThemes.includes("transportation")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="buildings"
-                  type="building"
-                  extrusion
-                  color="#d9d9d9"
-                  visible={visibleThemes.includes("buildings")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="buildings"
-                  type="building_part"
-                  extrusion
-                  color="#d9d9d9"
-                  visible={visibleThemes.includes("buildings")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="places"
-                  type="place"
-                  point
-                  pointSize={8}
-                  color="#fdb462"
-                  visible={visibleThemes.includes("places")}
-                  label={label}
-                />
-                <ThemeTypeLayer
-                  theme="addresses"
-                  type="address"
-                  point
-                  pointSize={5}
-                  color="#00FFFF"
-                  visible={visibleThemes.includes("addresses")}
-                  label={label}
-                />
-              </Fragment>
-            );
+            return layers.map((props, i) => (
+              <ThemeTypeLayer
+                key={`${props.theme}_${props.type}_${i}`}
+                {...{
+                  ...props,
+                  color:
+                    activeTheme === props.theme
+                      ? props.activeColor || props.color
+                      : props.color,
+                }}
+                visible={
+                  visibleTypes.includes(props.type) &&
+                  (props.activeOnly === undefined ||
+                    activeTheme === props.theme)
+                }
+                label={label && activeTheme === props.theme}
+                active={activeTheme === props.theme}
+              />
+            ));
           })}
           <Layer
             id="divisions_division"
             type="symbol"
             source="divisions"
             source-layer="division"
+            maxzoom={14}
             paint={{
               "text-color": mode === "theme-light" ? "black" : "white",
               "text-halo-color": mode === "theme-light" ? "white" : "black",
-              "text-halo-width": 1,
+              "text-halo-width": 2,
             }}
             layout={{
               "text-font": ["Noto Sans Bold"],
@@ -464,6 +214,10 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           <GeolocateControl />
           <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
         </MapLibreMap>
+        <InspectThemeSelect
+          activeTheme={activeTheme}
+          setActiveTheme={setActiveTheme}
+        />
         <div className="custom-controls">
           {Object.keys(mapEntity).length > 0 && (
             <InspectorPanel
@@ -475,7 +229,9 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
 
           <ThemeSelector
             mode={mode}
-            visibleThemes={setVisibleThemes}
+            setVisibleTypes={setVisibleTypes}
+            activeTheme={activeTheme}
+            setActiveTheme={setActiveTheme}
           ></ThemeSelector>
         </div>
         <div className="bug-nub">

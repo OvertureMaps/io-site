@@ -1,0 +1,22 @@
+.desktop-theme-select {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 68px;
+  height: 40px;
+  width: fit-content;
+  padding-left: 15px;
+}
+
+.mobile-theme-select {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+}
+
+.mobile-theme-select-nav {
+  padding-left: 80px;
+}
