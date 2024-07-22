@@ -9,6 +9,7 @@ import {
   DIVISION_TIPS,
   PLACES_TIPS,
   TRANSPORTATION_TIPS,
+  ADDRESSES_TIPS,
 } from "./TipLibrary";
 
 function InspectorPanel({ mode, entity, setEntity }) {
@@ -39,6 +40,10 @@ function InspectorPanel({ mode, entity, setEntity }) {
   } else if (theme === "transportation") {
     inspectorPanel = (
       <ThemePanel mode={mode} entity={entity} tips={TRANSPORTATION_TIPS} />
+    );
+  } else if (theme === "addresses") {
+    inspectorPanel = (
+      <ThemePanel mode={mode} entity={entity} tips={ADDRESSES_TIPS} />
     );
   } else {
     console.log("unhandled theme type");

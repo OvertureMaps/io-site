@@ -85,3 +85,20 @@ export const PLACES_TIPS = {
   id: PLACES_ID,
   source: PLACES_SOURCE,
 };
+
+const ADDRESSES_THEME =
+  "The Overture Address type is a compilation of open address datasets usually published by local authorized sources";
+const ADDRESSES_TYPE =
+  "Describes the entity. The addresses theme only has one type: address.";
+const ADDRESSES_SUBTYPE = "";
+const ADDRESSES_ID =
+  "A feature ID. This may be an ID associated with the Global Entity Reference System (GERS) if—and-only-if the feature represents an entity that is part of GERS.";
+const ADDRESSES_SOURCE =
+  "The array of source information for the properties of a given feature, with each entry being a source object which lists the property in JSON Pointer notation and the dataset that specific value came from. All features must have a root level source which is the default source if a specific property's source is not specified.";
+export const ADDRESSES_TIPS = {
+  theme: ADDRESSES_THEME,
+  type: ADDRESSES_TYPE,
+  subtype: ADDRESSES_SUBTYPE,
+  id: ADDRESSES_ID,
+  source: ADDRESSES_SOURCE,
+};

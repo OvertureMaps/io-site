@@ -8,7 +8,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import * as pmtiles from "pmtiles";
 import maplibregl from "maplibre-gl";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { Fragment, useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
 import InspectorPanel from "./inspector_panel/InspectorPanel";
 import PropTypes from "prop-types";
@@ -17,7 +17,7 @@ import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
 
 const PMTILES_URL =
-  "pmtiles://https://d32gfzcnkb85e2.cloudfront.net/2024-06-13-beta/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-07-22/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 51.05,
@@ -58,6 +58,7 @@ const ThemeTypeLayer = ({
   type,
   color,
   point,
+  pointSize,
   line,
   polygon,
   extrusion,
@@ -82,7 +83,7 @@ const ThemeTypeLayer = ({
               0,
               1,
               17,
-              8,
+              pointSize,
             ],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
@@ -245,7 +246,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         setCursor("pointer");
       }
     },
-    [visibleThemes],
+    [visibleThemes]
   );
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
 
@@ -270,7 +271,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
             sourceLayer: feature.sourceLayer,
             id: feature.id,
           },
-          { selected: true },
+          { selected: true }
         );
         setMapEntity({
           theme: feature.source,
@@ -281,7 +282,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
         setMapEntity({});
       }
     },
-    [visibleThemes],
+    [visibleThemes]
   );
 
   const handleZoom = (event) => {
@@ -316,114 +317,132 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           <ThemeSource name="places" url={PMTILES_URL} />
           <ThemeSource name="divisions" url={PMTILES_URL} />
           <ThemeSource name="transportation" url={PMTILES_URL} />
+          <ThemeSource name="addresses" url={PMTILES_URL} />
 
-          {[false,true].map((label) => {
-            return <>
-              <ThemeTypeLayer
-                theme="base"
-                type="land"
-                point
-                line
-                polygon
-                color="#ccebc5"
-                visible={visibleThemes.includes("base")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="land_cover"
-                polygon
-                color="#b3de69"
-                visible={visibleThemes.includes("base")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="land_use"
-                point
-                line
-                polygon
-                color="#b3de69"
-                visible={visibleThemes.includes("base")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="water"
-                point
-                line
-                polygon
-                color="#80b1d3"
-                visible={visibleThemes.includes("base")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="base"
-                type="infrastructure"
-                point
-                line
-                polygon
-                color="#b3de69"
-                visible={visibleThemes.includes("base")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="divisions"
-                type="division_area"
-                polygon
-                color="#bc80bd"
-                visible={visibleThemes.includes("divisions")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="divisions"
-                type="boundary"
-                line
-                color="#bc80bd"
-                visible={visibleThemes.includes("divisions")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="transportation"
-                type="segment"
-                line
-                color="#fb8072"
-                visible={visibleThemes.includes("transportation")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="transportation"
-                type="connector"
-                point
-                color="#fb8072"
-                visible={visibleThemes.includes("transportation")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="buildings"
-                type="building"
-                extrusion
-                color="#d9d9d9"
-                visible={visibleThemes.includes("buildings")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="buildings"
-                type="building_part"
-                extrusion
-                color="#d9d9d9"
-                visible={visibleThemes.includes("buildings")}
-                label={label}
-              />
-              <ThemeTypeLayer
-                theme="places"
-                type="place"
-                point
-                color="#fdb462"
-                visible={visibleThemes.includes("places")}
-                label={label}
-              />
-            </>;
+          {[false, true].map((label) => {
+            return (
+              <Fragment key={label}>
+                <ThemeTypeLayer
+                  theme="base"
+                  type="land"
+                  point
+                  pointSize={8}
+                  line
+                  polygon
+                  color="#ccebc5"
+                  visible={visibleThemes.includes("base")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="base"
+                  type="land_cover"
+                  polygon
+                  color="#b3de69"
+                  visible={visibleThemes.includes("base")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="base"
+                  type="land_use"
+                  point
+                  pointSize={8}
+                  line
+                  polygon
+                  color="#b3de69"
+                  visible={visibleThemes.includes("base")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="base"
+                  type="water"
+                  point
+                  pointSize={8}
+                  line
+                  polygon
+                  color="#80b1d3"
+                  visible={visibleThemes.includes("base")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="base"
+                  type="infrastructure"
+                  point
+                  pointSize={8}
+                  line
+                  polygon
+                  color="#b3de69"
+                  visible={visibleThemes.includes("base")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="divisions"
+                  type="division_area"
+                  polygon
+                  color="#bc80bd"
+                  visible={visibleThemes.includes("divisions")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="divisions"
+                  type="division_boundary"
+                  line
+                  color="#bc80bd"
+                  visible={visibleThemes.includes("divisions")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="transportation"
+                  type="segment"
+                  line
+                  color="#fb8072"
+                  visible={visibleThemes.includes("transportation")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="transportation"
+                  type="connector"
+                  point
+                  pointSize={8}
+                  color="#fb8072"
+                  visible={visibleThemes.includes("transportation")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="buildings"
+                  type="building"
+                  extrusion
+                  color="#d9d9d9"
+                  visible={visibleThemes.includes("buildings")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="buildings"
+                  type="building_part"
+                  extrusion
+                  color="#d9d9d9"
+                  visible={visibleThemes.includes("buildings")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="places"
+                  type="place"
+                  point
+                  pointSize={8}
+                  color="#fdb462"
+                  visible={visibleThemes.includes("places")}
+                  label={label}
+                />
+                <ThemeTypeLayer
+                  theme="addresses"
+                  type="address"
+                  point
+                  pointSize={5}
+                  color="#00FFFF"
+                  visible={visibleThemes.includes("addresses")}
+                  label={label}
+                />
+              </Fragment>
+            );
           })}
           <Layer
             id="divisions_division"
@@ -441,7 +460,6 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
               "text-size": 11,
             }}
           />
-
           <NavigationControl position="top-right"></NavigationControl>
           <GeolocateControl />
           <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
