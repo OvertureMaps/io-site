@@ -8,7 +8,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import * as pmtiles from "pmtiles";
 import maplibregl from "maplibre-gl";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { Fragment, useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
 import InspectorPanel from "./inspector_panel/InspectorPanel";
 import PropTypes from "prop-types";
@@ -17,7 +17,7 @@ import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
 
 const PMTILES_URL =
-  "pmtiles://https://d32gfzcnkb85e2.cloudfront.net/2024-06-13-beta/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-07-22/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 51.05,
@@ -318,7 +318,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           <ThemeSource name="transportation" url={PMTILES_URL} />
 
           {[false,true].map((label) => {
-            return <>
+            return <Fragment key={label}>
               <ThemeTypeLayer
                 theme="base"
                 type="land"
@@ -377,7 +377,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
               />
               <ThemeTypeLayer
                 theme="divisions"
-                type="boundary"
+                type="division_boundary"
                 line
                 color="#bc80bd"
                 visible={visibleThemes.includes("divisions")}
@@ -423,7 +423,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
                 visible={visibleThemes.includes("places")}
                 label={label}
               />
-            </>;
+            </Fragment>;
           })}
           <Layer
             id="divisions_division"
