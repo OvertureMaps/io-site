@@ -18,6 +18,8 @@ div.bug-nub {
   position: relative;
   display: grid;
   place-items: center;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
 
 svg.bug-nub-icon > path.primary {

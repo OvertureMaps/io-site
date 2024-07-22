@@ -8,6 +8,7 @@
   display: flex;
   max-height: 32px;
   margin-top: 3px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .theme-dark .inspector-panel {
