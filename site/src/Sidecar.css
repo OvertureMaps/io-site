@@ -139,3 +139,23 @@ div {
     color: var(--ifm-color-secondary-darker);
   }
 }
+
+button.sidecar-icon {
+  border: none;
+  width: 32px;
+  height: 32px;
+  margin: 3px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+svg.plane-icon {
+  width: 30px;
+  height: 30px;
+
+  path {
+    fill: blue;
+  }
+}

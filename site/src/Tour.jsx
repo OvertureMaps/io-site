@@ -137,6 +137,10 @@ function Tour({ run, modeName, setMapEntity, setSidecar }) {
     modeName === "theme-dark" ? "var(--ifm-color-secondary-light)" : "black";
 
   const handleJoyrideCallback = (event) => {
+    if (event.action === ACTIONS.SKIP) {
+      setSidecar(true);
+    }
+
     if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(event.type)) {
       const nextStepIndex =
         event.index + (event.action === ACTIONS.PREV ? -1 : 1);

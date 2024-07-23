@@ -13,7 +13,7 @@ function App() {
   const [run, setRun] = useState(false);
   const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
   const [open, setOpen] = useState(tour);
-  const [sidecarOpen, setSidecarOpen] = useState(false);
+  const [sidecarOpen, setSidecarOpen] = useState(!open);
   const [mapEntity, setMapEntity] = useState({});
   const [zoom, setZoom] = useState(16);
 
@@ -39,6 +39,7 @@ function App() {
         open={open}
         setOpen={setOpen}
         mode={modeName}
+        setSidecarOpen={setSidecarOpen}
       />
       <Tour
         run={run}

@@ -1,6 +1,7 @@
 import "./Sidecar.css";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 
 function Sidecar({ open, setOpen, map, setVisibleThemes }) {
   const handleParis = () => {
@@ -104,7 +105,9 @@ function Sidecar({ open, setOpen, map, setVisibleThemes }) {
           </div>
         </div>
       ) : (
-        <></>
+        <button className="sidecar-icon" onClick={() => setOpen(true)}>
+          <FlightTakeoffIcon className="plane-icon" />
+        </button>
       )}{" "}
     </>
   );

@@ -1,10 +1,21 @@
 import { Checkbox, FormControlLabel, Box, Modal } from "@mui/material";
 import "./StartupBox.css";
 
-function StartupBox({ open, setOpen, startTour, updateTour, mode }) {
+function StartupBox({
+  open,
+  setOpen,
+  startTour,
+  updateTour,
+  mode,
+  setSidecarOpen,
+}) {
+  const handleSkip = () => {
+    setOpen(false);
+    setSidecarOpen(true);
+  };
   return (
     <div className="startup-modal">
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal open={open} onClose={handleSkip}>
         <div
           className={`${
             mode === "theme-dark" ? "startup-box-dark" : "startup-box-light"
@@ -21,7 +32,7 @@ function StartupBox({ open, setOpen, startTour, updateTour, mode }) {
             <button className="button start" onClick={startTour}>
               Begin
             </button>
-            <button className="button skip" onClick={() => setOpen(false)}>
+            <button className="button skip" onClick={handleSkip}>
               Skip
             </button>
             <div className="perma-skip">
