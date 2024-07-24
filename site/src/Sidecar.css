@@ -152,6 +152,11 @@ button.sidecar-icon {
   border-radius: 5px;
 }
 
+button.sidecar-icon:active,
+button.sidecar-icon:focus {
+  outline: none;
+}
+
 svg.plane-icon {
   width: 30px;
   height: 30px;

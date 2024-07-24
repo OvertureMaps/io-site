@@ -20,8 +20,6 @@ import Sidecar from "./Sidecar";
 const PMTILES_URL =
   "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-07-22/";
 
-const ADDRESS_URL = "pmtiles://https://protomaps.dev/~bdon/";
-
 const INITIAL_VIEW_STATE = {
   latitude: 51.05,
   longitude: 3.7303,
@@ -325,7 +323,7 @@ export default function Map({
       <ThemeSource name="places" url={PMTILES_URL} />
       <ThemeSource name="divisions" url={PMTILES_URL} />
       <ThemeSource name="transportation" url={PMTILES_URL} />
-      <ThemeSource name="addresses" url={ADDRESS_URL} />
+      <ThemeSource name="addresses" url={PMTILES_URL} />
 
       <ThemeTypeLayer
         theme="base"
