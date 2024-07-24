@@ -2,19 +2,21 @@ import { Layer } from "react-map-gl/maplibre";
 import PropTypes from "prop-types";
 import "./CustomControls.css";
 
-const colorExpression = (color) => {
+const colorExpression = (color, highlightColor) => {
   return [
     "case",
     ["boolean", ["feature-state", "selected"], false],
-    "white",
+    highlightColor || "white",
     color,
   ];
 };
 
 const ThemeTypeLayer = ({
+  activeThemes,
   theme,
   type,
   color,
+  highlightColor,
   point,
   line,
   polygon,
@@ -24,7 +26,7 @@ const ThemeTypeLayer = ({
   active,
   outline,
   minzoom,
-  pointSize
+  pointSize,
 }) => {
   return (
     <>
@@ -36,7 +38,7 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "circle-color": colorExpression(color),
+            "circle-color": colorExpression(color, highlightColor),
             "circle-radius": [
               "interpolate",
               ["exponential", 2],
@@ -64,7 +66,7 @@ const ThemeTypeLayer = ({
             source-layer={type}
             paint={{
               "text-color": "black",
-              "text-halo-color": "white",
+              "text-halo-color": highlightColor,
               "text-halo-width": 1,
             }}
             layout={{
@@ -88,7 +90,7 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "line-color": colorExpression(color),
+            "line-color": colorExpression(color, highlightColor),
             "line-width": ["interpolate", ["linear"], ["zoom"], 12, 1, 13, 2],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
@@ -103,8 +105,16 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "line-color": colorExpression(color),
-            "line-width": ["interpolate", ["linear"], ["zoom"], 12, 1, 13, 2],
+            "line-color": colorExpression(color, highlightColor),
+            "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              12,
+              1,
+              13,
+              activeThemes.length > 1 ? 1 : 2,
+            ],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -119,7 +129,7 @@ const ThemeTypeLayer = ({
           source-layer={type}
           paint={{
             "text-color": "black",
-            "text-halo-color": "white",
+            "text-halo-color": highlightColor,
             "text-halo-width": 1,
           }}
           layout={{
@@ -141,8 +151,12 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "fill-color": colorExpression(color),
-            "fill-opacity": active ? 0.7 : 0.4,
+            "fill-color": colorExpression(color, highlightColor),
+            "fill-opacity": active
+              ? activeThemes.length > 1
+                ? 0.55
+                : 0.7
+              : 0.4,
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -160,8 +174,12 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "fill-extrusion-color": colorExpression(color),
-            "fill-extrusion-opacity": active ? 0.7 : 0.35,
+            "fill-extrusion-color": colorExpression(color, highlightColor),
+            "fill-extrusion-opacity": active
+              ? activeThemes.length > 1
+                ? 0.5
+                : 0.7
+              : 0.35,
             "fill-extrusion-base": ["get", "min_height"],
             "fill-extrusion-height": ["get", "height"],
           }}
@@ -178,7 +196,7 @@ const ThemeTypeLayer = ({
           source-layer={type}
           paint={{
             "text-color": "black",
-            "text-halo-color": "white",
+            "text-halo-color": highlightColor,
             "text-halo-width": 1,
           }}
           layout={{
@@ -196,9 +214,11 @@ const ThemeTypeLayer = ({
 };
 
 ThemeTypeLayer.propTypes = {
+  activeThemes: PropTypes.array.isRequired,
   theme: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   color: PropTypes.any.isRequired,
+  highlightColor: PropTypes.any.isRequired,
   point: PropTypes.bool,
   line: PropTypes.bool,
   polygon: PropTypes.bool,

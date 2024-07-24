@@ -3,13 +3,32 @@ import LayerIcon from "./icons/icon-layers.svg?react";
 import "./ThemeSelector.css";
 import { layers } from "./Layers";
 import { format } from "./util/TextUtil";
-import { Box, Checkbox, FormControlLabel, Popover } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  Popper,
+  Paper,
+} from "@mui/material";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 
-const ThemeSelector = ({ mode, setVisibleTypes }) => {
+const ThemeSelector = ({
+  mode,
+  setVisibleTypes,
+  activeThemes,
+  setActiveThemes,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (anchorEl) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
   };
 
   const handleClose = () => {
@@ -78,6 +97,38 @@ const ThemeSelector = ({ mode, setVisibleTypes }) => {
     });
   };
 
+  const renderPinThemeIcon = (theme) => {
+    const props = {
+      sx: {
+        "&:hover": {
+          cursor: "pointer",
+        },
+        color: "black",
+      },
+    };
+
+    return (
+      <IconButton
+        onClick={() => {
+          if (activeThemes.includes(theme)) {
+            setActiveThemes(activeThemes.filter((t) => t !== theme));
+          } else {
+            setActiveThemes(activeThemes.concat(theme));
+          }
+        }}
+        sx={{
+          marginTop: "-7px",
+        }}
+      >
+        {activeThemes.includes(theme) ? (
+          <PushPinIcon {...props} />
+        ) : (
+          <PushPinOutlinedIcon {...props} />
+        )}
+      </IconButton>
+    );
+  };
+
   const renderCheckboxes = () => {
     const themes = [...new Set(layers.map((layer) => layer.theme))];
 
@@ -91,41 +142,51 @@ const ThemeSelector = ({ mode, setVisibleTypes }) => {
           const children = types.map((t) => selectedTypes[t.type]);
 
           return (
-            <>
-              <div>
-                <FormControlLabel
-                  label={format(theme)}
-                  className="theme-selector-checkbox"
-                  control={
-                    <Checkbox
-                      size="small"
-                      checked={selectedThemes[theme] && children.includes(true)}
-                      indeterminate={
-                        children.includes(true) && children.includes(false)
-                      }
-                      onChange={() => handleThemeChange(theme)}
-                    />
-                  }
-                />
-              </div>
-              {types.length > 1 && (
-                <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
-                  {types.map((layer) => (
-                    <FormControlLabel
-                      label={format(layer.type)}
-                      className="theme-selector-checkbox"
-                      control={
-                        <Checkbox
-                          size="small"
-                          checked={selectedTypes[layer.type]}
-                          onChange={() => handleTypeChange(layer.type)}
-                        />
-                      }
-                    />
-                  ))}
-                </Box>
-              )}
-            </>
+            <Grid container width={200}>
+              <Grid item xs={10}>
+                <div>
+                  <FormControlLabel
+                    label={format(theme)}
+                    className="theme-selector-checkbox"
+                    sx={{
+                      height: "16px",
+                    }}
+                    control={
+                      <Checkbox
+                        size="small"
+                        checked={
+                          selectedThemes[theme] && children.includes(true)
+                        }
+                        indeterminate={
+                          children.includes(true) && children.includes(false)
+                        }
+                        onChange={() => handleThemeChange(theme)}
+                      />
+                    }
+                  />
+                </div>
+                {types.length > 1 && (
+                  <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+                    {types.map((layer) => (
+                      <FormControlLabel
+                        label={format(layer.type)}
+                        className="theme-selector-checkbox"
+                        control={
+                          <Checkbox
+                            size="small"
+                            checked={selectedTypes[layer.type]}
+                            onChange={() => handleTypeChange(layer.type)}
+                          />
+                        }
+                      />
+                    ))}
+                  </Box>
+                )}
+              </Grid>
+              <Grid item xs={2}>
+                {renderPinThemeIcon(theme)}
+              </Grid>
+            </Grid>
           );
         })}
       </Box>
@@ -137,27 +198,27 @@ const ThemeSelector = ({ mode, setVisibleTypes }) => {
 
   return (
     <div className="theme-selector tour-layers">
-      <div className="layer-control" onMouseEnter={handleClick}>
+      <div className="layer-control" onClick={handleClick}>
         <LayerIcon
-          onClick={handleClick}
           className={`icon-layers ${
             mode === "theme-dark" ? "icon-layers-dark" : ""
           }`}
         />
       </div>
-      <Popover
+      <Popper
         className="theme-selector-popover"
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
+        placement="bottom-start"
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
       >
-        {renderCheckboxes()}
-      </Popover>
+        <Paper>{renderCheckboxes()}</Paper>
+      </Popper>
     </div>
   );
 };

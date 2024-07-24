@@ -12,7 +12,13 @@ import {
   ADDRESSES_TIPS,
 } from "./TipLibrary";
 
-function InspectorPanel({ mode, entity, setEntity }) {
+function InspectorPanel({
+  mode,
+  entity,
+  setEntity,
+  activeThemes,
+  setActiveThemes,
+}) {
   if (!entity) {
     return;
   }
@@ -23,27 +29,63 @@ function InspectorPanel({ mode, entity, setEntity }) {
 
   if (theme === "base") {
     inspectorPanel = (
-      <ThemePanel mode={mode} entity={entity} tips={BASE_TIPS} />
+      <ThemePanel
+        mode={mode}
+        entity={entity}
+        tips={BASE_TIPS}
+        activeThemes={activeThemes}
+        setActiveThemes={setActiveThemes}
+      />
     );
   } else if (theme === "buildings") {
     inspectorPanel = (
-      <ThemePanel mode={mode} entity={entity} tips={BUILDING_TIPS} />
+      <ThemePanel
+        mode={mode}
+        entity={entity}
+        tips={BUILDING_TIPS}
+        activeThemes={activeThemes}
+        setActiveThemes={setActiveThemes}
+      />
     );
   } else if (theme === "divisions") {
     inspectorPanel = (
-      <ThemePanel mode={mode} entity={entity} tips={DIVISION_TIPS} />
+      <ThemePanel
+        mode={mode}
+        entity={entity}
+        tips={DIVISION_TIPS}
+        activeThemes={activeThemes}
+        setActiveThemes={setActiveThemes}
+      />
     );
   } else if (theme === "places") {
     inspectorPanel = (
-      <ThemePanel mode={mode} entity={entity} tips={PLACES_TIPS} />
+      <ThemePanel
+        mode={mode}
+        entity={entity}
+        tips={PLACES_TIPS}
+        activeThemes={activeThemes}
+        setActiveThemes={setActiveThemes}
+      />
     );
   } else if (theme === "transportation") {
     inspectorPanel = (
-      <ThemePanel mode={mode} entity={entity} tips={TRANSPORTATION_TIPS} />
+      <ThemePanel
+        mode={mode}
+        entity={entity}
+        tips={TRANSPORTATION_TIPS}
+        activeThemes={activeThemes}
+        setActiveThemes={setActiveThemes}
+      />
     );
   } else if (theme === "addresses") {
     inspectorPanel = (
-      <ThemePanel mode={mode} entity={entity} tips={ADDRESSES_TIPS} />
+      <ThemePanel
+        mode={mode}
+        entity={entity}
+        tips={ADDRESSES_TIPS}
+        activeThemes={activeThemes}
+        setActiveThemes={setActiveThemes}
+      />
     );
   } else {
     console.log("unhandled theme type");

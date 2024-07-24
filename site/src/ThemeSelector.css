@@ -17,6 +17,11 @@ div.layer-control {
   justify-content: center;
   display: flex;
 }
+
+div.layer-control:hover {
+  cursor: pointer;
+}
+
 img.layer-control {
   background: white;
   width: 30px;

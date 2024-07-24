@@ -17,7 +17,6 @@ import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
 import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
-import InspectThemeSelect from "./InspectThemeSelect";
 
 const PMTILES_URL =
   "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-07-22/";
@@ -51,15 +50,15 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
-  const [activeTheme, setActiveTheme] = useState("places");
+  const [activeThemes, setActiveThemes] = useState(["places"]);
   const [visibleTypes, setVisibleTypes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
 
   // For access of latest value within map events
-  const activeThemeRef = useRef(activeTheme);
+  const activeThemesRef = useRef(activeThemes);
   useEffect(() => {
-    activeThemeRef.current = activeTheme;
-  }, [activeTheme]);
+    activeThemesRef.current = activeThemes;
+  }, [activeThemes]);
 
   const syncInteractiveLayerIds = useCallback(() => {
     const layers = mapRef.current.getStyle().layers;
@@ -104,10 +103,19 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
   const onClick = useCallback(
     (event) => {
       let features = event.features;
+      const activeFeatures = [];
+      const backgroundFeatures = [];
       features = features
         .filter((f) => visibleTypes.indexOf(f.layer["source-layer"]) >= 0)
-        .filter((f) => activeThemeRef.current.indexOf(f.layer["source"]) >= 0);
-      const feature = features[0];
+        .forEach((f) => {
+          if (activeThemesRef.current.indexOf(f.layer["source"]) >= 0) {
+            activeFeatures.push(f);
+          } else {
+            backgroundFeatures.push(f);
+          }
+        });
+      const feature =
+        activeFeatures.length > 0 ? activeFeatures[0] : backgroundFeatures[0];
       if (feature) {
         if (selectedSource.current) {
           mapRef.current.removeFeatureState({
@@ -178,18 +186,25 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
                 key={`${props.theme}_${props.type}_${i}`}
                 {...{
                   ...props,
-                  color:
-                    activeTheme === props.theme
-                      ? props.activeColor || props.color
-                      : props.color,
+                  color: activeThemes.includes(props.theme)
+                    ? props.activeColor || props.color
+                    : props.color,
                 }}
                 visible={
                   visibleTypes.includes(props.type) &&
                   (props.activeOnly === undefined ||
-                    activeTheme === props.theme)
+                    activeThemes.includes(props.theme))
                 }
-                label={label && activeTheme === props.theme}
-                active={activeTheme === props.theme}
+                label={label && activeThemes.includes(props.theme)}
+                active={activeThemes.includes(props.theme)}
+                activeThemes={activeThemes}
+                highlightColor={
+                  activeThemes.includes(props.theme)
+                    ? props.activeColor
+                      ? props.color
+                      : undefined
+                    : props.activeColor
+                }
               />
             ));
           })}
@@ -214,24 +229,22 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           <GeolocateControl />
           <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
         </MapLibreMap>
-        <InspectThemeSelect
-          activeTheme={activeTheme}
-          setActiveTheme={setActiveTheme}
-        />
         <div className="custom-controls">
           {Object.keys(mapEntity).length > 0 && (
             <InspectorPanel
               mode={mode}
               entity={mapEntity}
               setEntity={setMapEntity}
+              activeThemes={activeThemes}
+              setActiveThemes={setActiveThemes}
             />
           )}
 
           <ThemeSelector
             mode={mode}
             setVisibleTypes={setVisibleTypes}
-            activeTheme={activeTheme}
-            setActiveTheme={setActiveTheme}
+            activeThemes={activeThemes}
+            setActiveThemes={setActiveThemes}
           ></ThemeSelector>
         </div>
         <div className="bug-nub">
