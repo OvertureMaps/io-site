@@ -8,13 +8,18 @@ div.sidecar-box {
   box-shadow: 0 2px 4px white;
   border-color: rgba(15, 15, 15, 0.8);
   border: 3px;
+  overflow: hidden;
 }
 
 div.sidecar-container {
   overflow-y: auto;
   width: 210px;
   height: 416px;
-  border-radius: 10px;
+  scrollbar-color: var(--ifm-color-secondary-dark) rgba(0, 0, 0, 0);
+}
+
+div.sidecar-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
 }
 
 div.sidecar-blurb {
@@ -39,10 +44,6 @@ p.sidecar-welcome {
 div.sidecar-header {
   font-weight: 600;
   height: 34px;
-}
-
-div.sidecar-container::-webkit-scrollbar {
-  display: none;
 }
 
 button.close-panel-button {
