@@ -18,7 +18,7 @@ import BugIcon from "./icons/icon-bug.svg?react";
 import Sidecar from "./Sidecar";
 
 const PMTILES_URL =
-  "pmtiles://https://d32gfzcnkb85e2.cloudfront.net/2024-06-13-beta/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-07-22/";
 
 const ADDRESS_URL = "pmtiles://https://protomaps.dev/~bdon/";
 
