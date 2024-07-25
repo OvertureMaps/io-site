@@ -46,7 +46,13 @@ ThemeSource.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
+export default function Map({
+  mode,
+  mapEntity,
+  setMapEntity,
+  setZoom,
+  themeRef,
+}) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
@@ -246,6 +252,7 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
           setVisibleTypes={setVisibleTypes}
           activeThemes={activeThemes}
           setActiveThemes={setActiveThemes}
+          themeRef={themeRef}
         ></ThemeSelector>
         <div className="bug-nub">
           <a

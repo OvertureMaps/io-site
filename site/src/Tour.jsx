@@ -1,5 +1,6 @@
 import Joyride, { ACTIONS, EVENTS, LIFECYCLE } from "react-joyride";
 import { useState } from "react";
+import LayerIcon from "./icons/icon-layers.svg?react";
 
 const Steps = [
   {
@@ -32,6 +33,24 @@ const Steps = [
     content: "These options changes the visible layers of data on the map.",
     disableBeacon: true,
     title: "Theme Selector",
+    placement: "auto",
+    offset: 0,
+  },
+  {
+    target: ".tour-layers-checkboxes",
+    content:
+      "Altering the visibility at the theme level is available, as well as at a more granular type level",
+    disableBeacon: true,
+    title: "Change Layer Visibility",
+    placement: "auto",
+    offset: 0,
+  },
+  {
+    target: ".tour-layers-pins",
+    content:
+      "This button highlights the related theme. Multiple can be selected at the same time, and the button is also available via the inspector panel.",
+    disableBeacon: true,
+    title: "Highlight Themes",
     placement: "auto",
     offset: 0,
   },
@@ -78,6 +97,8 @@ const sampleFeature = {
   },
   type: "Feature",
   properties: {
+    theme: "places",
+    type: "place",
     id: "08f194db132d2b6d0388899915aac1fc",
     "@name": "Grill Mix Centrum",
     "@category": "bar_and_grill_restaurant",
@@ -125,7 +146,7 @@ const sampleFeature = {
   state: {},
 };
 
-function Tour({ run, modeName, setMapEntity }) {
+function Tour({ run, modeName, setMapEntity, themeRef }) {
   const [stepIndex, setStepIndex] = useState(0);
 
   const stepBGColor =
@@ -139,7 +160,24 @@ function Tour({ run, modeName, setMapEntity }) {
       const nextStepIndex =
         event.index + (event.action === ACTIONS.PREV ? -1 : 1);
       if (
+        (event.index === 3) &
+        (event.lifecycle === LIFECYCLE.COMPLETE) &
+        (event.action === ACTIONS.NEXT)
+      ) {
+        themeRef.current.click();
+        setTimeout(() => {
+          setStepIndex(nextStepIndex);
+        }, 100);
+      } else if (
         (event.index === 5) &
+        (event.lifecycle === LIFECYCLE.COMPLETE)
+      ) {
+        themeRef.current.click();
+        setTimeout(() => {
+          setStepIndex(nextStepIndex);
+        }, 100);
+      } else if (
+        (event.index === 7) &
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.NEXT)
       ) {
@@ -148,7 +186,7 @@ function Tour({ run, modeName, setMapEntity }) {
           setStepIndex(nextStepIndex);
         }, 100);
       } else if (
-        (event.index === 6) &
+        (event.index === 8) &
         (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
         setMapEntity({});
