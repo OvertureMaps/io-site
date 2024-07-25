@@ -1,3 +1,19 @@
+import { createTheme } from "@mui/material";
+
+export const getTheme = () => {
+  const theme = localStorage.getItem("theme");
+  if (theme) {
+    return theme;
+  }
+
+  const prefersLightTheme = window.matchMedia("(prefers-color-scheme: light)");
+  if (prefersLightTheme.matches) {
+    return "theme-light";
+  }
+
+  return "theme-dark";
+};
+
 export function setTheme(themeName, setClassName) {
   localStorage.setItem("theme", themeName);
   setClassName(themeName);
@@ -8,17 +24,17 @@ export function setTheme(themeName, setClassName) {
 }
 
 export function keepTheme(setClassName) {
-  const theme = localStorage.getItem("theme");
-  if (theme) {
-    setTheme(theme, setClassName);
-    return;
-  }
-
-  const prefersLightTheme = window.matchMedia("(prefers-color-scheme: light)");
-  if (prefersLightTheme.matches) {
-    setTheme("theme-light", setClassName);
-    return;
-  }
-
-  setTheme("theme-dark", setClassName);
+  setTheme(getTheme(), setClassName);
 }
+
+export const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+export const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});

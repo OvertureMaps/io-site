@@ -3,9 +3,9 @@
 }
 
 .map {
-  width:100vw;
-  height:80vh;
-  position:relative;
+  width: 100vw;
+  height: 80vh;
+  position: relative;
 
   .maplibregl-ctrl-bottom-right {
     bottom: 10px;
@@ -19,7 +19,6 @@
   align-items: center;
 }
 
-
 .header {
   display: flex;
   flex-direction: row;
@@ -28,8 +27,7 @@
   width: 100%;
 }
 
-
-.downloadBar { 
+.downloadBar {
   display: flex;
   flex-direction: row;
   justify-content: end;

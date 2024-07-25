@@ -22,3 +22,7 @@ svg.info-icon {
 .theme-dark svg.info-icon > path.primary {
   fill: whitesmoke;
 }
+
+.info-floater-closed {
+  pointer-events: none;
+}

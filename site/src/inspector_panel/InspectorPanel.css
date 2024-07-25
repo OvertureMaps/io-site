@@ -96,3 +96,16 @@ div.panel-row {
   display: flex;
   justify-content: space-between;
 }
+
+div.panel-row.theme .actions {
+  display: flex;
+}
+
+div.panel-row.theme .actions .pin {
+  margin-right: 10px;
+  height: 10px;
+}
+
+div.panel-row.theme .actions .pin:hover {
+  cursor: pointer;
+}

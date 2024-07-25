@@ -8,6 +8,7 @@ function InfoToolTip({ mode, target, content }) {
   return (
     <div className={"tool-tip"}>
       <Floater
+        className={open ? "info-floater-open" : "info-floater-closed"}
         styles={{
           container: {
             padding: "10px",
