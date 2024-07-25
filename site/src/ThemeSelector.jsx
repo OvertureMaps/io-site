@@ -216,13 +216,13 @@ const ThemeSelector = ({
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        placement="bottom-start"
+        placement="right-start"
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
       >
-        <Paper>{renderCheckboxes()}</Paper>
+        <Paper sx={{ borderRadius: "10px" }}>{renderCheckboxes()}</Paper>
       </Popper>
     </div>
   );

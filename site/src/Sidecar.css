@@ -139,6 +139,13 @@ div {
   .sidecar-blurb {
     color: var(--ifm-color-secondary-darker);
   }
+  svg.plane-icon > path {
+    fill: var(--ifm-color-primary-light);
+  }
+
+  button.sidecar-icon {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
 }
 
 button.sidecar-icon {
@@ -159,8 +166,10 @@ button.sidecar-icon:focus {
 }
 
 svg.plane-icon {
-  width: 36px;
-  height: 36px;
+  width: 35px;
+  height: 35px;
+  padding-bottom: 1px;
+  padding-right: 1px;
 
   path {
     fill: blue;
