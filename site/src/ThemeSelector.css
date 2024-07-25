@@ -46,3 +46,25 @@ svg.icon-layers > path.secondary {
   max-height: 80vh;
   overflow-y: scroll;
 }
+
+label.type-selector-checkbox {
+  margin:0px;
+  padding:0px;
+}
+
+.type-selector-checkbox > span { 
+  font-weight:400;
+  font-size:small;
+  color:#dddddd;
+  font-style:italic
+}
+
+.type-selector-checkbox > span { 
+  color:#333333;
+  font-style:italic
+}
+
+.type-selector-checkbox.dark > span { 
+  color:#cccccc;
+  font-style:italic
+}

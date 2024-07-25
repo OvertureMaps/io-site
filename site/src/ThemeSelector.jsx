@@ -98,13 +98,13 @@ const ThemeSelector = ({
     });
   };
 
-  const renderPinThemeIcon = (theme) => {
+  const renderPinThemeIcon = (theme, mode) => {
     const props = {
       sx: {
         "&:hover": {
           cursor: "pointer",
         },
-        color: "black",
+        color: mode==='theme-dark' ? "white" : "black",
       },
     };
 
@@ -119,7 +119,7 @@ const ThemeSelector = ({
           }
         }}
         sx={{
-          marginTop: "-7px",
+          marginTop: "-2px",
         }}
       >
         {activeThemes.includes(theme) ? (
@@ -144,7 +144,7 @@ const ThemeSelector = ({
           const children = types.map((t) => selectedTypes[t.type]);
 
           return (
-            <Grid container width={200}>
+            <Grid container sx={{paddingLeft:"5px"}}width={200}>
               <Grid
                 className={
                   theme === "divisions" ? "tour-layers-checkboxes" : ""
@@ -158,10 +158,13 @@ const ThemeSelector = ({
                     className="theme-selector-checkbox"
                     sx={{
                       height: "16px",
+                      marginBottom: "4px",
+                      marginTop:"10px"
                     }}
                     control={
                       <Checkbox
-                        size="small"
+                        size="medium"
+                        sx={{padding:'2px'}}
                         checked={
                           selectedThemes[theme] && children.includes(true)
                         }
@@ -174,13 +177,15 @@ const ThemeSelector = ({
                   />
                 </div>
                 {types.length > 1 && (
-                  <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+                  <Box sx={{ display: "flex", flexDirection: "column", ml: 2, padding: "0px"}}>
                     {types.map((layer) => (
                       <FormControlLabel
                         label={format(layer.type)}
-                        className="theme-selector-checkbox"
+                        className=""
+                        className={`type-selector-checkbox ${mode === 'theme-dark' ? 'dark':'light'}`}
                         control={
                           <Checkbox
+                            sx={{padding:'2px'}}
                             size="small"
                             checked={selectedTypes[layer.type]}
                             onChange={() => handleTypeChange(layer.type)}
@@ -192,7 +197,7 @@ const ThemeSelector = ({
                 )}
               </Grid>
               <Grid item xs={2}>
-                {renderPinThemeIcon(theme)}
+                {renderPinThemeIcon(theme, mode)}
               </Grid>
             </Grid>
           );
