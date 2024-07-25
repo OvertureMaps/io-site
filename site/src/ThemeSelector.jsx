@@ -125,7 +125,7 @@ const ThemeSelector = ({
         {activeThemes.includes(theme) ? (
           <PushPinIcon {...props} />
         ) : (
-          <PushPinOutlinedIcon {...props} />
+          <PushPinOutlinedIcon {...props} sx={{strokeWidth:2}}/>
         )}
       </IconButton>
     );
@@ -144,7 +144,7 @@ const ThemeSelector = ({
           const children = types.map((t) => selectedTypes[t.type]);
 
           return (
-            <Grid container sx={{paddingLeft:"5px"}}width={200}>
+            <Grid container className={`theme-box ${mode === 'theme-dark' ? 'dark':'light'}`}  sx={{paddingLeft:"5px"}} width={200}>
               <Grid
                 className={
                   theme === "divisions" ? "tour-layers-checkboxes" : ""
@@ -163,7 +163,7 @@ const ThemeSelector = ({
                     }}
                     control={
                       <Checkbox
-                        size="medium"
+                        size="small"
                         sx={{padding:'2px'}}
                         checked={
                           selectedThemes[theme] && children.includes(true)

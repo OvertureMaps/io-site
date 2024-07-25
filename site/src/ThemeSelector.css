@@ -68,3 +68,11 @@ label.type-selector-checkbox {
   color:#cccccc;
   font-style:italic
 }
+
+.theme-box:nth-child(even) {
+  background:#eeeeee;
+}
+
+.theme-box.dark:nth-child(even) {
+  background:#333333;
+}
