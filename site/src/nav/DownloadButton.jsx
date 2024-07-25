@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
-import { DownloadCatalog } from "../DownloadCatalog.js";
+import { getDownloadCatalog } from "../DownloadCatalog.js";
 import {
   ParquetDataset,
   set_panic_hook,
@@ -14,7 +14,7 @@ import Floater from "react-floater";
 
 const ZOOM_BOUND = 15;
 
-function DownloadButton({ mode, zoom, setZoom }) {
+function DownloadButton({ mode, zoom, setZoom, visibleThemes}) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -41,10 +41,10 @@ function DownloadButton({ mode, zoom, setZoom }) {
     console.log(bounds);
 
     //Send those to the download engine
-    const minxPath = ["bbox", "minx"];
-    const minyPath = ["bbox", "miny"];
-    const maxxPath = ["bbox", "maxx"];
-    const maxyPath = ["bbox", "maxy"];
+    const minxPath = ["bbox", "xmin"];
+    const minyPath = ["bbox", "ymin"];
+    const maxxPath = ["bbox", "xmax"];
+    const maxyPath = ["bbox", "ymax"];
 
     const readOptions = {
       bbox: bbox,
@@ -55,11 +55,11 @@ function DownloadButton({ mode, zoom, setZoom }) {
         maxyPath,
       },
     };
-
-    let parquetDataset = await new ParquetDataset(DownloadCatalog);
+    let downloadCatalog = getDownloadCatalog(bbox, visibleThemes);
+    let parquetDataset = await new ParquetDataset(downloadCatalog);
+    set_panic_hook();
     const wasmTable = await parquetDataset.read(readOptions);
 
-    set_panic_hook();
     //Create a blob
     // const binaryDataForDownload = writeGeoParquet(wasmTable);
     const binaryDataForDownload = writeGeoJSON(wasmTable);
