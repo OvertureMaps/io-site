@@ -1,5 +1,7 @@
 .theme-selector {
-  max-width: 400px;
+  position: fixed;
+  left: 10px;
+  top: 65px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   color: black;
@@ -9,6 +11,10 @@
   max-height: 36px;
   margin-top: 4px;
   margin-left: 4px;
+}
+
+.theme-selector.active {
+  left: 390px;
 }
 
 div.layer-control {

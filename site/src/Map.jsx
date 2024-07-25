@@ -239,14 +239,14 @@ export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
               setActiveThemes={setActiveThemes}
             />
           )}
-
-          <ThemeSelector
-            mode={mode}
-            setVisibleTypes={setVisibleTypes}
-            activeThemes={activeThemes}
-            setActiveThemes={setActiveThemes}
-          ></ThemeSelector>
         </div>
+        <ThemeSelector
+          entity={mapEntity}
+          mode={mode}
+          setVisibleTypes={setVisibleTypes}
+          activeThemes={activeThemes}
+          setActiveThemes={setActiveThemes}
+        ></ThemeSelector>
         <div className="bug-nub">
           <a
             className="bug-nub-link"

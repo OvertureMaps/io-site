@@ -20,6 +20,7 @@ const ThemeSelector = ({
   setVisibleTypes,
   activeThemes,
   setActiveThemes,
+  entity,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -197,7 +198,11 @@ const ThemeSelector = ({
   const id = open ? "theme-selector-popover" : undefined;
 
   return (
-    <div className="theme-selector tour-layers">
+    <div
+      className={`theme-selector tour-layers ${
+        Object.keys(entity).length > 0 ? " active" : ""
+      }`}
+    >
       <div className="layer-control" onClick={handleClick}>
         <LayerIcon
           className={`icon-layers ${
@@ -206,7 +211,7 @@ const ThemeSelector = ({
         />
       </div>
       <Popper
-        className="theme-selector-popover"
+        className={"theme-selector-popover"}
         id={id}
         open={open}
         anchorEl={anchorEl}
