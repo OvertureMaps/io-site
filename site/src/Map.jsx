@@ -248,6 +248,7 @@ export default function Map({
             setOpen={setSidecarOpen}
             map={map}
             setVisibleTypes={setVisibleTypes}
+            setActiveThemes={setActiveThemes}
           />
 
           {Object.keys(mapEntity).length > 0 && (

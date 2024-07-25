@@ -143,9 +143,10 @@ div {
 
 button.sidecar-icon {
   border: none;
-  width: 32px;
-  height: 32px;
-  margin: 3px;
+  width: 36px;
+  height: 36px;
+  margin-top: 4px;
+  margin-left: 4px;
   padding: 0;
   display: flex;
   justify-content: center;
@@ -158,8 +159,8 @@ button.sidecar-icon:focus {
 }
 
 svg.plane-icon {
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
 
   path {
     fill: blue;

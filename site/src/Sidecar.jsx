@@ -3,16 +3,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 
-function Sidecar({ open, setOpen, map, setVisibleTypes }) {
+function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   const handleParis = () => {
     setVisibleTypes([
       "land",
-      "land cover",
-      "land use",
+      "land_cover",
+      "land_use",
       "water",
       "segment",
       "connector",
     ]);
+    setActiveThemes(["base", "transportation"]);
     map.ref.current.jumpTo({
       center: [2.3417, 48.8552],
       zoom: 11.73,
@@ -24,12 +25,13 @@ function Sidecar({ open, setOpen, map, setVisibleTypes }) {
   const handleNYC = () => {
     setVisibleTypes([
       "land",
-      "land cover",
-      "land use",
+      "land_cover",
+      "land_use",
       "water",
       "building",
       "building_part",
     ]);
+    setActiveThemes(["base", "buildings"]);
     map.ref.current.jumpTo({
       center: [-73.99768, 40.75332],
       zoom: 14.22,
@@ -40,11 +42,12 @@ function Sidecar({ open, setOpen, map, setVisibleTypes }) {
   const handleVenice = () => {
     setVisibleTypes([
       "land",
-      "land cover",
-      "land use",
+      "land_cover",
+      "land_use",
       "water",
       "infrastructure",
     ]);
+    setActiveThemes(["base"]);
     map.ref.current.jumpTo({
       center: [12.32545, 45.4299],
       zoom: 13.36,
@@ -53,7 +56,8 @@ function Sidecar({ open, setOpen, map, setVisibleTypes }) {
     });
   };
   const handleLondon = () => {
-    setVisibleTypes(["land", "land cover", "land use", "water", "place"]);
+    setVisibleTypes(["land", "land_cover", "land_use", "water", "place"]);
+    setActiveThemes(["base", "places"]);
     map.ref.current.jumpTo({
       center: [-0.091217, 51.514511],
       zoom: 16.02,
@@ -64,12 +68,13 @@ function Sidecar({ open, setOpen, map, setVisibleTypes }) {
   const handleBoston = () => {
     setVisibleTypes([
       "land",
-      "land cover",
-      "land use",
+      "land_cover",
+      "land_use",
       "water",
       "segment",
-      "addresse",
+      "address",
     ]);
+    setActiveThemes(["base", "addresses"]);
     map.ref.current.jumpTo({
       center: [-71.065192, 42.353714],
       zoom: 15.94,
