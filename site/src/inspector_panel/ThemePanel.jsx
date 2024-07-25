@@ -74,7 +74,7 @@ function ThemePanel({ mode, entity, tips }) {
         <div className="panel-row sources">
           <div>
             <strong>Source(s):</strong>{" "}
-            {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
+            {[...new Set(JSON.parse(entity["sources"]).map((source) => source["dataset"]))].join(', ')}
           </div>
           <InfoToolTip
             mode={mode}
