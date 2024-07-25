@@ -1,29 +1,36 @@
 .theme-selector {
-  max-width: 400px;
+  position: fixed;
+  left: 10px;
+  top: 65px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   color: black;
   font-size: 0;
   outline: none;
   display: flex;
-  max-height: 32px;
-  margin-top: 3px;
+  max-height: 36px;
+  margin-top: 4px;
+  margin-left: 4px;
 }
 
-.theme-dark .inspector-panel {
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
+.theme-selector.active {
+  left: 390px;
 }
 
 div.layer-control {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   justify-content: center;
   display: flex;
 }
+
+div.layer-control:hover {
+  cursor: pointer;
+}
+
 img.layer-control {
   background: white;
-  width: 24px;
+  width: 30px;
   justify-content: center;
 }
 
@@ -33,4 +40,9 @@ svg.icon-layers > path.primary {
 
 svg.icon-layers > path.secondary {
   fill: cornflowerblue;
+}
+
+.theme-selector-popover {
+  max-height: 80vh;
+  overflow-y: scroll;
 }

@@ -1,110 +1,231 @@
-import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import LayerIcon from "./icons/icon-layers.svg?react";
 import "./ThemeSelector.css";
+import { layers } from "./Layers";
+import { format } from "./util/TextUtil";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  Popper,
+  Paper,
+} from "@mui/material";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 
-function ThemeSelector({ visibleThemes, setVisibleThemes, mode }) {
-  const [base, setBase] = useState(true);
-  const [buildings, setBuildings] = useState(true);
-  const [divisions, setDivisions] = useState(true);
-  const [places, setPlaces] = useState(true);
-  const [transportation, setTransportation] = useState(true);
-  const [addresses, setAddresses] = useState(true);
+const ThemeSelector = ({
+  mode,
+  setVisibleTypes,
+  activeThemes,
+  setActiveThemes,
+  entity,
+}) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    if (anchorEl) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const [selectedThemes, setSelectedThemes] = useState({});
+  const [selectedTypes, setSelectedTypesState] = useState({});
 
   useEffect(() => {
-    let layers = [];
+    const newSelectedThemes = {};
+    const newSelectedTypes = {};
 
-    if (base) layers.push("base");
-    if (buildings) layers.push("buildings");
-    if (divisions) layers.push("divisions");
-    if (places) layers.push("places");
-    if (transportation) layers.push("transportation");
-    if (addresses) layers.push("addresses");
-    setVisibleThemes(layers);
-  }, [base, buildings, divisions, places, transportation, addresses]);
+    layers.forEach((layer) => {
+      if (!newSelectedThemes[layer.theme]) {
+        newSelectedThemes[layer.theme] = true;
+      }
+      newSelectedTypes[layer.type] = true;
+    });
+
+    setSelectedThemes(newSelectedThemes);
+    setSelectedTypesState(newSelectedTypes);
+    updateVisibleTypes(newSelectedTypes);
+  }, []);
+
+  const handleThemeChange = (theme) => {
+    const newSelectedThemes = {
+      ...selectedThemes,
+      [theme]: !selectedThemes[theme],
+    };
+    setSelectedThemes(newSelectedThemes);
+
+    const newSelectedTypes = { ...selectedTypes };
+    layers
+      .filter((layer) => layer.theme === theme)
+      .forEach((layer) => {
+        newSelectedTypes[layer.type] = !selectedThemes[theme];
+      });
+
+    setSelectedTypesState(newSelectedTypes);
+    updateVisibleTypes(newSelectedTypes);
+  };
+
+  const handleTypeChange = (type) => {
+    const newSelectedTypes = { ...selectedTypes, [type]: !selectedTypes[type] };
+    setSelectedTypesState(newSelectedTypes);
+    updateVisibleTypes(newSelectedTypes);
+  };
+
+  const updateVisibleTypes = (newSelectedTypes) => {
+    const visible = Object.keys(newSelectedTypes).filter(
+      (type) => newSelectedTypes[type]
+    );
+    setVisibleTypes(visible);
+  };
+
+  const filterUniqueByType = (array) => {
+    const seenTypes = new Set();
+    return array.filter((item) => {
+      if (seenTypes.has(item.type)) {
+        return false;
+      } else {
+        seenTypes.add(item.type);
+        return true;
+      }
+    });
+  };
+
+  const renderPinThemeIcon = (theme) => {
+    const props = {
+      sx: {
+        "&:hover": {
+          cursor: "pointer",
+        },
+        color: "black",
+      },
+    };
+
+    return (
+      <IconButton
+        onClick={() => {
+          if (activeThemes.includes(theme)) {
+            setActiveThemes(activeThemes.filter((t) => t !== theme));
+          } else {
+            setActiveThemes(activeThemes.concat(theme));
+          }
+        }}
+        sx={{
+          marginTop: "-7px",
+        }}
+      >
+        {activeThemes.includes(theme) ? (
+          <PushPinIcon {...props} />
+        ) : (
+          <PushPinOutlinedIcon {...props} />
+        )}
+      </IconButton>
+    );
+  };
+
+  const renderCheckboxes = () => {
+    const themes = [...new Set(layers.map((layer) => layer.theme))];
+
+    return (
+      <Box p={1}>
+        {themes.map((theme) => {
+          const types = filterUniqueByType(
+            layers.filter((layer) => layer.theme === theme)
+          );
+
+          const children = types.map((t) => selectedTypes[t.type]);
+
+          return (
+            <Grid container width={200}>
+              <Grid item xs={10}>
+                <div>
+                  <FormControlLabel
+                    label={format(theme)}
+                    className="theme-selector-checkbox"
+                    sx={{
+                      height: "16px",
+                    }}
+                    control={
+                      <Checkbox
+                        size="small"
+                        checked={
+                          selectedThemes[theme] && children.includes(true)
+                        }
+                        indeterminate={
+                          children.includes(true) && children.includes(false)
+                        }
+                        onChange={() => handleThemeChange(theme)}
+                      />
+                    }
+                  />
+                </div>
+                {types.length > 1 && (
+                  <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+                    {types.map((layer) => (
+                      <FormControlLabel
+                        label={format(layer.type)}
+                        className="theme-selector-checkbox"
+                        control={
+                          <Checkbox
+                            size="small"
+                            checked={selectedTypes[layer.type]}
+                            onChange={() => handleTypeChange(layer.type)}
+                          />
+                        }
+                      />
+                    ))}
+                  </Box>
+                )}
+              </Grid>
+              <Grid item xs={2}>
+                {renderPinThemeIcon(theme)}
+              </Grid>
+            </Grid>
+          );
+        })}
+      </Box>
+    );
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "theme-selector-popover" : undefined;
 
   return (
-    <div className="dropdown dropdown--hoverable theme-selector tour-layers">
-      <div className="layer-control">
+    <div
+      className={`theme-selector tour-layers ${
+        Object.keys(entity).length > 0 ? " active" : ""
+      }`}
+    >
+      <div className="layer-control" onClick={handleClick}>
         <LayerIcon
           className={`icon-layers ${
             mode === "theme-dark" ? "icon-layers-dark" : ""
           }`}
         />
       </div>
-      <ul className="dropdown__menu">
-        <li>
-          <label htmlFor="base" className="dropdown__link">
-            <input
-              id="base"
-              type="checkbox"
-              checked={visibleThemes.includes("base")}
-              onChange={() => setBase(!base)}
-            />
-            Base
-          </label>
-        </li>
-        <li>
-          <label htmlFor="buildings" className="dropdown__link">
-            <input
-              id="buildings"
-              type="checkbox"
-              checked={visibleThemes.includes("buildings")}
-              onChange={() => setBuildings(!buildings)}
-            />
-            Buildings
-          </label>
-        </li>
-        <li>
-          <label htmlFor="divisions" className="dropdown__link">
-            <input
-              id="divisions"
-              type="checkbox"
-              checked={visibleThemes.includes("divisions")}
-              onChange={() => setDivisions(!divisions)}
-            />
-            Divisions
-          </label>
-        </li>
-        <li>
-          <label htmlFor="places" className="dropdown__link">
-            <input
-              id="places"
-              type="checkbox"
-              checked={visibleThemes.includes("places")}
-              onChange={() => setPlaces(!places)}
-            />
-            Places
-          </label>
-        </li>
-        <li>
-          <label htmlFor="transportation" className="dropdown__link">
-            <input
-              id="transportation"
-              type="checkbox"
-              checked={visibleThemes.includes("transportation")}
-              onChange={() => setTransportation(!transportation)}
-            />
-            Transportation
-          </label>
-        </li>
-        <li>
-          <label htmlFor="addresses" className="dropdown__link">
-            <input
-              id="addresses"
-              type="checkbox"
-              checked={visibleThemes.includes("addresses")}
-              onChange={() => setAddresses(!addresses)}
-            />
-            Addresses
-          </label>
-        </li>
-      </ul>
+      <Popper
+        className={"theme-selector-popover"}
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        placement="bottom-start"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <Paper>{renderCheckboxes()}</Paper>
+      </Popper>
     </div>
   );
-}
-
-ThemeSelector.propTypes = {
-  setVisibleThemes: PropTypes.func,
 };
+
 export default ThemeSelector;

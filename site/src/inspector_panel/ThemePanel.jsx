@@ -5,6 +5,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import IndentIcon from "../icons/icon-indent.svg?react";
 import InfoToolTip from "./InfoToolTip";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 
 const sharedProperties = [
   "theme",
@@ -16,7 +18,7 @@ const sharedProperties = [
   "version",
 ];
 
-function ThemePanel({ mode, entity, tips }) {
+function ThemePanel({ mode, entity, tips, activeThemes, setActiveThemes }) {
   const [commonExpanded, setCommonExpanded] = useState(false);
   const [otherExpanded, setOtherExpanded] = useState(false);
 
@@ -27,11 +29,31 @@ function ThemePanel({ mode, entity, tips }) {
           <strong>Theme: </strong>
           {entity["theme"]}
         </div>
-        <InfoToolTip
-          mode={mode}
-          content={tips.theme}
-          target={"theme-theme-tip"}
-        />
+        <div className="actions">
+          <div
+            className="pin"
+            onClick={() => {
+              if (activeThemes.includes(entity["theme"])) {
+                setActiveThemes(
+                  activeThemes.filter((t) => t !== entity["theme"])
+                );
+              } else {
+                setActiveThemes(activeThemes.concat(entity["theme"]));
+              }
+            }}
+          >
+            {activeThemes.includes(entity["theme"]) ? (
+              <PushPinIcon />
+            ) : (
+              <PushPinOutlinedIcon />
+            )}
+          </div>
+          <InfoToolTip
+            mode={mode}
+            content={tips.theme}
+            target={"theme-theme-tip"}
+          />
+        </div>
       </div>
       <div className="panel-row type">
         <div>
@@ -74,7 +96,7 @@ function ThemePanel({ mode, entity, tips }) {
         <div className="panel-row sources">
           <div>
             <strong>Source(s):</strong>{" "}
-            {JSON.parse(entity["sources"]).map((source) => source["dataset"])}
+            {[...new Set(JSON.parse(entity["sources"]).map((source) => source["dataset"]))].join(', ')}
           </div>
           <InfoToolTip
             mode={mode}
