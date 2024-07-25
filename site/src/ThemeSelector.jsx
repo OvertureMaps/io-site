@@ -138,7 +138,7 @@ const ThemeSelector = ({
         {activeThemes.includes(theme) ? (
           <PushPinIcon {...props} />
         ) : (
-          <PushPinOutlinedIcon {...props} sx={{strokeWidth:2}}/>
+          <PushPinOutlinedIcon {...props}/>
         )}
       </IconButton>
     );
