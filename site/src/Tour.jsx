@@ -30,7 +30,8 @@ const Steps = [
   },
   {
     target: ".tour-layers",
-    content: "These options changes the visible layers of data on the map.",
+    content:
+      "These options change style and visibility of the different layers.",
     disableBeacon: true,
     title: "Theme Selector",
     placement: "auto",
@@ -39,7 +40,7 @@ const Steps = [
   {
     target: ".tour-layers-checkboxes",
     content:
-      "Altering the visibility at the theme level is available, as well as at a more granular type level",
+      "Visibility Toggles are available at both the 'theme' and 'type' levels.",
     disableBeacon: true,
     title: "Change Layer Visibility",
     placement: "auto",
@@ -48,7 +49,7 @@ const Steps = [
   {
     target: ".tour-layers-pins",
     content:
-      "This button sets a theme as active. Active themes are highlighted on the map and prioritized over non-active themes for click events.",
+      "This button sets a theme as active. Active themes are highlighted and receive click-to-select priority.",
     disableBeacon: true,
     title: "Highlight Themes",
     placement: "auto",
@@ -154,13 +155,22 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
   const stepTextColor =
     modeName === "theme-dark" ? "var(--ifm-color-secondary-light)" : "black";
 
+  const targets = Steps.map((step) => step["target"]);
+
+  /*
+  This function deals with the progress of the tour, and handling any events that take place during.
+  Each "step" has typically 3 events associated with it. Therefore, we must check that events only
+  take place once, which is why we check the event lifecycle. In addition, we must check the action of
+  the event (next, prev, skip, etc). This is a tedious and granular process, but it allows the tour
+  to be very controlled and open/close different parts and pieces of the explorer site to show them 
+  all off. 
+  */
   const handleJoyrideCallback = (event) => {
-    console.log(event);
     if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(event.type)) {
       const nextStepIndex =
         event.index + (event.action === ACTIONS.PREV ? -1 : 1);
       if (
-        (event.index === 3) &
+        (event.index === targets.indexOf(".tour-layers")) &
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.NEXT)
       ) {
@@ -169,14 +179,14 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
           setStepIndex(nextStepIndex);
         }, 100);
       } else if (
-        (event.index === 4) &
+        (event.index === targets.indexOf(".tour-layers-checkboxes")) &
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.PREV)
       ) {
         themeRef.current.click();
         setStepIndex(nextStepIndex);
       } else if (
-        (event.index === 5) &
+        (event.index === targets.indexOf(".tour-layers-pins")) &
         (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
         if (event.action === ACTIONS.PREV) {
@@ -186,7 +196,7 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
           setStepIndex(nextStepIndex);
         }
       } else if (
-        (event.index === 6) &
+        (event.index === targets.indexOf(".maplibregl-ctrl-top-right")) &
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.PREV)
       ) {
@@ -195,7 +205,7 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
           setStepIndex(nextStepIndex);
         }, 100);
       } else if (
-        (event.index === 7) &
+        (event.index === targets.indexOf(".bug-nub-link")) &
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.NEXT)
       ) {
@@ -204,13 +214,13 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
           setStepIndex(nextStepIndex);
         }, 100);
       } else if (
-        (event.index === 8) &
+        (event.index === targets.indexOf(".inspector-panel")) &
         (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
         setMapEntity({});
         setStepIndex(nextStepIndex);
       } else if (
-        (event.index === 9) &
+        (event.index === targets.indexOf(".maplibregl-ctrl-bottom-right")) &
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.PREV)
       ) {
@@ -222,8 +232,11 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
         setStepIndex(nextStepIndex);
       }
     } else if (event.action === ACTIONS.SKIP) {
-      if (event.index === 8) setMapEntity({});
-      else if ((event.index === 4) | (event.index === 5))
+      if (event.index === targets.indexOf(".inspector-panel")) setMapEntity({});
+      else if (
+        (event.index === targets.indexOf(".tour-layers-checkboxes")) |
+        (event.index === targets.indexOf(".tour-layers-pins"))
+      )
         themeRef.current.click();
     }
   };
