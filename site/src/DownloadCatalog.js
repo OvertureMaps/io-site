@@ -2,16 +2,18 @@ import manifest from './07-22-manifest.json';
 
 const awsbasepath = 'https://overturemaps-us-west-2.s3.amazonaws.com/release/';
 
-export function getDownloadCatalog(bbox){
+export function getDownloadCatalog(bbox, visibleThemes){
    let fileCatalog = [];
 
    const versionPath = awsbasepath + manifest.version;
 
    manifest.themes.forEach( theme => {
+      // If the theme isn't visible, don't download it. 
+         if (!visibleThemes.includes(theme.name)){
+            return;
+         }
+
          theme.types.forEach(type => {
-
-            if (type.name !== 'building') return;
-
             type.files.forEach(file => {
                let newName = `${versionPath}${theme.relative_path}${type.relative_path}/${file.name}`
                if (intersects(bbox, file.bbox)) {
@@ -35,4 +37,3 @@ function intersects(bb1, bb2) {
       bb1[3] > bb2[1]
    );
 }
-//"https://overturemaps-us-west-2.s3.amazonaws.com/release/2024-06-13-beta.1/theme=admins/type=administrative_boundary/part-00000-7b8d0781-120d-4bf4-ba8a-752423a2975b-c000.zstd.parquet"
