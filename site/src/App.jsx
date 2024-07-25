@@ -24,6 +24,8 @@ function App() {
     localStorage.setItem("tour", event.target.checked);
     setTour(!tour);
   };
+  
+  const [visibleThemes, setVisibleThemes] = useState([]);
 
   useEffect(() => {
     keepTheme(setModeName);
@@ -45,12 +47,15 @@ function App() {
           setMode={setModeName}
           zoom={zoom}
           setZoom={setZoom}
+          visibleThemes={visibleThemes}
         />
         <Map
           mode={modeName}
           mapEntity={mapEntity}
           setMapEntity={setMapEntity}
           setZoom={setZoom}
+          visibleThemes={visibleThemes}
+          setVisibleThemes={setVisibleThemes}
         />
       </MapProvider>
     </div>

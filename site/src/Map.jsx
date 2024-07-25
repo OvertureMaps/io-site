@@ -213,11 +213,11 @@ ThemeTypeLayer.propTypes = {
   extrusion: PropTypes.bool,
 };
 
-export default function Map({ mode, mapEntity, setMapEntity, setZoom }) {
+export default function Map({ mode, mapEntity, setMapEntity, setZoom, visibleThemes, setVisibleThemes}) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
-  const [visibleThemes, setVisibleThemes] = useState([]);
+  
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
 
   const selectedSource = useRef();
