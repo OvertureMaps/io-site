@@ -134,7 +134,7 @@ function DownloadButton({ mode, zoom, setZoom }) {
             <button
               className="close-panel-button"
               onClick={() => setShowFloater(false)}
-              style={{ height: "22px", width: "22px", paddingLeft: "2px" }}
+              style={{ height: "22px", width: "22px", marginLeft: "2px" }}
             >
               <CloseIcon
                 sx={{ fontSize: "22px" }}
