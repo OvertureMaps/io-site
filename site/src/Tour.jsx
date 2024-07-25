@@ -48,7 +48,7 @@ const Steps = [
   {
     target: ".tour-layers-pins",
     content:
-      "This button highlights the related theme. Multiple can be selected at the same time, and the button is also available via the inspector panel.",
+      "This button sets a theme as active. Active themes are highlighted on the map and prioritized over non-active themes for click events.",
     disableBeacon: true,
     title: "Highlight Themes",
     placement: "auto",
