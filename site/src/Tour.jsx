@@ -169,8 +169,26 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
           setStepIndex(nextStepIndex);
         }, 100);
       } else if (
+        (event.index === 4) &
+        (event.lifecycle === LIFECYCLE.COMPLETE) &
+        (event.action === ACTIONS.PREV)
+      ) {
+        themeRef.current.click();
+        setStepIndex(nextStepIndex);
+      } else if (
         (event.index === 5) &
         (event.lifecycle === LIFECYCLE.COMPLETE)
+      ) {
+        if (event.action === ACTIONS.PREV) {
+          setStepIndex(nextStepIndex);
+        } else {
+          themeRef.current.click();
+          setStepIndex(nextStepIndex);
+        }
+      } else if (
+        (event.index === 6) &
+        (event.lifecycle === LIFECYCLE.COMPLETE) &
+        (event.action === ACTIONS.PREV)
       ) {
         themeRef.current.click();
         setTimeout(() => {
@@ -191,9 +209,22 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
       ) {
         setMapEntity({});
         setStepIndex(nextStepIndex);
+      } else if (
+        (event.index === 9) &
+        (event.lifecycle === LIFECYCLE.COMPLETE) &
+        (event.action === ACTIONS.PREV)
+      ) {
+        setMapEntity(sampleFeature.properties);
+        setTimeout(() => {
+          setStepIndex(nextStepIndex);
+        }, 100);
       } else {
         setStepIndex(nextStepIndex);
       }
+    } else if (event.action === ACTIONS.SKIP) {
+      if (event.index === 8) setMapEntity({});
+      else if ((event.index === 4) | (event.index === 5))
+        themeRef.current.click();
     }
   };
 

@@ -204,10 +204,6 @@ const ThemeSelector = ({
   const open = Boolean(anchorEl);
   const id = open ? "theme-selector-popover" : undefined;
 
-  useEffect(() => {
-    themeRef.current.addEventListener("click", handleClick);
-  }, []);
-
   return (
     <div
       className={`theme-selector tour-layers ${
