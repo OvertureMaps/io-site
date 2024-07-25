@@ -63,3 +63,7 @@ div.download-text {
 div.download-zoom-tip {
   border-radius: 10px;
 }
+
+div.info-floater {
+  display: inline-flex;
+}
