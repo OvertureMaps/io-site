@@ -15,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const ZOOM_BOUND = 15;
 
-function DownloadButton({ mode, zoom, setZoom }) {
+function DownloadButton({ mode, zoom, setZoom, visibleThemes}) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -56,7 +56,7 @@ function DownloadButton({ mode, zoom, setZoom }) {
         maxyPath,
       },
     };
-    let downloadCatalog = getDownloadCatalog(bbox);
+    let downloadCatalog = getDownloadCatalog(bbox, visibleThemes);
     let parquetDataset = await new ParquetDataset(downloadCatalog);
     set_panic_hook();
     const wasmTable = await parquetDataset.read(readOptions);
