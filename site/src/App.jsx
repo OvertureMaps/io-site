@@ -27,6 +27,8 @@ function App() {
     localStorage.setItem("tour", event.target.checked);
     setTour(!tour);
   };
+  
+  const [visibleThemes, setVisibleThemes] = useState([]);
 
   useEffect(() => {
     keepTheme(setModeName);
@@ -42,6 +44,10 @@ function App() {
           setOpen={setOpen}
           mode={modeName}
           setNavigatorOpen={setNavigatorOpen}
+          setMode={setModeName}
+          zoom={zoom}
+          setZoom={setZoom}
+          visibleThemes={visibleThemes}
         />
         <Tour
           run={run}
@@ -49,6 +55,9 @@ function App() {
           setMapEntity={setMapEntity}
           setNavigatorOpen={setNavigatorOpen}
           themeRef={themeRef}
+          setZoom={setZoom}
+          visibleThemes={visibleThemes}
+          setVisibleThemes={setVisibleThemes}
         />
         <MapProvider>
           <Header
