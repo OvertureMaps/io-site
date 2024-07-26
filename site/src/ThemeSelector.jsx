@@ -17,6 +17,7 @@ import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 
 const ThemeSelector = ({
   mode,
+  visibleTypes,
   setVisibleTypes,
   activeThemes,
   setActiveThemes,
@@ -54,6 +55,14 @@ const ThemeSelector = ({
     setSelectedTypesState(newSelectedTypes);
     updateVisibleTypes(newSelectedTypes);
   }, []);
+
+  useEffect(() => {
+    const newSelectedTypes = {};
+    visibleTypes.forEach((type) => {
+      newSelectedTypes[type] = true;
+    });
+    setSelectedTypesState(newSelectedTypes);
+  }, [visibleTypes]);
 
   const handleThemeChange = (theme) => {
     const newSelectedThemes = {

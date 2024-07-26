@@ -263,6 +263,7 @@ export default function Map({
           <ThemeSelector
             entity={mapEntity}
             mode={mode}
+            visibleTypes={visibleTypes}
             setVisibleTypes={setVisibleTypes}
             activeThemes={activeThemes}
             setActiveThemes={setActiveThemes}
