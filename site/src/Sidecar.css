@@ -94,23 +94,28 @@ svg.arrow-forward {
 div {
   .paris {
     background-image: url("./images/paris.png");
+    background-size: 200px 150px;
     margin-top: 0;
   }
 
   .nyc {
     background-image: url("./images/nyc.png");
+    background-size: 200px 150px;
   }
 
-  .venice {
-    background-image: url("./images/venice.png");
+  .world {
+    background-image: url("./images/world.png");
+    background-size: 200px 150px;
   }
 
   .london {
     background-image: url("./images/london.png");
+    background-size: 200px 150px;
   }
 
   .boston {
     background-image: url("./images/boston.png");
+    background-size: 200px 100px;
   }
 }
 

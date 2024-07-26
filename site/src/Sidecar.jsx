@@ -6,14 +6,19 @@ import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   const handleParis = () => {
     setVisibleTypes([
+      "division_area",
+      "boundary",
       "land",
       "land_cover",
       "land_use",
       "water",
+      "infrastructure",
       "segment",
       "connector",
+      "building",
+      "building_part",
     ]);
-    setActiveThemes(["base", "transportation"]);
+    setActiveThemes(["transportation"]);
     map.ref.current.jumpTo({
       center: [2.3417, 48.8552],
       zoom: 11.73,
@@ -24,14 +29,16 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
 
   const handleNYC = () => {
     setVisibleTypes([
+      "boundary",
       "land",
       "land_cover",
       "land_use",
       "water",
+      "infrastructure",
       "building",
       "building_part",
     ]);
-    setActiveThemes(["base", "buildings"]);
+    setActiveThemes(["buildings"]);
     map.ref.current.jumpTo({
       center: [-73.99768, 40.75332],
       zoom: 14.22,
@@ -39,7 +46,7 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
       bearing: 60.6,
     });
   };
-  const handleVenice = () => {
+  const handleWorld = () => {
     setVisibleTypes([
       "land",
       "land_cover",
@@ -49,15 +56,27 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
     ]);
     setActiveThemes(["base"]);
     map.ref.current.jumpTo({
-      center: [12.32545, 45.4299],
-      zoom: 13.36,
-      pitch: 52,
-      bearing: 14.5,
+      center: [10.3, 24.5],
+      zoom: 1.07,
+      bearing: 0,
+      pitch: 0,
     });
   };
   const handleLondon = () => {
-    setVisibleTypes(["land", "land_cover", "land_use", "water", "place"]);
-    setActiveThemes(["base", "places"]);
+    setVisibleTypes([
+      "division_area",
+      "boundary",
+      "land",
+      "land_cover",
+      "land_use",
+      "water",
+      "infrastructure",
+      "segment",
+      "building",
+      "building_part",
+      "place",
+    ]);
+    setActiveThemes(["places"]);
     map.ref.current.jumpTo({
       center: [-0.091217, 51.514511],
       zoom: 16.02,
@@ -67,14 +86,18 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   };
   const handleBoston = () => {
     setVisibleTypes([
+      "boundary",
       "land",
       "land_cover",
       "land_use",
       "water",
+      "infrastructure",
       "segment",
+      "building",
+      "building_part",
       "address",
     ]);
-    setActiveThemes(["base", "addresses"]);
+    setActiveThemes(["addresses"]);
     map.ref.current.jumpTo({
       center: [-71.065192, 42.353714],
       zoom: 15.94,
@@ -115,10 +138,10 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
                   NYC Buildings
                 </button>
               </div>
-              <div className="sidecar-option venice">
-                <button className="sidecar-option" onClick={handleVenice}>
+              <div className="sidecar-option world">
+                <button className="sidecar-option" onClick={handleWorld}>
                   <ArrowForwardIosIcon className="arrow-forward" />
-                  Venice Landcover
+                  World Landcover
                 </button>
               </div>
               <div className="sidecar-option london">
