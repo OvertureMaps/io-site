@@ -3,7 +3,7 @@ import Header from "./nav/Header";
 import Map from "./Map";
 import { MapProvider } from "react-map-gl/maplibre";
 import { getTheme, keepTheme, darkTheme, lightTheme } from "./themeUtils";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Tour from "./Tour";
 import StartupBox from "./StartupBox";
 import { ThemeProvider } from "@mui/material";
@@ -16,7 +16,8 @@ function App() {
   const [open, setOpen] = useState(tour);
   const [sidecarOpen, setSidecarOpen] = useState(!open);
   const [mapEntity, setMapEntity] = useState({});
-  const [zoom, setZoom] = useState(16);
+  const [zoom, setZoom] = useState(0);
+  const themeRef = useRef(null);
 
   const startTour = () => {
     setOpen(false);
@@ -48,6 +49,7 @@ function App() {
           modeName={modeName}
           setMapEntity={setMapEntity}
           setSidecarOpen={setSidecarOpen}
+          themeRef={themeRef}
         />
         <MapProvider>
           <Header
@@ -63,6 +65,7 @@ function App() {
             setZoom={setZoom}
             sidecarOpen={sidecarOpen}
             setSidecarOpen={setSidecarOpen}
+            themeRef={themeRef}
           />
         </MapProvider>
       </ThemeProvider>

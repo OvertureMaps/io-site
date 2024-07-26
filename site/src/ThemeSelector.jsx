@@ -22,9 +22,9 @@ const ThemeSelector = ({
   activeThemes,
   setActiveThemes,
   entity,
+  themeRef,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-
   const handleClick = (event) => {
     if (anchorEl) {
       setAnchorEl(null);
@@ -119,6 +119,7 @@ const ThemeSelector = ({
 
     return (
       <IconButton
+        className={theme === "divisions" ? "tour-layers-pins" : ""}
         onClick={() => {
           if (activeThemes.includes(theme)) {
             setActiveThemes(activeThemes.filter((t) => t !== theme));
@@ -143,7 +144,7 @@ const ThemeSelector = ({
     const themes = [...new Set(layers.map((layer) => layer.theme))];
 
     return (
-      <Box p={1}>
+      <Box p={1} className>
         {themes.map((theme) => {
           const types = filterUniqueByType(
             layers.filter((layer) => layer.theme === theme)
@@ -153,7 +154,13 @@ const ThemeSelector = ({
 
           return (
             <Grid container width={200}>
-              <Grid item xs={10}>
+              <Grid
+                className={
+                  theme === "divisions" ? "tour-layers-checkboxes" : ""
+                }
+                item
+                xs={10}
+              >
                 <div>
                   <FormControlLabel
                     label={format(theme)}
@@ -212,7 +219,7 @@ const ThemeSelector = ({
         Object.keys(entity).length > 0 ? " active" : ""
       }`}
     >
-      <div className="layer-control" onClick={handleClick}>
+      <div ref={themeRef} className="layer-control" onClick={handleClick}>
         <LayerIcon
           className={`icon-layers ${
             mode === "theme-dark" ? "icon-layers-dark" : ""

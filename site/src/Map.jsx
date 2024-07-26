@@ -54,6 +54,7 @@ export default function Map({
   setZoom,
   sidecarOpen,
   setSidecarOpen,
+  themeRef,
 }) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
@@ -267,6 +268,7 @@ export default function Map({
             setVisibleTypes={setVisibleTypes}
             activeThemes={activeThemes}
             setActiveThemes={setActiveThemes}
+            themeRef={themeRef}
           ></ThemeSelector>
         </div>
 
