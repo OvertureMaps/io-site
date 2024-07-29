@@ -11,8 +11,22 @@ import downloadIcon from "/download.svg";
 import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
 import Floater from "react-floater";
+import algoliasearch from "algoliasearch";
 
 const ZOOM_BOUND = 15;
+
+function sendBboxAnalytics(bbox) {
+    
+  const client = algoliasearch(
+    "V189B0Z16S",
+    "790fe380304325c695042daa56e13c99"
+  );
+
+  const index = client.initIndex("bbox");
+  let retval = index.saveObject({bbox: bbox},  { autoGenerateObjectIDIfNotExist: true});
+  console.log(retval);
+  
+}
 
 function DownloadButton({ mode, zoom, setZoom }) {
   const { myMap } = useMap();
@@ -39,6 +53,8 @@ function DownloadButton({ mode, zoom, setZoom }) {
     ];
 
     console.log(bounds);
+
+    sendBboxAnalytics(bbox);
 
     //Send those to the download engine
     const minxPath = ["bbox", "minx"];

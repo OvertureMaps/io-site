@@ -17,6 +17,7 @@
     "@mui/base": "^5.0.0-beta.40",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
+    "algoliasearch": "^4.24.0",
     "apache-arrow": "^15.0.2",
     "maplibre-gl": "^4.4.1",
     "pmtiles": "^3.0.5",
