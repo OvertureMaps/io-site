@@ -15,6 +15,19 @@ import {
 import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const muiTheme = createTheme({
+  typography: {
+    allVariants: {
+      "fontFamily": `Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,sans-serif`,
+      "fontSize": 14,
+      "fontWeightLight": 300,
+      "fontWeightRegular": 400,
+      "fontWeightMedium": 500   
+    }
+  }});
+
 const ThemeSelector = ({
   mode,
   setVisibleTypes,
@@ -98,13 +111,13 @@ const ThemeSelector = ({
     });
   };
 
-  const renderPinThemeIcon = (theme) => {
+  const renderPinThemeIcon = (theme, mode) => {
     const props = {
       sx: {
         "&:hover": {
           cursor: "pointer",
         },
-        color: "black",
+        color: mode==='theme-dark' ? "white" : "black",
       },
     };
 
@@ -119,13 +132,13 @@ const ThemeSelector = ({
           }
         }}
         sx={{
-          marginTop: "-7px",
+          marginTop: "-2px",
         }}
       >
         {activeThemes.includes(theme) ? (
           <PushPinIcon {...props} />
         ) : (
-          <PushPinOutlinedIcon {...props} />
+          <PushPinOutlinedIcon {...props}/>
         )}
       </IconButton>
     );
@@ -135,69 +148,76 @@ const ThemeSelector = ({
     const themes = [...new Set(layers.map((layer) => layer.theme))];
 
     return (
-      <Box p={1} className>
-        {themes.map((theme) => {
-          const types = filterUniqueByType(
-            layers.filter((layer) => layer.theme === theme)
-          );
+      <ThemeProvider theme={muiTheme}>
+        <Box p={1} className sx={{padding:"0px"}}>
+          {themes.map((theme) => {
+            const types = filterUniqueByType(
+              layers.filter((layer) => layer.theme === theme)
+            );
 
-          const children = types.map((t) => selectedTypes[t.type]);
+            const children = types.map((t) => selectedTypes[t.type]);
 
-          return (
-            <Grid container width={200}>
-              <Grid
-                className={
-                  theme === "divisions" ? "tour-layers-checkboxes" : ""
-                }
-                item
-                xs={10}
-              >
-                <div>
-                  <FormControlLabel
-                    label={format(theme)}
-                    className="theme-selector-checkbox"
-                    sx={{
-                      height: "16px",
-                    }}
-                    control={
-                      <Checkbox
-                        size="small"
-                        checked={
-                          selectedThemes[theme] && children.includes(true)
-                        }
-                        indeterminate={
-                          children.includes(true) && children.includes(false)
-                        }
-                        onChange={() => handleThemeChange(theme)}
-                      />
-                    }
-                  />
-                </div>
-                {types.length > 1 && (
-                  <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
-                    {types.map((layer) => (
-                      <FormControlLabel
-                        label={format(layer.type)}
-                        className="theme-selector-checkbox"
-                        control={
-                          <Checkbox
-                            size="small"
-                            checked={selectedTypes[layer.type]}
-                            onChange={() => handleTypeChange(layer.type)}
-                          />
-                        }
-                      />
-                    ))}
-                  </Box>
-                )}
+            return (
+              <Grid container className={`theme-box ${mode === 'theme-dark' ? 'dark':'light'}`}  sx={{paddingLeft:"5px"}} width={200}>
+                <Grid
+                  className={
+                    theme === "divisions" ? "tour-layers-checkboxes" : ""
+                  }
+                  item
+                  xs={10}
+                >
+                  <div>
+                    <FormControlLabel
+                      label={format(theme)}
+                      className="theme-selector-checkbox"
+                      sx={{
+                        height: "16px",
+                        marginBottom: "4px",
+                        marginTop:"10px"
+                      }}
+                      control={
+                        <Checkbox
+                          size="small"
+                          sx={{padding:'2px', ml:1}}
+                          checked={
+                            selectedThemes[theme] && children.includes(true)
+                          }
+                          indeterminate={
+                            children.includes(true) && children.includes(false)
+                          }
+                          onChange={() => handleThemeChange(theme)}
+                        />
+                      }
+                    />
+                  </div>
+                  {types.length > 1 && (
+                    <Box sx={{ display: "flex", flexDirection: "column", ml: 2, padding: "0px"}}>
+                      {types.map((layer) => (
+                        <FormControlLabel
+                          label={format(layer.type)}
+                          className=""
+                          className={`type-selector-checkbox ${mode === 'theme-dark' ? 'dark':'light'}`}
+                          control={
+                            <Checkbox
+                              sx={{padding:'2px'}}
+                              size="small"
+                              checked={selectedTypes[layer.type]}
+                              onChange={() => handleTypeChange(layer.type)}
+                            />
+                          }
+                        />
+                      ))}
+                    </Box>
+                  )}
+                </Grid>
+                <Grid item xs={2}>
+                  {renderPinThemeIcon(theme, mode)}
+                </Grid>
               </Grid>
-              <Grid item xs={2}>
-                {renderPinThemeIcon(theme)}
-              </Grid>
-            </Grid>
-          );
-        })}
-      </Box>
+            );
+          })}
+        </Box>
+      </ThemeProvider>
     );
   };
 
