@@ -1,9 +1,11 @@
-import "./Sidecar.css";
+import "./Navigator.css";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+import { useMap } from "react-map-gl/maplibre";
 
-function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
+function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
+  const { myMap } = useMap();
   const handleParis = () => {
     setVisibleTypes([
       "division_area",
@@ -19,7 +21,7 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
       "building_part",
     ]);
     setActiveThemes(["transportation"]);
-    map.ref.current.jumpTo({
+    myMap.jumpTo({
       center: [2.3417, 48.8552],
       zoom: 11.73,
       pitch: 12,
@@ -39,7 +41,7 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
       "building_part",
     ]);
     setActiveThemes(["buildings"]);
-    map.ref.current.jumpTo({
+    myMap.jumpTo({
       center: [-73.99768, 40.75332],
       zoom: 14.22,
       pitch: 60,
@@ -55,7 +57,7 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
       "infrastructure",
     ]);
     setActiveThemes(["base"]);
-    map.ref.current.jumpTo({
+    myMap.jumpTo({
       center: [10.3, 24.5],
       zoom: 1.07,
       bearing: 0,
@@ -77,7 +79,7 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
       "place",
     ]);
     setActiveThemes(["places"]);
-    map.ref.current.jumpTo({
+    myMap.jumpTo({
       center: [-0.091217, 51.514511],
       zoom: 16.02,
       bearing: -24,
@@ -98,20 +100,59 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
       "address",
     ]);
     setActiveThemes(["addresses"]);
-    map.ref.current.jumpTo({
+    myMap.jumpTo({
       center: [-71.065192, 42.353714],
       zoom: 15.94,
       bearing: 0,
       pitch: 52,
     });
   };
+  const handleAthens = () => {
+    setVisibleTypes([
+      "boundary",
+      "land",
+      "land_cover",
+      "land_use",
+      "water",
+      "infrastructure",
+      "segment",
+    ]);
+    setActiveThemes(["transportation"]);
+    myMap.jumpTo({
+      center: [23.63247, 37.94203],
+      zoom: 14.83,
+      bearing: -142.3,
+      pitch: 60,
+    });
+  };
+  const handleHongKong = () => {
+    setVisibleTypes([
+      "boundary",
+      "land",
+      "land_cover",
+      "land_use",
+      "water",
+      "infrastructure",
+      "segment",
+      "connector",
+      "building",
+      "building_part",
+    ]);
+    setActiveThemes(["buildings"]);
+    myMap.jumpTo({
+      center: [114.15284, 22.2934],
+      zoom: 14.83,
+      bearing: 96.2,
+      pitch: 60,
+    });
+  };
   return (
     <>
       {open ? (
-        <div className="sidecar-modal">
-          <div className="sidecar-box">
-            <div className="sidecar-landing">
-              <p className="sidecar-welcome">WELCOME</p>
+        <div className="navigator-modal">
+          <div className="navigator-box">
+            <div className="navigator-landing">
+              <p className="navigator-welcome">NAVIGATE</p>
               <button
                 className="close-panel-button"
                 onClick={() => setOpen(false)}
@@ -119,48 +160,62 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
                 <CloseIcon className="close-panel-icon" />
               </button>
             </div>
-            <div className="sidecar-header">Explore Overture</div>
-            <div className="sidecar-blurb">
-              Initially, we are focusing on layers for transportation, places,
-              3D buildings, and administrative.
+            <div className="navigator-header">Explore Overture</div>
+            <div className="navigator-blurb">
+              We've picked a few spots around the world you might be interested
+              in seeing.
             </div>
-            <div className="sidecar-container">
-              <div className="sidecar-option paris">
-                {" "}
-                <button className="sidecar-option" onClick={handleParis}>
+            <div className="navigator-container">
+              <div className="navigator-option paris" onClick={handleParis}>
+                <button className="navigator-option" onClick={handleParis}>
                   <ArrowForwardIosIcon className="arrow-forward" />
                   Paris Roads
                 </button>
               </div>
-              <div className="sidecar-option nyc">
-                <button className="sidecar-option" onClick={handleNYC}>
+              <div className="navigator-option nyc" onClick={handleNYC}>
+                <button className="navigator-option" onClick={handleNYC}>
                   <ArrowForwardIosIcon className="arrow-forward" />
                   NYC Buildings
                 </button>
               </div>
-              <div className="sidecar-option world">
-                <button className="sidecar-option" onClick={handleWorld}>
+              <div className="navigator-option world" onClick={handleWorld}>
+                <button className="navigator-option" onClick={handleWorld}>
                   <ArrowForwardIosIcon className="arrow-forward" />
                   World Landcover
                 </button>
               </div>
-              <div className="sidecar-option london">
-                <button className="sidecar-option" onClick={handleLondon}>
+              <div className="navigator-option london" onClick={handleLondon}>
+                <button className="navigator-option" onClick={handleLondon}>
                   <ArrowForwardIosIcon className="arrow-forward" />
                   London Places
                 </button>
               </div>
-              <div className="sidecar-option boston">
-                <button className="sidecar-option" onClick={handleBoston}>
+              <div className="navigator-option boston" onClick={handleBoston}>
+                <button className="navigator-option" onClick={handleBoston}>
                   <ArrowForwardIosIcon className="arrow-forward" />
                   Boston Addresses
+                </button>
+              </div>
+              <div className="navigator-option athens" onClick={handleAthens}>
+                <button className="navigator-option" onClick={handleAthens}>
+                  <ArrowForwardIosIcon className="arrow-forward" />
+                  Athens Shipping Lines
+                </button>
+              </div>
+              <div
+                className="navigator-option hongkong"
+                onClick={handleHongKong}
+              >
+                <button className="navigator-option" onClick={handleHongKong}>
+                  <ArrowForwardIosIcon className="arrow-forward" />
+                  Hong Kong Port
                 </button>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <button className="sidecar-icon" onClick={() => setOpen(true)}>
+        <button className="navigator-icon" onClick={() => setOpen(true)}>
           <FlightTakeoffIcon className="plane-icon" />
         </button>
       )}{" "}
@@ -168,4 +223,4 @@ function Sidecar({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   );
 }
 
-export default Sidecar;
+export default Navigator;

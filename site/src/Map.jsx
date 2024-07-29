@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
-import Sidecar from "./Sidecar";
+import Navigator from "./Navigator";
 import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
 
@@ -52,8 +52,8 @@ export default function Map({
   mapEntity,
   setMapEntity,
   setZoom,
-  sidecarOpen,
-  setSidecarOpen,
+  navigatorOpen,
+  setNavigatorOpen,
   themeRef,
 }) {
   const mapRef = useRef();
@@ -159,95 +159,91 @@ export default function Map({
     setZoom(event.target.getZoom());
   };
 
-  const map = (
-    <MapLibreMap
-      id="myMap"
-      ref={mapRef}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onLoad={syncInteractiveLayerIds}
-      onClick={onClick}
-      cursor={cursor}
-      hash={true}
-      onZoom={handleZoom}
-      mapStyle={MAP_STYLE}
-      interactiveLayerIds={interactiveLayerIds}
-      initialViewState={INITIAL_VIEW_STATE}
-      style={{
-        position: "fixed",
-        width: "100%",
-        height: "calc(100vh - 60px)",
-      }}
-      attributionControl={false}
-    >
-      <ThemeSource name="base" url={PMTILES_URL} />
-      <ThemeSource name="buildings" url={PMTILES_URL} />
-      <ThemeSource name="places" url={PMTILES_URL} />
-      <ThemeSource name="divisions" url={PMTILES_URL} />
-      <ThemeSource name="transportation" url={PMTILES_URL} />
-      <ThemeSource name="addresses" url={PMTILES_URL} />
-
-      {[false, true].map((label) => {
-        return layers.map((props, i) => (
-          <ThemeTypeLayer
-            key={`${props.theme}_${props.type}_${i}`}
-            {...{
-              ...props,
-              color: activeThemes.includes(props.theme)
-                ? props.activeColor || props.color
-                : props.color,
-            }}
-            visible={
-              visibleTypes.includes(props.type) &&
-              (props.activeOnly === undefined ||
-                activeThemes.includes(props.theme))
-            }
-            label={label && activeThemes.includes(props.theme)}
-            active={activeThemes.includes(props.theme)}
-            activeThemes={activeThemes}
-            highlightColor={
-              activeThemes.includes(props.theme)
-                ? props.activeColor
-                  ? props.color
-                  : undefined
-                : props.activeColor
-            }
-          />
-        ));
-      })}
-      <Layer
-        id="divisions_division"
-        type="symbol"
-        source="divisions"
-        source-layer="division"
-        paint={{
-          "text-color": mode === "theme-light" ? "black" : "white",
-          "text-halo-color": mode === "theme-light" ? "white" : "black",
-          "text-halo-width": 1,
-        }}
-        layout={{
-          "text-font": ["Noto Sans Bold"],
-          "text-field": ["get", "@name"],
-          "text-size": 11,
-        }}
-      />
-
-      <NavigationControl position="top-right"></NavigationControl>
-      <GeolocateControl />
-      <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
-    </MapLibreMap>
-  );
-
   return (
     <>
       <div className={`map ${mode} tour-map`}>
-        {map}
+        <MapLibreMap
+          id="myMap"
+          ref={mapRef}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onLoad={syncInteractiveLayerIds}
+          onClick={onClick}
+          cursor={cursor}
+          hash={true}
+          onZoom={handleZoom}
+          mapStyle={MAP_STYLE}
+          interactiveLayerIds={interactiveLayerIds}
+          initialViewState={INITIAL_VIEW_STATE}
+          style={{
+            position: "fixed",
+            width: "100%",
+            height: "calc(100vh - 60px)",
+          }}
+          attributionControl={false}
+        >
+          <ThemeSource name="base" url={PMTILES_URL} />
+          <ThemeSource name="buildings" url={PMTILES_URL} />
+          <ThemeSource name="places" url={PMTILES_URL} />
+          <ThemeSource name="divisions" url={PMTILES_URL} />
+          <ThemeSource name="transportation" url={PMTILES_URL} />
+          <ThemeSource name="addresses" url={PMTILES_URL} />
+
+          {[false, true].map((label) => {
+            return layers.map((props, i) => (
+              <ThemeTypeLayer
+                key={`${props.theme}_${props.type}_${i}`}
+                {...{
+                  ...props,
+                  color: activeThemes.includes(props.theme)
+                    ? props.activeColor || props.color
+                    : props.color,
+                }}
+                visible={
+                  visibleTypes.includes(props.type) &&
+                  (props.activeOnly === undefined ||
+                    activeThemes.includes(props.theme))
+                }
+                label={label && activeThemes.includes(props.theme)}
+                active={activeThemes.includes(props.theme)}
+                activeThemes={activeThemes}
+                highlightColor={
+                  activeThemes.includes(props.theme)
+                    ? props.activeColor
+                      ? props.color
+                      : undefined
+                    : props.activeColor
+                }
+              />
+            ));
+          })}
+          <Layer
+            id="divisions_division"
+            type="symbol"
+            source="divisions"
+            source-layer="division"
+            paint={{
+              "text-color": mode === "theme-light" ? "black" : "white",
+              "text-halo-color": mode === "theme-light" ? "white" : "black",
+              "text-halo-width": 1,
+            }}
+            layout={{
+              "text-font": ["Noto Sans Bold"],
+              "text-field": ["get", "@name"],
+              "text-size": 11,
+            }}
+          />
+
+          <NavigationControl position="top-right"></NavigationControl>
+          <GeolocateControl />
+          <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
+        </MapLibreMap>
 
         <div className="custom-controls">
-          <Sidecar
-            open={sidecarOpen}
-            setOpen={setSidecarOpen}
-            map={map}
+          <Navigator
+            open={navigatorOpen}
+            setOpen={setNavigatorOpen}
+            map={useRef}
             setVisibleTypes={setVisibleTypes}
             setActiveThemes={setActiveThemes}
           />

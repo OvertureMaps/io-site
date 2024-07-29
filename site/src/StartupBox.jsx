@@ -7,11 +7,11 @@ function StartupBox({
   startTour,
   updateTour,
   mode,
-  setSidecarOpen,
+  setNavigatorOpen,
 }) {
   const handleSkip = () => {
     setOpen(false);
-    setSidecarOpen(true);
+    setNavigatorOpen(true);
   };
   return (
     <div className="startup-modal">

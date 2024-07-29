@@ -7,14 +7,13 @@ import { useState, useEffect, useRef } from "react";
 import Tour from "./Tour";
 import StartupBox from "./StartupBox";
 import { ThemeProvider } from "@mui/material";
-import Sidecar from "./Sidecar";
 
 function App() {
   const [modeName, setModeName] = useState(getTheme());
   const [run, setRun] = useState(false);
   const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
   const [open, setOpen] = useState(tour);
-  const [sidecarOpen, setSidecarOpen] = useState(!open);
+  const [navigatorOpen, setNavigatorOpen] = useState(!open);
   const [mapEntity, setMapEntity] = useState({});
   const [zoom, setZoom] = useState(0);
   const themeRef = useRef(null);
@@ -42,13 +41,13 @@ function App() {
           open={open}
           setOpen={setOpen}
           mode={modeName}
-          setSidecarOpen={setSidecarOpen}
+          setNavigatorOpen={setNavigatorOpen}
         />
         <Tour
           run={run}
           modeName={modeName}
           setMapEntity={setMapEntity}
-          setSidecarOpen={setSidecarOpen}
+          setNavigatorOpen={setNavigatorOpen}
           themeRef={themeRef}
         />
         <MapProvider>
@@ -63,8 +62,8 @@ function App() {
             mapEntity={mapEntity}
             setMapEntity={setMapEntity}
             setZoom={setZoom}
-            sidecarOpen={sidecarOpen}
-            setSidecarOpen={setSidecarOpen}
+            navigatorOpen={navigatorOpen}
+            setNavigatorOpen={setNavigatorOpen}
             themeRef={themeRef}
           />
         </MapProvider>

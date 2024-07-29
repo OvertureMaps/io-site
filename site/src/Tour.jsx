@@ -148,7 +148,7 @@ const sampleFeature = {
   state: {},
 };
 
-function Tour({ run, modeName, setMapEntity, setSidecarOpen, themeRef }) {
+function Tour({ run, modeName, setMapEntity, setNavigatorOpen, themeRef }) {
   const [stepIndex, setStepIndex] = useState(0);
 
   const stepBGColor =
@@ -225,7 +225,7 @@ function Tour({ run, modeName, setMapEntity, setSidecarOpen, themeRef }) {
         (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
         if (event.action === ACTIONS.NEXT) {
-          setSidecarOpen(true);
+          setNavigatorOpen(true);
           setStepIndex(nextStepIndex);
         } else if (event.action === ACTIONS.PREV) {
           setMapEntity(sampleFeature.properties);
@@ -243,7 +243,7 @@ function Tour({ run, modeName, setMapEntity, setSidecarOpen, themeRef }) {
         (event.index === targets.indexOf(".tour-layers-pins"))
       )
         themeRef.current.click();
-      setSidecarOpen(true);
+      setNavigatorOpen(true);
     }
   };
 
