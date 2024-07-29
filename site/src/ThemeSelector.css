@@ -38,9 +38,41 @@ svg.icon-layers > path.secondary {
 .theme-selector-popover {
   max-height: 80vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #888888;
 }
 
 .theme-dark svg.icon-layers {
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 5px;
+}
+
+label.type-selector-checkbox {
+  margin: 0px;
+  padding: 0px;
+}
+
+.type-selector-checkbox > span {
+  font-weight: 400;
+  font-size: small;
+  color: #dddddd;
+  font-style: italic;
+}
+
+.type-selector-checkbox > span {
+  color: #333333;
+  font-style: italic;
+}
+
+.type-selector-checkbox.dark > span {
+  color: #cccccc;
+  font-style: italic;
+}
+
+.theme-box:nth-child(even) {
+  background: #eeeeee;
+}
+
+.theme-box.dark:nth-child(even) {
+  background: #333333;
 }
