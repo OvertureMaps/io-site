@@ -149,7 +149,7 @@ const ThemeSelector = ({
 
     return (
       <ThemeProvider theme={muiTheme}>
-        <Box p={1} className>
+        <Box p={1} className sx={{padding:"0px"}}>
           {themes.map((theme) => {
             const types = filterUniqueByType(
               layers.filter((layer) => layer.theme === theme)
@@ -178,7 +178,7 @@ const ThemeSelector = ({
                       control={
                         <Checkbox
                           size="small"
-                          sx={{padding:'2px'}}
+                          sx={{padding:'2px', ml:1}}
                           checked={
                             selectedThemes[theme] && children.includes(true)
                           }

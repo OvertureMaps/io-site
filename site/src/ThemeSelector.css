@@ -45,6 +45,8 @@ svg.icon-layers > path.secondary {
 .theme-selector-popover {
   max-height: 80vh;
   overflow-y: auto;
+  overflow-x:hidden;
+  border:1px solid #888888;
 }
 
 label.type-selector-checkbox {
