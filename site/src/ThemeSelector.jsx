@@ -250,11 +250,7 @@ const ThemeSelector = ({
   const id = open ? "theme-selector-popover" : undefined;
 
   return (
-    <div
-      className={`theme-selector tour-layers ${
-        Object.keys(entity).length > 0 ? " active" : ""
-      }`}
-    >
+    <div className={`theme-selector tour-layers ${open ? "active" : ""}`}>
       <div ref={themeRef} className="layer-control" onClick={handleClick}>
         <LayerIcon
           className={`icon-layers ${
@@ -263,7 +259,7 @@ const ThemeSelector = ({
         />
       </div>
       <Popper
-        className={"theme-selector-popover"}
+        className={` ${mode} theme-selector-popover`}
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -274,7 +270,7 @@ const ThemeSelector = ({
           horizontal: "left",
         }}
       >
-        <Paper>{renderCheckboxes()}</Paper>
+        <Paper sx={{ borderRadius: "0px" }}>{renderCheckboxes()}</Paper>
       </Popper>
     </div>
   );

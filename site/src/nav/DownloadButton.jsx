@@ -115,7 +115,7 @@ function DownloadButton({ mode, zoom, setZoom }) {
           },
         }}
         content={
-          <div className="info-floater">
+          <div className={`${mode} info-floater`}>
             <div className="floater-text">
               The download button is disabled at zoom levels below {ZOOM_BOUND}.
               This is done to prevent downloading large amounts of data. To

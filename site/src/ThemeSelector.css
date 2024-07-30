@@ -1,13 +1,25 @@
 .theme-selector {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
-  color: black;
+  background-color: white;
   font-size: 0;
   outline: none;
   display: flex;
   max-height: 36px;
   margin-top: 4px;
   margin-left: 4px;
+}
+
+.theme-dark .theme-selector {
+  background-color: #121212;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05)
+  );
+}
+
+.theme-selector.active {
+  border-radius: 5px 0px 0px 5px;
 }
 
 div.layer-control {
@@ -39,12 +51,10 @@ svg.icon-layers > path.secondary {
   max-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 1px solid #888888;
-}
-
-.theme-dark svg.icon-layers {
-  background-color: rgba(0, 0, 0, 0.75);
-  border-radius: 5px;
+  border-radius: 0px 10px 10px 10px;
+  box-shadow: 0 2px 4px white;
+  border-color: rgba(15, 15, 15, 0.8);
+  border: 3px;
 }
 
 label.type-selector-checkbox {
@@ -75,4 +85,8 @@ label.type-selector-checkbox {
 
 .theme-box.dark:nth-child(even) {
   background: #333333;
+}
+
+.theme-dark.theme-selector-popover {
+  box-shadow: 0 2px 4px black;
 }
