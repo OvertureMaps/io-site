@@ -87,8 +87,13 @@ function InspectorPanel({
         setActiveThemes={setActiveThemes}
       />
     );
+  } else if (theme === "addresses") {
+    inspectorPanel = (
+      <ThemePanel mode={mode} entity={entity} tips={ADDRESSES_TIPS} />
+    );
   } else {
     console.log("unhandled theme type");
+    console.log(entity);
     inspectorPanel = (
       <table>
         <tbody>

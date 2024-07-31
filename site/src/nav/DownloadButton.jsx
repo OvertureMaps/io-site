@@ -11,6 +11,7 @@ import downloadIcon from "/download.svg";
 import RefreshIcon from "../icons/icon-refresh.svg?react";
 import "./DownloadButton.css";
 import Floater from "react-floater";
+import CloseIcon from "@mui/icons-material/Close";
 
 const ZOOM_BOUND = 15;
 
@@ -98,7 +99,7 @@ function DownloadButton({ mode, zoom, setZoom }) {
         styles={{
           container: {
             borderRadius: "10px",
-            padding: "10px",
+            padding: "6px",
             color: mode === "theme-dark" ? "white" : "black",
             fontSize: ".7rem",
             background:
@@ -114,20 +115,32 @@ function DownloadButton({ mode, zoom, setZoom }) {
           },
         }}
         content={
-          <div>
-            The download button is disabled at zoom levels below {ZOOM_BOUND}.
-            This is done to prevent downloading large amounts of data. To
-            reenable the button, zoom further in. If you wish to download a
-            larger area of data points, consider using our python installer,
-            found at{" "}
-            <a
-              href={"https://github.com/OvertureMaps/overturemaps-py"}
-              target="_blank"
-              rel="noreferrer noopener"
+          <div className={`${mode} info-floater`}>
+            <div className="floater-text">
+              The download button is disabled at zoom levels below {ZOOM_BOUND}.
+              This is done to prevent downloading large amounts of data. To
+              reenable the button, zoom further in. If you wish to download a
+              larger area of data points, consider using our python installer,
+              found at{" "}
+              <a
+                href={"https://github.com/OvertureMaps/overturemaps-py"}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                our git repository
+              </a>
+              .
+            </div>
+            <button
+              className="close-panel-button"
+              onClick={() => setShowFloater(false)}
+              style={{ height: "22px", width: "22px", marginLeft: "2px" }}
             >
-              our git repository
-            </a>
-            .
+              <CloseIcon
+                sx={{ fontSize: "22px" }}
+                className="close-panel-icon"
+              />
+            </button>
           </div>
         }
         open={showFloater}

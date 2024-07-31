@@ -15,21 +15,23 @@ import {
 import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const muiTheme = createTheme({
   typography: {
     allVariants: {
-      "fontFamily": `Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,sans-serif`,
-      "fontSize": 14,
-      "fontWeightLight": 300,
-      "fontWeightRegular": 400,
-      "fontWeightMedium": 500   
-    }
-  }});
+      fontFamily: `Montserrat, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,sans-serif`,
+      fontSize: 14,
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+    },
+  },
+});
 
 const ThemeSelector = ({
   mode,
+  visibleTypes,
   setVisibleTypes,
   activeThemes,
   setActiveThemes,
@@ -67,6 +69,14 @@ const ThemeSelector = ({
     setSelectedTypesState(newSelectedTypes);
     updateVisibleTypes(newSelectedTypes);
   }, []);
+
+  useEffect(() => {
+    const newSelectedTypes = {};
+    visibleTypes.forEach((type) => {
+      newSelectedTypes[type] = true;
+    });
+    setSelectedTypesState(newSelectedTypes);
+  }, [visibleTypes]);
 
   const handleThemeChange = (theme) => {
     const newSelectedThemes = {
@@ -117,7 +127,7 @@ const ThemeSelector = ({
         "&:hover": {
           cursor: "pointer",
         },
-        color: mode==='theme-dark' ? "white" : "black",
+        color: mode === "theme-dark" ? "white" : "black",
       },
     };
 
@@ -138,7 +148,7 @@ const ThemeSelector = ({
         {activeThemes.includes(theme) ? (
           <PushPinIcon {...props} />
         ) : (
-          <PushPinOutlinedIcon {...props}/>
+          <PushPinOutlinedIcon {...props} />
         )}
       </IconButton>
     );
@@ -149,7 +159,7 @@ const ThemeSelector = ({
 
     return (
       <ThemeProvider theme={muiTheme}>
-        <Box p={1} className sx={{padding:"0px"}}>
+        <Box p={1} className sx={{ padding: "0px" }}>
           {themes.map((theme) => {
             const types = filterUniqueByType(
               layers.filter((layer) => layer.theme === theme)
@@ -158,7 +168,14 @@ const ThemeSelector = ({
             const children = types.map((t) => selectedTypes[t.type]);
 
             return (
-              <Grid container className={`theme-box ${mode === 'theme-dark' ? 'dark':'light'}`}  sx={{paddingLeft:"5px"}} width={200}>
+              <Grid
+                container
+                className={`theme-box ${
+                  mode === "theme-dark" ? "dark" : "light"
+                }`}
+                sx={{ paddingLeft: "5px" }}
+                width={200}
+              >
                 <Grid
                   className={
                     theme === "divisions" ? "tour-layers-checkboxes" : ""
@@ -173,12 +190,12 @@ const ThemeSelector = ({
                       sx={{
                         height: "16px",
                         marginBottom: "4px",
-                        marginTop:"10px"
+                        marginTop: "10px",
                       }}
                       control={
                         <Checkbox
                           size="small"
-                          sx={{padding:'2px', ml:1}}
+                          sx={{ padding: "2px", ml: 1 }}
                           checked={
                             selectedThemes[theme] && children.includes(true)
                           }
@@ -191,15 +208,23 @@ const ThemeSelector = ({
                     />
                   </div>
                   {types.length > 1 && (
-                    <Box sx={{ display: "flex", flexDirection: "column", ml: 2, padding: "0px"}}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        ml: 2,
+                        padding: "0px",
+                      }}
+                    >
                       {types.map((layer) => (
                         <FormControlLabel
                           label={format(layer.type)}
-                          className=""
-                          className={`type-selector-checkbox ${mode === 'theme-dark' ? 'dark':'light'}`}
+                          className={`type-selector-checkbox ${
+                            mode === "theme-dark" ? "dark" : "light"
+                          }`}
                           control={
                             <Checkbox
-                              sx={{padding:'2px'}}
+                              sx={{ padding: "2px" }}
                               size="small"
                               checked={selectedTypes[layer.type]}
                               onChange={() => handleTypeChange(layer.type)}
@@ -225,11 +250,7 @@ const ThemeSelector = ({
   const id = open ? "theme-selector-popover" : undefined;
 
   return (
-    <div
-      className={`theme-selector tour-layers ${
-        Object.keys(entity).length > 0 ? " active" : ""
-      }`}
-    >
+    <div className={`theme-selector tour-layers ${open ? "active" : ""}`}>
       <div ref={themeRef} className="layer-control" onClick={handleClick}>
         <LayerIcon
           className={`icon-layers ${
@@ -238,18 +259,18 @@ const ThemeSelector = ({
         />
       </div>
       <Popper
-        className={"theme-selector-popover"}
+        className={` ${mode} theme-selector-popover`}
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        placement="bottom-start"
+        placement="right-start"
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
       >
-        <Paper>{renderCheckboxes()}</Paper>
+        <Paper sx={{ borderRadius: "0px" }}>{renderCheckboxes()}</Paper>
       </Popper>
     </div>
   );

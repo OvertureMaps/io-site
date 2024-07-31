@@ -91,6 +91,7 @@ const Steps = [
     offset: 0,
   },
 ];
+
 const sampleFeature = {
   geometry: {
     type: "Point",
@@ -147,7 +148,7 @@ const sampleFeature = {
   state: {},
 };
 
-function Tour({ run, modeName, setMapEntity, themeRef }) {
+function Tour({ run, modeName, setMapEntity, setNavigatorOpen, themeRef }) {
   const [stepIndex, setStepIndex] = useState(0);
 
   const stepBGColor =
@@ -221,13 +222,17 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
         setStepIndex(nextStepIndex);
       } else if (
         (event.index === targets.indexOf(".maplibregl-ctrl-bottom-right")) &
-        (event.lifecycle === LIFECYCLE.COMPLETE) &
-        (event.action === ACTIONS.PREV)
+        (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
-        setMapEntity(sampleFeature.properties);
-        setTimeout(() => {
+        if (event.action === ACTIONS.NEXT) {
+          setNavigatorOpen(true);
           setStepIndex(nextStepIndex);
-        }, 100);
+        } else if (event.action === ACTIONS.PREV) {
+          setMapEntity(sampleFeature.properties);
+          setTimeout(() => {
+            setStepIndex(nextStepIndex);
+          }, 100);
+        }
       } else {
         setStepIndex(nextStepIndex);
       }
@@ -238,6 +243,7 @@ function Tour({ run, modeName, setMapEntity, themeRef }) {
         (event.index === targets.indexOf(".tour-layers-pins"))
       )
         themeRef.current.click();
+      setNavigatorOpen(true);
     }
   };
 

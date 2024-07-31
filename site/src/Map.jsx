@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
+import Navigator from "./Navigator";
 import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
 
@@ -51,6 +52,8 @@ export default function Map({
   mapEntity,
   setMapEntity,
   setZoom,
+  navigatorOpen,
+  setNavigatorOpen,
   themeRef,
 }) {
   const mapRef = useRef();
@@ -158,7 +161,7 @@ export default function Map({
 
   return (
     <>
-      <div className={`map ${mode}`}>
+      <div className={`map ${mode} tour-map`}>
         <MapLibreMap
           id="myMap"
           ref={mapRef}
@@ -219,11 +222,10 @@ export default function Map({
             type="symbol"
             source="divisions"
             source-layer="division"
-            maxzoom={14}
             paint={{
               "text-color": mode === "theme-light" ? "black" : "white",
               "text-halo-color": mode === "theme-light" ? "white" : "black",
-              "text-halo-width": 2,
+              "text-halo-width": 1,
             }}
             layout={{
               "text-font": ["Noto Sans Bold"],
@@ -231,11 +233,21 @@ export default function Map({
               "text-size": 11,
             }}
           />
+
           <NavigationControl position="top-right"></NavigationControl>
           <GeolocateControl />
           <AttributionControl customAttribution='<a href="https://openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>, <a href="https://overturemaps.org" target="_blank">Overture Maps Foundation</a>' />
         </MapLibreMap>
+
         <div className="custom-controls">
+          <Navigator
+            open={navigatorOpen}
+            setOpen={setNavigatorOpen}
+            map={useRef}
+            setVisibleTypes={setVisibleTypes}
+            setActiveThemes={setActiveThemes}
+          />
+
           {Object.keys(mapEntity).length > 0 && (
             <InspectorPanel
               mode={mode}
@@ -245,15 +257,17 @@ export default function Map({
               setActiveThemes={setActiveThemes}
             />
           )}
+          <ThemeSelector
+            entity={mapEntity}
+            mode={mode}
+            visibleTypes={visibleTypes}
+            setVisibleTypes={setVisibleTypes}
+            activeThemes={activeThemes}
+            setActiveThemes={setActiveThemes}
+            themeRef={themeRef}
+          ></ThemeSelector>
         </div>
-        <ThemeSelector
-          entity={mapEntity}
-          mode={mode}
-          setVisibleTypes={setVisibleTypes}
-          activeThemes={activeThemes}
-          setActiveThemes={setActiveThemes}
-          themeRef={themeRef}
-        ></ThemeSelector>
+
         <div className="bug-nub">
           <a
             className="bug-nub-link"
