@@ -93,15 +93,23 @@ label.type-selector-checkbox {
 
 button.expand-icon {
   width: 30px;
-  height: 30px;
+  height: 38px;
   color: black;
   border: none;
   background-color: rgba(0, 0, 0, 0);
   justify-content: center;
   display: flex;
+  padding-top: 4px;
 }
 
-button.expand-icon:focus {
+button.pin-button {
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
+}
+
+button.expand-icon:focus,
+button.pin-button:focus {
   outline: none;
 }
 

@@ -162,7 +162,9 @@ const ThemeSelector = ({
 
     return (
       <IconButton
-        className={theme === "divisions" ? "tour-layers-pins" : ""}
+        className={`${
+          theme === "divisions" ? "tour-layers-pins" : ""
+        } pin-button`}
         onClick={() => {
           if (activeThemes.includes(theme)) {
             setActiveThemes(activeThemes.filter((t) => t !== theme));
@@ -196,6 +198,8 @@ const ThemeSelector = ({
 
             const children = types.map((t) => selectedTypes[t.type]);
 
+            const expandGridSize = types.length > 1 ? 2 : 0;
+
             return (
               <Grid
                 container
@@ -203,14 +207,14 @@ const ThemeSelector = ({
                   mode === "theme-dark" ? "dark" : "light"
                 }`}
                 sx={{ paddingLeft: "5px" }}
-                width={200}
+                width={220}
               >
                 <Grid
                   className={
                     theme === "divisions" ? "tour-layers-checkboxes" : ""
                   }
                   item
-                  xs={8}
+                  xs={10 - expandGridSize}
                 >
                   <div>
                     <FormControlLabel
@@ -267,7 +271,8 @@ const ThemeSelector = ({
                       <></>
                     ))}
                 </Grid>
-                <Grid item xs={2}>
+
+                <Grid item xs={expandGridSize}>
                   {renderExpandIcon(theme, types)}
                 </Grid>
                 <Grid item xs={2}>
