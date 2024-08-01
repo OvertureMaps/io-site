@@ -11,7 +11,6 @@ import {
   IconButton,
   Popper,
   Paper,
-  collapseClasses,
 } from "@mui/material";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
@@ -163,9 +162,7 @@ const ThemeSelector = ({
 
     return (
       <IconButton
-        className={`${
-          theme === "divisions" ? "tour-layers-pins" : ""
-        } pin-icon`}
+        className={theme === "divisions" ? "tour-layers-pins" : ""}
         onClick={() => {
           if (activeThemes.includes(theme)) {
             setActiveThemes(activeThemes.filter((t) => t !== theme));
