@@ -90,3 +90,21 @@ label.type-selector-checkbox {
 .theme-dark.theme-selector-popover {
   box-shadow: 0 2px 4px black;
 }
+
+button.expand-icon {
+  width: 30px;
+  height: 30px;
+  color: black;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  justify-content: center;
+  display: flex;
+}
+
+button.expand-icon:focus {
+  outline: none;
+}
+
+.theme-dark .expand-icon {
+  color: white;
+}

@@ -11,9 +11,12 @@ import {
   IconButton,
   Popper,
   Paper,
+  collapseClasses,
 } from "@mui/material";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -121,6 +124,33 @@ const ThemeSelector = ({
     });
   };
 
+  const [expandedThemes, setExpandedThemes] = useState(activeThemes);
+
+  const renderExpandIcon = (theme, types) => {
+    if (types.length === 1) {
+      return <></>;
+    } else {
+      return (
+        <button
+          className={`expand-icon`}
+          onClick={() => {
+            if (expandedThemes.includes(theme)) {
+              setExpandedThemes(expandedThemes.filter((t) => t !== theme));
+            } else {
+              setExpandedThemes(expandedThemes.concat(theme));
+            }
+          }}
+        >
+          {expandedThemes.includes(theme) ? (
+            <ExpandLessIcon />
+          ) : (
+            <ExpandMoreIcon />
+          )}
+        </button>
+      );
+    }
+  };
+
   const renderPinThemeIcon = (theme, mode) => {
     const props = {
       sx: {
@@ -133,7 +163,9 @@ const ThemeSelector = ({
 
     return (
       <IconButton
-        className={theme === "divisions" ? "tour-layers-pins" : ""}
+        className={`${
+          theme === "divisions" ? "tour-layers-pins" : ""
+        } pin-icon`}
         onClick={() => {
           if (activeThemes.includes(theme)) {
             setActiveThemes(activeThemes.filter((t) => t !== theme));
@@ -181,7 +213,7 @@ const ThemeSelector = ({
                     theme === "divisions" ? "tour-layers-checkboxes" : ""
                   }
                   item
-                  xs={10}
+                  xs={8}
                 >
                   <div>
                     <FormControlLabel
@@ -207,33 +239,39 @@ const ThemeSelector = ({
                       }
                     />
                   </div>
-                  {types.length > 1 && (
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        ml: 2,
-                        padding: "0px",
-                      }}
-                    >
-                      {types.map((layer) => (
-                        <FormControlLabel
-                          label={format(layer.type)}
-                          className={`type-selector-checkbox ${
-                            mode === "theme-dark" ? "dark" : "light"
-                          }`}
-                          control={
-                            <Checkbox
-                              sx={{ padding: "2px" }}
-                              size="small"
-                              checked={selectedTypes[layer.type]}
-                              onChange={() => handleTypeChange(layer.type)}
-                            />
-                          }
-                        />
-                      ))}
-                    </Box>
-                  )}
+                  {types.length > 1 &&
+                    (expandedThemes.includes(theme) ? (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          ml: 2,
+                          padding: "0px",
+                        }}
+                      >
+                        {types.map((layer) => (
+                          <FormControlLabel
+                            label={format(layer.type)}
+                            className={`type-selector-checkbox ${
+                              mode === "theme-dark" ? "dark" : "light"
+                            }`}
+                            control={
+                              <Checkbox
+                                sx={{ padding: "2px" }}
+                                size="small"
+                                checked={selectedTypes[layer.type]}
+                                onChange={() => handleTypeChange(layer.type)}
+                              />
+                            }
+                          />
+                        ))}
+                      </Box>
+                    ) : (
+                      <></>
+                    ))}
+                </Grid>
+                <Grid item xs={2}>
+                  {renderExpandIcon(theme, types)}
                 </Grid>
                 <Grid item xs={2}>
                   {renderPinThemeIcon(theme, mode)}
