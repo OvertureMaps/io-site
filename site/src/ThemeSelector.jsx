@@ -64,7 +64,7 @@ const ThemeSelector = ({
       if (!newSelectedThemes[layer.theme]) {
         newSelectedThemes[layer.theme] = true;
       }
-      newSelectedTypes[layer.selectorName] = true;
+      newSelectedTypes[layer.type] = true;
     });
 
     setSelectedThemes(newSelectedThemes);

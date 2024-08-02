@@ -17,6 +17,7 @@ const ThemeTypeLayer = ({
   type,
   color,
   highlightColor,
+  labelColor,
   outlineColor,
   point,
   line,
@@ -51,7 +52,8 @@ const ThemeTypeLayer = ({
               17,
               pointSize || 4,
             ],
-            "circle-opacity": active ? 1 : ["interpolate", ["linear"], ["zoom"], 2, 0.05, 12, 0.1, 16, 0.3],
+            //"circle-opacity": active ? 1 : ["interpolate", ["linear"], ["zoom"], 2, 0.05, 12, 0.1, 16, 0.3],
+            "circle-blur": active ? 1 : 0,
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -68,18 +70,22 @@ const ThemeTypeLayer = ({
             source={theme}
             source-layer={type}
             paint={{
-              "text-color": "black",
-              "text-halo-color": highlightColor,
+              "text-color": "hsla(234, 99%, 66%, 1)",
+              "text-halo-color": "#fff",
               "text-halo-width": 1,
+              "text-halo-blur": 1,
             }}
             layout={{
-              "text-font": ["Noto Sans Bold"],
+              "text-font": ["Noto Sans Regular"],
               "text-field": ["get", "@name"],
-              "text-size": 11,
+              "text-size": 10,
               visibility: visible ? "visible" : "none",
               "text-variable-anchor": ["top", "bottom", "left", "right"],
-              "text-radial-offset": 0.8,
+              "text-radial-offset": 0,
               "text-justify": "auto",
+              "text-line-height": 1,
+              "text-padding": 12,
+              "text-max-width": 4,
             }}
           />
         </>
@@ -87,14 +93,18 @@ const ThemeTypeLayer = ({
 
       {line ? (
         <Layer
-          filter={["==", ["geometry-type"], "LineString"]}
+          filter={[
+            "all", ["==", ["geometry-type"], "LineString"],
+            ...(additionalFilter ? [additionalFilter] : []),
+          ]}
           id={`${selectorName}_line`}
           type="line"
           source={theme}
           source-layer={type}
           paint={{
             "line-color": colorExpression(color, highlightColor),
-            "line-width": ["interpolate", ["linear"], ["zoom"], 12, 1, 13, 2],
+            "line-width": active ? 3 :["interpolate", ["linear"], ["zoom"], 12, 1, 13, 2],
+            "line-blur": active ? 3 : 0,
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -102,7 +112,10 @@ const ThemeTypeLayer = ({
       ) : null}
       {outline ? (
         <Layer
-          filter={["==", ["geometry-type"], "Polygon"]}
+          filter={[
+            "all", ["==", ["geometry-type"], "LineString"],
+            ...(additionalFilter ? [additionalFilter] : []),
+          ]}
           id={`${selectorName}_outline`}
           type="line"
           source={theme}
@@ -131,14 +144,15 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "text-color": "black",
-            "text-halo-color": highlightColor,
+            "text-color": "hsla(218, 99%, 36%, 0.8)",
+            "text-halo-color": "#fff",
             "text-halo-width": 1,
+            "text-halo-blur": 1,
           }}
           layout={{
-            "text-font": ["Noto Sans Bold"],
+            "text-font": ["Noto Sans Regular"],
             "text-field": ["get", "@name"],
-            "text-size": 11,
+            "text-size": 12,
             "symbol-placement": "line-center",
             visibility: visible ? "visible" : "none",
           }}
@@ -185,9 +199,9 @@ const ThemeTypeLayer = ({
             "fill-extrusion-color": colorExpression(color, highlightColor),
             "fill-extrusion-opacity": active
               ? activeThemes.length > 1
-                ? 0.5
-                : 0.7
-              : 0.35,
+                ? 0.35
+                : 0.15
+              : 0.2,
             "fill-extrusion-base": ["get", "min_height"],
             "fill-extrusion-height": ["get", "height"],
           }}
@@ -203,14 +217,18 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "text-color": "black",
-            "text-halo-color": highlightColor,
+            "text-color": labelColor,
+            "text-halo-color": "#fff",
             "text-halo-width": 1,
+            "text-halo-blur": 1,
           }}
           layout={{
-            "text-font": ["Noto Sans Bold"],
+            "text-font": ["Noto Sans Regular"],
             "text-field": ["get", "@name"],
-            "text-size": 11,
+            "text-size": 12,
+            "text-line-height": 1,
+            "text-padding": 12,
+            "text-max-width": 4,
             visibility: visible ? "visible" : "none",
             "symbol-placement": "point",
           }}
@@ -227,6 +245,7 @@ ThemeTypeLayer.propTypes = {
   type: PropTypes.string.isRequired,
   color: PropTypes.any.isRequired,
   highlightColor: PropTypes.any.isRequired,
+  labelColor: PropTypes.string,
   point: PropTypes.bool,
   line: PropTypes.bool,
   polygon: PropTypes.bool,
