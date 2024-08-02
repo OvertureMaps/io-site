@@ -192,7 +192,7 @@ export default function Map({
           {[false, true].map((label) => {
             return layers.map((props, i) => (
               <ThemeTypeLayer
-                key={`${props.theme}_${props.type}_${i}`}
+                key={`${props.theme}_${props.selectorName}_${i}`}
                 {...{
                   ...props,
                   color: activeThemes.includes(props.theme)
@@ -200,7 +200,7 @@ export default function Map({
                     : props.color,
                 }}
                 visible={
-                  visibleTypes.includes(props.type) &&
+                  visibleTypes.includes(props.selectorName) &&
                   (props.activeOnly === undefined ||
                     activeThemes.includes(props.theme))
                 }
@@ -222,15 +222,30 @@ export default function Map({
             type="symbol"
             source="divisions"
             source-layer="division"
+            filter={
+              ["all",
+                ["has", "@name"],
+                ["step",["zoom"],
+                  ["==","$type","Point"],
+                  2,["match",["get", "subtype"],["country","dependency"],true, false],
+                  4,["match",["get", "subtype"],["macroregion","region"],true, false],
+                  8,["match",["get", "subtype"],["macrocounty","county"],true, false],
+                  10,["match",["get", "subtype"],["county", "localadmin"],true, false],
+                  12,["match",["get", "subtype"],["localadmin", "locality", "borough", "macrohood", "neighborhood","microhood"],true, false]
+                ]
+              ]}
             paint={{
-              "text-color": mode === "theme-light" ? "black" : "white",
+              "text-color": mode === "theme-light" ? "hsla(207, 14%, 46%, 1)" : "white",
               "text-halo-color": mode === "theme-light" ? "white" : "black",
-              "text-halo-width": 1,
+              "text-halo-width": 0.5,
             }}
             layout={{
-              "text-font": ["Noto Sans Bold"],
+              "text-font": ["Noto Sans Regular"],
               "text-field": ["get", "@name"],
-              "text-size": 11,
+              "text-size": ["interpolate", ["linear"], ["zoom"], 2, 10, 10, 14, 12, 12, 16, 16],
+              "text-line-height": 1,
+              "text-padding": 12,
+              "text-max-width": 4,
             }}
           />
 

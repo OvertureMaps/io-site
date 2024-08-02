@@ -17,6 +17,7 @@ const ThemeTypeLayer = ({
   type,
   color,
   highlightColor,
+  outlineColor,
   point,
   line,
   polygon,
@@ -27,13 +28,15 @@ const ThemeTypeLayer = ({
   outline,
   minzoom,
   pointSize,
+  additionalFilter,
+  selectorName
 }) => {
   return (
     <>
       {point ? (
         <Layer
           filter={["==", ["geometry-type"], "Point"]}
-          id={`${theme}_${type}_point`}
+          id={`${selectorName}_point`}
           type="circle"
           source={theme}
           source-layer={type}
@@ -46,9 +49,9 @@ const ThemeTypeLayer = ({
               0,
               1,
               17,
-              pointSize || 8,
+              pointSize || 4,
             ],
-            "circle-opacity": active ? 1 : 0.4,
+            "circle-opacity": active ? 1 : ["interpolate", ["linear"], ["zoom"], 2, 0.05, 12, 0.1, 16, 0.3],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -59,7 +62,7 @@ const ThemeTypeLayer = ({
         <>
           <Layer
             filter={["==", ["geometry-type"], "Point"]}
-            id={`${theme}_${type}_point_label`}
+            id={`${selectorName}_point_label`}
             minzoom={minzoom || 17}
             type="symbol"
             source={theme}
@@ -85,7 +88,7 @@ const ThemeTypeLayer = ({
       {line ? (
         <Layer
           filter={["==", ["geometry-type"], "LineString"]}
-          id={`${theme}_${type}_line`}
+          id={`${selectorName}_line`}
           type="line"
           source={theme}
           source-layer={type}
@@ -100,7 +103,7 @@ const ThemeTypeLayer = ({
       {outline ? (
         <Layer
           filter={["==", ["geometry-type"], "Polygon"]}
-          id={`${theme}_${type}_outline`}
+          id={`${selectorName}_outline`}
           type="line"
           source={theme}
           source-layer={type}
@@ -123,7 +126,7 @@ const ThemeTypeLayer = ({
       {label && line ? (
         <Layer
           filter={["==", ["geometry-type"], "LineString"]}
-          id={`${theme}_${type}_line_label`}
+          id={`${selectorName}_line_label`}
           type="symbol"
           source={theme}
           source-layer={type}
@@ -145,18 +148,23 @@ const ThemeTypeLayer = ({
 
       {polygon ? (
         <Layer
-          filter={["==", ["geometry-type"], "Polygon"]}
-          id={`${theme}_${type}_fill`}
+          filter={[
+            "all",
+            ["==", ["geometry-type"], "Polygon"],
+            ...(additionalFilter ? [additionalFilter] : []),
+          ] }
+          id={`${selectorName}_fill`}
           type="fill"
           source={theme}
           source-layer={type}
           paint={{
             "fill-color": colorExpression(color, highlightColor),
-            "fill-opacity": active
-              ? activeThemes.length > 1
-                ? 0.55
-                : 0.7
-              : 0.4,
+            "fill-outline-color": outlineColor,
+            //"fill-opacity": active
+              //? activeThemes.length > 1
+              //  ? 0.55
+              //  : 0.7
+              //: 0.4,
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -169,7 +177,7 @@ const ThemeTypeLayer = ({
             ["==", ["geometry-type"], "Polygon"],
             ["!=", ["get", "has_parts"], true],
           ]} // prevent z-fighting
-          id={`${theme}_${type}_fill-extrusion`}
+          id={`${selectorName}_fill-extrusion`}
           type="fill-extrusion"
           source={theme}
           source-layer={type}
@@ -190,7 +198,7 @@ const ThemeTypeLayer = ({
       {label && (polygon || extrusion || outline) ? (
         <Layer
           filter={["all", ["==", ["geometry-type"], "Polygon"]]}
-          id={`${theme}_${type}_fill_labels`}
+          id={`${selectorName}_fill_labels`}
           type="symbol"
           source={theme}
           source-layer={type}
@@ -228,6 +236,9 @@ ThemeTypeLayer.propTypes = {
   label: PropTypes.bool,
   minzoom: PropTypes.number,
   pointSize: PropTypes.number,
+  additionalFilter: PropTypes.array,
+  selectorName: PropTypes.string,
+  outlineColor: PropTypes.string,
 };
 
 export default ThemeTypeLayer;

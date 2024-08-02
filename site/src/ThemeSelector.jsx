@@ -64,7 +64,7 @@ const ThemeSelector = ({
       if (!newSelectedThemes[layer.theme]) {
         newSelectedThemes[layer.theme] = true;
       }
-      newSelectedTypes[layer.type] = true;
+      newSelectedTypes[layer.selectorName] = true;
     });
 
     setSelectedThemes(newSelectedThemes);
@@ -91,7 +91,7 @@ const ThemeSelector = ({
     layers
       .filter((layer) => layer.theme === theme)
       .forEach((layer) => {
-        newSelectedTypes[layer.type] = !selectedThemes[theme];
+        newSelectedTypes[layer.selectorName] = !selectedThemes[theme];
       });
 
     setSelectedTypesState(newSelectedTypes);
@@ -114,10 +114,10 @@ const ThemeSelector = ({
   const filterUniqueByType = (array) => {
     const seenTypes = new Set();
     return array.filter((item) => {
-      if (seenTypes.has(item.type)) {
+      if (seenTypes.has(item.selectorName)) {
         return false;
       } else {
-        seenTypes.add(item.type);
+        seenTypes.add(item.selectorName);
         return true;
       }
     });
@@ -196,7 +196,7 @@ const ThemeSelector = ({
               layers.filter((layer) => layer.theme === theme)
             );
 
-            const children = types.map((t) => selectedTypes[t.type]);
+            const children = types.map((t) => selectedTypes[t.selectorName]);
 
             const expandGridSize = types.length > 1 ? 2 : 0;
 
@@ -252,7 +252,7 @@ const ThemeSelector = ({
                       >
                         {types.map((layer) => (
                           <FormControlLabel
-                            label={format(layer.type)}
+                            label={format(layer.selectorName)}
                             className={`type-selector-checkbox ${
                               mode === "theme-dark" ? "dark" : "light"
                             }`}
@@ -260,8 +260,8 @@ const ThemeSelector = ({
                               <Checkbox
                                 sx={{ padding: "2px" }}
                                 size="small"
-                                checked={selectedTypes[layer.type]}
-                                onChange={() => handleTypeChange(layer.type)}
+                                checked={selectedTypes[layer.selectorName]}
+                                onChange={() => handleTypeChange(layer.selectorName)}
                               />
                             }
                           />
