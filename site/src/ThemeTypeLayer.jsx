@@ -168,6 +168,7 @@ const ThemeTypeLayer = ({
             "all",
             ["==", ["geometry-type"], "Polygon"],
             ["!=", ["get", "has_parts"], true],
+            ["has", "height"]
           ]} // prevent z-fighting
           id={`${theme}_${type}_fill-extrusion`}
           type="fill-extrusion"
@@ -180,7 +181,7 @@ const ThemeTypeLayer = ({
                 ? 0.5
                 : 0.7
               : 0.35,
-            "fill-extrusion-base": ["get", "min_height"],
+            "fill-extrusion-base": ["coalesce",["get", "min_height"],0],
             "fill-extrusion-height": ["get", "height"],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
