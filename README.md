@@ -12,6 +12,8 @@ The data accessible through io-site is drawn from the [Overture Maps Foundation]
 - Test a prerelease version of io-site:
   - The current build of the `main` branch is publicly available [here](https://explore.overturemaps.org/#16.34/51.049194/3.728993)!
 
+- For the tilesets that power the io-site viewer, see the [overture-tiles repository](https://github.com/OvertureMaps/overture-tiles).
+
 ## For developers
 
 Running the io-site requires installation of:
