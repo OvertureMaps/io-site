@@ -218,7 +218,7 @@ const ThemeSelector = ({
                 >
                   <div>
                     <FormControlLabel
-                      label={format(theme)}
+                      label={(theme)}
                       className="theme-selector-checkbox"
                       sx={{
                         height: "16px",
@@ -252,7 +252,7 @@ const ThemeSelector = ({
                       >
                         {types.map((layer) => (
                           <FormControlLabel
-                            label={format(layer.selectorName)}
+                            label={(layer.selectorName)}
                             className={`type-selector-checkbox ${
                               mode === "theme-dark" ? "dark" : "light"
                             }`}

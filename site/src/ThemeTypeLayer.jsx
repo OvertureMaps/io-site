@@ -52,7 +52,7 @@ const ThemeTypeLayer = ({
               17,
               pointSize || 4,
             ],
-            //"circle-opacity": active ? 1 : ["interpolate", ["linear"], ["zoom"], 2, 0.05, 12, 0.1, 16, 0.3],
+            //"circle-opacity": ["interpolate", ["linear"], ["zoom"], 2, 0.1, 12, 0.5, 16, 0.5],
             "circle-blur": active ? 1 : 0,
           }}
           layout={{ visibility: visible ? "visible" : "none" }}

@@ -235,7 +235,7 @@ export default function Map({
                 ]
               ]}
             paint={{
-              "text-color": mode === "theme-light" ? "hsla(207, 14%, 46%, 1)" : "white",
+              "text-color": mode === "theme-light" ? "hsla(207, 14%, 26%, 1)" : "white",
               "text-halo-color": mode === "theme-light" ? "white" : "black",
               "text-halo-width": 0.5,
             }}

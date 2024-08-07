@@ -118,7 +118,7 @@ export const layers = [
     type: "place",
     selectorName: "Places",
     point: true,
-    color: "hsla(226, 100%, 75%, 0.3)",
+    color: "hsla(226, 100%, 75%, 0.25)",
     activeColor: "hsla(226, 100%, 75%, 1)",
   },
   {
