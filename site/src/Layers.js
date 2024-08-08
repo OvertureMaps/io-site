@@ -148,6 +148,7 @@ export const layers = [
     line: true,
     color: "hsla(210, 16%, 82%, 1)",
     activeColor: "hsla(210, 16%, 82%, 1)",
+    labelColor: "hsla(201, 29%, 15%, 1)"
   },
 ];
 
