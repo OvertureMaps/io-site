@@ -27,6 +27,8 @@ const ThemeTypeLayer = ({
   outline,
   minzoom,
   pointSize,
+  fillOutlineColor,
+  labelColor,
 }) => {
   return (
     <>
@@ -46,7 +48,7 @@ const ThemeTypeLayer = ({
               0,
               1,
               17,
-              pointSize || 8,
+              pointSize || 6,
             ],
             "circle-opacity": active ? 1 : 0.4,
           }}
@@ -65,18 +67,20 @@ const ThemeTypeLayer = ({
             source={theme}
             source-layer={type}
             paint={{
-              "text-color": "black",
-              "text-halo-color": highlightColor,
+              "text-color": labelColor,
+              "text-halo-color": "hsla(0, 100%, 100%, 1)",
               "text-halo-width": 1,
             }}
             layout={{
-              "text-font": ["Noto Sans Bold"],
+              "text-font": ["Noto Sans Regular"],
               "text-field": ["get", "@name"],
-              "text-size": 11,
+              "text-size": 10,
               visibility: visible ? "visible" : "none",
-              "text-variable-anchor": ["top", "bottom", "left", "right"],
-              "text-radial-offset": 0.8,
+              "text-radial-offset": 0,
               "text-justify": "auto",
+              "text-line-height": 1,
+              "text-padding": 12,
+              "text-max-width": 4,
             }}
           />
         </>
@@ -128,12 +132,12 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "text-color": "black",
-            "text-halo-color": highlightColor,
+            "text-color": labelColor,
+            "text-halo-color": "hsla(0, 100%, 100%, 1)",
             "text-halo-width": 1,
           }}
           layout={{
-            "text-font": ["Noto Sans Bold"],
+            "text-font": ["Noto Sans Regular"],
             "text-field": ["get", "@name"],
             "text-size": 11,
             "symbol-placement": "line-center",
@@ -152,11 +156,8 @@ const ThemeTypeLayer = ({
           source-layer={type}
           paint={{
             "fill-color": colorExpression(color, highlightColor),
-            "fill-opacity": active
-              ? activeThemes.length > 1
-                ? 0.55
-                : 0.7
-              : 0.4,
+            "fill-opacity": active ? 0.5 : 0.5,
+            "fill-outline-color": fillOutlineColor
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -178,9 +179,9 @@ const ThemeTypeLayer = ({
             "fill-extrusion-color": colorExpression(color, highlightColor),
             "fill-extrusion-opacity": active
               ? activeThemes.length > 1
-                ? 0.5
-                : 0.7
-              : 0.35,
+              ? 0.35
+              : 0.15
+            : 0.15,
             "fill-extrusion-base": ["coalesce",["get", "min_height"],0],
             "fill-extrusion-height": ["get", "height"],
           }}
@@ -196,12 +197,12 @@ const ThemeTypeLayer = ({
           source={theme}
           source-layer={type}
           paint={{
-            "text-color": "black",
-            "text-halo-color": highlightColor,
+            "text-color": labelColor,
+            "text-halo-color": "hsla(0, 100%, 100%, 1)",
             "text-halo-width": 1,
           }}
           layout={{
-            "text-font": ["Noto Sans Bold"],
+            "text-font": ["Noto Sans Regular"],
             "text-field": ["get", "@name"],
             "text-size": 11,
             visibility: visible ? "visible" : "none",
@@ -229,6 +230,8 @@ ThemeTypeLayer.propTypes = {
   label: PropTypes.bool,
   minzoom: PropTypes.number,
   pointSize: PropTypes.number,
+  fillOutlineColor: PropTypes.string,
+  labelColor: PropTypes.string,
 };
 
 export default ThemeTypeLayer;
