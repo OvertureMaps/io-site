@@ -222,15 +222,30 @@ export default function Map({
             type="symbol"
             source="divisions"
             source-layer="division"
+            filter={
+              ["all",
+                ["has", "@name"],
+                ["step",["zoom"],
+                  ["==","$type","Point"],
+                  2,["match",["get", "subtype"],["country","dependency"],true, false],
+                  4,["match",["get", "subtype"],["macroregion","region"],true, false],
+                  8,["match",["get", "subtype"],["macrocounty","county"],true, false],
+                  10,["match",["get", "subtype"],["county", "localadmin"],true, false],
+                  12,["match",["get", "subtype"],["localadmin", "locality", "borough", "macrohood", "neighborhood","microhood"],true, false]
+                ]
+              ]}
             paint={{
-              "text-color": mode === "theme-light" ? "black" : "white",
+              "text-color": mode === "theme-light" ? "hsla(201, 29%, 15%, 1)" : "white",
               "text-halo-color": mode === "theme-light" ? "white" : "black",
               "text-halo-width": 1,
             }}
             layout={{
-              "text-font": ["Noto Sans Bold"],
+              "text-font": ["Noto Sans Regular"],
               "text-field": ["get", "@name"],
-              "text-size": 11,
+              "text-size": ["interpolate", ["linear"], ["zoom"], 2, 10, 10, 14, 12, 12, 16, 16],
+              "text-line-height": 1,
+              "text-padding": 6,
+              "text-max-width": 4,
             }}
           />
 
