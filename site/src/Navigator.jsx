@@ -9,7 +9,7 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   const handleParis = () => {
     setVisibleTypes([
       "division_area",
-      "boundary",
+      "division_boundary",
       "land",
       "land_cover",
       "land_use",
@@ -31,7 +31,7 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
 
   const handleNYC = () => {
     setVisibleTypes([
-      "boundary",
+      "division_boundary",
       "land",
       "land_cover",
       "land_use",
@@ -67,7 +67,7 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   const handleLondon = () => {
     setVisibleTypes([
       "division_area",
-      "boundary",
+      "division_boundary",
       "land",
       "land_cover",
       "land_use",
@@ -88,7 +88,7 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   };
   const handleBoston = () => {
     setVisibleTypes([
-      "boundary",
+      "division_boundary",
       "land",
       "land_cover",
       "land_use",
@@ -109,7 +109,7 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   };
   const handleAthens = () => {
     setVisibleTypes([
-      "boundary",
+      "division_boundary",
       "land",
       "land_cover",
       "land_use",
@@ -127,7 +127,7 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   };
   const handleHongKong = () => {
     setVisibleTypes([
-      "boundary",
+      "division_boundary",
       "land",
       "land_cover",
       "land_use",
