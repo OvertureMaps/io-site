@@ -19,6 +19,39 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+// Should convert this logic to be dynamic once manifests are a thing!
+function themeFromType (type) {
+  switch (type) {
+    case "boundary":
+    case "division":
+    case "division_area":
+    case "division_boundary":
+      return 'divisions';
+
+    case "land":
+    case "land_cover":
+    case "land_use":
+    case "water":
+    case "infrastructure":
+      return "base";
+
+    case "segment":
+    case "connector":
+      return "transportation";
+
+    case "building":
+    case "building_part":
+      return "buildings"
+
+    case "place":
+      return "places";
+
+    case "address":
+      return "addresses"
+  }
+  return '';
+}
+
 const muiTheme = createTheme({
   typography: {
     allVariants: {
@@ -74,10 +107,15 @@ const ThemeSelector = ({
 
   useEffect(() => {
     const newSelectedTypes = {};
+    const newSelectedThemes = {};
+
     visibleTypes.forEach((type) => {
       newSelectedTypes[type] = true;
+      newSelectedThemes[themeFromType(type)] = true;
     });
+
     setSelectedTypesState(newSelectedTypes);
+    setSelectedThemes(newSelectedThemes);
   }, [visibleTypes]);
 
   const handleThemeChange = (theme) => {
