@@ -7,6 +7,7 @@ export const layers = [
     color: "hsla(213, 23%, 92%, 1)",
     fillOutlineColor: "hsla(208, 15%, 78%, 1)",
     activeColor: "hsla(17, 17%, 92%, 1)",
+    labelColor: "hsla(0, 0%, 0%, 0)",
   },
   {
     theme: "base",
