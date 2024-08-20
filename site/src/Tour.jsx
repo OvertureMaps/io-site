@@ -66,9 +66,9 @@ const Steps = [
   {
     target: ".bug-nub-link",
     content:
-      "This is where you can file bug reports! Follow this link, and fill out the appropriate github workflow.",
+      "This is where you can file bug reports! Follow this link, and fill out the appropriate GitHub workflow.",
     disableBeacon: true,
-    title: "Github Issue Link",
+    title: "GitHub Issue Link",
     placement: "left",
     offset: 0,
   },
