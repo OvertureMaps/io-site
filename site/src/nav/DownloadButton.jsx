@@ -57,7 +57,7 @@ function DownloadButton({ mode, zoom, setZoom, visibleThemes}) {
       },
     };
     let downloadCatalog = getDownloadCatalog(bbox, visibleThemes);
-    let parquetDataset = await new ParquetDataset(downloadCatalog);
+    let parquetDataset = await new ParquetDataset(downloadCatalog.basePath, downloadCatalog.files);
     set_panic_hook();
     const wasmTable = await parquetDataset.read(readOptions);
 
