@@ -9,7 +9,7 @@ const awsbasepath = 'https://overturemaps-us-west-2.s3.amazonaws.com/release/';
  * @returns an object with the 'basepath' and array of filespecs 'files' */
 export function getDownloadCatalog(bbox, visibleThemes){
    let fileCatalog = {};
-   let filenames = [];
+   let types = [];
 
    const versionPath = awsbasepath + manifest.version;
 
@@ -19,19 +19,26 @@ export function getDownloadCatalog(bbox, visibleThemes){
          if (!visibleThemes.includes(theme.name)){
             return;
          }
-
          theme.types.forEach(type => {
+         let typeEntry = {};
+         typeEntry.files = [];
+           
             type.files.forEach(file => {
-               let newName = `${theme.relative_path}${type.relative_path}/${file.name}`
+               typeEntry.name = type.name;
+
+                  let newName = `${theme.relative_path}${type.relative_path}/${file.name}`
                if (intersects(bbox, file.bbox)) {
-                  filenames.push( newName )
+                  typeEntry.files.push( newName )
                }
             })
+            if (typeEntry.files.length > 0) {
+               types.push(typeEntry);
+            }
          })
       }
    )
 
-   fileCatalog.files = filenames;
+   fileCatalog.types = types;
    return fileCatalog;
 }
 
