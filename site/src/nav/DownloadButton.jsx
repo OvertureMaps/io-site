@@ -57,34 +57,50 @@ function DownloadButton({ mode, zoom, setZoom, visibleThemes}) {
       },
     };
     let downloadCatalog = getDownloadCatalog(bbox, visibleThemes);
-    let parquetDataset = await new ParquetDataset(downloadCatalog.basePath, downloadCatalog.files);
+
     set_panic_hook();
-    const wasmTable = await parquetDataset.read(readOptions);
 
-    //Create a blob
-    // const binaryDataForDownload = writeGeoParquet(wasmTable);
-    const binaryDataForDownload = writeGeoJSON(wasmTable);
-
-    let blerb = new Blob([binaryDataForDownload], {
-      type: "application/octet-stream",
+    // The catalog contains a base path and then a list of types with filenames. 
+    //First, assemble the parquet datasets in parallel.
+   let datasets = downloadCatalog.types.map(type => {
+      return new ParquetDataset(downloadCatalog.basePath, type.files).then((dataset) => {return {type: type.name, parquet: dataset} });
     });
+      
+    Promise.all(datasets)
+    .then((datasets) => {
+      return datasets.map(dataset => dataset.parquet.read(readOptions).then(reader => {return {type: dataset.type, reader:reader}}));
+    }).then((tableReads) => Promise.all(tableReads)
+    .then((wasmTables) => {
+      wasmTables.map(wasmTable => {
+        //Create a blob
+        // const binaryDataForDownload = writeGeoParquet(wasmTable);
+        const binaryDataForDownload = writeGeoJSON(wasmTable.reader);
 
-    //Download the blob
-    // window.open(URL.createObjectURL(blerb));
+        let blerb = new Blob([binaryDataForDownload], {
+          type: "application/octet-stream",
+        });
 
-    const url = URL.createObjectURL(blerb);
-    var downloadLink = document.createElement("a");
-    downloadLink.href = url;
+        //Download the blob
+        // window.open(URL.createObjectURL(blerb));
 
-    const center = myMap.getCenter();
-    const zoom = myMap.getZoom();
-    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
+        const url = URL.createObjectURL(blerb);
+        var downloadLink = document.createElement("a");
+        downloadLink.href = url;
 
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+        const center = myMap.getCenter();
+        const zoom = myMap.getZoom();
+        downloadLink.download = `overture-${wasmTable.type}-${zoom}-${center.lat}-${center.lng}.geojson`;
 
-    setLoading(false);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      })
+    }).then(() => {
+      setLoading(false);
+    })
+  )
+    
+
   };
 
   const handleToggleTooltip = () => {
