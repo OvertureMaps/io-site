@@ -20,7 +20,7 @@ import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
 
 const PMTILES_URL =
-  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-07-22/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-08-20/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 38.90678,
@@ -222,27 +222,84 @@ export default function Map({
             type="symbol"
             source="divisions"
             source-layer="division"
-            filter={
-              ["all",
-                ["has", "@name"],
-                ["step",["zoom"],
-                  ["==","$type","Point"],
-                  2,["match",["get", "subtype"],["country","dependency"],true, false],
-                  4,["match",["get", "subtype"],["macroregion","region"],true, false],
-                  8,["match",["get", "subtype"],["macrocounty","county"],true, false],
-                  10,["match",["get", "subtype"],["county", "localadmin"],true, false],
-                  12,["match",["get", "subtype"],["localadmin", "locality", "borough", "macrohood", "neighborhood","microhood"],true, false]
-                ]
-              ]}
+            filter={[
+              "all",
+              ["has", "@name"],
+              [
+                "step",
+                ["zoom"],
+                ["==", "$type", "Point"],
+                2,
+                [
+                  "match",
+                  ["get", "subtype"],
+                  ["country", "dependency"],
+                  true,
+                  false,
+                ],
+                4,
+                [
+                  "match",
+                  ["get", "subtype"],
+                  ["macroregion", "region"],
+                  true,
+                  false,
+                ],
+                8,
+                [
+                  "match",
+                  ["get", "subtype"],
+                  ["macrocounty", "county"],
+                  true,
+                  false,
+                ],
+                10,
+                [
+                  "match",
+                  ["get", "subtype"],
+                  ["county", "localadmin"],
+                  true,
+                  false,
+                ],
+                12,
+                [
+                  "match",
+                  ["get", "subtype"],
+                  [
+                    "localadmin",
+                    "locality",
+                    "borough",
+                    "macrohood",
+                    "neighborhood",
+                    "microhood",
+                  ],
+                  true,
+                  false,
+                ],
+              ],
+            ]}
             paint={{
-              "text-color": mode === "theme-light" ? "hsla(201, 29%, 15%, 1)" : "white",
+              "text-color":
+                mode === "theme-light" ? "hsla(201, 29%, 15%, 1)" : "white",
               "text-halo-color": mode === "theme-light" ? "white" : "black",
               "text-halo-width": 1,
             }}
             layout={{
               "text-font": ["Noto Sans Regular"],
               "text-field": ["get", "@name"],
-              "text-size": ["interpolate", ["linear"], ["zoom"], 2, 10, 10, 14, 12, 12, 16, 16],
+              "text-size": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                2,
+                10,
+                10,
+                14,
+                12,
+                12,
+                16,
+                16,
+              ],
               "text-line-height": 1,
               "text-padding": 6,
               "text-max-width": 4,
