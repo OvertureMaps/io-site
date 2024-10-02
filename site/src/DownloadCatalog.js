@@ -1,26 +1,26 @@
-import manifest from './07-22-manifest.json';
+import manifest from './09-18-manifest.json';
 
 const awsbasepath = 'https://overturemaps-us-west-2.s3.amazonaws.com/release/';
 
 /**
  * 
  * @param {*} bbox 
- * @param {*} visibleThemes 
+ * @param {*} visibleTypes an array of type names that are currently visible on the map
  * @returns an object with the 'basepath' and array of filespecs 'files' */
-export function getDownloadCatalog(bbox, visibleThemes){
+export function getDownloadCatalog(bbox, visibleTypes){
    let fileCatalog = {};
    let types = [];
 
-   const versionPath = awsbasepath + manifest.version;
+   const versionPath = awsbasepath + manifest.release_version;
 
    fileCatalog.basePath = versionPath;
    manifest.themes.forEach( theme => {
       // If the theme isn't visible, don't download it. 
-         if (!visibleThemes.includes(theme.name)){
-            return;
-         }
          theme.types.forEach(type => {
-         let typeEntry = {};
+            if (!visibleTypes.includes(type.name)){
+               return;
+            }
+            let typeEntry = {};
          typeEntry.files = [];
            
             type.files.forEach(file => {

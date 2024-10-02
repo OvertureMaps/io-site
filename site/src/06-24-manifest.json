@@ -1,5 +1,5 @@
 {
-    "version": "2024-06-13-beta.1",
+    "release_version": "2024-06-13-beta.1",
     "s3_location": "overturemaps-us-west-2/release/2024-06-13-beta.1",
     "themes": [
         {

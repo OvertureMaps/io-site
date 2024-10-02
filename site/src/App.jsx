@@ -31,7 +31,8 @@ function App() {
     setTour(!tour);
   };
   
-  const [visibleThemes, setVisibleThemes] = useState([]);
+  const [visibleTypes, setVisibleTypes] = useState([]);
+
 
   useEffect(() => {
     keepTheme(setModeName);
@@ -50,7 +51,7 @@ function App() {
           setMode={setModeName}
           zoom={zoom}
           setZoom={setZoom}
-          visibleThemes={visibleThemes}
+          visibleTypes={visibleTypes}
         />
         <Tour
           run={run}
@@ -59,8 +60,8 @@ function App() {
           setNavigatorOpen={setNavigatorOpen}
           themeRef={themeRef}
           setZoom={setZoom}
-          visibleThemes={visibleThemes}
-          setVisibleThemes={setVisibleThemes}
+          visibleTypes={visibleTypes}
+          setVisibleTypes={setVisibleTypes}
         />
         <MapProvider>
           <Header
@@ -68,6 +69,7 @@ function App() {
             setMode={setModeName}
             zoom={zoom}
             setZoom={setZoom}
+            visibleTypes={visibleTypes}
           />
           <Map
             mode={modeName}
@@ -79,6 +81,8 @@ function App() {
             themeRef={themeRef}
             setActiveFeature={setActiveFeature}
             activeFeature={activeFeature}
+            visibleTypes={visibleTypes}
+            setVisibleTypes={setVisibleTypes}
           />
         </MapProvider>
       </ThemeProvider>

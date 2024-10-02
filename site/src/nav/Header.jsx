@@ -4,7 +4,7 @@ import DarkModeToggle from "./DarkModeToggle";
 import PropTypes from "prop-types";
 import GithubButton from "./GithubButton";
 
-export default function Header({ zoom, mode, setMode, setZoom, visibleThemes}) {
+export default function Header({ zoom, mode, setMode, setZoom, visibleTypes}) {
   return (
     <nav aria-label="Main" className="navbar navbar--fixed-top">
       <div className="navbar__inner">
@@ -22,7 +22,7 @@ export default function Header({ zoom, mode, setMode, setZoom, visibleThemes}) {
         <div className="navbar__items navbar__items--right">
           <GithubButton />
           <DarkModeToggle mode={mode} setMode={setMode} />
-          <DownloadButton zoom={zoom} mode={mode} setZoom={setZoom} visibleThemes={visibleThemes}/>
+          <DownloadButton zoom={zoom} mode={mode} setZoom={setZoom} visibleTypes={visibleTypes}/>
         </div>
       </div>
     </nav>
