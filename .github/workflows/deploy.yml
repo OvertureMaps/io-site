@@ -5,7 +5,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main , manifest_driven_downloads]
 
 permissions:
   id-token: write # required to use OIDC authentication
