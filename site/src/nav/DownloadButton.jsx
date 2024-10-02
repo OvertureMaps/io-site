@@ -72,28 +72,25 @@ function DownloadButton({ mode, zoom, setZoom, visibleTypes}) {
     }).then((tableReads) => Promise.all(tableReads)
     .then((wasmTables) => {
       wasmTables.map(wasmTable => {
-        //Create a blob
-        // const binaryDataForDownload = writeGeoParquet(wasmTable);
-        const binaryDataForDownload = writeGeoJSON(wasmTable.reader);
+        if (wasmTable?.reader?.numBatches > 0) {
+          const binaryDataForDownload = writeGeoJSON(wasmTable.reader);
 
-        let blerb = new Blob([binaryDataForDownload], {
-          type: "application/octet-stream",
-        });
-
-        //Download the blob
-        // window.open(URL.createObjectURL(blerb));
-
-        const url = URL.createObjectURL(blerb);
-        var downloadLink = document.createElement("a");
-        downloadLink.href = url;
-
-        const center = myMap.getCenter();
-        const zoom = myMap.getZoom();
-        downloadLink.download = `overture-${wasmTable.type}-${zoom}-${center.lat}-${center.lng}.geojson`;
-
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
+          let blerb = new Blob([binaryDataForDownload], {
+            type: "application/octet-stream",
+          });
+    
+          const url = URL.createObjectURL(blerb);
+          var downloadLink = document.createElement("a");
+          downloadLink.href = url;
+  
+          const center = myMap.getCenter();
+          const zoom = myMap.getZoom();
+          downloadLink.download = `overture-${wasmTable.type}-${zoom}-${center.lat}-${center.lng}.geojson`;
+  
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+        }
       })
     }).then(() => {
       setLoading(false);
