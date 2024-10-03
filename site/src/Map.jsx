@@ -55,12 +55,13 @@ export default function Map({
   navigatorOpen,
   setNavigatorOpen,
   themeRef,
+  visibleTypes, 
+  setVisibleTypes,
 }) {
   const mapRef = useRef();
   const [cursor, setCursor] = useState("auto");
 
   const [activeThemes, setActiveThemes] = useState(["places"]);
-  const [visibleTypes, setVisibleTypes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
 
   // For access of latest value within map events
