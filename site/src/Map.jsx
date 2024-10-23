@@ -20,7 +20,7 @@ import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
 
 const PMTILES_URL =
-  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-09-18/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-10-23/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 38.90678,
