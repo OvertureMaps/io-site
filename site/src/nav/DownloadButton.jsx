@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect, useState } from "react";
-import { DownloadCatalog } from "../DownloadCatalog.js";
+import { getDownloadCatalog } from "../DownloadCatalog.js";
 import {
   ParquetDataset,
   set_panic_hook,
@@ -15,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const ZOOM_BOUND = 15;
 
-function DownloadButton({ mode, zoom, setZoom }) {
+function DownloadButton({ mode, zoom, setZoom, visibleTypes}) {
   const { myMap } = useMap();
 
   const [loading, setLoading] = useState(false);
@@ -42,10 +42,10 @@ function DownloadButton({ mode, zoom, setZoom }) {
     console.log(bounds);
 
     //Send those to the download engine
-    const minxPath = ["bbox", "minx"];
-    const minyPath = ["bbox", "miny"];
-    const maxxPath = ["bbox", "maxx"];
-    const maxyPath = ["bbox", "maxy"];
+    const minxPath = ["bbox", "xmin"];
+    const minyPath = ["bbox", "ymin"];
+    const maxxPath = ["bbox", "xmax"];
+    const maxyPath = ["bbox", "ymax"];
 
     const readOptions = {
       bbox: bbox,
@@ -56,35 +56,48 @@ function DownloadButton({ mode, zoom, setZoom }) {
         maxyPath,
       },
     };
-
-    let parquetDataset = await new ParquetDataset(DownloadCatalog);
-    const wasmTable = await parquetDataset.read(readOptions);
+    let downloadCatalog = getDownloadCatalog(bbox, visibleTypes);
 
     set_panic_hook();
-    //Create a blob
-    // const binaryDataForDownload = writeGeoParquet(wasmTable);
-    const binaryDataForDownload = writeGeoJSON(wasmTable);
 
-    let blerb = new Blob([binaryDataForDownload], {
-      type: "application/octet-stream",
+    // The catalog contains a base path and then a list of types with filenames. 
+    //First, assemble the parquet datasets in parallel.
+   let datasets = downloadCatalog.types.map(type => {
+      return new ParquetDataset(downloadCatalog.basePath, type.files).then((dataset) => {return {type: type.name, parquet: dataset} });
     });
+      
+    Promise.all(datasets)
+    .then((datasets) => {
+      return datasets.map(dataset => dataset.parquet.read(readOptions).then(reader => {return {type: dataset.type, reader:reader}}));
+    }).then((tableReads) => Promise.all(tableReads)
+    .then((wasmTables) => {
+      wasmTables.map(wasmTable => {
+        if (wasmTable?.reader?.numBatches > 0) {
+          const binaryDataForDownload = writeGeoJSON(wasmTable.reader);
 
-    //Download the blob
-    // window.open(URL.createObjectURL(blerb));
+          let blerb = new Blob([binaryDataForDownload], {
+            type: "application/octet-stream",
+          });
+    
+          const url = URL.createObjectURL(blerb);
+          var downloadLink = document.createElement("a");
+          downloadLink.href = url;
+  
+          const center = myMap.getCenter();
+          const zoom = myMap.getZoom();
+          downloadLink.download = `overture-${wasmTable.type}-${zoom}-${center.lat}-${center.lng}.geojson`;
+  
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+        }
+      })
+    }).then(() => {
+      setLoading(false);
+    })
+  )
+    
 
-    const url = URL.createObjectURL(blerb);
-    var downloadLink = document.createElement("a");
-    downloadLink.href = url;
-
-    const center = myMap.getCenter();
-    const zoom = myMap.getZoom();
-    downloadLink.download = `overture-${zoom}-${center.lat}-${center.lng}.geojson`;
-
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-
-    setLoading(false);
   };
 
   const handleToggleTooltip = () => {
