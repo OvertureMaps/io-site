@@ -42,18 +42,18 @@ function DownloadButton({ mode, zoom, setZoom, visibleTypes}) {
     console.log(bounds);
 
     //Send those to the download engine
-    const minxPath = ["bbox", "xmin"];
-    const minyPath = ["bbox", "ymin"];
-    const maxxPath = ["bbox", "xmax"];
-    const maxyPath = ["bbox", "ymax"];
+    const xmin = ["bbox", "xmin"];
+    const ymin = ["bbox", "ymin"];
+    const xmax = ["bbox", "xmax"];
+    const ymax = ["bbox", "ymax"];
 
     const readOptions = {
       bbox: bbox,
       bboxPaths: {
-        minxPath,
-        minyPath,
-        maxxPath,
-        maxyPath,
+        xmin,
+        ymin,
+        xmax,
+        ymax,
       },
     };
     let downloadCatalog = getDownloadCatalog(bbox, visibleTypes);
