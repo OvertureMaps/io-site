@@ -3,7 +3,7 @@ import OvertureWordmark from "./OvertureWordmark";
 import DarkModeToggle from "./DarkModeToggle";
 import PropTypes from "prop-types";
 
-export default function Header({ zoom, mode, setMode, setZoom }) {
+export default function Header({ zoom, mode, setMode, setZoom, visibleTypes}) {
   return (
     <nav aria-label="Main" className="navbar navbar--fixed-top">
       <div className="navbar__inner">
@@ -12,7 +12,7 @@ export default function Header({ zoom, mode, setMode, setZoom }) {
         </div>
         <div className="navbar__items navbar__items--right">
           <DarkModeToggle mode={mode} setMode={setMode} />
-          <DownloadButton zoom={zoom} mode={mode} setZoom={setZoom} />
+          <DownloadButton zoom={zoom} mode={mode} setZoom={setZoom} visibleTypes={visibleTypes}/>
         </div>
       </div>
     </nav>
