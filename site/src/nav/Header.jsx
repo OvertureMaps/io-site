@@ -10,6 +10,14 @@ export default function Header({ zoom, mode, setMode, setZoom }) {
       <div className="navbar__inner">
         <div className="navbar__items">
           <OvertureWordmark />
+          <a
+            aria-current="page"
+            class="navbar__item navbar__link"
+            href="https://docs.overturemaps.org/"
+            target="_blank"
+          >
+            Docs
+          </a>
         </div>
         <div className="navbar__items navbar__items--right">
           <GithubButton />
