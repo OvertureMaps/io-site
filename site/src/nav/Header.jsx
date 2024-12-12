@@ -2,6 +2,7 @@ import DownloadButton from "./DownloadButton";
 import OvertureWordmark from "./OvertureWordmark";
 import DarkModeToggle from "./DarkModeToggle";
 import PropTypes from "prop-types";
+import GithubButton from "./GithubButton";
 
 export default function Header({ zoom, mode, setMode, setZoom }) {
   return (
@@ -11,6 +12,7 @@ export default function Header({ zoom, mode, setMode, setZoom }) {
           <OvertureWordmark />
         </div>
         <div className="navbar__items navbar__items--right">
+          <GithubButton />
           <DarkModeToggle mode={mode} setMode={setMode} />
           <DownloadButton zoom={zoom} mode={mode} setZoom={setZoom} />
         </div>
