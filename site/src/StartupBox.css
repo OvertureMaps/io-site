@@ -3,8 +3,8 @@ div.startup-box-light {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 450px;
-  height: 200px;
+  width: 80%;
+  max-width: 450px;
   background: white;
   border-radius: 15px;
 }
@@ -15,7 +15,6 @@ div.startup-box-dark {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 450px;
-  height: 200px;
   background: black;
   border-radius: 15px;
   color: whitesmoke;
@@ -49,6 +48,12 @@ button.skip:hover {
   background: var(--ifm-color-info-darkest);
 }
 
+.tool-intro {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
 p.tour-intro {
   margin-left: 20px;
   margin-top: 20px;
@@ -57,7 +62,8 @@ p.tour-intro {
 }
 
 div.perma-skip {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left: 20px;
 }
 
@@ -67,4 +73,9 @@ p.dark-startup {
 
 p.light-startup {
   color: #213547;
+}
+
+.tour-buttons {
+  display: flex;
+  justify-content: center;
 }

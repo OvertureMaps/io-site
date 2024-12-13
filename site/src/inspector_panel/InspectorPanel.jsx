@@ -110,7 +110,7 @@ function InspectorPanel({
   return (
     <div className="inspector-panel">
       <div className="panel-header">
-        <h4>Inspector Panel</h4>
+        <h4 className="title">Inspector Panel</h4>
         <button className="close-panel-button" onClick={() => setEntity({})}>
           <CloseIcon className="close-panel-icon" />
         </button>

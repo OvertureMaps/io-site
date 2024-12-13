@@ -6,6 +6,10 @@
   color: black;
   margin: 4px;
   outline: none;
+
+  .title {
+    padding: 2px 0;
+  }
 }
 
 div.bug-nub {

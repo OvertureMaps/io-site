@@ -1,4 +1,5 @@
 .inspector-panel {
+  width: 90%;
   max-width: 370px;
   display: flex;
   flex-direction: column;

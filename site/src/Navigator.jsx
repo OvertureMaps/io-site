@@ -152,7 +152,7 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
         <div className="navigator-modal">
           <div className="navigator-box">
             <div className="navigator-landing">
-              <p className="navigator-welcome">NAVIGATE</p>
+              <h4 className="title">Explore Overture</h4>
               <button
                 className="close-panel-button"
                 onClick={() => setOpen(false)}
@@ -160,7 +160,6 @@ function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
                 <CloseIcon className="close-panel-icon" />
               </button>
             </div>
-            <div className="navigator-header">Explore Overture</div>
             <div className="navigator-blurb">
               We've picked a few spots around the world you might be interested
               in seeing.

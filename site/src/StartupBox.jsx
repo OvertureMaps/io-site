@@ -23,18 +23,28 @@ function StartupBox({
         >
           <Box>
             <p
+              className={`tool-intro ${
+                mode === "theme-dark" ? "dark-startup" : "light-startup"
+              }`}
+            >
+              <strong>Overture Maps Explorer</strong> is a tool for inspecting
+              and downloading Overture data.
+            </p>
+            <p
               className={`tour-intro ${
                 mode === "theme-dark" ? "dark-startup" : "light-startup"
               }`}
             >
-              First time here? Take the tour to get familiar with our features!
+              New here? Take the tour to get started!
             </p>
-            <button className="button start" onClick={startTour}>
-              Begin
-            </button>
-            <button className="button skip" onClick={handleSkip}>
-              Skip
-            </button>
+            <div className="tour-buttons">
+              <button className="button start" onClick={startTour}>
+                Begin
+              </button>
+              <button className="button skip" onClick={handleSkip}>
+                Skip
+              </button>
+            </div>
             <div className="perma-skip">
               <FormControlLabel
                 control={
