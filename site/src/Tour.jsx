@@ -148,7 +148,7 @@ const sampleFeature = {
   state: {},
 };
 
-function Tour({ run, modeName, setMapEntity, setNavigatorOpen, themeRef }) {
+function Tour({ run, modeName, setFeatures, setNavigatorOpen, themeRef }) {
   const [stepIndex, setStepIndex] = useState(0);
 
   const stepBGColor =
@@ -210,7 +210,7 @@ function Tour({ run, modeName, setMapEntity, setNavigatorOpen, themeRef }) {
         (event.lifecycle === LIFECYCLE.COMPLETE) &
         (event.action === ACTIONS.NEXT)
       ) {
-        setMapEntity(sampleFeature.properties);
+        // setFeatures([{ properties: sampleFeature.properties }]);
         setTimeout(() => {
           setStepIndex(nextStepIndex);
         }, 100);
@@ -218,7 +218,7 @@ function Tour({ run, modeName, setMapEntity, setNavigatorOpen, themeRef }) {
         (event.index === targets.indexOf(".inspector-panel")) &
         (event.lifecycle === LIFECYCLE.COMPLETE)
       ) {
-        setMapEntity({});
+        // setFeatures({});
         setStepIndex(nextStepIndex);
       } else if (
         (event.index === targets.indexOf(".maplibregl-ctrl-bottom-right")) &
@@ -228,7 +228,7 @@ function Tour({ run, modeName, setMapEntity, setNavigatorOpen, themeRef }) {
           setNavigatorOpen(true);
           setStepIndex(nextStepIndex);
         } else if (event.action === ACTIONS.PREV) {
-          setMapEntity(sampleFeature.properties);
+          // setFeatures(sampleFeature.properties);
           setTimeout(() => {
             setStepIndex(nextStepIndex);
           }, 100);
@@ -237,7 +237,7 @@ function Tour({ run, modeName, setMapEntity, setNavigatorOpen, themeRef }) {
         setStepIndex(nextStepIndex);
       }
     } else if (event.action === ACTIONS.SKIP) {
-      if (event.index === targets.indexOf(".inspector-panel")) setMapEntity({});
+      if (event.index === targets.indexOf(".inspector-panel")) setFeatures([]);
       else if (
         (event.index === targets.indexOf(".tour-layers-checkboxes")) |
         (event.index === targets.indexOf(".tour-layers-pins"))

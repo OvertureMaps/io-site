@@ -42,6 +42,7 @@
     justify-content: space-between;
     grid-template-columns: auto auto;
     place-items: start;
+    height: 26px;
   }
 }
 
@@ -100,6 +101,15 @@ div.panel-row {
 
 div.panel-row.theme .actions {
   display: flex;
+}
+
+div.panel-row.header {
+  font-weight: bold;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 div.panel-row.theme .actions .pin {

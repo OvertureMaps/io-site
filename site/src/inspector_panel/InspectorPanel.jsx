@@ -14,14 +14,21 @@ import {
 
 function InspectorPanel({
   mode,
-  entity,
-  setEntity,
+  features,
+  setFeatures,
   activeThemes,
   setActiveThemes,
 }) {
-  if (!entity) {
+  const entities = features.map((feature) => ({
+    theme: feature.source,
+    type: feature.sourceLayer,
+    ...feature.properties,
+  }));
+  if (entities.length === 0) {
     return;
   }
+
+  const entity = entities[0];
 
   const theme = entity["theme"];
 
@@ -111,7 +118,7 @@ function InspectorPanel({
     <div className="inspector-panel">
       <div className="panel-header">
         <h4 className="title">Inspector Panel</h4>
-        <button className="close-panel-button" onClick={() => setEntity({})}>
+        <button className="close-panel-button" onClick={() => setFeatures([])}>
           <CloseIcon className="close-panel-icon" />
         </button>
       </div>
