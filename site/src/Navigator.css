@@ -41,11 +41,6 @@ p.navigator-welcome {
   padding-top: 8px;
 }
 
-div.navigator-header {
-  font-weight: 600;
-  height: 34px;
-}
-
 button.close-panel-button {
   border: none;
   padding: 0;
@@ -137,9 +132,6 @@ div {
   }
   .navigator-landing {
     color: var(--ifm-color-secondary-darkest);
-  }
-  .navigator-header {
-    color: white;
   }
   .close-panel-button {
     background-color: rgba(0, 0, 0, 0);
