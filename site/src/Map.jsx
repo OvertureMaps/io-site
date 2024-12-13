@@ -49,17 +49,23 @@ ThemeSource.propTypes = {
 
 export default function Map({
   mode,
-  mapEntity,
-  setMapEntity,
+  features,
+  setFeatures,
   setZoom,
   navigatorOpen,
   setNavigatorOpen,
   themeRef,
 }) {
   const mapRef = useRef();
+
   const [cursor, setCursor] = useState("auto");
 
-  const [activeThemes, setActiveThemes] = useState(["places"]);
+  const [activeThemes, setActiveThemes] = useState([
+    "places",
+    "addresses",
+    "buildings",
+    "transportation",
+  ]);
   const [visibleTypes, setVisibleTypes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
 
@@ -93,9 +99,6 @@ export default function Map({
   );
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
 
-  const selectedSource = useRef();
-  const selectedSourceLayer = useRef();
-
   useEffect(() => {
     const protocol = new pmtiles.Protocol();
     maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -111,48 +114,46 @@ export default function Map({
 
   const onClick = useCallback(
     (event) => {
-      let features = event.features;
-      const activeFeatures = [];
-      const backgroundFeatures = [];
-      features = features
-        .filter((f) => visibleTypes.indexOf(f.layer["source-layer"]) >= 0)
-        .forEach((f) => {
-          if (activeThemesRef.current.indexOf(f.layer["source"]) >= 0) {
-            activeFeatures.push(f);
-          } else {
-            backgroundFeatures.push(f);
-          }
-        });
-      const feature =
-        activeFeatures.length > 0 ? activeFeatures[0] : backgroundFeatures[0];
-      if (feature) {
-        if (selectedSource.current) {
-          mapRef.current.removeFeatureState({
-            source: selectedSource.current,
-            sourceLayer: selectedSourceLayer.current,
-          });
+      const clickedFeatures = [];
+      const clickedSources = new Set();
+      for (const feature of event.features) {
+        if (visibleTypes.indexOf(feature.layer["source-layer"]) >= 0) {
+          clickedFeatures.push(feature);
+          clickedSources.add(feature.source);
         }
+      }
 
-        selectedSource.current = feature.source;
-        selectedSourceLayer.current = feature.sourceLayer;
-        mapRef.current.setFeatureState(
-          {
-            source: feature.source,
-            sourceLayer: feature.sourceLayer,
-            id: feature.id,
-          },
-          { selected: true }
-        );
-        setMapEntity({
-          theme: feature.source,
-          type: feature.sourceLayer,
-          ...feature.properties,
+      for (const feature of features) {
+        mapRef.current.removeFeatureState({
+          source: feature.source,
+          sourceLayer: feature.sourceLayer,
+          id: feature.id,
         });
+      }
+
+      if (clickedFeatures.length > 0) {
+        const visitedSources = new Set();
+        clickedFeatures.forEach((feature) => {
+          if (!visitedSources.has(feature.source)) {
+            visitedSources.add(feature.source);
+          }
+
+          mapRef.current.setFeatureState(
+            {
+              source: feature.source,
+              sourceLayer: feature.sourceLayer,
+              id: feature.id,
+            },
+            { selected: true }
+          );
+        });
+
+        setFeatures(clickedFeatures);
       } else {
-        setMapEntity({});
+        setFeatures([]);
       }
     },
-    [visibleTypes]
+    [visibleTypes, features]
   );
 
   const handleZoom = (event) => {
@@ -320,17 +321,17 @@ export default function Map({
             setActiveThemes={setActiveThemes}
           />
 
-          {Object.keys(mapEntity).length > 0 && (
+          {features.length > 0 && (
             <InspectorPanel
               mode={mode}
-              entity={mapEntity}
-              setEntity={setMapEntity}
+              features={features}
+              setFeatures={setFeatures}
               activeThemes={activeThemes}
               setActiveThemes={setActiveThemes}
             />
           )}
           <ThemeSelector
-            entity={mapEntity}
+            entity={features}
             mode={mode}
             visibleTypes={visibleTypes}
             setVisibleTypes={setVisibleTypes}
