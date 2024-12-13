@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import "./CustomControls.css";
 import ThemeSelector from "./ThemeSelector";
 import BugIcon from "./icons/icon-bug.svg?react";
-import Navigator from "./Navigator";
+import Navigator from "./navigator/Navigator";
 import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
 

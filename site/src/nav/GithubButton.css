@@ -1,7 +1,7 @@
 .github-link {
   width: 32px;
   height: 32px;
-  padding: 6px !important; /* override default padding */
+  padding: 6px !important; /* override default padding for infima links  */
   margin-right: 4px;
   border-radius: 50%;
   transition: background var(--ifm-transition-fast);

@@ -12,7 +12,7 @@ export default function Header({ zoom, mode, setMode, setZoom }) {
           <OvertureWordmark />
           <a
             aria-current="page"
-            class="navbar__item navbar__link"
+            className="navbar__item navbar__link"
             href="https://docs.overturemaps.org/"
             target="_blank"
           >
