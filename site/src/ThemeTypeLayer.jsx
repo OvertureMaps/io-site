@@ -101,6 +101,23 @@ const ThemeTypeLayer = ({
           {...(minzoom ? { minzoom } : {})}
         />
       ) : null}
+      {line ? (
+        <Layer
+          filter={["==", ["geometry-type"], "LineString"]}
+          id={`${theme}_${type}_line_buffer`}
+          type="line"
+          source={theme}
+          source-layer={type}
+          paint={{
+            "line-opacity": 0,
+            "line-color": "black",
+            "line-width": ["interpolate", ["linear"], ["zoom"], 12, 6, 13, 9],
+          }}
+          layout={{ visibility: visible ? "visible" : "none" }}
+          {...(minzoom ? { minzoom } : {})}
+        />
+      ) : null}
+
       {outline ? (
         <Layer
           filter={["==", ["geometry-type"], "Polygon"]}
@@ -157,7 +174,7 @@ const ThemeTypeLayer = ({
           paint={{
             "fill-color": colorExpression(color, highlightColor),
             "fill-opacity": active ? 0.5 : 0.5,
-            "fill-outline-color": fillOutlineColor
+            "fill-outline-color": fillOutlineColor,
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}
@@ -178,11 +195,11 @@ const ThemeTypeLayer = ({
             "fill-extrusion-color": colorExpression(color, highlightColor),
             "fill-extrusion-opacity": active
               ? activeThemes.length > 1
-              ? 0.35
-              : 0.15
-            : 0.15,
-            "fill-extrusion-base": ["coalesce",["get", "min_height"],0],
-            "fill-extrusion-height": ["coalesce",["get", "height"],0],
+                ? 0.35
+                : 0.15
+              : 0.15,
+            "fill-extrusion-base": ["coalesce", ["get", "min_height"], 0],
+            "fill-extrusion-height": ["coalesce", ["get", "height"], 0],
           }}
           layout={{ visibility: visible ? "visible" : "none" }}
           {...(minzoom ? { minzoom } : {})}

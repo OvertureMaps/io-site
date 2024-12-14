@@ -3,12 +3,13 @@ import {
   NavigationControl,
   Source,
   AttributionControl,
+  Popup,
 } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import * as pmtiles from "pmtiles";
 import maplibregl from "maplibre-gl";
 
-import { Fragment, useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Layer, GeolocateControl } from "react-map-gl/maplibre";
 import InspectorPanel from "./inspector_panel/InspectorPanel";
 import PropTypes from "prop-types";
@@ -18,6 +19,7 @@ import BugIcon from "./icons/icon-bug.svg?react";
 import Navigator from "./navigator/Navigator";
 import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
+import FeaturePopup from "./FeaturePopup";
 
 const PMTILES_URL =
   "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-11-13/";
@@ -51,6 +53,8 @@ export default function Map({
   mode,
   features,
   setFeatures,
+  activeFeature,
+  setActiveFeature,
   setZoom,
   navigatorOpen,
   setNavigatorOpen,
@@ -68,6 +72,8 @@ export default function Map({
   ]);
   const [visibleTypes, setVisibleTypes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
+
+  const [lastClickedCoords, setLastClickedCoords] = useState();
 
   // For access of latest value within map events
   const activeThemesRef = useRef(activeThemes);
@@ -112,48 +118,64 @@ export default function Map({
     window.map = mapRef.current;
   });
 
+  const activeFeatureRef = useRef(null);
+
+  useEffect(() => {
+    // Remove feature state from previous active feature
+    if (activeFeatureRef.current) {
+      mapRef.current.removeFeatureState({
+        source: activeFeatureRef.current.source,
+        sourceLayer: activeFeatureRef.current.sourceLayer,
+        id: activeFeatureRef.current.id,
+      });
+    }
+
+    // Set feature state for new active feature
+    if (activeFeature) {
+      mapRef.current.setFeatureState(
+        {
+          source: activeFeature.source,
+          sourceLayer: activeFeature.sourceLayer,
+          id: activeFeature.id,
+        },
+        { selected: true }
+      );
+    }
+
+    activeFeatureRef.current = activeFeature;
+  }, [activeFeature]);
+
   const onClick = useCallback(
     (event) => {
+      setLastClickedCoords({
+        longitude: event.lngLat.lng,
+        latitude: event.lngLat.lat,
+      });
+
       const clickedFeatures = [];
+      const seenIds = new Set();
       const clickedSources = new Set();
+
       for (const feature of event.features) {
         if (visibleTypes.indexOf(feature.layer["source-layer"]) >= 0) {
-          clickedFeatures.push(feature);
-          clickedSources.add(feature.source);
+          // Only add if we haven't seen this ID before
+          if (!seenIds.has(feature.properties.id)) {
+            clickedFeatures.push(feature);
+            seenIds.add(feature.properties.id);
+            clickedSources.add(feature.source);
+          }
         }
       }
 
-      for (const feature of features) {
-        mapRef.current.removeFeatureState({
-          source: feature.source,
-          sourceLayer: feature.sourceLayer,
-          id: feature.id,
-        });
-      }
-
       if (clickedFeatures.length > 0) {
-        const visitedSources = new Set();
-        clickedFeatures.forEach((feature) => {
-          if (!visitedSources.has(feature.source)) {
-            visitedSources.add(feature.source);
-          }
-
-          mapRef.current.setFeatureState(
-            {
-              source: feature.source,
-              sourceLayer: feature.sourceLayer,
-              id: feature.id,
-            },
-            { selected: true }
-          );
-        });
-
         setFeatures(clickedFeatures);
+        setActiveFeature(clickedFeatures[0]);
       } else {
         setFeatures([]);
+        setActiveFeature(null);
       }
     },
-    [visibleTypes, features]
+    [visibleTypes]
   );
 
   const handleZoom = (event) => {
@@ -189,6 +211,14 @@ export default function Map({
           <ThemeSource name="divisions" url={PMTILES_URL} />
           <ThemeSource name="transportation" url={PMTILES_URL} />
           <ThemeSource name="addresses" url={PMTILES_URL} />
+
+          <FeaturePopup
+            coordinates={lastClickedCoords}
+            features={features}
+            onClose={() => setLastClickedCoords(null)}
+            setActiveFeature={setActiveFeature}
+            activeFeature={activeFeature}
+          />
 
           {[false, true].map((label) => {
             return layers.map((props, i) => (
@@ -324,6 +354,8 @@ export default function Map({
           {features.length > 0 && (
             <InspectorPanel
               mode={mode}
+              activeFeature={activeFeature}
+              setActiveFeature={setActiveFeature}
               features={features}
               setFeatures={setFeatures}
               activeThemes={activeThemes}

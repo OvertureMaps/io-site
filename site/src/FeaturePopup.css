@@ -1,0 +1,22 @@
+.popup-content {
+  padding: 2px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-item span {
+  font-size: 14px;
+  color: #333;
+}
