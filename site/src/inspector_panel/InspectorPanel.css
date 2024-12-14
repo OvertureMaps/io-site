@@ -103,15 +103,6 @@ div.panel-row.theme .actions {
   display: flex;
 }
 
-div.panel-row.header {
-  font-weight: bold;
-  font-size: 1.1em;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-}
-
 div.panel-row.theme .actions .pin {
   margin-right: 10px;
   height: 10px;

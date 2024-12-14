@@ -14,21 +14,21 @@ import {
 
 function InspectorPanel({
   mode,
-  features,
   setFeatures,
   activeThemes,
   setActiveThemes,
+  activeFeature,
+  setActiveFeature,
 }) {
-  const entities = features.map((feature) => ({
-    theme: feature.source,
-    type: feature.sourceLayer,
-    ...feature.properties,
-  }));
-  if (entities.length === 0) {
+  if (!activeFeature) {
     return;
   }
 
-  const entity = entities[0];
+  const entity = {
+    theme: activeFeature.source,
+    type: activeFeature.sourceLayer,
+    ...activeFeature.properties,
+  };
 
   const theme = entity["theme"];
 
@@ -118,7 +118,13 @@ function InspectorPanel({
     <div className="inspector-panel">
       <div className="panel-header">
         <h4 className="title">Inspector Panel</h4>
-        <button className="close-panel-button" onClick={() => setFeatures([])}>
+        <button
+          className="close-panel-button"
+          onClick={() => {
+            setFeatures([]);
+            setActiveFeature(null);
+          }}
+        >
           <CloseIcon className="close-panel-icon" />
         </button>
       </div>

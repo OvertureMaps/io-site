@@ -19,15 +19,6 @@ const sharedProperties = [
 function ThemePanel({ mode, entity, tips, activeThemes, setActiveThemes }) {
   return (
     <div className="theme-panel">
-      <div className="panel-row header">
-        <ThemeIcon theme={entity["theme"]} />{" "}
-        <div>
-          {entity["@name"] ||
-            (entity["names"] && entity["names"]["primary"]) ||
-            entity["theme"] ||
-            ""}
-        </div>
-      </div>
       {entity["id"] ? (
         <div className="panel-row id">
           <div>

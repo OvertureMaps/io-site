@@ -13,10 +13,11 @@ function App() {
   const [run, setRun] = useState(false);
   const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
   const [open, setOpen] = useState(tour);
-  const [navigatorOpen, setNavigatorOpen] = useState(!open);
+  const [navigatorOpen, setNavigatorOpen] = useState(false);
   const [features, setFeatures] = useState([]);
   const [zoom, setZoom] = useState(0);
   const themeRef = useRef(null);
+  const [activeFeature, setActiveFeature] = useState(null);
 
   const startTour = () => {
     setOpen(false);
@@ -65,6 +66,8 @@ function App() {
             navigatorOpen={navigatorOpen}
             setNavigatorOpen={setNavigatorOpen}
             themeRef={themeRef}
+            setActiveFeature={setActiveFeature}
+            activeFeature={activeFeature}
           />
         </MapProvider>
       </ThemeProvider>
