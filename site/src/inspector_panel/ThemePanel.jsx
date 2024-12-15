@@ -5,6 +5,7 @@ import InfoToolTip from "./InfoToolTip";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import ThemeIcon from "./ThemeIcon";
+import SourcesRow from "./SourcesRow.jsx";
 
 const sharedProperties = [
   "theme",
@@ -88,21 +89,7 @@ function ThemePanel({ mode, entity, tips, activeThemes, setActiveThemes }) {
         <></>
       )}
       {entity["sources"] ? (
-        <div className="panel-row sources">
-          <div>
-            <strong>sources: </strong>
-            {[
-              ...new Set(
-                JSON.parse(entity["sources"]).map((source) => source["dataset"])
-              ),
-            ].join(", ")}
-          </div>
-          <InfoToolTip
-            mode={mode}
-            content={tips.source}
-            target={"theme-sources-tip"}
-          />
-        </div>
+        <SourcesRow entity={entity} mode={mode} tips={tips} />
       ) : (
         <></>
       )}
@@ -120,7 +107,7 @@ function ThemePanel({ mode, entity, tips, activeThemes, setActiveThemes }) {
       ) : (
         ""
       )}
-      {["update_time", "version"].map((key) => (
+      {["version"].map((key) => (
         <div className="panel-row id">
           <div>
             <strong>{key}: </strong>

@@ -1,0 +1,9 @@
+.sources-content {
+  margin-left: 20px;
+}
+
+.source-divider {
+  margin: 2px 0;
+  border-top: 1px solid var(--ifm-table-border-width) solid
+    var(--ifm-table-border-color);
+}

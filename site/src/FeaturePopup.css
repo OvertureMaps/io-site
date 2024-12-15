@@ -4,12 +4,21 @@
   overflow-y: auto;
 }
 
+.feature-item.active {
+  background-color: #eee;
+}
+
 .feature-item {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 2px 0;
   border-bottom: 1px solid #eee;
+}
+
+.feature-item:hover {
+  background-color: #f5f5f5;
 }
 
 .feature-item:last-child {
