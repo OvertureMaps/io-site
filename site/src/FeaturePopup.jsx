@@ -1,6 +1,7 @@
 import { Popup } from "react-map-gl/maplibre";
 import PropTypes from "prop-types";
 import ThemeIcon from "./inspector_panel/ThemeIcon";
+import FeatureTitle from "./FeatureTitle";
 import "./FeaturePopup.css";
 
 export default function FeaturePopup({
@@ -29,7 +30,9 @@ export default function FeaturePopup({
           return (
             <div
               key={index}
-              className="feature-item"
+              className={`feature-item${
+                feature === activeFeature ? " active" : ""
+              }`}
               onClick={() => {
                 if (feature === activeFeature) {
                   setActiveFeature(null);
@@ -37,21 +40,10 @@ export default function FeaturePopup({
                   setActiveFeature(feature);
                 }
               }}
-              style={{
-                cursor: "pointer",
-                backgroundColor:
-                  feature === activeFeature ? "#eee" : "transparent",
-              }}
             >
               <ThemeIcon theme={entity.theme} />
               <span>
-                {entity["@name"] ||
-                  (entity["names"] && JSON.parse(entity["names"]).primary) ||
-                  `${entity["type"]}${
-                    entity["subtype"] && entity["subtype"] !== entity["type"]
-                      ? ` (${entity["subtype"]})`
-                      : ""
-                  }`}
+                <FeatureTitle entity={entity} />
               </span>
             </div>
           );
@@ -68,4 +60,6 @@ FeaturePopup.propTypes = {
   }),
   features: PropTypes.array.isRequired,
   onClose: PropTypes.func.isRequired,
+  activeFeature: PropTypes.object,
+  setActiveFeature: PropTypes.func.isRequired,
 };
