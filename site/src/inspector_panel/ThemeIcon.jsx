@@ -2,7 +2,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import HomeIcon from "@mui/icons-material/Home";
 import TerrainIcon from "@mui/icons-material/Terrain";
 import DirectionsIcon from "@mui/icons-material/Directions";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
+import FlagIcon from "@mui/icons-material/Flag";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import PropTypes from "prop-types";
 
@@ -17,7 +17,7 @@ function ThemeIcon({ theme }) {
     case "transportation":
       return <DirectionsIcon />;
     case "divisions":
-      return <LocationCityIcon />;
+      return <FlagIcon />;
     case "addresses":
       return <ImportContactsIcon />;
     default:

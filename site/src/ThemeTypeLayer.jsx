@@ -104,7 +104,7 @@ const ThemeTypeLayer = ({
       {line ? (
         <Layer
           filter={["==", ["geometry-type"], "LineString"]}
-          id={`${theme}_${type}_line_buffer`}
+          id={`${theme}_${type}_line_click_buffer`}
           type="line"
           source={theme}
           source-layer={type}
