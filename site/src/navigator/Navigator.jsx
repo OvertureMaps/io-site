@@ -4,6 +4,20 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import { useMap } from "react-map-gl/maplibre";
 import { tours } from "./NavigatorConfig";
+import { useState, useEffect } from "react";
+
+export function useNavigatorState(initialOpen = false) {
+  const [navigatorOpen, setNavigatorOpen] = useState(() => {
+    const stored = localStorage.getItem("navigatorOpen");
+    return stored !== null ? JSON.parse(stored) : !initialOpen;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("navigatorOpen", JSON.stringify(navigatorOpen));
+  }, [navigatorOpen]);
+
+  return [navigatorOpen, setNavigatorOpen];
+}
 
 function Navigator({ open, setOpen, map, setVisibleTypes, setActiveThemes }) {
   const { myMap } = useMap();

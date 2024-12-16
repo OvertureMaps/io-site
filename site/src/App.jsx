@@ -7,13 +7,15 @@ import { useState, useEffect, useRef } from "react";
 import Tour from "./Tour";
 import StartupBox from "./StartupBox";
 import { ThemeProvider } from "@mui/material";
+import { useNavigatorState } from "./navigator/Navigator";
 
 function App() {
   const [modeName, setModeName] = useState(getTheme());
   const [run, setRun] = useState(false);
   const [tour, setTour] = useState(!(localStorage.getItem("tour") === "true"));
   const [open, setOpen] = useState(tour);
-  const [navigatorOpen, setNavigatorOpen] = useState(false);
+  const [navigatorOpen, setNavigatorOpen] = useNavigatorState(open);
+
   const [features, setFeatures] = useState([]);
   const [zoom, setZoom] = useState(0);
   const themeRef = useRef(null);
