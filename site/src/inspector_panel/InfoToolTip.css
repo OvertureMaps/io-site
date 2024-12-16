@@ -25,4 +25,5 @@ svg.info-icon {
 
 .info-floater-closed {
   pointer-events: none;
+  display: none;
 }

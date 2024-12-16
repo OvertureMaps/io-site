@@ -11,8 +11,8 @@
     word-break: break-all;
   }
   td:first-child {
-    text-align: left;
-    min-width: 40%;
+    text-align: right;
+    max-width: 40%;
     justify-content: space-between;
     word-break: normal;
     border: none;

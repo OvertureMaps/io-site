@@ -16,6 +16,7 @@
   border-color: rgba(15, 15, 15, 0.8);
   max-height: 80vh;
   position: relative;
+  overflow: auto;
 
   p {
     margin: 0;

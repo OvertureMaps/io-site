@@ -18,6 +18,7 @@ function InfoToolTip({ mode, target, content }) {
               mode === "theme-dark"
                 ? "var(--ifm-navbar-background-color)"
                 : "var(--ifm-color-secondary-light)",
+            display: open ? "block" : "none",
           },
           arrow: {
             color:

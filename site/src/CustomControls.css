@@ -6,10 +6,15 @@
   color: black;
   margin: 4px;
   outline: none;
+  pointer-events: none;
 
   .title {
     padding: 2px 0;
   }
+}
+
+.custom-controls * {
+  pointer-events: auto;
 }
 
 div.bug-nub {
