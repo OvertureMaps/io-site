@@ -2,7 +2,7 @@ import { Popup } from "react-map-gl/maplibre";
 import PropTypes from "prop-types";
 import ThemeIcon from "./inspector_panel/ThemeIcon";
 import FeatureTitle from "./FeatureTitle";
-import "./FeaturePopup.css";
+import "./FeatureSelector.css";
 
 export default function FeaturePopup({
   coordinates,
@@ -21,6 +21,7 @@ export default function FeaturePopup({
       closeOnClick={false}
     >
       <div className="popup-content">
+        <div className="feature-selector-title">Select a feature</div>
         {features.map((feature, index) => {
           const entity = {
             theme: feature.source,
