@@ -3,7 +3,6 @@ import {
   NavigationControl,
   Source,
   AttributionControl,
-  Popup,
 } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import * as pmtiles from "pmtiles";
@@ -19,7 +18,7 @@ import BugIcon from "./icons/icon-bug.svg?react";
 import Navigator from "./navigator/Navigator";
 import { layers } from "./Layers";
 import ThemeTypeLayer from "./ThemeTypeLayer";
-import FeaturePopup from "./FeaturePopup";
+import FeaturePopup from "./FeatureSelector";
 
 const PMTILES_URL =
   "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-11-13/";

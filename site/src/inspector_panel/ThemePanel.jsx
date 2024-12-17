@@ -93,20 +93,6 @@ function ThemePanel({ mode, entity, tips, activeThemes, setActiveThemes }) {
       ) : (
         <></>
       )}
-      {entity["class"] ? (
-        <div className="panel-row class">
-          <div>
-            <strong>class: </strong> {entity["class"]}
-          </div>
-          <InfoToolTip
-            mode={mode}
-            content={tips.class}
-            target={"theme-class-tip"}
-          />{" "}
-        </div>
-      ) : (
-        ""
-      )}
       {["version"].map((key) => (
         <div className="panel-row id">
           <div>
