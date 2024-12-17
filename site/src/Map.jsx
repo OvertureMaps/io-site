@@ -154,7 +154,6 @@ export default function Map({
 
       const clickedFeatures = [];
       const seenIds = new Set();
-      const clickedSources = new Set();
 
       for (const feature of event.features) {
         if (visibleTypes.indexOf(feature.layer["source-layer"]) >= 0) {
@@ -162,7 +161,6 @@ export default function Map({
           if (!seenIds.has(feature.properties.id)) {
             clickedFeatures.push(feature);
             seenIds.add(feature.properties.id);
-            clickedSources.add(feature.source);
           }
         }
       }
