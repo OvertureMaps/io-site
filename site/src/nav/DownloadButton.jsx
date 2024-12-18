@@ -60,44 +60,53 @@ function DownloadButton({ mode, zoom, setZoom, visibleTypes}) {
 
     set_panic_hook();
 
-    // The catalog contains a base path and then a list of types with filenames. 
+    // The catalog contains a base path and then a list of types with filenames.
     //First, assemble the parquet datasets in parallel.
-   let datasets = downloadCatalog.types.map(type => {
-      return new ParquetDataset(downloadCatalog.basePath, type.files).then((dataset) => {return {type: type.name, parquet: dataset} });
-    });
-      
-    Promise.all(datasets)
-    .then((datasets) => {
-      return datasets.map(dataset => dataset.parquet.read(readOptions).then(reader => {return {type: dataset.type, reader:reader}}));
-    }).then((tableReads) => Promise.all(tableReads)
-    .then((wasmTables) => {
-      wasmTables.map(wasmTable => {
-        if (wasmTable?.reader?.numBatches > 0) {
-          const binaryDataForDownload = writeGeoJSON(wasmTable.reader);
-
-          let blerb = new Blob([binaryDataForDownload], {
-            type: "application/octet-stream",
-          });
-    
-          const url = URL.createObjectURL(blerb);
-          var downloadLink = document.createElement("a");
-          downloadLink.href = url;
-  
-          const center = myMap.getCenter();
-          const zoom = myMap.getZoom();
-          downloadLink.download = `overture-${wasmTable.type}-${zoom}-${center.lat}-${center.lng}.geojson`;
-  
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
+    let datasets = downloadCatalog.types.map((type) => {
+      return new ParquetDataset(downloadCatalog.basePath, type.files).then(
+        (dataset) => {
+          return { type: type.name, parquet: dataset };
         }
-      })
-    }).then(() => {
-      setLoading(false);
-    })
-  )
-    
+      );
+    });
 
+    Promise.all(datasets)
+      .then((datasets) => {
+        return datasets.map((dataset) =>
+          dataset.parquet.read(readOptions).then((reader) => {
+            return { type: dataset.type, reader: reader };
+          })
+        );
+      })
+      .then((tableReads) =>
+        Promise.all(tableReads)
+          .then((wasmTables) => {
+            wasmTables.map((wasmTable) => {
+              if (wasmTable?.reader?.numBatches > 0) {
+                const binaryDataForDownload = writeGeoJSON(wasmTable.reader);
+
+                let blerb = new Blob([binaryDataForDownload], {
+                  type: "application/octet-stream",
+                });
+
+                const url = URL.createObjectURL(blerb);
+                var downloadLink = document.createElement("a");
+                downloadLink.href = url;
+
+                const center = myMap.getCenter();
+                const zoom = myMap.getZoom();
+                downloadLink.download = `overture-${wasmTable.type}-${zoom}-${center.lat}-${center.lng}.geojson`;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+              }
+            });
+          })
+          .then(() => {
+            setLoading(false);
+          })
+      );
   };
 
   const handleToggleTooltip = () => {
