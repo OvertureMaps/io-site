@@ -106,7 +106,10 @@ function DownloadButton({ mode, zoom, setZoom, visibleTypes}) {
           .then(() => {
             setLoading(false);
           })
-      );
+      ).catch(error => {
+        // Something went wrong with the download.
+        alert("An error occurred during the download: " + error);
+      });
   };
 
   const handleToggleTooltip = () => {
