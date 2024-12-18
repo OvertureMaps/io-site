@@ -21,7 +21,7 @@ import ThemeTypeLayer from "./ThemeTypeLayer";
 import FeaturePopup from "./FeatureSelector";
 
 const PMTILES_URL =
-  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-11-13/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-12-18/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 38.90678,
@@ -58,7 +58,7 @@ export default function Map({
   navigatorOpen,
   setNavigatorOpen,
   themeRef,
-  visibleTypes, 
+  visibleTypes,
   setVisibleTypes,
 }) {
   const mapRef = useRef();
