@@ -10,6 +10,7 @@ function SourcesRow({ entity, mode, tips }) {
         case "meta":
           return `https://facebook.com/${source.record_id}`;
         case "OpenStreetMap": {
+          if (!source.record_id) return null;
           const match = source.record_id.match(/^([nwr])(\d+)(@\d+)?$/i);
           if (!match) return null;
 
