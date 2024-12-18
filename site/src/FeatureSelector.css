@@ -9,6 +9,11 @@
   color: #fff;
 }
 
+.maplibregl-popup-close-button {
+  color: #000;
+}
+
+
 .theme-dark .maplibregl-popup-close-button {
   color: #fff;
 }
