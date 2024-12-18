@@ -58,6 +58,8 @@ export default function Map({
   navigatorOpen,
   setNavigatorOpen,
   themeRef,
+  visibleTypes, 
+  setVisibleTypes,
 }) {
   const mapRef = useRef();
 
@@ -69,7 +71,6 @@ export default function Map({
     "buildings",
     "transportation",
   ]);
-  const [visibleTypes, setVisibleTypes] = useState([]);
   const [interactiveLayerIds, setInteractiveLayerIds] = useState([]);
 
   const [lastClickedCoords, setLastClickedCoords] = useState();
