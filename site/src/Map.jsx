@@ -40,7 +40,13 @@ const MAP_STYLE = {
 };
 
 const ThemeSource = ({ name, url }) => {
-  return <Source id={name} type="vector" url={`${url}${name}.pmtiles`} />;
+  return (
+    <Source
+      id={name}
+      type="vector"
+      url={`${url}${name}${name === "base" ? "_canary" : ""}.pmtiles`}
+    />
+  );
 };
 
 ThemeSource.propTypes = {

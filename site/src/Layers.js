@@ -11,6 +11,13 @@ export const layers = [
   },
   {
     theme: "base",
+    type: "bathymetry",
+    outline: true,
+    color: "hsla(195, 71%, 80%, 1)",
+    activeColor: "hsla(195, 77%, 85%, 1)",
+  },
+  {
+    theme: "base",
     type: "land",
     polygon: true,
     point: true,
