@@ -141,6 +141,22 @@ const ThemeTypeLayer = ({
           {...(minzoom ? { minzoom } : {})}
         />
       ) : null}
+      {outline ? (
+        <Layer
+          filter={["==", ["geometry-type"], "Polygon"]}
+          id={`${theme}_${type}_outline_click_buffer`}
+          type="line"
+          source={theme}
+          source-layer={type}
+          paint={{
+            "line-opacity": 0,
+            "line-color": "black",
+            "line-width": ["interpolate", ["linear"], ["zoom"], 12, 6, 13, 9],
+          }}
+          layout={{ visibility: visible ? "visible" : "none" }}
+          {...(minzoom ? { minzoom } : {})}
+        />
+      ) : null}
       {label && line ? (
         <Layer
           filter={["==", ["geometry-type"], "LineString"]}
