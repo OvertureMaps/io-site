@@ -23,7 +23,8 @@
   }
 
   @media (max-width: 768px) {
-    max-height: 50%;
+    max-height: 380px;
+    width: 70%;
   }
 
   table {

@@ -1,6 +1,7 @@
 import Joyride, { ACTIONS, EVENTS, LIFECYCLE } from "react-joyride";
 import { useState } from "react";
 import LayerIcon from "./icons/icon-layers.svg?react";
+import "./Tour.css";
 
 const Steps = [
   {
