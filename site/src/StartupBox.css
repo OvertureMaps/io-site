@@ -79,3 +79,10 @@ p.light-startup {
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 768px) {
+  div.startup-box-light,
+  div.startup-box-dark {
+    width: 70%;
+  }
+}
