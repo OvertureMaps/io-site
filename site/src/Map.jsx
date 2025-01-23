@@ -21,7 +21,7 @@ import ThemeTypeLayer from "./ThemeTypeLayer";
 import FeaturePopup from "./FeatureSelector";
 
 const PMTILES_URL =
-  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2024-12-18/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2025-01-22/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 38.90678,
@@ -40,13 +40,7 @@ const MAP_STYLE = {
 };
 
 const ThemeSource = ({ name, url }) => {
-  return (
-    <Source
-      id={name}
-      type="vector"
-      url={`${url}${name}${name === "base" ? "_canary" : ""}.pmtiles`}
-    />
-  );
+  return <Source id={name} type="vector" url={`${url}${name}.pmtiles`} />;
 };
 
 ThemeSource.propTypes = {
