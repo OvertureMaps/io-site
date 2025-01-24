@@ -1,4 +1,4 @@
-import manifest from './manifests/12-18-manifest.json';
+import manifest from './manifests/01-22-25-manifest.json';
 
 const awsbasepath = 'https://overturemaps-us-west-2.s3.amazonaws.com/release/';
 
