@@ -21,7 +21,7 @@ import ThemeTypeLayer from "./ThemeTypeLayer";
 import FeaturePopup from "./FeatureSelector";
 
 const PMTILES_URL =
-  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2025-01-22/";
+  "pmtiles://https://d3c1b7bog2u1nn.cloudfront.net/2025-02-19/";
 
 const INITIAL_VIEW_STATE = {
   latitude: 38.90678,
